@@ -86,9 +86,9 @@
 
 ## Completed & Confirmed
 - [x] Phase 1: Infrastructure — GitHub repo, Netlify, Sanity project created (2026-04-07)
-- [x] Phase 2: Content extraction — all pages extracted to content/ directory
-- [ ] Phase 3: Build all pages
-- [ ] Phase 4: Wire Sanity CMS
+- [x] Phase 2: Content extraction — all pages extracted to content/ directory (2026-04-07)
+- [x] Phase 3: Build all pages — 8 pages built, `npm run build` passes (2026-04-07)
+- [ ] Phase 4: Wire Sanity CMS — NEXT (blocker: Sanity dataset not yet created)
 - [ ] Phase 5: CAR Gate
 - [ ] Phase 6: Design Refinement
 - [ ] Phase 7: QA
