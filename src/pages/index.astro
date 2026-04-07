@@ -1,20 +1,254 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import { sanityClient } from '../lib/sanity.ts';
 
-// Example Sanity fetch — replace with real query for this site
-// import { sanityClient } from '../lib/sanity.ts';
-// const items = await sanityClient.fetch(`*[_type == "post"] | order(_createdAt desc)`);
+// Fetch latest 6 blog posts
+let blogPosts: any[] = [];
+try {
+  blogPosts = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) [0..5] {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "imageUrl": heroImage.asset->url,
+      tags
+    }
+  `);
+} catch (e) {
+  // Sanity not yet populated — show empty state
+}
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const formatDate = (d: string) => {
+  const dt = new Date(d);
+  return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+};
+
+const stats = [
+  { icon: '🤝', label: 'Donors', value: '1,000+' },
+  { icon: '📖', label: 'Bibles Distributed', value: '100,000+' },
+  { icon: '✈️', label: 'Mission Teams', value: '1,000+' },
+  { icon: '💧', label: 'Water Projects', value: '500+' },
+  { icon: '👶', label: 'Orphans Sponsored', value: '500+' },
+  { icon: '🧴', label: 'Hygiene Kits', value: '10,000+' },
+  { icon: '🌍', label: 'Lives Impacted', value: '100,000+' },
+  { icon: '🙏', label: 'Years in India', value: '25+' },
+];
 ---
 
-<Layout title="Site Name — Tagline">
-  <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-    <h1 class="text-4xl font-bold mb-4">
-      Site Name
-    </h1>
-    <p class="text-lg max-w-lg">
-      Replace this page with your site content. Connect to Sanity via
-      <code>src/lib/sanity.ts</code> and update the project ID.
-    </p>
-  </main>
+<Layout
+  title="Global Hope India — Sharing Jesus by Sending People, Funding, and Resources"
+  description="Global Hope India engages the church worldwide to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Global Hope India",
+      "url": "https://globalhopeindia.org",
+      "description": "Sharing Jesus by Sending People, Funding, and Resources to India",
+      "address": { "@type": "PostalAddress", "streetAddress": "PO Box 3251", "addressLocality": "Cary", "addressRegion": "NC", "postalCode": "27519", "addressCountry": "US" },
+      "telephone": "919-438-2444",
+      "email": "info@globalhopeindia.org",
+      "sameAs": ["https://www.facebook.com/GlobalHopeIndia","https://www.youtube.com/@GlobalHopeIndia"]
+    })}></script>
+  </Fragment>
+
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section
+    class="relative min-h-screen flex items-center justify-center text-white text-center overflow-hidden"
+    style="background: linear-gradient(135deg, #1D1C1C 0%, #2a2a2a 40%, #1a3a1a 100%);"
+  >
+    <!-- Overlay pattern -->
+    <div class="absolute inset-0 opacity-10" style="background-image: url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FEC415' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");"></div>
+
+    <div class="relative container mx-auto px-6 py-32 pt-40">
+      <span class="eyebrow text-[#FEC415] text-sm font-semibold tracking-widest uppercase mb-4 block">Jesus — India — For India — Jesus</span>
+      <h1 class="text-white font-bold mb-6 max-w-4xl mx-auto leading-tight">
+        Sharing Jesus by Sending People,<br class="hidden md:block" /> Funding, and Resources
+      </h1>
+      <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        Global Hope India engages the church worldwide to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn text-base px-8 py-4">Donate Now</a>
+        <a href="/get-involved" class="btn btn-outline text-base px-8 py-4">Get Involved</a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── 25 YEARS ─────────────────────────────────────────── -->
+  <section class="section bg-[#FEC415]">
+    <div class="container mx-auto text-center">
+      <span class="eyebrow text-[#1D1C1C]">Milestone</span>
+      <h2 class="text-[#1D1C1C] mb-4">Celebrating Over 25 Years in India</h2>
+      <p class="text-[#1D1C1C]/80 text-lg max-w-2xl mx-auto mb-8">
+        Since 1998, God has used Global Hope India to transform thousands of lives through missions, church planting, and community development.
+      </p>
+      <a href="/about" class="btn" style="background-color: #1D1C1C; color: #FEC415; border-color: #1D1C1C;">Our Story</a>
+    </div>
+  </section>
+
+  <!-- ── IMPACT STATS ─────────────────────────────────────── -->
+  <section class="section bg-[#1D1C1C]">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="eyebrow">Our Impact</span>
+        <h2 class="text-white">Making a Difference in India</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map(stat => (
+          <div class="text-center">
+            <div class="text-4xl mb-2">{stat.icon}</div>
+            <div class="text-3xl md:text-4xl font-bold text-[#FEC415] mb-1">{stat.value}</div>
+            <div class="text-white/70 text-sm font-medium">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THREE WAYS ──────────────────────────────────────── -->
+  <section class="section bg-white">
+    <div class="container mx-auto">
+      <div class="text-center mb-14">
+        <span class="eyebrow">Join Us</span>
+        <h2>Three Ways to Make an Impact</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Pray -->
+        <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-shadow">
+          <div class="text-5xl mb-5">🙏</div>
+          <h3 class="mb-3">Pray</h3>
+          <p class="text-[#666] leading-relaxed mb-6">Salvation and transformation are God's work. Our work is to pray for India — for God to open eyes and hearts to Jesus.</p>
+          <a href="/get-involved#pray" class="btn">Pray with Us</a>
+        </div>
+        <!-- Give -->
+        <div class="text-center p-8 rounded-2xl bg-[#FEC415]/10 hover:shadow-lg transition-shadow border-2 border-[#FEC415]">
+          <div class="text-5xl mb-5">💛</div>
+          <h3 class="mb-3">Give</h3>
+          <p class="text-[#666] leading-relaxed mb-6">Over 85% of every donation directly benefits programs in the USA and India. Your generosity makes Christ known.</p>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn">Donate Now</a>
+        </div>
+        <!-- Go -->
+        <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-lg transition-shadow">
+          <div class="text-5xl mb-5">✈️</div>
+          <h3 class="mb-3">Go</h3>
+          <p class="text-[#666] leading-relaxed mb-6">God called every believer to go! Over 1,000 people have traveled to India through GHI, empowering our Indian partners.</p>
+          <a href="/get-involved#go" class="btn">Join a Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GHI MAGAZINE / BLOG ──────────────────────────────── -->
+  <section class="section bg-[#f5f5f5]">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="eyebrow">Stories from the Field</span>
+        <h2>GHI Magazine</h2>
+      </div>
+
+      {blogPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map(post => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
+            >
+              <div class="h-52 overflow-hidden bg-[#1D1C1C]">
+                {post.imageUrl ? (
+                  <img
+                    src={`${post.imageUrl}?w=600&auto=format`}
+                    alt={post.title}
+                    class="blog-card-img w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-white/30 text-4xl">🌏</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-6">
+                {post.tags?.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5 mb-3">
+                    {post.tags.slice(0, 2).map((tag: string) => (
+                      <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
+                {post.excerpt && <p class="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>}
+                <div class="flex items-center justify-between text-sm text-[#999]">
+                  <span>{post.publishDate ? formatDate(post.publishDate) : ''}</span>
+                  <span class="text-[#2EAB5A] font-semibold group-hover:underline">Read →</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <!-- Fallback: static blog posts before Sanity is populated -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners' },
+            { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects' },
+            { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare' },
+            { title: 'Hope for India\'s Special Needs Community', date: 'March 4, 2025', tag: 'Community' },
+            { title: 'Empowering the Deaf Community in Nagaland', date: 'March 4, 2025', tag: 'Community' },
+            { title: 'Elim School: Supporting Pastor Mayon\'s Mission', date: 'March 4, 2025', tag: 'Education' },
+          ].map(post => (
+            <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm">
+              <div class="h-52 bg-gradient-to-br from-[#1D1C1C] to-[#2EAB5A] flex items-center justify-center">
+                <span class="text-white/30 text-5xl">🌏</span>
+              </div>
+              <div class="p-6">
+                <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5 mb-3 inline-block">{post.tag}</span>
+                <h3 class="font-bold text-lg leading-snug mb-4">{post.title}</h3>
+                <div class="text-sm text-[#999]">{post.date}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div class="text-center mt-12">
+        <a href="/impact" class="btn">See More Stories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INDIA DEMOGRAPHICS CALLOUT ────────────────────────── -->
+  <section class="section bg-[#2EAB5A]">
+    <div class="container mx-auto text-center">
+      <span class="eyebrow text-white/70">Why India?</span>
+      <h2 class="text-white mb-6">1.4 Billion People. One Gospel.</h2>
+      <div class="grid grid-cols-3 gap-6 max-w-lg mx-auto mb-10">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">72%</div>
+          <div class="text-white/80 text-sm mt-1">Hindu</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">23%</div>
+          <div class="text-white/80 text-sm mt-1">Muslim</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">3%</div>
+          <div class="text-white/80 text-sm mt-1">Christian</div>
+        </div>
+      </div>
+      <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
+        "As India goes, all of Asia will go with her." — Dr. Billy Graham, 1972
+      </p>
+      <a href="/about" class="btn" style="background-color: white; color: #1D1C1C; border-color: white;">Learn More</a>
+    </div>
+  </section>
 </Layout>

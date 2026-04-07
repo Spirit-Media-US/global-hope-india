@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { sanityClient } from '../lib/sanity.ts';
+
+let blogPosts: any[] = [];
+try {
+  blogPosts = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) [0..11] {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "imageUrl": heroImage.asset->url,
+      tags
+    }
+  `);
+} catch (e) {
+  // Sanity not yet populated
+}
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const formatDate = (d: string) => {
+  const dt = new Date(d);
+  return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+};
+
+const stats = [
+  { icon: '🤝', label: 'Donors', value: '1,000+' },
+  { icon: '📖', label: 'Bibles Distributed', value: '100,000+' },
+  { icon: '✈️', label: 'Mission Trips', value: '1,000+' },
+  { icon: '💧', label: 'Water Projects', value: '500+' },
+  { icon: '👶', label: 'Orphans Sponsored', value: '500+' },
+  { icon: '🧴', label: 'Hygiene Kits', value: '10,000+' },
+  { icon: '🌍', label: 'Lives Impacted', value: '100,000+' },
+  { icon: '🙏', label: 'Years of Ministry', value: '25+' },
+];
+---
+
+<Layout
+  title="Our Impact — Global Hope India"
+  description="See the impact of Global Hope India's work: Bibles distributed, churches planted, lives transformed. Read stories from the field."
+>
+  <!-- ── PAGE HERO ────────────────────────────────────────── -->
+  <section class="bg-[#1D1C1C] text-white pt-36 pb-20 px-6">
+    <div class="container mx-auto text-center">
+      <span class="eyebrow">God at Work</span>
+      <h1 class="text-white mb-5">Our Impact: Making Christ Known</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">For over 25 years, God has used Global Hope India to transform lives, plant churches, and extend His kingdom across India.</p>
+    </div>
+  </section>
+
+  <!-- ── IMPACT STATS ─────────────────────────────────────── -->
+  <section class="section bg-[#FEC415]">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="eyebrow text-[#1D1C1C]">By the Numbers</span>
+        <h2 class="text-[#1D1C1C]">25+ Years of God's Faithfulness</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map(stat => (
+          <div class="bg-white rounded-xl p-6 text-center shadow-sm">
+            <div class="text-3xl mb-2">{stat.icon}</div>
+            <div class="text-2xl md:text-3xl font-bold text-[#1D1C1C] mb-1">{stat.value}</div>
+            <div class="text-[#555] text-sm font-medium">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STORIES FROM THE FIELD ───────────────────────────── -->
+  <section class="section bg-[#f5f5f5]">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="eyebrow">Stories from the Field</span>
+        <h2>GHI Magazine</h2>
+        <p class="text-[#555] text-lg max-w-xl mx-auto mt-4">Real stories of transformation from our partners and teams across India.</p>
+      </div>
+
+      {blogPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map(post => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
+            >
+              <div class="h-52 overflow-hidden bg-[#1D1C1C]">
+                {post.imageUrl ? (
+                  <img
+                    src={`${post.imageUrl}?w=600&auto=format`}
+                    alt={post.title}
+                    class="blog-card-img w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-white/30 text-4xl">🌏</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-6">
+                {post.tags?.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5 mb-3">
+                    {post.tags.slice(0, 2).map((tag: string) => (
+                      <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
+                {post.excerpt && <p class="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>}
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-[#999]">{post.publishDate ? formatDate(post.publishDate) : ''}</span>
+                  <span class="text-[#2EAB5A] font-semibold group-hover:underline">Read Full Story →</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <!-- Fallback static posts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners' },
+            { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects' },
+            { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare' },
+            { title: 'Hope for India\'s Special Needs Community: The Mission of Raja\'s Home', date: 'March 4, 2025', tag: 'Community' },
+            { title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland', date: 'March 4, 2025', tag: 'Community' },
+            { title: 'Elim School: Supporting Pastor Mayon\'s Mission in Manipur', date: 'March 4, 2025', tag: 'Education' },
+          ].map(post => (
+            <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm">
+              <div class="h-52 bg-gradient-to-br from-[#1D1C1C] to-[#2EAB5A] flex items-center justify-center">
+                <span class="text-white/30 text-5xl">🌏</span>
+              </div>
+              <div class="p-6">
+                <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5 mb-3 inline-block">{post.tag}</span>
+                <h3 class="font-bold text-lg leading-snug mb-4">{post.title}</h3>
+                <div class="text-sm text-[#999]">{post.date}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────── -->
+  <section class="section bg-[#1D1C1C] text-white">
+    <div class="container mx-auto text-center">
+      <span class="eyebrow">Be Part of the Story</span>
+      <h2 class="text-white mb-4">Your Gift Writes the Next Chapter</h2>
+      <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">Every dollar you give funds real transformation — Bibles distributed, churches planted, and lives changed by the gospel.</p>
+      <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn">Donate Now</a>
+    </div>
+  </section>
+</Layout>
