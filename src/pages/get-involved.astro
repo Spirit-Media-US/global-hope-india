@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MailtoLink from '../components/MailtoLink.astro';
 ---
 
 <Layout
@@ -31,12 +32,14 @@ import Layout from '../layouts/Layout.astro';
           <p class="text-[#444] text-lg leading-relaxed mb-8">
             Salvation and transformation are God's work. Our work is to pray — and your intercession is one of the most powerful things you can do for India.
           </p>
-          <a
-            href="mailto:info@globalhopeindia.org?subject=Prayer%20Points%20Request&body=I%20would%20like%20to%20receive%20prayer%20points%20for%20India.%20Please%20add%20me%20to%20your%20prayer%20list."
+          <MailtoLink
+            email="info@globalhopeindia.org"
+            subject="Prayer Points Request"
+            body="I would like to receive prayer points for India. Please add me to your prayer list."
             class="btn"
           >
             I Will Pray — Send Me Prayer Points
-          </a>
+          </MailtoLink>
         </div>
         <div class="bg-[#FEC415]/10 border-2 border-[#FEC415] rounded-2xl p-10 text-center">
           <blockquote class="text-[#1D1C1C] text-xl font-semibold leading-relaxed italic">
@@ -96,12 +99,14 @@ import Layout from '../layouts/Layout.astro';
           <p class="text-[#444] text-lg leading-relaxed mb-8">
             A short-term mission trip to India is one of the most radical ways you can engage with God's mission. Come and see what God is doing — and be transformed in the process.
           </p>
-          <a
-            href="mailto:info@globalhopeindia.org?subject=Mission%20Trip%20Interest&body=I%20am%20interested%20in%20joining%20a%20mission%20team%20to%20India.%20Please%20send%20me%20more%20information."
+          <MailtoLink
+            email="info@globalhopeindia.org"
+            subject="Mission Trip Interest"
+            body="I am interested in joining a mission team to India. Please send me more information."
             class="btn"
           >
             I Want to Go — Tell Me More
-          </a>
+          </MailtoLink>
         </div>
         <div class="bg-[#2EAB5A]/10 border-2 border-[#2EAB5A] rounded-2xl p-10 text-center">
           <div class="text-5xl font-bold text-[#2EAB5A] mb-2">1,000+</div>
@@ -123,7 +128,7 @@ import Layout from '../layouts/Layout.astro';
       <h2 class="text-white mb-4">We'd Love to Hear from You</h2>
       <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">Whether you want to pray, give, or go — reach out and we'll connect you with the right next step.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="mailto:info@globalhopeindia.org" class="btn">Email Us</a>
+        <MailtoLink email="info@globalhopeindia.org" class="btn">Email Us</MailtoLink>
         <a href="tel:9194382444" class="btn btn-outline">Call 919-438-2444</a>
       </div>
     </div>

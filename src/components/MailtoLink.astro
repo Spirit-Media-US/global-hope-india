@@ -1,0 +1,55 @@
+---
+/**
+ * MailtoLink — spam-safe email link component.
+ * The address is split into user + domain so it never appears as a
+ * plain mailto: in the HTML source. JS assembles it on click.
+ *
+ * Usage:
+ *   <MailtoLink email="info@globalhopeindia.org" class="hover:text-white">
+ *     info@globalhopeindia.org
+ *   </MailtoLink>
+ *
+ *   With subject/body:
+ *   <MailtoLink email="info@globalhopeindia.org" subject="Hello" body="I want to learn more.">
+ *     Email Us
+ *   </MailtoLink>
+ */
+interface Props {
+	email: string;
+	subject?: string;
+	body?: string;
+	class?: string;
+	'aria-label'?: string;
+	[key: string]: any;
+}
+
+const { email, subject, body, class: className, 'aria-label': ariaLabel, ...rest } = Astro.props;
+const [user, domain] = email.split('@');
+---
+
+<a
+  href="#"
+  class={className}
+  data-e={user}
+  data-d={domain}
+  data-subject={subject}
+  data-body={body}
+  aria-label={ariaLabel || `Email ${user} at ${domain}`}
+  role="link"
+  {...rest}
+><slot /></a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[data-e][data-d]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const addr = el.dataset.e + '@' + el.dataset.d;
+      let href = 'mailto:' + addr;
+      const params: string[] = [];
+      if (el.dataset.subject) params.push('subject=' + encodeURIComponent(el.dataset.subject));
+      if (el.dataset.body) params.push('body=' + encodeURIComponent(el.dataset.body));
+      if (params.length) href += '?' + params.join('&');
+      window.location.href = href;
+    });
+  });
+</script>

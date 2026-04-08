@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import MailtoLink from '../components/MailtoLink.astro';
 
 interface Props {
   title: string;
@@ -46,7 +47,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
   </head>
   <body>
     <!-- ── Navbar ─────────────────────────────────────────── -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50">
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-[#1D1C1C]">
       <div class="container mx-auto px-6 flex items-center justify-between h-20">
         <!-- Logo -->
         <a href="/" class="flex items-center gap-3 shrink-0">
@@ -168,7 +169,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
               </li>
               <li class="flex gap-2">
                 <span>✉️</span>
-                <a href="mailto:info@globalhopeindia.org" class="hover:text-white transition-colors">info@globalhopeindia.org</a>
+                <MailtoLink email="info@globalhopeindia.org" class="hover:text-white transition-colors">info@globalhopeindia.org</MailtoLink>
               </li>
             </ul>
           </div>
@@ -176,8 +177,15 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
 
         <!-- Trust badges row -->
         <div class="border-t border-white/10 mt-12 pt-8">
-          <p class="text-white/50 text-xs text-center mb-4">Global Hope India is a federally recognized 501(c)3 nonprofit. All gifts are tax-deductible.</p>
-          <p class="text-white/40 text-xs text-center">© {new Date().getFullYear()} Global Hope India. All rights reserved.</p>
+          <p class="text-white/50 text-xs text-center mb-6">Global Hope India is a federally recognized 501(c)3 nonprofit. All gifts are tax-deductible.</p>
+          <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
+            <img src="https://globalhopeindia.org/wp-content/uploads/2020/10/3.svg" alt="GuideStar" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/Charity.png" alt="Charity Navigator" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/BBB.png" alt="Better Business Bureau" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/Cary.png" alt="Cary Chamber of Commerce" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://globalhopeindia.org/wp-content/uploads/2020/10/7094135.svg" alt="Chamber Affiliation" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+          </div>
+          <p class="text-white/40 text-xs text-center">© {new Date().getFullYear()} Copyright by Spirit Media</p>
         </div>
       </div>
     </footer>
