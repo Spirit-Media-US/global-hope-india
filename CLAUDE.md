@@ -23,11 +23,12 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 - Phase 1: Infrastructure — repo, Netlify, Sanity created
 - Phase 2: Content extraction — all pages extracted to content/ directory
 - Phase 3: Build all pages — 8 pages, build passes
-- Phase 4: Wire Sanity CMS — Studio created, schemas ready, pages wired
+- Phase 4: Wire Sanity CMS — Studio + schemas deployed, dataset live
+- Phase 5: CAR Gate — GA4, OG image, JSON-LD, security headers, sitemap all verified
 
 ### Still Pending
-- Phase 4 BLOCKER: Sanity `production` dataset must be created + schema deployed (needs Sanity auth for project r33r2z1j)
-- Phase 5–9: QA, Launch, Delivery
+- Migrate ~30 WP CDN images to Sanity (will break when domain migrates)
+- Phase 6–9: Design Refinement, QA, Launch, Delivery
 
 ## Rules
 - All work goes to the dev branch — never push directly to main
