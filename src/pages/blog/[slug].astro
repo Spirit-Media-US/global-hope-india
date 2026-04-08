@@ -78,7 +78,7 @@ const encodedTitle = encodeURIComponent(post.title);
 <Layout
   title={post.seoTitle || `${post.title} | GHI Magazine`}
   description={post.seoDescription || post.excerpt || 'Read this story on the Global Hope India blog.'}
-  ogImage={heroImage || '/og-default.jpg'}
+  ogImage={heroImage}
 >
   <Fragment slot="head">
     <meta name="robots" content="index, follow" />

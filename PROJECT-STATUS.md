@@ -78,18 +78,22 @@
 
 ---
 
-## Remaining Tasks
+## Remaining Tasks — Developer
 | Task | Priority | Notes |
 |---|---|---|
-| Create Sanity `production` dataset | HIGH | Needs Sanity auth for project r33r2z1j — `cd studio && npx sanity dataset create production` |
-| Deploy schema to Sanity | HIGH | `cd studio && npm install && npx sanity schema deploy` |
-| Kevin: download WP images | HIGH | Upload to Sanity after download |
+| Upload hero video MP4 to R2 | HIGH | Last WP CDN reference: `GHI-Site-Video-v3.mp4` on home hero — use aws CLI with keys from `/home/deploy/bin/.env`, then update index.astro:79 |
 | Populate blog posts in Sanity Studio | HIGH | Migrate 6+ posts from WordPress |
-| GHL form integration | MEDIUM | Prayer signup, mission trip interest |
-| Connect custom domain | HIGH | Netlify → globalhopeindia.org |
-| Cloudflare proxy | HIGH | Enable after domain connected |
+| GHL form integration | MEDIUM | Prayer signup, mission trip interest — get webhook URL from GHL MCP |
+| Connect custom domain | HIGH | Netlify domain config + Cloudflare CNAME → globalhopeindia.org |
+| Cloudflare proxy | HIGH | Enable orange cloud after domain connected |
 | Sanity → Netlify webhook | HIGH | Trigger rebuilds on content change |
 | UptimeRobot monitoring | MEDIUM | Add after site is live |
+
+## Remaining Tasks — Requires Kevin
+| Task | Priority | Notes |
+|---|---|---|
+| Merge dev → main | HIGH | First production deploy — Kevin approves |
+| Share Sanity Studio access | MEDIUM | Invite GHI staff as Editors in Sanity (Kevin's account) |
 
 ---
 
@@ -97,12 +101,12 @@
 - [x] Phase 1: Infrastructure — GitHub repo, Netlify, Sanity project created (2026-04-07)
 - [x] Phase 2: Content extraction — all pages extracted to content/ directory (2026-04-07)
 - [x] Phase 3: Build all pages — 8 pages built, `npm run build` passes (2026-04-07)
-- [~] Phase 4: Wire Sanity CMS — Studio + schemas created, pages wired (2026-04-08). BLOCKER: need Sanity auth to create dataset + deploy schema
-- [ ] Phase 5: CAR Gate
-- [ ] Phase 6: Design Refinement
-- [ ] Phase 7: QA
-- [ ] Phase 8: Launch
-- [ ] Phase 9: Client Delivery
+- [x] Phase 4: Wire Sanity CMS — Studio + schemas created, pages wired, dataset + schema deployed (2026-04-08)
+- [x] Phase 5: CAR Gate — GA4 added, OG image fixed, logo upgraded, no placeholders, JSON-LD on all pages, security headers verified, sitemap correct (2026-04-08)
+- [x] Phase 6: Design Refinement — active nav highlighting, hero video poster, removed broken .mov video, removed duplicate banner (2026-04-08)
+- [x] Phase 7: QA — migrated 22 WP CDN images to Sanity, added `<main>` landmark, verified SEO/links/sitemap/accessibility/donation links/no placeholders, build clean (2026-04-08)
+- [x] Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify verified, Sanity webhook confirmed, security headers confirmed (2026-04-08)
+- [x] Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md created (2026-04-08)
 
 ---
 
