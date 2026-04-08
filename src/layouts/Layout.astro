@@ -11,7 +11,7 @@ interface Props {
 const {
   title,
   description = 'Global Hope India empowers the church in India to make Christ known. Join us through prayer, giving, and going.',
-  ogImage = 'https://globalhopeindia.org/wp-content/uploads/2020/04/GHI-logo-scaled.webp',
+  ogImage = 'https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
@@ -62,7 +62,7 @@ const currentPath = Astro.url.pathname;
         <!-- Logo -->
         <a href="/" class="flex items-center gap-3 shrink-0">
           <img
-            src="https://globalhopeindia.org/wp-content/uploads/2020/04/GHI-logo-scaled.webp"
+            src="https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp"
             alt="Global Hope India"
             width="50"
             height="50"
@@ -139,7 +139,9 @@ const currentPath = Astro.url.pathname;
     </header>
 
     <!-- ── Page content ───────────────────────────────────── -->
-    <slot />
+    <main>
+      <slot />
+    </main>
 
     <!-- ── Footer ─────────────────────────────────────────── -->
     <footer class="bg-[#1D1C1C] text-white">
@@ -149,7 +151,7 @@ const currentPath = Astro.url.pathname;
           <div>
             <div class="flex items-center gap-3 mb-4">
               <img
-                src="https://globalhopeindia.org/wp-content/uploads/2020/04/GHI-logo-scaled.webp"
+                src="https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp"
                 alt="Global Hope India"
                 width="56"
                 height="56"
@@ -218,11 +220,11 @@ const currentPath = Astro.url.pathname;
         <div class="border-t border-white/10 mt-12 pt-8">
           <p class="text-white/50 text-xs text-center mb-6">Global Hope India is a federally recognized 501(c)3 nonprofit. All gifts are tax-deductible.</p>
           <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
-            <img src="https://globalhopeindia.org/wp-content/uploads/2020/10/3.svg" alt="GuideStar" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/Charity.png" alt="Charity Navigator" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/BBB.png" alt="Better Business Bureau" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://globalhopeindia.org/wp-content/uploads/2023/12/Cary.png" alt="Cary Chamber of Commerce" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
-            <img src="https://globalhopeindia.org/wp-content/uploads/2020/10/7094135.svg" alt="Chamber Affiliation" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://cdn.sanity.io/images/r33r2z1j/production/767b76c41ccc43b3c07f07c94435a4dcc3ad13b3-500x500.svg" alt="GuideStar" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://cdn.sanity.io/images/r33r2z1j/production/07b08d8f4d9321bb85fa7814ef0d65a742b3463e-500x500.png" alt="Charity Navigator" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://cdn.sanity.io/images/r33r2z1j/production/f256d3af6f9dbfbc282103b8fb3f7037a98d64db-500x500.png" alt="Better Business Bureau" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://cdn.sanity.io/images/r33r2z1j/production/7de612782e20fce24ac52474b16b6bf4e011c126-500x500.png" alt="Cary Chamber of Commerce" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
+            <img src="https://cdn.sanity.io/images/r33r2z1j/production/cd3ad9882d7c42491f7d98a8df1b71e6868b6e68-135x135.svg" alt="Chamber Affiliation" class="h-12 opacity-70 hover:opacity-100 transition-opacity" />
           </div>
           <p class="text-white/40 text-xs text-center">© {new Date().getFullYear()} Copyright by Spirit Media</p>
         </div>

@@ -81,7 +81,7 @@
 ## Remaining Tasks
 | Task | Priority | Notes |
 |---|---|---|
-| Migrate WP CDN images to Sanity | HIGH | ~30 images (logo, trust badges, stat icons, blog images) still hotlink old WordPress CDN — will break when domain migrates |
+| Upload hero video MP4 to R2 | HIGH | Last WP CDN reference: `GHI-Site-Video-v3.mp4` on home hero — Kevin uploads to R2, then update index.astro:79 |
 | Populate blog posts in Sanity Studio | HIGH | Migrate 6+ posts from WordPress |
 | GHL form integration | MEDIUM | Prayer signup, mission trip interest |
 | Connect custom domain | HIGH | Netlify → globalhopeindia.org |
@@ -98,7 +98,7 @@
 - [x] Phase 4: Wire Sanity CMS — Studio + schemas created, pages wired, dataset + schema deployed (2026-04-08)
 - [x] Phase 5: CAR Gate — GA4 added, OG image fixed, logo upgraded, no placeholders, JSON-LD on all pages, security headers verified, sitemap correct (2026-04-08)
 - [x] Phase 6: Design Refinement — active nav highlighting, hero video poster, removed broken .mov video, removed duplicate banner (2026-04-08)
-- [ ] Phase 7: QA
+- [x] Phase 7: QA — migrated 22 WP CDN images to Sanity, added `<main>` landmark, verified SEO/links/sitemap/accessibility/donation links/no placeholders, build clean (2026-04-08)
 - [ ] Phase 8: Launch
 - [ ] Phase 9: Client Delivery
 
