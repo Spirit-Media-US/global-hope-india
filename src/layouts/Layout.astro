@@ -57,8 +57,8 @@ const currentPath = Astro.url.pathname;
   </head>
   <body>
     <!-- ── Navbar ─────────────────────────────────────────── -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div class="container mx-auto px-6 flex items-center justify-between h-24">
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white transition-colors duration-300">
+      <div class="container mx-auto px-6 flex items-center justify-between h-[68px]">
         <!-- Logo -->
         <a href="/" class="shrink-0">
           <img
@@ -78,20 +78,19 @@ const currentPath = Astro.url.pathname;
             { href: '/projects', label: 'Projects' },
             { href: '/get-involved', label: 'Get Involved' },
             { href: '/impact', label: 'Impact' },
-            { href: '/blog', label: 'Blog' },
           ].map(link => (
             <a
               href={link.href}
-              class={`nav-link font-medium text-sm transition-colors ${
+              class={`nav-link font-semibold text-base transition-colors px-3 ${
                 currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                  ? 'text-[#2EAB5A] underline underline-offset-4 decoration-2'
+                  ? 'text-[#2EAB5A]'
                   : 'text-[#1D1C1C] hover:text-[#2EAB5A]'
               }`}
             >
               {link.label}
             </a>
           ))}
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#4A55A2] hover:bg-[#3b4589] text-white text-sm font-semibold py-2 px-6 rounded-full transition-colors">Donate</a>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-[15px] font-medium py-3 px-8 rounded transition-colors">Donate</a>
         </nav>
 
         <!-- Mobile hamburger -->
@@ -119,11 +118,10 @@ const currentPath = Astro.url.pathname;
             { href: '/projects', label: 'Projects' },
             { href: '/get-involved', label: 'Get Involved' },
             { href: '/impact', label: 'Impact' },
-            { href: '/blog', label: 'Blog' },
           ].map(link => (
             <a
               href={link.href}
-              class={`font-medium py-3 border-b border-gray-100 transition-colors ${
+              class={`font-semibold py-3 border-b border-gray-100 transition-colors ${
                 currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
                   ? 'text-[#2EAB5A]'
                   : 'text-[#1D1C1C] hover:text-[#2EAB5A]'
@@ -132,7 +130,7 @@ const currentPath = Astro.url.pathname;
               {link.label}
             </a>
           ))}
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#4A55A2] hover:bg-[#3b4589] text-white font-semibold mt-3 text-center py-3 rounded-full transition-colors">Donate Now</a>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium mt-3 text-center py-3 rounded transition-colors">Donate Now</a>
         </nav>
       </div>
     </header>
@@ -183,7 +181,7 @@ const currentPath = Astro.url.pathname;
               href="https://givebutter.com/GlobalHopeIndia"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-block bg-[#2EAB5A] hover:bg-[#259a4e] text-white font-bold text-sm px-8 py-3 rounded-md transition-colors shadow-sm"
+              class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium text-[15px] px-8 py-3 rounded transition-colors shadow-sm"
             >Donate Now</a>
             <!-- Social icons in green squares -->
             <div class="flex gap-2">
@@ -225,8 +223,8 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <!-- Copyright bar -->
-      <div class="bg-[#e0e0e0] py-3 px-6">
-        <p class="text-[#777] text-xs text-center">© {new Date().getFullYear()} Copyright by Spirit Media | <a href="/privacy-policy" class="hover:text-[#2EAB5A] transition-colors">Privacy Policy</a></p>
+      <div class="bg-[#F8F9F3] py-3 px-6">
+        <p class="text-[#1D1C1C] text-xs text-center">© {new Date().getFullYear()} Copyright by Spirit Media | <a href="/privacy-policy" class="hover:text-[#2EAB5A] transition-colors">Privacy Policy</a></p>
       </div>
     </footer>
 
