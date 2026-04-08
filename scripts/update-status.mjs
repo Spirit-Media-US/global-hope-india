@@ -15,21 +15,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATUS_FILE = join(__dirname, '..', 'PROJECT-STATUS.md');
 
 const client = createClient({
-  projectId: 'REPLACE_PROJECT_ID',
+  projectId: 'r33r2z1j',
   dataset: 'production',
   useCdn: false,
   apiVersion: '2024-01-01',
 });
 
 const TYPES = [
-  { type: 'testimonial',    note: 'Live on homepage, fetched from Sanity' },
-  { type: 'teamMember',     note: 'Live on about page, fetched from Sanity' },
-  { type: 'pressRelease',   note: 'Live on media-center, fetched from Sanity' },
-  { type: 'mediaVideo',     note: 'YouTube IDs/titles only, no video files in Sanity' },
-  { type: 'portfolioVideo', note: 'YouTube embed URLs' },
   { type: 'blogPost',       note: 'Fully dynamic via [slug].astro' },
-  { type: 'book',           note: 'Fully dynamic on /bookstore' },
-  { type: 'siteSettings',   note: 'phone, email, socials, siteName, tagline, description' },
+  { type: 'siteSettings',   note: 'Not yet populated' },
 ];
 
 async function run() {

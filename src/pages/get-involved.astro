@@ -7,6 +7,17 @@ import MailtoLink from '../components/MailtoLink.astro';
   title="Get Involved — Global Hope India"
   description="Pray, give, or go — there's a place for you in God's mission to India. Join thousands who have engaged with Global Hope India."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Get Involved — Global Hope India",
+      "url": "https://globalhopeindia.org/get-involved",
+      "description": "Pray, give, or go — there's a place for you in God's mission to India.",
+      "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+  </Fragment>
+
   <!-- ── PAGE HERO ────────────────────────────────────────── -->
   <section class="bg-[#1D1C1C] text-white pt-36 pb-20 px-6">
     <div class="container mx-auto text-center">
