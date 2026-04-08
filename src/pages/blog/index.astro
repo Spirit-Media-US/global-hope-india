@@ -124,7 +124,8 @@ function applyFilters() {
     const searchOk = !q ||
       p.title?.toLowerCase().includes(q) ||
       p.excerpt?.toLowerCase().includes(q) ||
-      (p.tags || []).some((t: string) => t.toLowerCase().includes(q));
+      (p.tags || []).some((t: string) => t.toLowerCase().includes(q)) ||
+      (p.author || '').toLowerCase().includes(q);
     return tagOk && searchOk;
   });
   page = 1;
@@ -162,7 +163,7 @@ function render() {
           <h3 class="font-bold text-lg leading-snug text-[#1D1C1C] mb-2 group-hover:text-[#2EAB5A] transition-colors">${p.title}</h3>
           <p class="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">${p.excerpt || ''}</p>
           <div class="flex items-center justify-between text-sm">
-            <span class="text-[#999]">${p.dateFormatted}</span>
+            <span class="text-[#999]">${p.author || 'Global Hope India'} · ${p.dateFormatted}</span>
             <span class="text-[#2EAB5A] font-semibold group-hover:underline">Read →</span>
           </div>
         </div>
