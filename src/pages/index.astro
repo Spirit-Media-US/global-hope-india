@@ -1,20 +1,220 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import { sanityClient } from '../lib/sanity.ts';
 
-// Example Sanity fetch — replace with real query for this site
-// import { sanityClient } from '../lib/sanity.ts';
-// const items = await sanityClient.fetch(`*[_type == "post"] | order(_createdAt desc)`);
+// Fetch latest 6 blog posts
+let blogPosts: any[] = [];
+try {
+  blogPosts = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) [0..5] {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "imageUrl": heroImage.asset->url,
+      tags
+    }
+  `);
+} catch (e) {
+  // Sanity not yet populated — show empty state
+}
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const formatDate = (d: string) => {
+  const dt = new Date(d);
+  return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+};
+
+const stats = [
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/Donors-Icon.svg', label: 'Donors', value: '1,029' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/8.svg', label: 'Collecting', value: '$10,000,000' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/5.svg', label: 'Bibles', value: '50,000' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/9.svg', label: 'Mission Teams', value: '139' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/6.svg', label: 'Volunteers', value: '1,002' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/Waters-Project-Icons.svg', label: 'Water Projects', value: '143' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/10.svg', label: 'Orphans Sponsored', value: '599' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/Hygiene-Icon.svg', label: 'Hygiene kits', value: '100,000' },
+  { icon: 'https://globalhopeindia.org/wp-content/uploads/2023/12/7.svg', label: 'Lives Impacted', value: '59,000,000' },
+];
+
+const fallbackBlogPosts = [
+  { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-3-03.18.25.webp' },
+  { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-2-03.18.25.webp' },
+  { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-1-03.18.25.webp' },
+  { title: "Hope for India's Special Needs Community", date: 'March 4, 2025', tag: 'Community', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-04.04.25-2.webp' },
+  { title: 'Empowering the Deaf Community in Nagaland', date: 'March 4, 2025', tag: 'Community', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-03.04.25.webp' },
+  { title: "Elim School: Supporting Pastor Mayon's Mission", date: 'March 4, 2025', tag: 'Education', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-03.04.25-3-1.webp' },
+];
 ---
 
-<Layout title="Site Name — Tagline">
-  <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-    <h1 class="text-4xl font-bold mb-4">
-      Site Name
-    </h1>
-    <p class="text-lg max-w-lg">
-      Replace this page with your site content. Connect to Sanity via
-      <code>src/lib/sanity.ts</code> and update the project ID.
-    </p>
-  </main>
+<Layout
+  title="Global Hope India — Sharing Jesus by Sending People, Funding, and Resources"
+  description="Global Hope India engages the church worldwide to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Global Hope India",
+      "url": "https://globalhopeindia.org",
+      "description": "Sharing Jesus by Sending People, Funding, and Resources to India",
+      "address": { "@type": "PostalAddress", "streetAddress": "PO Box 3251", "addressLocality": "Cary", "addressRegion": "NC", "postalCode": "27519", "addressCountry": "US" },
+      "telephone": "919-438-2444",
+      "email": "info@globalhopeindia.org",
+      "sameAs": ["https://www.facebook.com/GlobalHopeIndia","https://www.youtube.com/@GlobalHopeIndia"]
+    })}></script>
+  </Fragment>
+
+  <!-- ── HERO (Video Background) ──────────────────────────── -->
+  <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="https://globalhopeindia.org/wp-content/uploads/2023/12/GHI-Site-Video-v3.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 container mx-auto px-6">
+      <h1 class="text-white font-bold mb-4 max-w-4xl mx-auto leading-tight" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+        <span class="text-[#2EAB5A]">India</span> for <span class="text-[#2EAB5A]">Jesus</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- ── TAGLINE ─────────────────────────────────────────── -->
+  <section class="bg-white py-12 lg:py-16 px-6">
+    <div class="container mx-auto text-center">
+      <h2 class="text-[#1D1C1C] font-bold mb-4">Sharing Jesus by Sending People, Funding, and Resources</h2>
+      <p class="text-[#666] text-lg max-w-3xl mx-auto leading-relaxed">
+        Global Hope India engages the church worldwide in order to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God in India.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── MISSION BANNER (salmon/pink strip) ──────────────── -->
+  <section class="bg-[#E8837C] py-4 px-6">
+    <div class="container mx-auto text-center">
+      <p class="text-white font-semibold text-sm md:text-base tracking-wide">
+        Sharing Jesus by Sending People, Funding, and Resources to India
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 25 YEARS (green box) ────────────────────────────── -->
+  <section class="bg-[#2EAB5A] py-12 lg:py-16 px-6">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="text-center md:text-left">
+          <h2 class="text-white font-bold">Celebrating Over <span class="text-[#FEC415]">25 Years</span> in India</h2>
+        </div>
+        <div class="shrink-0">
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/celebreate-25-years.webp"
+            alt="Celebrating 25 Years in India"
+            width="200"
+            height="200"
+            class="w-48 h-48 md:w-52 md:h-52"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPACT STATS (3x3 grid) ─────────────────────────── -->
+  <section class="section bg-white">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {stats.map(stat => (
+          <div class="flex items-center gap-4">
+            <img src={stat.icon} alt={stat.label} class="w-16 h-16 shrink-0" />
+            <div>
+              <div class="text-2xl md:text-3xl font-bold text-[#1D1C1C] leading-tight">{stat.value}</div>
+              <div class="text-[#666] text-sm font-medium">{stat.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INDIA MAP (Video Background) ────────────────────── -->
+  <section class="relative h-[50vh] lg:h-[60vh] flex items-center justify-center overflow-hidden">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="https://globalhopeindia.org/wp-content/uploads/2023/12/india-paper-travel-map-2023-11-27-05-12-20-utc.mov" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative z-10 text-center">
+      <span class="inline-block bg-[#2EAB5A] text-white font-bold text-2xl md:text-4xl px-8 py-3 rounded-sm">Impacting</span>
+    </div>
+  </section>
+
+  <!-- ── GHI MAGAZINE / BLOG ──────────────────────────────── -->
+  <section class="section bg-[#f5f5f5]">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="eyebrow">Stories from the Field</span>
+        <h2>GHI Magazine</h2>
+      </div>
+
+      {blogPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map(post => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
+            >
+              <div class="h-52 overflow-hidden bg-[#1D1C1C]">
+                {post.imageUrl ? (
+                  <img
+                    src={`${post.imageUrl}?w=600&auto=format`}
+                    alt={post.title}
+                    class="blog-card-img w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-white/30 text-4xl">🌏</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
+                <div class="text-sm text-[#999] mb-3">{post.publishDate ? formatDate(post.publishDate) : ''}</div>
+                <span class="text-[#2EAB5A] font-semibold text-sm group-hover:underline">Read Full Story Here</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <!-- Fallback: static blog posts before Sanity is populated -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {fallbackBlogPosts.map(post => (
+            <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm">
+              <div class="h-52 overflow-hidden">
+                <img src={post.image} alt={post.title} class="w-full h-full object-cover" />
+              </div>
+              <div class="p-6">
+                <h3 class="font-bold text-lg leading-snug mb-2">{post.title}</h3>
+                <div class="text-sm text-[#999] mb-3">{post.date}</div>
+                <span class="text-[#2EAB5A] font-semibold text-sm">Read Full Story Here</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div class="text-center mt-12">
+        <a href="/impact" class="btn" style="background-color: #1D1C1C; color: #fff; border-color: #1D1C1C;">See more blogs</a>
+      </div>
+    </div>
+  </section>
+
 </Layout>

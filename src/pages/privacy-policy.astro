@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MailtoLink from '../components/MailtoLink.astro';
+---
+
+<Layout
+  title="Privacy Policy — Global Hope India"
+  description="Global Hope India privacy policy — how we collect, use, and protect your personal information."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
+  <section class="bg-[#1D1C1C] text-white pt-36 pb-16 px-6">
+    <div class="container mx-auto">
+      <h1 class="text-white mb-3">Privacy Policy</h1>
+      <p class="text-white/60 text-sm">Last updated: 2025</p>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container mx-auto max-w-3xl prose prose-lg">
+      <p class="text-[#444] text-lg">
+        <strong>Global Hope India (GHI) values its users' privacy.</strong> This Privacy Policy explains how we collect and use personal information from website visitors and online service users. We are committed to meeting — and exceeding — most existing privacy standards.
+      </p>
+
+      <h2>Information We Collect</h2>
+      <p>We may collect the following types of information:</p>
+      <ul>
+        <li><strong>Voluntarily provided data:</strong> name, address, email, billing or credit card information</li>
+        <li><strong>Automatically collected data:</strong> cookies, tracking technologies, server logs</li>
+        <li><strong>Non-personal demographic information:</strong> age, gender, income, browser type, IP address</li>
+      </ul>
+      <p>Collection occurs through surveys, membership forms, and emails that users knowingly complete.</p>
+
+      <h2>How We Use Your Information</h2>
+      <p>GHI collects data to:</p>
+      <ul>
+        <li>Better understand and serve your needs</li>
+        <li>Improve our services and programs</li>
+        <li>Send promotional emails (with your consent)</li>
+        <li>Request survey participation (with your consent)</li>
+        <li>Customize your website experience</li>
+      </ul>
+      <p>Data is stored no longer than necessary, based on relevance, legal obligations, and legitimate interests.</p>
+
+      <h2>Information Disclosure</h2>
+      <p>GHI may disclose your information when:</p>
+      <ul>
+        <li>Providing requested services or products</li>
+        <li>Required by law or subpoena</li>
+        <li>Sharing with outside auditors under confidentiality agreements</li>
+        <li>Enforcing our Terms of Service</li>
+        <li>Protecting organizational rights and property</li>
+      </ul>
+      <p>Aggregate data may be shared in ways that prevent individual identification.</p>
+
+      <h2>Children Under 13</h2>
+      <p>Global Hope India's website is not directed to, and does not knowingly collect personally identifiable information from, children under the age of thirteen (13). If such information is inadvertently collected, we will delete it promptly.</p>
+
+      <h2>Unsubscribe / Opt-Out</h2>
+      <p>To discontinue communications, email <MailtoLink email="info@globalhopeindia.org" class="text-[#2EAB5A]">info@globalhopeindia.org</MailtoLink> with your unsubscribe request.</p>
+
+      <h2>External Links</h2>
+      <p>GHI is not responsible for other websites' privacy policies. Please review each site's policy before providing personal information.</p>
+
+      <h2>Security</h2>
+      <p>GHI employs industry-standard security measures including encryption for sensitive data, HTTPS protocol, employee access restrictions, and SSL authentication to protect your information.</p>
+
+      <h2>Policy Updates</h2>
+      <p>GHI reserves the right to modify this policy at any time. We will notify users by email if we plan to use personal information differently than originally stated.</p>
+
+      <h2>Contact Us</h2>
+      <address class="not-italic text-[#444]">
+        <strong>Global Hope India</strong><br/>
+        10520 Chapel Hill Rd #330<br/>
+        Morrisville, NC 27560<br/>
+        <a href="tel:9194382444" class="text-[#2EAB5A]">919-438-2444</a><br/>
+        <MailtoLink email="info@globalhopeindia.org" class="text-[#2EAB5A]">info@globalhopeindia.org</MailtoLink>
+      </address>
+
+      <p class="text-sm text-[#888] mt-8">By using this website, you accept the terms and conditions of this Privacy Policy Agreement.</p>
+    </div>
+  </section>
+</Layout>
