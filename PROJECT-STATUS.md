@@ -100,7 +100,7 @@
 - [x] Phase 6: Design Refinement — active nav highlighting, hero video poster, removed broken .mov video, removed duplicate banner (2026-04-08)
 - [x] Phase 7: QA — migrated 22 WP CDN images to Sanity, added `<main>` landmark, verified SEO/links/sitemap/accessibility/donation links/no placeholders, build clean (2026-04-08)
 - [x] Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify verified, Sanity webhook confirmed, security headers confirmed (2026-04-08)
-- [ ] Phase 9: Client Delivery
+- [x] Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md created (2026-04-08)
 
 ---
 

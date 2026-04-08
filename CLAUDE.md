@@ -28,11 +28,14 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 - Phase 6: Design Refinement — active nav, hero poster, removed broken .mov, removed duplicate banner
 - Phase 7: QA — 22 images migrated WP CDN → Sanity, `<main>` landmark added, all audits pass
 - Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify/Sanity webhook/security headers verified
+- Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md
 
-### Still Pending
+### Still Pending (Kevin)
 - Upload hero video MP4 to R2 (last WP CDN reference)
-- Connect custom domain (Kevin: DNS)
-- Phase 9: Client Delivery
+- Connect custom domain (DNS cutover)
+- Merge dev → main (first production deploy)
+- UptimeRobot monitoring
+- Share Sanity Studio access with GHI staff
 
 ## Rules
 - All work goes to the dev branch — never push directly to main
