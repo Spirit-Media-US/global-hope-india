@@ -100,7 +100,7 @@ const fallbackBlogPosts = [
   </section>
 
   <!-- ── TAGLINE ─────────────────────────────────────────── -->
-  <section class="tagline-section relative bg-[#fdf5f3] overflow-hidden -mt-16 lg:-mt-24 z-10">
+  <section class="tagline-section relative bg-[#fdf5f3] overflow-hidden -mt-28 md:-mt-20 lg:-mt-24 z-10">
     <!-- Decorative dashed diagonal lines -->
     <div class="tagline-dashed-line tagline-dashed-top-right"></div>
     <div class="tagline-dashed-line tagline-dashed-bottom-right"></div>
@@ -219,7 +219,8 @@ const fallbackBlogPosts = [
   <!-- ── IMPACT STATS (3x3 grid) ─────────────────────────── -->
   <section id="impact-stats" class="section bg-white">
     <div class="container mx-auto">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+      <!-- Desktop: horizontal grid -->
+      <div class="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         {stats.map(stat => {
           const raw = stat.value.replace(/[$,]/g, '');
           const num = parseInt(raw, 10);
@@ -238,6 +239,32 @@ const fallbackBlogPosts = [
             </div>
           );
         })}
+      </div>
+      <!-- Mobile: vertical centered cards with dashed path -->
+      <div class="sm:hidden relative">
+        <!-- Decorative dashed path -->
+        <div class="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 border-l-2 border-dashed border-stone-300 z-0"></div>
+        <div class="relative z-10 flex flex-col items-center gap-6">
+          {stats.map(stat => {
+            const raw = stat.value.replace(/[$,]/g, '');
+            const num = parseInt(raw, 10);
+            const prefix = stat.value.startsWith('$') ? '$' : '';
+            return (
+              <div class="flex flex-col items-center text-center">
+                <div class="relative w-28 h-28 flex items-center justify-center mb-3">
+                  <div class="absolute inset-0 bg-[#2EAB5A]/10 rounded-[40%_60%_50%_50%/60%_40%_60%_40%]"></div>
+                  <img src={stat.icon} alt={stat.label} class="relative w-20 h-20" />
+                </div>
+                <div
+                  class="count-up text-2xl font-bold text-[#1D1C1C] leading-tight"
+                  data-target={num}
+                  data-prefix={prefix}
+                >0</div>
+                <div class="text-[#666] text-sm font-medium">{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   </section>
