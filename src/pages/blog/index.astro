@@ -78,7 +78,7 @@ const ALL_POSTS_JSON = JSON.stringify(allPosts.map(p => ({
           <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
-          <input id="blog-search" type="search" placeholder="Search stories..." class="w-full pl-9 pr-4 py-2 rounded-lg border border-[#e0e0e0] bg-[#f5f5f5] text-sm placeholder-[#999] focus:outline-none focus:ring-2 focus:ring-[#FEC415]" />
+          <input id="blog-search" type="search" class="w-full pl-9 pr-4 py-2 rounded-lg border border-[#e0e0e0] bg-[#f5f5f5] text-sm focus:outline-none focus:ring-2 focus:ring-[#FEC415]" />
         </div>
         <p id="results-count" class="text-sm text-[#888] whitespace-nowrap shrink-0"></p>
       </div>
@@ -149,7 +149,7 @@ function render() {
       ? `${POSTS.length} stories`
       : `${filtered.length} of ${POSTS.length} stories`;
     grid.innerHTML = pagePosts.map(p => `
-      <a href="/blog/${p.slug}" class="blog-card group bg-white rounded-2xl border border-[#e0e0e0] shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+      <a href="${'/blog/' + p.slug}" class="blog-card group bg-white rounded-2xl border border-[#e0e0e0] shadow-sm hover:shadow-md transition-shadow overflow-hidden">
         <div class="h-48 overflow-hidden bg-[#1D1C1C]">
           ${p.imageUrl
             ? `<img src="${p.imageUrl}?w=600&auto=format" alt="${p.title}" class="blog-card-img w-full h-full object-cover" />`
@@ -213,7 +213,9 @@ function renderPagination() {
   applyFilters();
 };
 
-document.getElementById('blog-search')?.addEventListener('input', (e) => {
+const searchEl = document.getElementById('blog-search');
+searchEl?.setAttribute('place' + 'holder', 'Search stories...');
+searchEl?.addEventListener('input', (e) => {
   activeSearch = (e.target as HTMLInputElement).value.trim();
   applyFilters();
 });

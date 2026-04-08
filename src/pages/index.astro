@@ -76,12 +76,12 @@ const fallbackBlogPosts = [
       poster="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
       class="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="https://assets.spiritmediapublishing.com/video/GHI-Site-Video-v3.mp4" type="video/mp4" />
+      <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 container mx-auto px-6">
-      <div class="hero-flip-container" style="perspective: 600px;">
-        <h1 class="hero-flip-text" style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.1;">
+      <div class="hero-flip-container">
+        <h1 class="hero-flip-text">
           <!-- Phase A: "Jesus for India" -->
           <span class="flip-phrase flip-phrase-a active">
             <span class="txt-jesus">Jesus</span>
@@ -100,9 +100,15 @@ const fallbackBlogPosts = [
   </section>
 
   <style>
+    .hero-flip-container {
+      perspective: 600px;
+    }
     .hero-flip-text {
       position: relative;
       display: block;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
     }
     .flip-phrase {
       display: inline-flex;
@@ -264,7 +270,7 @@ const fallbackBlogPosts = [
       )}
 
       <div class="text-center mt-12">
-        <a href="/blog" class="btn" style="background-color: #1D1C1C; color: #fff; border-color: #1D1C1C;">See more blogs</a>
+        <a href="/blog" class="btn btn-dark">See more blogs</a>
       </div>
     </div>
   </section>
