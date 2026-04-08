@@ -30,10 +30,10 @@
 [context.branch-deploy]
   command = "npm run build"
 
-# Sanity Studio SPA — must be before other redirects
+# Sanity Studio static assets
 [[redirects]]
-  from = "/studio/*"
-  to = "/studio/index.html"
+  from = "/static/*"
+  to = "/studio/static/:splat"
   status = 200
 
 # TODO: Update domain before going live
