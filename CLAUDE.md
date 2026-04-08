@@ -39,9 +39,10 @@ Then run: `git checkout dev && git pull origin dev`
 - Phase 7: QA — 22 images migrated WP CDN → Sanity, `<main>` landmark added, all audits pass
 - Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify/Sanity webhook/security headers verified
 - Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md
+- Hero video migrated from WP CDN to R2 (assets.spiritmediapublishing.com/video/GHI-Site-Video-v3.mp4)
+- First deploy to main — merged 2026-04-08, Netlify auto-build triggered
 
 ### Still Pending — Developer Tasks
-- Upload hero video MP4 to R2 (last WP CDN reference — use aws CLI with keys from /home/deploy/bin/.env)
 - Connect custom domain in Netlify + Cloudflare DNS (globalhopeindia.org)
 - Populate blog posts in Sanity Studio (migrate 6+ from WordPress)
 - GHL form integration (prayer signup, mission trip interest)
@@ -49,8 +50,7 @@ Then run: `git checkout dev && git pull origin dev`
 - Sanity → Netlify rebuild webhook
 
 ### Still Pending — Requires Kevin
-- Merge dev → main (first production deploy — Kevin approves)
-- Share Sanity Studio access with GHI staff (Kevin's Sanity account)
+- Share Sanity Studio access with GHI staff (manage.sanity.io > project r33r2z1j > Members > Invite)
 
 ## Rules
 - All work goes to the dev branch — never push directly to main

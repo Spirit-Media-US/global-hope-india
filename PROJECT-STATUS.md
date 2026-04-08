@@ -81,19 +81,17 @@
 ## Remaining Tasks — Developer
 | Task | Priority | Notes |
 |---|---|---|
-| Upload hero video MP4 to R2 | HIGH | Last WP CDN reference: `GHI-Site-Video-v3.mp4` on home hero — use aws CLI with keys from `/home/deploy/bin/.env`, then update index.astro:79 |
 | Populate blog posts in Sanity Studio | HIGH | Migrate 6+ posts from WordPress |
-| GHL form integration | MEDIUM | Prayer signup, mission trip interest — get webhook URL from GHL MCP |
 | Connect custom domain | HIGH | Netlify domain config + Cloudflare CNAME → globalhopeindia.org |
 | Cloudflare proxy | HIGH | Enable orange cloud after domain connected |
 | Sanity → Netlify webhook | HIGH | Trigger rebuilds on content change |
+| GHL form integration | MEDIUM | Prayer signup, mission trip interest — get webhook URL from GHL MCP |
 | UptimeRobot monitoring | MEDIUM | Add after site is live |
 
 ## Remaining Tasks — Requires Kevin
 | Task | Priority | Notes |
 |---|---|---|
-| Merge dev → main | HIGH | First production deploy — Kevin approves |
-| Share Sanity Studio access | MEDIUM | Invite GHI staff as Editors in Sanity (Kevin's account) |
+| Share Sanity Studio access | MEDIUM | Invite GHI staff as Editors (manage.sanity.io > project r33r2z1j > Members) |
 
 ---
 
@@ -107,6 +105,8 @@
 - [x] Phase 7: QA — migrated 22 WP CDN images to Sanity, added `<main>` landmark, verified SEO/links/sitemap/accessibility/donation links/no placeholders, build clean (2026-04-08)
 - [x] Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify verified, Sanity webhook confirmed, security headers confirmed (2026-04-08)
 - [x] Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md created (2026-04-08)
+- [x] Hero video migrated from WP CDN to R2 — assets.spiritmediapublishing.com/video/GHI-Site-Video-v3.mp4 (2026-04-08)
+- [x] First deploy: dev merged to main, Netlify auto-build triggered (2026-04-08)
 
 ---
 
