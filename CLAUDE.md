@@ -8,7 +8,7 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 
 ## Stack
 - Astro 5 + Tailwind CSS v4
-- Sanity Studio at global-hope-india.sanity.studio (TBC)
+- Sanity Studio at `/studio` (static build via `sanity build public/studio`)
 
 ## Design System
 - Font: Poppins (400, 500, 600, 700) — load from Google Fonts
@@ -18,14 +18,15 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 - Dark bg (header/footer): #1D1C1C
 - White: #FFFFFF
 
-## Status — as of 2026-04-07
-### Completed & Live on Main
+## Status — as of 2026-04-08
+### Completed
 - Phase 1: Infrastructure — repo, Netlify, Sanity created
+- Phase 2: Content extraction — all pages extracted to content/ directory
+- Phase 3: Build all pages — 8 pages, build passes
+- Phase 4: Wire Sanity CMS — Studio created, schemas ready, pages wired
 
 ### Still Pending
-- Phase 2: Content extraction (in progress — content/ directory populated)
-- Phase 3: Build all pages
-- Phase 4: Wire Sanity CMS
+- Phase 4 BLOCKER: Sanity `production` dataset must be created + schema deployed (needs Sanity auth for project r33r2z1j)
 - Phase 5–9: QA, Launch, Delivery
 
 ## Rules

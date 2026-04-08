@@ -1,5 +1,5 @@
 # Global Hope India — Project Status & Knowledge Base
-> Last updated: 2026-04-07
+> Last updated: 2026-04-08
 > **Claude: Read this file before making any statements about project state or touching any code.**
 
 ---
@@ -61,21 +61,30 @@
 
 ---
 
+## Sanity Studio
+- Location: `studio/` directory
+- Schemas: `blogPost` (tags: Partners, Projects, Healthcare, Community, Education)
+- Default author: "Global Hope India"
+- Config: `sanity.config.ts` at root (projectId: r33r2z1j, dataset: production, basePath: /studio)
+
 ## Components — Sanity Integration Status
 | Component | Fetches from Sanity | Notes |
 |---|---|---|
-| Footer.astro | — | phone, email, socials not yet wired |
-| Navbar.astro | — | Logo hardcoded intentionally |
+| blog/index.astro | blogPost list | Search, tag filter, pagination — all wired |
+| blog/[slug].astro | blogPost detail | Related posts, share bar, portable text — all wired |
+| index.astro | Latest 6 blogPosts | Fallback to static cards when empty |
+| Layout.astro (footer) | — | Contact info hardcoded (rarely changes) |
+| Layout.astro (navbar) | — | Logo + links hardcoded intentionally |
 
 ---
 
 ## Remaining Tasks
 | Task | Priority | Notes |
 |---|---|---|
-| Phase 3: Build all pages | HIGH | See content/ directory for all content |
-| Wire Sanity CMS (Phase 4) | HIGH | projectId: r33r2z1j |
+| Create Sanity `production` dataset | HIGH | Needs Sanity auth for project r33r2z1j — `cd studio && npx sanity dataset create production` |
+| Deploy schema to Sanity | HIGH | `cd studio && npm install && npx sanity schema deploy` |
 | Kevin: download WP images | HIGH | Upload to Sanity after download |
-| Add blogPost schema to Sanity | HIGH | Migrate 6+ posts from WordPress |
+| Populate blog posts in Sanity Studio | HIGH | Migrate 6+ posts from WordPress |
 | GHL form integration | MEDIUM | Prayer signup, mission trip interest |
 | Connect custom domain | HIGH | Netlify → globalhopeindia.org |
 | Cloudflare proxy | HIGH | Enable after domain connected |
@@ -88,7 +97,7 @@
 - [x] Phase 1: Infrastructure — GitHub repo, Netlify, Sanity project created (2026-04-07)
 - [x] Phase 2: Content extraction — all pages extracted to content/ directory (2026-04-07)
 - [x] Phase 3: Build all pages — 8 pages built, `npm run build` passes (2026-04-07)
-- [ ] Phase 4: Wire Sanity CMS — NEXT (blocker: Sanity dataset not yet created)
+- [~] Phase 4: Wire Sanity CMS — Studio + schemas created, pages wired (2026-04-08). BLOCKER: need Sanity auth to create dataset + deploy schema
 - [ ] Phase 5: CAR Gate
 - [ ] Phase 6: Design Refinement
 - [ ] Phase 7: QA

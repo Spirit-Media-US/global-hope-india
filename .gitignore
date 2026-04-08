@@ -7,7 +7,11 @@ node_modules/
 *.log
 
 # Sanity studio build artifacts
-.sanity/runtime/
+.sanity/
+public/studio/
+
+# Netlify
+.netlify/
 
 # Media files — never commit to git
 *.jpg
