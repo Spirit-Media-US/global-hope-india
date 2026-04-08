@@ -40,12 +40,17 @@ Then run: `git checkout dev && git pull origin dev`
 - Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify/Sanity webhook/security headers verified
 - Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md
 
-### Still Pending (Kevin)
-- Upload hero video MP4 to R2 (last WP CDN reference)
-- Connect custom domain (DNS cutover)
-- Merge dev → main (first production deploy)
-- UptimeRobot monitoring
-- Share Sanity Studio access with GHI staff
+### Still Pending — Developer Tasks
+- Upload hero video MP4 to R2 (last WP CDN reference — use aws CLI with keys from /home/deploy/bin/.env)
+- Connect custom domain in Netlify + Cloudflare DNS (globalhopeindia.org)
+- Populate blog posts in Sanity Studio (migrate 6+ from WordPress)
+- GHL form integration (prayer signup, mission trip interest)
+- UptimeRobot monitoring (add after site is live)
+- Sanity → Netlify rebuild webhook
+
+### Still Pending — Requires Kevin
+- Merge dev → main (first production deploy — Kevin approves)
+- Share Sanity Studio access with GHI staff (Kevin's Sanity account)
 
 ## Rules
 - All work goes to the dev branch — never push directly to main
