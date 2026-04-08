@@ -1,18 +1,74 @@
 @import "tailwindcss";
 
-/* ─── Global Hope India Design Tokens ──────────────────────── */
+/* ─── Design Tokens (Stitch Design System: Global Hope India Brand) ──── */
+/* Project: projects/3081457824766301683                                  */
+/* Design System: assets/8816472739238572553                              */
+/* Color variant: FIDELITY | Roundness: ROUND_FULL | Mode: LIGHT         */
+/* ──────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --font-sans: 'Poppins', system-ui, sans-serif;
-  --color-bg: #ffffff;
-  --color-text: #1D1C1C;
-  --color-accent: #FEC415;
-  --color-accent-hover: #e6b010;
-  --color-green: #2EAB5A;
-  --color-dark: #1D1C1C;
-  --color-white: #ffffff;
-  --color-gray: #f5f5f5;
-  --color-gray-mid: #e0e0e0;
-  --color-text-muted: #666666;
+  /* ── Brand Palette ──────────────────────────────────────────────────── */
+  --ghi-primary:        #FEC415;  /* Golden yellow — buttons, CTAs, accents */
+  --ghi-primary-hover:  #e6b010;  /* Darkened yellow for hover states */
+  --ghi-secondary:      #2EAB5A;  /* Green — links, success, hover text */
+  --ghi-neutral:        #1D1C1C;  /* Dark — header/footer bg, primary text */
+  --ghi-white:          #FFFFFF;
+  --ghi-surface:        #f5f5f5;  /* Light gray — section backgrounds */
+  --ghi-border:         #e0e0e0;  /* Card borders, dividers */
+  --ghi-text-muted:     #666666;  /* Secondary body text */
+
+  /* ── Semantic Color Roles ───────────────────────────────────────────── */
+  --color-bg:           var(--ghi-white);
+  --color-text:         var(--ghi-neutral);
+  --color-accent:       var(--ghi-primary);
+  --color-accent-hover: var(--ghi-primary-hover);
+  --color-green:        var(--ghi-secondary);
+  --color-dark:         var(--ghi-neutral);
+  --color-white:        var(--ghi-white);
+  --color-gray:         var(--ghi-surface);
+  --color-gray-mid:     var(--ghi-border);
+  --color-text-muted:   var(--ghi-text-muted);
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans:          'Poppins', 'Nunito Sans', system-ui, sans-serif;
+
+  /* Display scale (responsive) */
+  --type-display-lg:    clamp(2.2rem, 5vw, 4.375rem);   /* 35px → 70px */
+  --type-display-md:    clamp(1.75rem, 3.5vw, 3.125rem); /* 28px → 50px */
+  --type-display-sm:    clamp(1.25rem, 2.5vw, 1.75rem);  /* 20px → 28px */
+
+  /* Body scale */
+  --type-body-lg:       1.125rem;   /* 18px */
+  --type-body-md:       1rem;       /* 16px */
+  --type-body-sm:       0.875rem;   /* 14px */
+
+  /* Label scale */
+  --type-label-lg:      0.875rem;   /* 14px */
+  --type-label-sm:      0.75rem;    /* 12px */
+
+  --weight-regular:     400;
+  --weight-medium:      500;
+  --weight-semibold:    600;
+  --weight-bold:        700;
+
+  --leading-tight:      1.15;
+  --leading-body:       1.875;
+
+  /* ── Spacing ────────────────────────────────────────────────────────── */
+  --space-xs:           0.5rem;     /* 8px */
+  --space-sm:           1rem;       /* 16px */
+  --space-md:           1.5rem;     /* 24px */
+  --space-lg:           3rem;       /* 48px */
+  --space-xl:           5rem;       /* 80px */
+
+  /* ── Shape ──────────────────────────────────────────────────────────── */
+  --radius-sm:          0.5rem;     /* 8px — inputs, chips */
+  --radius-md:          1rem;       /* 16px — cards */
+  --radius-lg:          1.5rem;     /* 24px — large cards */
+  --radius-full:        50px;       /* Pill buttons */
+
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+  --max-width:          1200px;
 }
 
 * { box-sizing: border-box; }
@@ -23,23 +79,23 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.875;
+  line-height: var(--leading-body);
   margin: 0;
 }
 
 /* ─── Typography ─────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
   color: var(--color-text);
   margin-top: 0;
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 4.375rem); }
-h2 { font-size: clamp(1.75rem, 3.5vw, 3.125rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
-p { margin-bottom: 1rem; }
+h1 { font-size: var(--type-display-lg); }
+h2 { font-size: var(--type-display-md); }
+h3 { font-size: var(--type-display-sm); }
+p { margin-bottom: var(--space-sm); }
 
 /* ─── Buttons ────────────────────────────────────────────────── */
 .btn {
@@ -47,10 +103,10 @@ p { margin-bottom: 1rem; }
   background-color: var(--color-accent);
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: var(--weight-bold);
+  font-size: var(--type-body-md);
   padding: 0.85rem 2rem;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
   border: 2px solid var(--color-accent);
@@ -72,17 +128,17 @@ p { margin-bottom: 1rem; }
 }
 
 /* ─── Layout utilities ────────────────────────────────────────── */
-.section { padding: 5rem 1.5rem; }
-.section-sm { padding: 3rem 1.5rem; }
-.container { max-width: 1200px; margin-left: auto; margin-right: auto; }
+.section { padding: var(--space-xl) var(--space-md); }
+.section-sm { padding: var(--space-lg) var(--space-md); }
+.container { max-width: var(--max-width); margin-left: auto; margin-right: auto; }
 .eyebrow {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 /* ─── Navbar ──────────────────────────────────────────────────── */
@@ -97,5 +153,5 @@ p { margin-bottom: 1rem; }
 .blog-card:hover .blog-card-img { transform: scale(1.05); }
 
 @media (max-width: 768px) {
-  .section { padding: 3rem 1.25rem; }
+  .section { padding: var(--space-lg) 1.25rem; }
 }
