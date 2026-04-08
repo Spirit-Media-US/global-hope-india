@@ -2,6 +2,16 @@
 
 This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-india | Domain: globalhopeindia.org | Sanity ID: r33r2z1j
 
+## Mandatory — Before Starting Work
+Always start Claude sessions from inside this directory:
+```
+cd /srv/sites/global-hope-india && claude
+```
+Then run: `git checkout dev && git pull origin dev`
+
+## Developer
+- **Vinit** — assigned developer for this site (user: vinit on Bethel)
+
 ## Dev Commands
 - npm run dev — local preview (port TBD — assign in astro.config.mjs)
 - npm run build — production build to dist/
