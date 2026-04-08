@@ -42,6 +42,61 @@
   status = 301
   force = true
 
+# WordPress → Astro URL redirects
+[[redirects]]
+  from = "/about-ghi/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/about-ghi"
+  to = "/about/"
+  status = 301
+
+# WordPress admin → Sanity Studio
+[[redirects]]
+  from = "/wp-admin"
+  to = "/studio/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/studio/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/studio/"
+  status = 301
+
+# WordPress feed → blog
+[[redirects]]
+  from = "/feed/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/feed"
+  to = "/blog/"
+  status = 301
+
+# WordPress category/tag pages → blog
+[[redirects]]
+  from = "/category/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/*"
+  to = "/blog/"
+  status = 301
+
+# WordPress paginated pages
+[[redirects]]
+  from = "/page/*"
+  to = "/"
+  status = 301
+
 # Security headers
 [[headers]]
   for = "/*"

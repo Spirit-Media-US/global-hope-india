@@ -27,10 +27,12 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 - Phase 5: CAR Gate — GA4, OG image, JSON-LD, security headers, sitemap all verified
 - Phase 6: Design Refinement — active nav, hero poster, removed broken .mov, removed duplicate banner
 - Phase 7: QA — 22 images migrated WP CDN → Sanity, `<main>` landmark added, all audits pass
+- Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify/Sanity webhook/security headers verified
 
 ### Still Pending
 - Upload hero video MP4 to R2 (last WP CDN reference)
-- Phase 8–9: Launch, Delivery
+- Connect custom domain (Kevin: DNS)
+- Phase 9: Client Delivery
 
 ## Rules
 - All work goes to the dev branch — never push directly to main
