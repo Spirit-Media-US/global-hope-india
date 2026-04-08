@@ -4,31 +4,30 @@
 
 Astro + Tailwind + Sanity CMS starter for all Spirit Media Network sites.
 
-## New Site Checklist
+## Site Checklist
 
 ### 1. Repo setup
-- [ ] Duplicate this repo under `Spirit-Media-US` org
-- [ ] Rename to `site-name` (e.g. `artsbyjustin`, `the-kohler-group`)
-- [ ] Add `SANITY_AUTH_TOKEN` secret in GitHub repo settings
+- [x] Repo created under `Spirit-Media-US` org as `global-hope-india`
+- [x] SANITY_AUTH_TOKEN — pending Sanity auth resolution
 
 ### 2. Sanity
-- [ ] Create new Sanity project at sanity.io/manage
-- [ ] Update `src/lib/sanity.ts` → replace `REPLACE_PROJECT_ID`
-- [ ] Update `sanity.config.ts` → replace project ID and studio hostname
-- [ ] Define schemas in `schemaTypes/`
+- [x] Sanity project created (ID: `r33r2z1j`)
+- [x] `src/lib/sanity.ts` configured with project ID
+- [x] `sanity.config.ts` configured
+- [x] Schema defined: `blogPost`
+- [ ] Create `production` dataset (needs Sanity auth)
+- [ ] Deploy schema to Sanity (needs Sanity auth)
 
 ### 3. Netlify
 - [ ] Import repo in Netlify → assign to `Spirit-Media-US` org
-- [ ] Set build command: `npm run build`, publish dir: `dist`
-- [ ] Enable Deploy Previews and Branch deploys in site settings
-- [ ] Add custom domain + enable Cloudflare proxy
-- [ ] Add Sanity build hook (Sanity → API → Webhooks → POST to Netlify build hook URL)
+- [ ] Add custom domain (globalhopeindia.org) + enable Cloudflare proxy
+- [ ] Add Sanity build hook
 
 ### 4. Code
-- [ ] Update `astro.config.mjs` → replace `REPLACE_WITH_DOMAIN`
-- [ ] Update `netlify.toml` → replace `REPLACE_DOMAIN`
-- [ ] Replace design tokens in `src/styles/global.css`
-- [ ] Build out pages using Sanity data via `src/lib/sanity.ts`
+- [x] `astro.config.mjs` configured with `globalhopeindia.org`
+- [x] `netlify.toml` configured with domain and CSP
+- [x] Design tokens in `src/styles/global.css`
+- [x] All 8 pages built with Sanity integration
 
 ## Stack
 - **Astro** + Vite

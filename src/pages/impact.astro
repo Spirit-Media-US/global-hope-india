@@ -40,6 +40,17 @@ const stats = [
   title="Our Impact — Global Hope India"
   description="See the impact of Global Hope India's work: Bibles distributed, churches planted, lives transformed. Read stories from the field."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Our Impact — Global Hope India",
+      "url": "https://globalhopeindia.org/impact",
+      "description": "See the impact of Global Hope India's work: Bibles distributed, churches planted, lives transformed.",
+      "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+  </Fragment>
+
   <!-- ── PAGE HERO ────────────────────────────────────────── -->
   <section class="bg-[#1D1C1C] text-white pt-36 pb-20 px-6">
     <div class="container mx-auto text-center">

@@ -11,7 +11,7 @@ interface Props {
 const {
   title,
   description = 'Global Hope India empowers the church in India to make Christ known. Join us through prayer, giving, and going.',
-  ogImage = '/og-default.jpg',
+  ogImage = 'https://globalhopeindia.org/wp-content/uploads/2020/04/GHI-logo-150x150.webp',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
@@ -68,6 +68,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
           <a href="/projects" class="nav-link text-white font-medium text-sm hover:text-[#FEC415] transition-colors">Projects</a>
           <a href="/get-involved" class="nav-link text-white font-medium text-sm hover:text-[#FEC415] transition-colors">Get Involved</a>
           <a href="/impact" class="nav-link text-white font-medium text-sm hover:text-[#FEC415] transition-colors">Impact</a>
+          <a href="/blog" class="nav-link text-white font-medium text-sm hover:text-[#FEC415] transition-colors">Blog</a>
           <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn text-sm py-2 px-5">Donate</a>
         </nav>
 
@@ -95,6 +96,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
           <a href="/projects" class="text-white font-medium py-3 border-b border-white/10 hover:text-[#FEC415] transition-colors">Projects</a>
           <a href="/get-involved" class="text-white font-medium py-3 border-b border-white/10 hover:text-[#FEC415] transition-colors">Get Involved</a>
           <a href="/impact" class="text-white font-medium py-3 border-b border-white/10 hover:text-[#FEC415] transition-colors">Impact</a>
+          <a href="/blog" class="text-white font-medium py-3 border-b border-white/10 hover:text-[#FEC415] transition-colors">Blog</a>
           <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn mt-3 text-center">Donate Now</a>
         </nav>
       </div>
@@ -149,6 +151,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
               <li><a href="/projects" class="text-white/70 hover:text-white transition-colors">Projects</a></li>
               <li><a href="/get-involved" class="text-white/70 hover:text-white transition-colors">Get Involved</a></li>
               <li><a href="/impact" class="text-white/70 hover:text-white transition-colors">Impact</a></li>
+              <li><a href="/blog" class="text-white/70 hover:text-white transition-colors">Blog</a></li>
               <li><a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#FEC415] font-semibold hover:text-white transition-colors">Donate Now</a></li>
               <li><a href="/privacy-policy" class="text-white/70 hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>

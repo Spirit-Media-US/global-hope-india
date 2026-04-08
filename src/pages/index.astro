@@ -65,7 +65,7 @@ const fallbackBlogPosts = [
     })}></script>
   </Fragment>
 
-  <!-- ── HERO (Video Background) ──────────────────────────── -->
+  <!-- ── HERO (Video Background + Flip Text) ────────────── -->
   <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
     <video
       autoplay
@@ -78,11 +78,77 @@ const fallbackBlogPosts = [
     </video>
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 container mx-auto px-6">
-      <h1 class="text-white font-bold mb-4 max-w-4xl mx-auto leading-tight" style="font-size: clamp(2.5rem, 6vw, 5rem);">
-        <span class="text-[#2EAB5A]">India</span> for <span class="text-[#2EAB5A]">Jesus</span>
-      </h1>
+      <div class="hero-flip-container" style="perspective: 600px;">
+        <h1 class="hero-flip-text" style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.1;">
+          <!-- Phase A: "Jesus for India" -->
+          <span class="flip-phrase flip-phrase-a active">
+            <span class="txt-jesus">Jesus</span>
+            <span class="txt-for">for</span>
+            <span class="txt-india">India</span>
+          </span>
+          <!-- Phase B: "India for Jesus" -->
+          <span class="flip-phrase flip-phrase-b">
+            <span class="txt-india">India</span>
+            <span class="txt-for">for</span>
+            <span class="txt-jesus">Jesus</span>
+          </span>
+        </h1>
+      </div>
     </div>
   </section>
+
+  <style>
+    .hero-flip-text {
+      position: relative;
+      display: block;
+    }
+    .flip-phrase {
+      display: inline-flex;
+      gap: 0.25em;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotateX(90deg);
+      opacity: 0;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+      backface-visibility: hidden;
+      white-space: nowrap;
+    }
+    .flip-phrase.active {
+      transform: translate(-50%, -50%) rotateX(0deg);
+      opacity: 1;
+    }
+    .flip-phrase.exit {
+      transform: translate(-50%, -50%) rotateX(-90deg);
+      opacity: 0;
+    }
+    /* Reserve vertical space for the text */
+    .hero-flip-text::before {
+      content: '\00a0';
+      display: block;
+      visibility: hidden;
+      font-size: inherit;
+      line-height: 1.1;
+    }
+    .txt-india { color: #2EAB5A; }
+    .txt-jesus { color: #FF4081; }
+    .txt-for   { color: #ffffff; }
+  </style>
+
+  <script>
+    const phrases = document.querySelectorAll('.flip-phrase');
+    let current = 0;
+    function flipHeroText() {
+      const prev = current;
+      current = (current + 1) % phrases.length;
+      phrases[prev].classList.remove('active');
+      phrases[prev].classList.add('exit');
+      phrases[current].classList.add('active');
+      phrases[current].classList.remove('exit');
+      setTimeout(flipHeroText, 3000);
+    }
+    setTimeout(flipHeroText, 3000);
+  </script>
 
   <!-- ── TAGLINE ─────────────────────────────────────────── -->
   <section class="bg-white py-12 lg:py-16 px-6">
@@ -212,7 +278,7 @@ const fallbackBlogPosts = [
       )}
 
       <div class="text-center mt-12">
-        <a href="/impact" class="btn" style="background-color: #1D1C1C; color: #fff; border-color: #1D1C1C;">See more blogs</a>
+        <a href="/blog" class="btn" style="background-color: #1D1C1C; color: #fff; border-color: #1D1C1C;">See more blogs</a>
       </div>
     </div>
   </section>
