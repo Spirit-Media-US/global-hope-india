@@ -97,7 +97,7 @@
 - [x] Phase 3: Build all pages — 8 pages built, `npm run build` passes (2026-04-07)
 - [x] Phase 4: Wire Sanity CMS — Studio + schemas created, pages wired, dataset + schema deployed (2026-04-08)
 - [x] Phase 5: CAR Gate — GA4 added, OG image fixed, logo upgraded, no placeholders, JSON-LD on all pages, security headers verified, sitemap correct (2026-04-08)
-- [ ] Phase 6: Design Refinement
+- [x] Phase 6: Design Refinement — active nav highlighting, hero video poster, removed broken .mov video, removed duplicate banner (2026-04-08)
 - [ ] Phase 7: QA
 - [ ] Phase 8: Launch
 - [ ] Phase 9: Client Delivery

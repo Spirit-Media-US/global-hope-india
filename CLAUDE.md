@@ -25,10 +25,11 @@ This site: Global Hope India | Repo: github.com/Spirit-Media-US/global-hope-indi
 - Phase 3: Build all pages — 8 pages, build passes
 - Phase 4: Wire Sanity CMS — Studio + schemas deployed, dataset live
 - Phase 5: CAR Gate — GA4, OG image, JSON-LD, security headers, sitemap all verified
+- Phase 6: Design Refinement — active nav, hero poster, removed broken .mov, removed duplicate banner
 
 ### Still Pending
 - Migrate ~30 WP CDN images to Sanity (will break when domain migrates)
-- Phase 6–9: Design Refinement, QA, Launch, Delivery
+- Phase 7–9: QA, Launch, Delivery
 
 ## Rules
 - All work goes to the dev branch — never push directly to main
