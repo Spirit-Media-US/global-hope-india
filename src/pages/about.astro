@@ -21,88 +21,108 @@ import Layout from '../layouts/Layout.astro';
     <img
       src="https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp"
       alt="Indian young people"
-      class="absolute inset-0 w-full h-full object-cover"
+      class="absolute inset-0 w-full h-full object-cover object-[center_30%]"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-white/80 via-white/30 to-transparent"></div>
-    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-10 pt-40">
-      <h1 class="text-[#1D1C1C] max-w-3xl font-['Poppins'] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.5] md:leading-[1.5] lg:leading-[1.2] tracking-[0.2px]">Church Vision and Mission:<br/>Shaping Faith's Future with<br/>Global Hope India</h1>
+    <div class="absolute inset-0 bg-gradient-to-t from-white/90 via-white/40 to-transparent"></div>
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-12 pt-44">
+      <h1 class="text-[#1D1C1C] max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2]">Shaping Faith's<br/>Future with<br/>Global Hope India</h1>
     </div>
   </section>
 
-  <!-- ── OUR VISION ──────────────────────────────────────── -->
+  <!-- ── VISION / EMPOWERING / MISSION ROW ───────────────── -->
   <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl text-center">
-      <h2 class="text-[#1D1C1C] mb-4">Our Vision</h2>
-      <p class="text-[#555] text-lg leading-relaxed">"Everyone in India worshiping Jesus as Savior and Lord."</p>
-    </div>
-  </section>
-
-  <!-- ── EMPOWERING RADICAL TRANSFORMATION ───────────────── -->
-  <section class="section bg-[#f9f9f9]">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-6 text-center">Empowering Radical Transformation</h2>
-      <p class="text-[#444] leading-relaxed">For over 25 years, we have been watching God radically transform thousands of Americans &amp; Indian Nationals through missions. We've taken over 1,000 Americans on short-term mission trips to India. We work with 12 long-term indigenous church-planting partners located in North, South, East, &amp; West Mainland India as well as Northeast India. We empower The Church in India to make Christ known through leadership, child, &amp; village development projects.</p>
-    </div>
-  </section>
-
-  <!-- ── OUR MISSION ─────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl text-center">
-      <h2 class="text-[#1D1C1C] mb-4">Our Mission</h2>
-      <p class="text-[#555] text-lg leading-relaxed">"Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel."</p>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-6 md:gap-4 items-start">
+        <!-- Our Vision -->
+        <div class="text-center px-4">
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Our Vision</h3>
+          <p class="text-[#555] leading-relaxed">"Everyone in India worshiping Jesus as Savior and Lord."</p>
+        </div>
+        <!-- Green swoosh arrow -->
+        <div class="hidden md:flex items-center justify-center pt-4">
+          <svg width="60" height="40" viewBox="0 0 60 40" fill="none" class="text-[#2EAB5A]"><path d="M5 20c15-18 35-18 50 0" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M45 14l10 6-10 6" fill="currentColor"/></svg>
+        </div>
+        <!-- Empowering Radical Transformation -->
+        <div class="text-center px-4">
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Empowering Radical Transformation</h3>
+          <p class="text-[#555] leading-relaxed text-sm">For over 25 years, we have been watching God radically transform thousands of Americans &amp; Indian Nationals through missions. We've taken over 1,000 Americans on short-term mission trips to India. We work with 12 long-term indigenous church-planting partners located in North, South, East, &amp; West Mainland India as well as Northeast India. We empower The Church in India to make Christ known through leadership, child, &amp; village development projects.</p>
+        </div>
+        <!-- Green swoosh arrow -->
+        <div class="hidden md:flex items-center justify-center pt-4">
+          <svg width="60" height="40" viewBox="0 0 60 40" fill="none" class="text-[#2EAB5A]"><path d="M5 20c15-18 35-18 50 0" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M45 14l10 6-10 6" fill="currentColor"/></svg>
+        </div>
+        <!-- Our Mission -->
+        <div class="text-center px-4">
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Our Mission</h3>
+          <p class="text-[#555] leading-relaxed">"Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel."</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ── OUR CULTURE ─────────────────────────────────────── -->
   <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl">
+    <div class="container mx-auto max-w-5xl">
       <h2 class="text-[#1D1C1C] mb-8">Our Culture</h2>
-      <ol class="space-y-5 list-none">
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We are missionaries.</strong> It's about being sent out by God; for the purposes of God, to the glory of God.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We love India.</strong> It's about Jesus' love for every nation, tribe, and tongue, absent to the gospel.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We facilitate short-term mission trips to India.</strong> It's about our radical response for the love &amp; grace we've received.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We empower The Church to fulfill the Great Commission.</strong> It's about Jesus' love for His bride — the Big C Church.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">5</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We minimize distractions.</strong> It's about freeing you to focus on the mission.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">6</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We stand on God's Word.</strong> It's about His Word being for all people and us hearing &amp; obeying the voice of God.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">7</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We make prayer — the work.</strong> It's about salvation belonging to God and Him doing the work in and through us.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">8</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We honor the Holy Spirit.</strong> It's about experiencing God and joining Him in His work.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 w-6 h-6 rounded-full bg-[#2EAB5A] text-white text-xs font-bold flex items-center justify-center shrink-0">9</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
           <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We live generously.</strong> It's about worship and providing an attractive witness of the gospel.</p>
-        </li>
-      </ol>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ── DID SOMEONE SAY RADICAL? ─────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
+  <section class="section bg-[#f9f9f9]">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Left: text content -->
+        <!-- Left: photos -->
+        <div class="grid grid-cols-2 gap-4">
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-56-scaled.jpg"
+            alt="Global Hope India mission team"
+            class="rounded-xl shadow-md w-full h-auto object-cover"
+          />
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/Untitled-design-16.png"
+            alt="Global Hope India team"
+            class="rounded-xl shadow-md w-full h-auto object-cover"
+          />
+        </div>
+        <!-- Right: text content -->
         <div>
           <h2 class="text-[#1D1C1C] mb-5">Did Someone Say, "Radical"?</h2>
           <p class="text-[#444] leading-relaxed mb-5">
@@ -112,96 +132,125 @@ import Layout from '../layouts/Layout.astro';
             Therefore, we are on a mission to see God transform India, from being unreached by the Gospel to being reached by the Gospel. But, not just reached! We believe God can transform India, from receiving missionaries to sending missionaries! Our vision is for God to transform India, from being a people known for their poverty, to a Church known for its generosity.
           </p>
         </div>
-        <!-- Right: group photo -->
-        <div>
-          <img
-            src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-56-scaled.jpg"
-            alt="Global Hope India mission team group photo"
-            class="rounded-2xl shadow-lg w-full h-auto object-cover"
-          />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPANDABLE ACCORDION ─────────────────────────────── -->
+  <section class="section bg-white">
+    <div class="container mx-auto max-w-4xl">
+      <div class="space-y-3">
+        <!-- Why India? -->
+        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
+          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
+            <h3 class="text-base font-bold text-[#1D1C1C]">Why India?</h3>
+            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
+          </button>
+          <div class="accordion-content hidden px-6 pb-5">
+            <p class="text-[#444] leading-relaxed">With 1.4 billion people, India represents one of the largest, neediest, and most unreached countries in the world.</p>
+          </div>
+        </div>
+        <!-- The Big "C" Church -->
+        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
+          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
+            <h3 class="text-base font-bold text-[#1D1C1C]">The Big "C" Church</h3>
+            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
+          </button>
+          <div class="accordion-content hidden px-6 pb-5">
+            <p class="text-[#444] leading-relaxed">EVERYTHING we do is through the local church! Jesus said, "I will build my Church, and the gates of hell will not prevail against it." (Matthew 16:18) We believe history proves the most effective means of evangelism and it is the starting of new churches. Therefore, we empower The Church in India to train more healthy church-planting pastors that will start more healthy churches.</p>
+          </div>
+        </div>
+        <!-- Changing The World -->
+        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
+          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
+            <h3 class="text-base font-bold text-[#1D1C1C]">Changing The World</h3>
+            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
+          </button>
+          <div class="accordion-content hidden px-6 pb-5">
+            <p class="text-[#444] leading-relaxed">In 1972, in his only crusade ever in India, Dr. Billy Graham said, "As India goes, all of Asia will go with her." In essence, he was saying: that if we can make Christ known among the 1.4 billion people of India, they will help us to make Christ known among the 4.6 billion people in Asia. Not only does that cover the entire 10/40 window, but that is 2/3's of the earth's total population!</p>
+          </div>
+        </div>
+        <!-- Living The Dream -->
+        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
+          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
+            <h3 class="text-base font-bold text-[#1D1C1C]">Living The Dream</h3>
+            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
+          </button>
+          <div class="accordion-content hidden px-6 pb-5">
+            <p class="text-[#444] leading-relaxed">We help The Church be on earth as it is in heaven. In Revelation 7:9-12, we see the Church in heaven filled with people from every nation, tongue, and tribe gathered around the throne worshiping Jesus. Won't you join us in living the dream?</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── WHY INDIA? ──────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-4">Why India?</h2>
-      <p class="text-[#444] leading-relaxed">With 1.4 billion people, India represents one of the largest, neediest, and most unreached countries in the world.</p>
-    </div>
-  </section>
-
-  <!-- ── CHANGING THE WORLD ──────────────────────────────── -->
-  <section class="section bg-[#f9f9f9]">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-4">Changing The World</h2>
-      <p class="text-[#444] leading-relaxed">In 1972, in his only crusade ever in India, Dr. Billy Graham said, "As India goes, all of Asia will go with her." In essence, he was saying: that if we can make Christ known among the 1.4 billion people of India, they will help us to make Christ known among the 4.6 billion people in Asia. Not only does that cover the entire 10/40 window, but that is 2/3's of the earth's total population!</p>
-    </div>
-  </section>
-
-  <!-- ── THE BIG "C" CHURCH ──────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-4">The Big "C" Church</h2>
-      <p class="text-[#444] leading-relaxed">EVERYTHING we do is through the local church! Jesus said, "I will build my Church, and the gates of hell will not prevail against it." (Matthew 16:18) We believe history proves the most effective means of evangelism and it is the starting of new churches. Therefore, we empower The Church in India to train more healthy church-planting pastors that will start more healthy churches.</p>
-    </div>
-  </section>
-
-  <!-- ── LIVING THE DREAM ────────────────────────────────── -->
-  <section class="section bg-[#f9f9f9]">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-4">Living The Dream</h2>
-      <p class="text-[#444] leading-relaxed">We help The Church be on earth as it is in heaven. In Revelation 7:9-12, we see the Church in heaven filled with people from every nation, tongue, and tribe gathered around the throne worshiping Jesus. Won't you join us in living the dream?</p>
-    </div>
-  </section>
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.accordion-item');
+        const content = item?.querySelector('.accordion-content');
+        const icon = btn.querySelector('.accordion-icon');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.accordion-item').forEach(other => {
+          if (other !== item) {
+            other.querySelector('.accordion-content')?.classList.add('hidden');
+            other.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
+            const otherIcon = other.querySelector('.accordion-icon');
+            if (otherIcon) otherIcon.textContent = '+';
+          }
+        });
+        content?.classList.toggle('hidden', isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        if (icon) icon.textContent = isOpen ? '+' : '−';
+      });
+    });
+  </script>
 
   <!-- ── 4 WAYS WE EMPOWER BELIEVERS ─────────────────────── -->
-  <section class="section bg-[#F8F5EF]">
-    <div class="container mx-auto max-w-4xl">
+  <section class="relative section bg-[#F8F5EF] overflow-hidden">
+    <!-- Green swoosh decorations on sides -->
+    <div class="absolute top-10 -left-8 opacity-30 hidden lg:block">
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><path d="M10 60c30-50 70-50 100-10" stroke="#2EAB5A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M95 38l15 12-18 4" fill="#2EAB5A"/></svg>
+    </div>
+    <div class="absolute bottom-10 -right-8 opacity-30 hidden lg:block">
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><path d="M110 60c-30-50-70-50-100-10" stroke="#2EAB5A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M25 38l-15 12 18 4" fill="#2EAB5A"/></svg>
+    </div>
+    <div class="relative z-10 container mx-auto">
       <h2 class="text-[#1D1C1C] text-center mb-4">4 Ways we Empower Believers Globally</h2>
-      <p class="text-[#444] text-center leading-relaxed mb-12">
+      <p class="text-[#444] text-center leading-relaxed max-w-3xl mx-auto mb-12">
         Everyone wants to make a difference in the world. Changing the World is a daunting task, but when we pray and obey God, He can change our world forever.
       </p>
-      <div class="space-y-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <!-- Pray -->
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-[#FEC415]/20 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1C8.14 1 5 4.14 5 8c0 4 4.5 9.44 6.38 11.59a.85.85 0 001.24 0C14.5 17.44 19 12 19 8c0-3.86-3.14-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-[#1D1C1C]">Pray</h3>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="w-14 h-14 rounded-full bg-[#FEC415]/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#FEC415]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/></svg>
           </div>
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Pray</h3>
           <p class="text-[#444] leading-relaxed">Salvation and transformation are God's work. Our work is to pray. We empower you to engage in God's work by praying very specifically for the people of India. Everyone wants to make a difference in the world. Changing the World is a daunting task, but when we pray and obey God, He can change our world forever.</p>
         </div>
         <!-- Give -->
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-[#FEC415]/20 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-[#1D1C1C]">Give</h3>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="w-14 h-14 rounded-full bg-[#FEC415]/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </div>
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Give</h3>
           <p class="text-[#444] leading-relaxed">We empower you to engage by giving generously and sacrificially to God's work through GHI. God uses every gift to GHI so that Americans and Indian Nationals are radically transformed by &amp; for The Gospel. Over 85% of every dollar given directly benefits our programs here in the USA and India.</p>
         </div>
         <!-- Go -->
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-[#FEC415]/20 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-[#1D1C1C]">Go</h3>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="w-14 h-14 rounded-full bg-[#FEC415]/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
           </div>
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Go</h3>
           <p class="text-[#444] leading-relaxed">We believe one of the most radical ways for us to engage in God's mission is to get on a plane and go to India. Few things are more endearing to any International living in the USA than the words, "I've been there." We empower you to go and share the love and grace you've been shown.</p>
         </div>
         <!-- Resources -->
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-[#FEC415]/20 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-[#1D1C1C]">Resources</h3>
+        <div class="bg-white rounded-2xl p-8 shadow-sm">
+          <div class="w-14 h-14 rounded-full bg-[#FEC415]/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#FEC415]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
           </div>
+          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Resources</h3>
           <p class="text-[#444] leading-relaxed">We empower church staffs and volunteers with an identifiable and measurable strategy for reaching the internationals in their community. When our churches reach foreign-born internationals, they will reach other foreign-born nationals. Now that is truly changing the world!</p>
         </div>
       </div>
@@ -214,59 +263,62 @@ import Layout from '../layouts/Layout.astro';
       <h2 class="text-[#1D1C1C] text-center mb-12">3 Ways Our Teams Serve The Church in India</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Leadership Development -->
-        <div class="text-center p-8 bg-[#f9f9f9] rounded-2xl">
-          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
+            <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
           </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Leadership Development</h3>
-          <p class="text-[#555] leading-relaxed text-left">We equip church planters, pastors, worship leaders, church staff, and core leaders with biblical truth &amp; practical resources.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Leadership Development</h3>
+          <p class="text-[#555] leading-relaxed">We equip church planters, pastors, worship leaders, church staff, and core leaders with biblical truth &amp; practical resources.</p>
         </div>
         <!-- Child Development -->
-        <div class="text-center p-8 bg-[#f9f9f9] rounded-2xl">
-          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
+            <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
           </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Child Development</h3>
-          <p class="text-[#555] leading-relaxed text-left">We empower the local church as they make Christ known among children in schools, orphan homes, and local communities.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Child Development</h3>
+          <p class="text-[#555] leading-relaxed">We empower the local church as they make Christ known among children in schools, orphan homes, and local communities.</p>
         </div>
         <!-- Community Development -->
-        <div class="text-center p-8 bg-[#f9f9f9] rounded-2xl">
-          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
+            <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
           </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Community Development</h3>
-          <p class="text-[#555] leading-relaxed text-left">We empower local churches in India with clean water projects, hygiene kits, business development projects, and other practical resources.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Community Development</h3>
+          <p class="text-[#555] leading-relaxed">We empower local churches in India with clean water projects, hygiene kits, business development projects, and other practical resources.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── HOW GHI BEGAN ────────────────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
-    <div class="container mx-auto max-w-4xl">
+  <section class="relative section bg-white overflow-hidden">
+    <!-- Green swoosh decoration -->
+    <div class="absolute top-16 -right-4 opacity-25 hidden lg:block">
+      <svg width="150" height="100" viewBox="0 0 150 100" fill="none"><path d="M10 70c40-60 90-60 130-10" stroke="#2EAB5A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M125 48l15 12-18 4" fill="#2EAB5A"/></svg>
+    </div>
+    <div class="relative z-10 container mx-auto">
       <h2 class="text-[#1D1C1C] mb-8">How GHI Began</h2>
-      <div class="space-y-5 text-[#444] leading-relaxed mb-10">
-        <p>During our founder's first trip to India in 1998, God planted a part of his heart in India. He returned three years later, with his 11-year-old son, and again three years after that, with his 11-year-old daughter. In 2003, GHI incorporated as a 501(c)(3) nonprofit organization for the sole purpose of having a bank account and the ability to offer donors a tax-deductible receipt.</p>
-        <p>This hobby of taking teams on mission trips to India grew from one team a year, to two teams per year and then three. In October 2010, while Pastor Kevin was speaking to a group of gospel workers in Hyderabad, India; God broke his heart for the pastors of India and called him to focus full-time on empowering The Church as they make Christ known among the people of India.</p>
-        <p class="font-semibold text-[#1D1C1C]">Today, thousands of Americans and Indians have been radically transformed through this mission, and millions of dollars have been collected for the Lord's work through Global Hope India.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <img
-          src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191230-IMG_8353Cary-The-water-untitled-768x1024.jpg"
-          alt="Indian woman in colorful dress"
-          class="rounded-2xl shadow-lg w-full h-auto object-cover max-h-[400px]"
-        />
-        <img
-          src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191231-IMG_8426Cary-The-water-untitled-scaled.jpg"
-          alt="Global Hope India water project"
-          class="rounded-2xl shadow-lg w-full h-auto object-cover max-h-[400px]"
-        />
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Left: text -->
+        <div class="space-y-5 text-[#444] leading-relaxed">
+          <p>During our founder's first trip to India in 1998, God planted a part of his heart in India. He returned three years later, with his 11-year-old son, and again three years after that, with his 11-year-old daughter. In 2003, GHI incorporated as a 501(c)(3) nonprofit organization for the sole purpose of having a bank account and the ability to offer donors a tax-deductible receipt.</p>
+          <p>This hobby of taking teams on mission trips to India grew from one team a year, to two teams per year and then three. In October 2010, while Pastor Kevin was speaking to a group of gospel workers in Hyderabad, India; God broke his heart for the pastors of India and called him to focus full-time on empowering The Church as they make Christ known among the people of India.</p>
+          <p class="font-semibold text-[#1D1C1C]">Today, thousands of Americans and Indians have been radically transformed through this mission, and millions of dollars have been collected for the Lord's work through Global Hope India.</p>
+        </div>
+        <!-- Right: photo -->
+        <div>
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191230-IMG_8353Cary-The-water-untitled-768x1024.jpg"
+            alt="Indian woman in colorful traditional dress"
+            class="rounded-2xl shadow-lg w-full h-auto object-cover max-h-[500px]"
+          />
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── OUR TEAM ─────────────────────────────────────────── -->
-  <section class="section bg-white">
+  <section class="section bg-[#f9f9f9]">
     <div class="container mx-auto max-w-4xl">
       <h2 class="text-[#1D1C1C] mb-8">Our Team</h2>
       <ul class="space-y-4 text-[#444] leading-relaxed">
@@ -296,23 +348,39 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ── STATEMENT OF FAITH ───────────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-8">Statement of Faith</h2>
-      <div class="space-y-5 text-[#444] leading-relaxed">
-        <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
-        <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
-        <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
-        <p>We believe that God created all men in his image, to be in perfect fellowship with him, but that this fellowship was broken by sin. Subsequently, all men are born sinners and are in need of salvation. Our relationship with God can only be restored through repentance of sin and belief in Jesus Christ for salvation.</p>
-        <p>We believe the death of Jesus Christ on the cross is sufficient in itself to make atonement for the sin of the world — an atonement available to all who repent of their sins and believe in him alone for forgiveness and salvation.</p>
-        <p>We believe Jesus Christ died on the cross, was buried, and the third day he bodily arose from the dead guaranteeing the bodily resurrection of all those who have received eternal life through faith in him.</p>
-        <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
-        <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
-        <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
-        <p>We believe the true Church is not an organization, but the body of Christ made up of those who have personally trusted Jesus Christ as Savior and publicly confessed him as Lord.</p>
-        <p>We believe that the Bible is the Word of God, inspired by the Spirit of God, without error and thus the supreme and final authority for faith and practice.</p>
-        <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
-        <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
+  <section class="section bg-white">
+    <div class="container mx-auto">
+      <h2 class="text-[#1D1C1C] mb-10">Statement of Faith</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
+        <!-- Left: text -->
+        <div class="space-y-5 text-[#444] leading-relaxed">
+          <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
+          <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
+          <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
+          <p>We believe that God created all men in his image, to be in perfect fellowship with him, but that this fellowship was broken by sin. Subsequently, all men are born sinners and are in need of salvation. Our relationship with God can only be restored through repentance of sin and belief in Jesus Christ for salvation.</p>
+          <p>We believe the death of Jesus Christ on the cross is sufficient in itself to make atonement for the sin of the world — an atonement available to all who repent of their sins and believe in him alone for forgiveness and salvation.</p>
+          <p>We believe Jesus Christ died on the cross, was buried, and the third day he bodily arose from the dead guaranteeing the bodily resurrection of all those who have received eternal life through faith in him.</p>
+          <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
+          <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
+          <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
+          <p>We believe the true Church is not an organization, but the body of Christ made up of those who have personally trusted Jesus Christ as Savior and publicly confessed him as Lord.</p>
+          <p>We believe that the Bible is the Word of God, inspired by the Spirit of God, without error and thus the supreme and final authority for faith and practice.</p>
+          <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
+          <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
+        </div>
+        <!-- Right: photos -->
+        <div class="space-y-6">
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191231-IMG_8426Cary-The-water-untitled-scaled.jpg"
+            alt="Global Hope India water project"
+            class="rounded-2xl shadow-md w-full h-auto object-cover"
+          />
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/20200106-IMG_0052Cary-The-water-untitled-scaled.jpg"
+            alt="Global Hope India community outreach"
+            class="rounded-2xl shadow-md w-full h-auto object-cover"
+          />
+        </div>
       </div>
     </div>
   </section>
