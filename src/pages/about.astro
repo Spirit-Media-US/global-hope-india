@@ -333,8 +333,8 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div>
           <img
-            src="https://globalhopeindia.org/wp-content/uploads/2023/12/Untitled-design-20.png"
-            alt="GHI team members reviewing documents"
+            src="/images/ghi-began.jpg"
+            alt="Indian woman and child smiling while receiving supplies"
             class="rounded-xl w-full h-auto object-cover"
           />
         </div>
@@ -361,32 +361,48 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ── OUR TEAM ─────────────────────────────────────────── -->
-  <section class="section bg-[#f9f9f9]">
-    <div class="container mx-auto max-w-4xl">
-      <h2 class="text-[#1D1C1C] mb-8">Our Team</h2>
-      <ul class="space-y-4 text-[#444] leading-relaxed">
-        <li class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p><strong class="text-[#1D1C1C]">US Founder/President</strong></p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p><strong class="text-[#1D1C1C]">GHI Board of Directors</strong> — Consisting of male and female Christian leaders from the USA &amp; India</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p><strong class="text-[#1D1C1C]">Staff</strong></p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p><strong class="text-[#1D1C1C]">Indian partners</strong> from across India covering North, South, East, and West India including mainland India and Northeast India</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p><strong class="text-[#1D1C1C]">100's of Volunteers annually</strong></p>
-        </li>
-      </ul>
-      <p class="text-[#666] text-sm mt-8 italic">For security purposes, please contact us directly to request specific details about Our Team.</p>
+  <section class="relative section bg-[#f9f9f9] overflow-hidden">
+    <div class="container mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 items-start">
+        <!-- Left: heading + decorative element -->
+        <div class="relative">
+          <h2 class="text-[#1D1C1C] mb-4 lg:mb-0">Our Team</h2>
+          <!-- Decorative green leaf/bird -->
+          <div class="hidden lg:block absolute -bottom-16 -left-8 pointer-events-none opacity-70">
+            <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 110 C30 60, 80 10, 160 30 C120 20, 60 40, 30 90 Z" fill="#2EAB5A"/>
+              <path d="M10 110 C40 70, 90 50, 160 30" stroke="#1a7a3a" stroke-width="2" fill="none"/>
+              <circle cx="100" cy="38" r="4" fill="#2EAB5A"/>
+            </svg>
+          </div>
+        </div>
+        <!-- Right: bullet list -->
+        <div>
+          <ul class="space-y-4 text-[#444] leading-relaxed">
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
+              <p><strong class="text-[#1D1C1C]">US Founder/President</strong></p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
+              <p><strong class="text-[#1D1C1C]">GHI Board of Directors</strong> (Consisting of male and female Christian leaders from the USA &amp; India)</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
+              <p><strong class="text-[#1D1C1C]">Staff</strong></p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
+              <p><strong class="text-[#1D1C1C]">Indian partners</strong> from across India covering North, South, East, and West India including mainland India and Northeast India.</p>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
+              <p><strong class="text-[#1D1C1C]">100's of Volunteers annually</strong></p>
+            </li>
+          </ul>
+          <p class="text-[#666] text-sm mt-8 italic">(please <a href="/contact" class="underline hover:text-[#2EAB5A] transition-colors">contact us</a> directly to request specific details about Our Team.)</p>
+        </div>
+      </div>
     </div>
   </section>
 
