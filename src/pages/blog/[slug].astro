@@ -2,20 +2,55 @@
 import Layout from '../../layouts/Layout.astro';
 import { sanityClient, urlFor } from '../../lib/sanity.ts';
 
+// Static fallback posts (not in Sanity yet)
+const staticPosts: Record<string, any> = {
+  'our-partners-in-india': {
+    title: 'Our Partners in India',
+    excerpt: 'Global Hope India works with indigenous church-planting partners across India.',
+    author: 'Global Hope India',
+    publishDate: '2025-03-18',
+    tags: ['Partners', 'South India'],
+    heroImageUrl: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-3-03.18.25.webp',
+    bodyHtml: `
+      <p>In Chennai, a major city in India, a local church has found itself at a crossroads, facing significant challenges in continuing to meet for worship. The church, which has been gathering in a space located on the first floor of a home, is currently in a difficult situation due to stringent local regulations that do not allow churches to meet in residential spaces or adjacent properties. This regulation has been an ongoing issue, and recently, the church faces a new challenge.</p>
+      <h2>Challenges in Chennai Church</h2>
+      <p>For the church in Chennai, during the first service of the year, on January 1, 2025, a group of individuals entered the church service, disrupting worship. This incident, along with previous warnings from local authorities, has left the congregation in a state of uncertainty. They were given just two weeks to vacate their current location and find an alternative space for worship which now puts them in a very tight situation, needing prayers and help.</p>
+      <h2>The Urgent Need for a New House of Worship</h2>
+      <p>The church, which relies heavily on the support of its local community and believers, now faces an urgent need to secure a new space. The plan is to find land for rent or lease where they can establish a temporary shelter made of sheets until a more permanent solution can be found. However, with limited resources, they are in dire need of financial support to cover the costs of securing land and setting up a safe and suitable place for worship.</p>
+      <p>In the midst of these challenges, they are calling on the global Christian community to join them in prayer. They ask for prayer that God will provide them with a new place to gather, a place where they can worship freely without fear of interference or disruption.</p>
+      <h2>Your Prayer is Needed</h2>
+      <p>In times like these, the power of prayer and the support of the global church are vital. As the church in Chennai navigates this challenging season, Global Hope India asks for prayers that God will open doors for them to find a suitable and permanent place of worship. Additionally, the church is seeking financial support to cover the costs of securing land and establishing a temporary space.</p>
+      <p>The road ahead may be uncertain, but with the support of prayer and the generosity of believers around the world, we trust that God will provide. Please join us in praying for the church in Chennai, as well as for other congregations across India who are facing similar struggles. Pray that they will be able to worship freely and boldly, without fear or hindrance.</p>
+      <p>To support the church in Chennai, please donate here: <a href="https://givebutter.com/ChennaiMinistry" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/ChennaiMinistry</a></p>
+      <p>Let's stand together in prayer and support, trusting that God will provide for His followers in this challenging time.</p>
+      <h2>How You Can Help</h2>
+      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
+      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
+      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
+      <p>Together, we can support the vision of making education accessible to all children. Let's show them the love of Jesus by ensuring they have the opportunity to learn and grow.</p>
+      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
+      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
+      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
+    `,
+  },
+};
+
 export async function getStaticPaths() {
+  let sanityPaths: any[] = [];
   try {
     const posts = await sanityClient.fetch(`*[_type == "blogPost"] { "slug": slug.current }`);
-    return posts.map((p: any) => ({ params: { slug: p.slug } }));
-  } catch (e) {
-    // Sanity not yet configured — no blog posts to build
-    return [];
-  }
+    sanityPaths = posts.map((p: any) => ({ params: { slug: p.slug } }));
+  } catch (e) {}
+  const staticSlugs = ['our-partners-in-india'];
+  const staticPaths = staticSlugs.map(s => ({ params: { slug: s } }));
+  return [...sanityPaths, ...staticPaths];
 }
 
 const { slug } = Astro.params;
 
 let post: any = null;
 let related: any[] = [];
+let isStatic = false;
 try {
   post = await sanityClient.fetch(
     `*[_type == "blogPost" && slug.current == $slug][0]`,
@@ -29,8 +64,23 @@ try {
       { slug, tags: post.tags }
     );
   }
-} catch (e) {
-  // Sanity not yet configured
+} catch (e) {}
+
+// Fallback to static post
+if (!post && staticPosts[slug]) {
+  isStatic = true;
+  const sp = staticPosts[slug];
+  post = {
+    title: sp.title,
+    excerpt: sp.excerpt,
+    author: sp.author,
+    publishDate: sp.publishDate,
+    tags: sp.tags,
+    heroImage: null,
+    body: null,
+    seoTitle: null,
+    seoDescription: null,
+  };
 }
 
 if (!post) return Astro.redirect('/blog');
@@ -63,12 +113,14 @@ const formatDate = (d: string) => {
   return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
 };
 
-const heroImage = post.heroImage
-  ? urlFor(post.heroImage).width(1200).format('webp').url()
-  : null;
+const heroImage = isStatic
+  ? staticPosts[slug].heroImageUrl
+  : post.heroImage
+    ? urlFor(post.heroImage).width(1200).format('webp').url()
+    : null;
 const author = post.author || 'Global Hope India';
 const tags = post.tags || [];
-const bodyHtml = renderPortableText(post.body);
+const bodyHtml = isStatic ? staticPosts[slug].bodyHtml : renderPortableText(post.body);
 const publishDate = post.publishDate ? formatDate(post.publishDate) : '';
 const postUrl = `https://globalhopeindia.org/blog/${slug}`;
 const encodedUrl = encodeURIComponent(postUrl);
@@ -163,29 +215,66 @@ const encodedTitle = encodeURIComponent(post.title);
     </div>
   </section>
 
-  <!-- ── RELATED POSTS ─────────────────────────────────────── -->
-  {related.length > 0 && (
-    <section class="section bg-white">
-      <div class="container mx-auto max-w-3xl">
-        <h2 class="text-xl font-bold mb-8">More Stories</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {related.map((r: any) => (
-            <a href={`/blog/${r.slug}`} class="group rounded-xl border border-[#e0e0e0] overflow-hidden hover:shadow-md transition-shadow">
-              <div class="h-32 overflow-hidden bg-[#1D1C1C]">
-                {r.imageUrl
-                  ? <img src={`${r.imageUrl}?w=400&auto=format`} alt={r.title} class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  : <div class="w-full h-full flex items-center justify-center text-2xl">🌏</div>
-                }
-              </div>
-              <div class="p-4">
-                <h3 class="text-sm font-bold leading-snug group-hover:text-[#2EAB5A] transition-colors">{r.title}</h3>
-              </div>
-            </a>
-          ))}
+  <!-- ── LEAVE A REPLY ──────────────────────────────────────── -->
+  <section class="bg-white px-6 py-12 border-t border-[#e0e0e0]">
+    <div class="container mx-auto max-w-3xl">
+      <h2 style="font-size:18px!important;font-weight:700!important;color:#1D1C1C!important;text-transform:uppercase!important;letter-spacing:0.05em!important;margin:0 0 16px 0!important;">LEAVE A REPLY</h2>
+      <p class="text-[#666] text-sm mb-6">Your email address will not be published. Required fields are marked *</p>
+      <form id="comment-form" class="space-y-5">
+        <div>
+          <label class="block text-[#1D1C1C] text-sm font-medium mb-1.5">Comment *</label>
+          <textarea name="comment" required rows="6" class="w-full border-2 border-[#2EAB5A] rounded-xl px-4 py-3 text-sm text-[#444] focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent resize-vertical"></textarea>
         </div>
+        <div>
+          <label class="block text-[#1D1C1C] text-sm font-medium mb-1.5">Name *</label>
+          <input type="text" name="name" required class="w-full border-2 border-[#2EAB5A] rounded-xl px-4 py-3 text-sm text-[#444] focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-[#1D1C1C] text-sm font-medium mb-1.5">Email *</label>
+          <input type="email" name="email" required class="w-full border-2 border-[#2EAB5A] rounded-xl px-4 py-3 text-sm text-[#444] focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-[#1D1C1C] text-sm font-medium mb-1.5">Website</label>
+          <input type="url" name="website" class="w-full border-2 border-[#2EAB5A] rounded-xl px-4 py-3 text-sm text-[#444] focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+        </div>
+        <div class="flex items-start gap-2">
+          <input type="checkbox" name="save" id="save-info" class="mt-1 accent-[#2EAB5A]" />
+          <label for="save-info" class="text-[#444] text-sm">Save my name, email, and website in this browser for the next time I comment.</label>
+        </div>
+        <button type="submit" class="bg-[#2EAB5A] text-white font-bold text-sm rounded-full px-8 py-3 hover:bg-[#248f4a] transition-colors">Post Comment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── RECENT POSTS ──────────────────────────────────────── -->
+  <section class="bg-[#f5f5f0] py-12 lg:py-16 px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-2-03.18.25.webp', url: '/blog/support-key-projects-in-manipur' },
+          { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-1-03.18.25.webp', url: '/blog/medical-camp-miracles-healing-bodies-and-souls' },
+          { title: "Hope for India's Special Needs Community: The Mission of Raja's Home", date: 'March 4, 2025', image: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-04.04.25-2.webp', url: '/blog/hope-for-indias-special-needs' },
+        ].map(card => (
+          <a href={card.url} class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+            <div class="overflow-hidden">
+              <img src={card.image} alt={card.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+            </div>
+            <div class="p-4 flex flex-col flex-1">
+              <p class="blog-card-title" style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">{card.title}</p>
+              <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                <span>{card.date}</span>
+              </div>
+              <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                Read Full Story Here
+                <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
   <!-- ── DONATE CTA ────────────────────────────────────────── -->
   <section class="section bg-[#FEC415]">
