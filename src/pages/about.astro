@@ -24,9 +24,8 @@ import Layout from '../layouts/Layout.astro';
       class="absolute inset-0 w-full h-full object-cover object-[center_30%]"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-14 pt-52">
-      <p class="text-white/80 text-sm md:text-base font-medium mb-2 tracking-wide">Church Vision and Mission:</p>
-      <h1 class="text-white max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2] drop-shadow-lg">Shaping Faith's Future with<br/>Global Hope India</h1>
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-10 pt-64">
+      <h1 class="text-[#2EAB5A] max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2] ">Church Vision and Mission:<br/>Shaping Faith's Future with<br/>Global Hope India</h1>
     </div>
   </section>
 
@@ -69,45 +68,53 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ── OUR CULTURE ─────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto max-w-5xl">
-      <h2 class="text-[#1D1C1C] mb-8">Our Culture</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We are missionaries.</strong> It's about being sent out by God; for the purposes of God, to the glory of God.</p>
+  <section class="relative section bg-[#F8F5EF] overflow-hidden">
+    <!-- Large faded green circle decoration -->
+    <div class="absolute -left-32 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[#2EAB5A]/10 pointer-events-none"></div>
+    <div class="relative z-10 container mx-auto max-w-5xl">
+      <h2 class="text-[#1D1C1C] mb-10">Our Culture</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
+        <!-- Left column: items 1-4 -->
+        <div class="space-y-6">
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">1.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We are missionaries.</strong> It's about being sent out by God; for the purposes of God, to the glory of God.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">2.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We love India.</strong> It's about Jesus' love for every nation, tribe, and tongue, absent to the gospel.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">3.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We facilitate short-term mission trips to India.</strong> It's about our radical response for the love &amp; grace we've received.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">4.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We empower The Church to fulfill the Great Commission.</strong> It's about Jesus' love for His bride — the Big C Church.</p>
+          </div>
         </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We love India.</strong> It's about Jesus' love for every nation, tribe, and tongue, absent to the gospel.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We facilitate short-term mission trips to India.</strong> It's about our radical response for the love &amp; grace we've received.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We empower The Church to fulfill the Great Commission.</strong> It's about Jesus' love for His bride — the Big C Church.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We minimize distractions.</strong> It's about freeing you to focus on the mission.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We stand on God's Word.</strong> It's about His Word being for all people and us hearing &amp; obeying the voice of God.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We make prayer — the work.</strong> It's about salvation belonging to God and Him doing the work in and through us.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We honor the Holy Spirit.</strong> It's about experiencing God and joining Him in His work.</p>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-1.5 w-2.5 h-2.5 rounded-full bg-[#2EAB5A] shrink-0"></span>
-          <p class="text-[#444] leading-relaxed"><strong class="text-[#1D1C1C]">We live generously.</strong> It's about worship and providing an attractive witness of the gospel.</p>
+        <!-- Right column: items 5-9 -->
+        <div class="space-y-6">
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">5.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We minimize distractions.</strong> It's about freeing you to focus on the mission.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">6.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We stand on God's Word.</strong> It's about His Word being for all people and us hearing &amp; obeying the voice of God.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">7.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We make prayer — the work.</strong> It's about salvation belonging to God and Him doing the work in and through us.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">8.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We honor the Holy Spirit.</strong> It's about experiencing God and joining Him in His work.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">9.</span>
+            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We live generously.</strong> It's about worship and providing an attractive witness of the gospel.</p>
+          </div>
         </div>
       </div>
     </div>
