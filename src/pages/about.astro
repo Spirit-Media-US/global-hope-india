@@ -363,82 +363,79 @@ import Layout from '../layouts/Layout.astro';
   <!-- ── OUR TEAM ─────────────────────────────────────────── -->
   <section class="relative section bg-[#f9f9f9] overflow-hidden">
     <div class="container mx-auto max-w-5xl">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 items-start">
-        <!-- Left: heading + decorative element -->
-        <div class="relative">
-          <h2 class="text-[#1D1C1C] mb-4 lg:mb-0">Our Team</h2>
-          <!-- Decorative green leaf/bird -->
-          <div class="hidden lg:block absolute -bottom-16 -left-8 pointer-events-none opacity-70">
-            <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 110 C30 60, 80 10, 160 30 C120 20, 60 40, 30 90 Z" fill="#2EAB5A"/>
-              <path d="M10 110 C40 70, 90 50, 160 30" stroke="#1a7a3a" stroke-width="2" fill="none"/>
-              <circle cx="100" cy="38" r="4" fill="#2EAB5A"/>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16 items-center">
+        <!-- Left: heading + decorative green leaf -->
+        <div class="relative min-h-[200px]">
+          <h2 class="text-[#1D1C1C] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-tight mb-0">Our Team</h2>
+          <!-- Decorative green leaf/bird — matches original site -->
+          <div class="hidden lg:block absolute -bottom-12 -left-16 pointer-events-none">
+            <svg width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-20 130 C10 50, 70 5, 180 35 C130 15, 50 45, 0 120 Z" fill="#2EAB5A"/>
+              <path d="M-20 130 C20 65, 90 35, 180 35" stroke="#1e7d3e" stroke-width="1.5" fill="none"/>
+              <circle cx="112" cy="34" r="4.5" fill="#2EAB5A"/>
             </svg>
           </div>
         </div>
         <!-- Right: bullet list -->
         <div>
-          <ul class="space-y-4 text-[#444] leading-relaxed">
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
-              <p><strong class="text-[#1D1C1C]">US Founder/President</strong></p>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
-              <p><strong class="text-[#1D1C1C]">GHI Board of Directors</strong> (Consisting of male and female Christian leaders from the USA &amp; India)</p>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
-              <p><strong class="text-[#1D1C1C]">Staff</strong></p>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
-              <p><strong class="text-[#1D1C1C]">Indian partners</strong> from across India covering North, South, East, and West India including mainland India and Northeast India.</p>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-2 h-2 rounded-full bg-[#1D1C1C] shrink-0"></span>
-              <p><strong class="text-[#1D1C1C]">100's of Volunteers annually</strong></p>
-            </li>
+          <ul class="list-disc list-outside pl-5 space-y-3 text-[#1D1C1C] text-base leading-relaxed">
+            <li>US Founder/President</li>
+            <li>GHI Board of Directors (Consisting of male and female Christian leaders from the USA &amp; India)</li>
+            <li>Staff</li>
+            <li>Indian partners from across India covering North, South, East, and West India including mainland India and Northeast India.</li>
+            <li>100's of Volunteers annually</li>
           </ul>
-          <p class="text-[#666] text-sm mt-8 italic">(please <a href="/contact" class="underline hover:text-[#2EAB5A] transition-colors">contact us</a> directly to request specific details about Our Team.)</p>
         </div>
       </div>
+      <p class="text-[#666] text-sm mt-10 italic text-center">(please <a href="/contact" class="underline hover:text-[#2EAB5A] transition-colors">contact us</a> directly to request specific details about Our Team.)</p>
     </div>
   </section>
 
   <!-- ── STATEMENT OF FAITH ───────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto">
-      <h2 class="text-[#1D1C1C] mb-10">Statement of Faith</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
-        <!-- Left: text -->
-        <div class="space-y-5 text-[#444] leading-relaxed">
-          <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
-          <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
-          <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
-          <p>We believe that God created all men in his image, to be in perfect fellowship with him, but that this fellowship was broken by sin. Subsequently, all men are born sinners and are in need of salvation. Our relationship with God can only be restored through repentance of sin and belief in Jesus Christ for salvation.</p>
-          <p>We believe the death of Jesus Christ on the cross is sufficient in itself to make atonement for the sin of the world — an atonement available to all who repent of their sins and believe in him alone for forgiveness and salvation.</p>
-          <p>We believe Jesus Christ died on the cross, was buried, and the third day he bodily arose from the dead guaranteeing the bodily resurrection of all those who have received eternal life through faith in him.</p>
-          <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
-          <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
-          <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
-          <p>We believe the true Church is not an organization, but the body of Christ made up of those who have personally trusted Jesus Christ as Savior and publicly confessed him as Lord.</p>
-          <p>We believe that the Bible is the Word of God, inspired by the Spirit of God, without error and thus the supreme and final authority for faith and practice.</p>
-          <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
-          <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
+  <section class="section bg-[#F8F5EF]">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-10">
+        <!-- Left column: heading + 6 paragraphs -->
+        <div>
+          <h2 class="text-[#1D1C1C] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-tight mb-8">Statement of Faith</h2>
+          <div class="space-y-5 text-[#444] text-[15px] leading-relaxed">
+            <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
+            <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
+            <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
+            <p>We believe that God created all men in his image, to be in perfect fellowship with him, but that this fellowship was broken by sin. Subsequently, all men are born sinners and are in need of salvation. Our relationship with God can only be restored through repentance of sin and belief in Jesus Christ for salvation.</p>
+            <p>We believe the death of Jesus Christ on the cross is sufficient in itself to make atonement for the sin of the world — an atonement available to all who repent of their sins and believe in him alone for forgiveness and salvation.</p>
+            <p>We believe Jesus Christ died on the cross, was buried, and the third day he bodily arose from the dead guaranteeing the bodily resurrection of all those who have received eternal life through faith in him.</p>
+          </div>
         </div>
-        <!-- Right: photos -->
-        <div class="space-y-6">
-          <img
-            src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191231-IMG_8426Cary-The-water-untitled-scaled.jpg"
-            alt="Global Hope India water project"
-            class="rounded-2xl shadow-md w-full h-auto object-cover"
-          />
-          <img
-            src="https://globalhopeindia.org/wp-content/uploads/2023/12/20200106-IMG_0052Cary-The-water-untitled-scaled.jpg"
-            alt="Global Hope India community outreach"
-            class="rounded-2xl shadow-md w-full h-auto object-cover"
-          />
+        <!-- Right column: 7 paragraphs + photo collage -->
+        <div>
+          <div class="space-y-5 text-[#444] text-[15px] leading-relaxed lg:mt-[116px]">
+            <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
+            <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
+            <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
+            <p>We believe the true Church is not an organization, but the body of Christ made up of those who have personally trusted Jesus Christ as Savior and publicly confessed him as Lord.</p>
+            <p>We believe that the Bible is the Word of God, inspired by the Spirit of God, without error and thus the supreme and final authority for faith and practice.</p>
+            <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
+            <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
+          </div>
+          <!-- Photo collage: 3 images -->
+          <div class="relative mt-10 grid grid-cols-3 gap-3 items-end h-[320px] lg:h-[380px]">
+            <img
+              src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-56-scaled.jpg"
+              alt="Global Hope India church gathering"
+              class="w-full h-full object-cover"
+            />
+            <img
+              src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-20-scaled.jpg"
+              alt="Indian woman in prayer"
+              class="w-full h-[110%] object-cover object-top -mt-[10%]"
+            />
+            <img
+              src="https://globalhopeindia.org/wp-content/uploads/2023/12/20200106-IMG_0052Cary-The-water-untitled-scaled.jpg"
+              alt="Global Hope India community outreach"
+              class="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>
