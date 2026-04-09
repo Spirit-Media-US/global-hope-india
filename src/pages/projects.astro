@@ -62,24 +62,27 @@ const practicalResources = [
     })}></script>
   </Fragment>
 
-  <!-- ── HERO ────────────────────────────────────────────── -->
-  <section class="relative min-h-[65vh] flex items-end overflow-hidden">
-    <img
-      src="https://globalhopeindia.org/wp-content/uploads/2023/12/Ghi-Projects.jpg"
-      alt="Global Hope India projects"
-      class="absolute inset-0 w-full h-full object-cover object-[center_30%]"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-10 pt-64">
-      <h1 class="text-[#2EAB5A] max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2]">Church Project:<br/>Building Faith & Community</h1>
+  <!-- ── HERO + INTRO ─────────────────────────────────────── -->
+  <section class="relative">
+    <!-- Image area -->
+    <div class="relative min-h-[55vh] lg:min-h-[65vh] overflow-hidden">
+      <img
+        src="/images/projects-hero.png"
+        alt="Children playing on swings in India at sunset"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      <!-- Red box: heading at bottom-left of image -->
+      <div id="hero-parallax" class="absolute bottom-6 left-0 right-0 z-10 container mx-auto px-6 lg:px-12 will-change-transform">
+        <h1 style="color: white !important;" class="max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2] drop-shadow-lg">Church Project:<br/>Building Faith & Community</h1>
+      </div>
     </div>
-  </section>
-
-  <!-- ── INTRO TEXT ───────────────────────────────────────── -->
-  <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl">
-      <p class="text-[#444] text-lg leading-relaxed">We share Jesus by funding projects that make Christ known and extend God's kingdom in India. Your generosity is needed and greatly appreciated. God uses every gift to accomplish His mission in India.</p>
-      <p class="text-[#444] text-lg leading-relaxed mt-4">Please prayerfully consider sponsoring these projects:</p>
+    <!-- Blue box: intro text in white strip below image -->
+    <div class="bg-white px-6 lg:px-12 py-8 lg:py-10">
+      <div class="container mx-auto max-w-4xl">
+        <p class="text-[#444] text-base lg:text-lg leading-relaxed">We share Jesus by funding projects that make Christ known and extend God's kingdom in India. Your generosity is needed and greatly appreciated. God uses every gift to accomplish His mission in India.</p>
+        <p class="text-[#444] text-base lg:text-lg leading-relaxed mt-4">Please prayerfully consider sponsoring these projects:</p>
+      </div>
     </div>
   </section>
 
@@ -249,4 +252,19 @@ const practicalResources = [
       }
     });
   });
+
+  // Parallax: heading drifts up as user scrolls
+  const heroEl = document.getElementById('hero-parallax');
+  if (heroEl && window.matchMedia('(min-width: 768px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          heroEl.style.transform = `translateY(${window.scrollY * -0.3}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 </script>
