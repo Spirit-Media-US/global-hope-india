@@ -320,27 +320,41 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- ── HOW GHI BEGAN ────────────────────────────────────── -->
-  <section class="relative section bg-white overflow-hidden">
-    <!-- Green swoosh decoration -->
-    <div class="absolute top-16 -right-4 opacity-25 hidden lg:block">
-      <svg width="150" height="100" viewBox="0 0 150 100" fill="none"><path d="M10 70c40-60 90-60 130-10" stroke="#2EAB5A" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M125 48l15 12-18 4" fill="#2EAB5A"/></svg>
-    </div>
-    <div class="relative z-10 container mx-auto">
-      <h2 class="text-[#1D1C1C] mb-8">How GHI Began</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <!-- Left: text -->
-        <div class="space-y-5 text-[#444] leading-relaxed">
-          <p>During our founder's first trip to India in 1998, God planted a part of his heart in India. He returned three years later, with his 11-year-old son, and again three years after that, with his 11-year-old daughter. In 2003, GHI incorporated as a 501(c)(3) nonprofit organization for the sole purpose of having a bank account and the ability to offer donors a tax-deductible receipt.</p>
-          <p>This hobby of taking teams on mission trips to India grew from one team a year, to two teams per year and then three. In October 2010, while Pastor Kevin was speaking to a group of gospel workers in Hyderabad, India; God broke his heart for the pastors of India and called him to focus full-time on empowering The Church as they make Christ known among the people of India.</p>
-          <p class="font-semibold text-[#1D1C1C]">Today, thousands of Americans and Indians have been radically transformed through this mission, and millions of dollars have been collected for the Lord's work through Global Hope India.</p>
-        </div>
-        <!-- Right: photo -->
+  <section class="section bg-white overflow-hidden">
+    <div class="container mx-auto">
+      <!-- Row 1: Text left, Photo right -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
         <div>
+          <h2 class="text-[#1D1C1C] text-3xl lg:text-4xl font-bold mb-6">How GHI Began</h2>
+          <div class="space-y-5 text-[#444] leading-relaxed">
+            <p>During our founder's first trip to India in 1998, God planted a part of his heart in India. He returned three years later, with his 11-year-old son, and again three years after that, with his 11-year-old daughter.</p>
+            <p>In 2003, GHI incorporated as a 501(c)(3) nonprofit organization for the sole purpose of having a bank account and the ability to offer donors a tax-deductible receipt.</p>
+          </div>
+        </div>
+        <div>
+          <img
+            src="https://globalhopeindia.org/wp-content/uploads/2023/12/Untitled-design-20.png"
+            alt="GHI team members reviewing documents"
+            class="rounded-xl w-full h-auto object-cover"
+          />
+        </div>
+      </div>
+      <!-- Row 2: Photo left with green swoosh, Text right -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="relative">
+          <!-- Green swoosh behind photo -->
+          <div class="absolute -bottom-6 -left-6 pointer-events-none opacity-40 hidden lg:block">
+            <svg width="180" height="100" viewBox="0 0 180 100" fill="none"><path d="M10 80c40-70 110-70 160-15" stroke="#2EAB5A" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M152 50l20 15-18 6" fill="#2EAB5A"/></svg>
+          </div>
           <img
             src="https://globalhopeindia.org/wp-content/uploads/2023/12/20191230-IMG_8353Cary-The-water-untitled-768x1024.jpg"
             alt="Indian woman in colorful traditional dress"
-            class="rounded-2xl shadow-lg w-full h-auto object-cover max-h-[500px]"
+            class="relative z-10 rounded-xl w-full h-auto object-cover max-h-[500px]"
           />
+        </div>
+        <div class="space-y-5 text-[#444] leading-relaxed">
+          <p>This hobby of taking teams on mission trips to India grew from one team a year, to two teams per year and then three. In October 2010, while Pastor Kevin was speaking to a group of gospel workers in Hyderabad, India; God broke his heart for the pastors of India and called him to focus full-time on empowering The Church as they make Christ known among the people of India.</p>
+          <p class="font-semibold text-[#1D1C1C]">Today, thousands of Americans and Indians have been radically transformed through this mission, and millions of dollars have been collected for the Lord's work through Global Hope India.</p>
         </div>
       </div>
     </div>
