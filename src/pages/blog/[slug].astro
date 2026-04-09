@@ -33,6 +33,33 @@ const staticPosts: Record<string, any> = {
       <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
     `,
   },
+  'support-key-projects-in-manipur': {
+    title: 'Support Key Projects in Manipur',
+    excerpt: 'The work in Manipur is critical to reaching Northeast India for Christ. See how your support is making a difference.',
+    author: 'Global Hope India',
+    publishDate: '2025-03-18',
+    tags: ['Leadership', 'Northeast'],
+    heroImageUrl: 'https://globalhopeindia.org/wp-content/uploads/2025/03/GHI-Blog-2-03.18.25.webp',
+    bodyHtml: `
+      <p>Manipur, located in the northeastern region of India, is a state rich in culture and natural beauty but faces significant challenges including political instability, economic hardship, and limited access to resources. Despite these obstacles, the church in Manipur continues to grow and serve as a beacon of hope for the community.</p>
+      <h2>The Need in Manipur</h2>
+      <p>The churches and ministry leaders in Manipur face unique challenges. Many congregations meet in temporary structures, and pastors serve without adequate support or training resources. The region has experienced civil unrest that has displaced families and disrupted communities, making the work of the church even more critical.</p>
+      <p>Global Hope India partners with local church leaders in Manipur who are committed to reaching their communities with the gospel while meeting practical needs. These partners work tirelessly to plant churches, train leaders, and provide essential support to families in need.</p>
+      <h2>Key Projects We Support</h2>
+      <p><strong>Church Planting:</strong> Supporting the establishment of new congregations across Manipur, providing resources and training for church planters who are reaching unreached villages.</p>
+      <p><strong>Leadership Development:</strong> Training pastors, worship leaders, and core church leaders with biblical truth and practical ministry skills to strengthen the local church.</p>
+      <p><strong>Education Support:</strong> Elim School and other educational initiatives are providing quality education to children who otherwise would have no access to learning opportunities.</p>
+      <p><strong>Community Relief:</strong> Providing disaster relief, food assistance, and practical support to families affected by civil unrest and natural disasters in the region.</p>
+      <h2>How You Can Help</h2>
+      <p><strong>Pray for Manipur:</strong> Pray for peace in the region, for the safety of church leaders and their families, and for God to open doors for the gospel.</p>
+      <p><strong>Give:</strong> Your financial support directly funds church planting, leadership training, education, and community relief in Manipur. Every dollar makes a difference.</p>
+      <p><strong>Share the Vision:</strong> Help others learn about the work God is doing in Manipur. Share this story with your friends, family, and church.</p>
+      <p>To support key projects in Manipur, please donate here: <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/GlobalHopeIndia</a></p>
+      <p>If you'd prefer to give by check, please make it payable to and mail it to:</p>
+      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
+      <p>Thank you for standing with the believers in Manipur. Together, we are making a difference for the Kingdom of God in Northeast India.</p>
+    `,
+  },
 };
 
 export async function getStaticPaths() {
@@ -41,7 +68,7 @@ export async function getStaticPaths() {
     const posts = await sanityClient.fetch(`*[_type == "blogPost"] { "slug": slug.current }`);
     sanityPaths = posts.map((p: any) => ({ params: { slug: p.slug } }));
   } catch (e) {}
-  const staticSlugs = ['our-partners-in-india'];
+  const staticSlugs = ['our-partners-in-india', 'support-key-projects-in-manipur'];
   const staticPaths = staticSlugs.map(s => ({ params: { slug: s } }));
   return [...sanityPaths, ...staticPaths];
 }
@@ -179,25 +206,14 @@ const encodedTitle = encodeURIComponent(post.title);
     </div>
   </section>
 
-  <!-- ── HERO IMAGE COLLAGE ────────────────────────────────── -->
-  <section class="bg-white px-6 py-8">
-    <div class="container mx-auto max-w-3xl">
-      {heroImage ? (
-        <div class="relative flex items-center justify-center h-[280px] lg:h-[350px]">
-          <!-- Green circle outlines -->
-          <div class="absolute w-[220px] h-[220px] lg:w-[280px] lg:h-[280px] rounded-full border-[6px] border-[#2EAB5A] left-[5%] lg:left-[8%] top-[10%]"></div>
-          <div class="absolute w-[200px] h-[200px] lg:w-[260px] lg:h-[260px] rounded-full border-[6px] border-[#2EAB5A] right-[5%] lg:right-[8%] top-[5%]"></div>
-          <!-- Photo circles -->
-          <div class="absolute w-[180px] h-[180px] lg:w-[240px] lg:h-[240px] rounded-full overflow-hidden left-[8%] lg:left-[10%] top-[15%] z-10 shadow-lg">
-            <img src={heroImage} alt={post.title} class="w-full h-full object-cover object-left" />
-          </div>
-          <div class="absolute w-[180px] h-[180px] lg:w-[240px] lg:h-[240px] rounded-full overflow-hidden right-[8%] lg:right-[10%] top-[8%] z-20 shadow-lg">
-            <img src={heroImage} alt={post.title} class="w-full h-full object-cover object-[80%_center]" />
-          </div>
-        </div>
-      ) : null}
-    </div>
-  </section>
+  <!-- ── HERO IMAGE ──────────────────────────────────────────── -->
+  {heroImage && (
+    <section class="bg-white px-6 py-6">
+      <div class="container mx-auto max-w-3xl">
+        <img src={heroImage} alt={post.title} class="w-full rounded-xl object-cover max-h-[400px]" />
+      </div>
+    </section>
+  )}
 
   <!-- ── POST HEADER ───────────────────────────────────────── -->
   <section class="bg-white px-6 pb-8">
