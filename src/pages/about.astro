@@ -127,7 +127,7 @@ import Layout from '../layouts/Layout.astro';
         <!-- Left: group photo -->
         <div>
           <img
-            src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-56-scaled.jpg"
+            src="https://assets.spiritmediapublishing.com/images/ghi-radical-group.jpg"
             alt="Global Hope India mission team under covered structure"
             class="rounded-lg w-full h-auto object-cover"
           />
@@ -146,48 +146,55 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- ── EXPANDABLE ACCORDION ─────────────────────────────── -->
+  <!-- ── ACCORDION 2x2 GRID ────────────────────────────────── -->
   <section class="section bg-white">
-    <div class="container mx-auto max-w-4xl">
-      <div class="space-y-3">
-        <!-- Why India? -->
-        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
-          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
-            <h3 class="text-base font-bold text-[#1D1C1C]">Why India?</h3>
-            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
-          </button>
-          <div class="accordion-content hidden px-6 pb-5">
-            <p class="text-[#444] leading-relaxed">With 1.4 billion people, India represents one of the largest, neediest, and most unreached countries in the world.</p>
+    <div class="container mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Left column -->
+        <div class="space-y-6">
+          <!-- Why India? -->
+          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">Why India?</h3>
+              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+            </button>
+            <div class="accordion-body mt-4">
+              <p class="text-[#555] leading-relaxed text-sm">With 1.4 billion people, India represents one of the largest, neediest, and most unreached countries in the world.</p>
+            </div>
+          </div>
+          <!-- Changing The World -->
+          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">Changing The World</h3>
+              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+            </button>
+            <div class="accordion-body mt-4">
+              <p class="text-[#555] leading-relaxed text-sm">In 1972, in his only crusade ever in India, Dr. Billy Graham said, "As India goes, all of Asia will go with her." In essence, he was saying: that if we can make Christ known among the 1.4 billion people of India, they will help us to make Christ known among the 4.6 billion people in Asia. Not only does that cover the entire 10/40 window, but that is 2/3's of the earth's total population!</p>
+            </div>
           </div>
         </div>
-        <!-- The Big "C" Church -->
-        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
-          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
-            <h3 class="text-base font-bold text-[#1D1C1C]">The Big "C" Church</h3>
-            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
-          </button>
-          <div class="accordion-content hidden px-6 pb-5">
-            <p class="text-[#444] leading-relaxed">EVERYTHING we do is through the local church! Jesus said, "I will build my Church, and the gates of hell will not prevail against it." (Matthew 16:18) We believe history proves the most effective means of evangelism and it is the starting of new churches. Therefore, we empower The Church in India to train more healthy church-planting pastors that will start more healthy churches.</p>
+        <!-- Right column -->
+        <div class="space-y-6">
+          <!-- The Big "C" Church -->
+          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">The Big "C" Church</h3>
+              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+            </button>
+            <div class="accordion-body mt-4">
+              <p class="text-[#555] leading-relaxed text-sm">EVERYTHING we do is through the local church! Jesus said, "I will build my Church, and the gates of hell will not prevail against it." (Matthew 16:18) We believe history proves the most effective means of evangelism and it is the starting of new churches. Therefore, we empower The Church in India to train more healthy church-planting pastors that will start more healthy churches.</p>
+            </div>
           </div>
-        </div>
-        <!-- Changing The World -->
-        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
-          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
-            <h3 class="text-base font-bold text-[#1D1C1C]">Changing The World</h3>
-            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
-          </button>
-          <div class="accordion-content hidden px-6 pb-5">
-            <p class="text-[#444] leading-relaxed">In 1972, in his only crusade ever in India, Dr. Billy Graham said, "As India goes, all of Asia will go with her." In essence, he was saying: that if we can make Christ known among the 1.4 billion people of India, they will help us to make Christ known among the 4.6 billion people in Asia. Not only does that cover the entire 10/40 window, but that is 2/3's of the earth's total population!</p>
-          </div>
-        </div>
-        <!-- Living The Dream -->
-        <div class="accordion-item border border-[#e0e0e0] rounded-lg overflow-hidden">
-          <button class="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left bg-white hover:bg-[#f9f9f9] transition-colors" aria-expanded="false">
-            <h3 class="text-base font-bold text-[#1D1C1C]">Living The Dream</h3>
-            <span class="accordion-icon text-[#2EAB5A] text-2xl font-light leading-none shrink-0 transition-transform duration-300">+</span>
-          </button>
-          <div class="accordion-content hidden px-6 pb-5">
-            <p class="text-[#444] leading-relaxed">We help The Church be on earth as it is in heaven. In Revelation 7:9-12, we see the Church in heaven filled with people from every nation, tongue, and tribe gathered around the throne worshiping Jesus. Won't you join us in living the dream?</p>
+          <!-- Living The Dream -->
+          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">Living The Dream</h3>
+              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+            </button>
+            <div class="accordion-body mt-4">
+              <p class="text-[#555] leading-relaxed text-sm">We help The Church be on earth as it is in heaven. In Revelation 7:9-12, we see the Church in heaven filled with people from every nation, tongue, and tribe gathered around the throne worshiping Jesus.</p>
+              <p class="text-[#555] leading-relaxed text-sm mt-3">Won't you join us in living the dream?</p>
+            </div>
           </div>
         </div>
       </div>
@@ -195,23 +202,21 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <script>
-    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const item = btn.closest('.accordion-item');
-        const content = item?.querySelector('.accordion-content');
-        const icon = btn.querySelector('.accordion-icon');
+        const card = btn.closest('.accordion-card');
+        const body = card?.querySelector('.accordion-body');
+        const sign = btn.querySelector('.accordion-sign');
         const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        document.querySelectorAll('.accordion-item').forEach(other => {
-          if (other !== item) {
-            other.querySelector('.accordion-content')?.classList.add('hidden');
-            other.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
-            const otherIcon = other.querySelector('.accordion-icon');
-            if (otherIcon) otherIcon.textContent = '+';
-          }
-        });
-        content?.classList.toggle('hidden', isOpen);
-        btn.setAttribute('aria-expanded', String(!isOpen));
-        if (icon) icon.textContent = isOpen ? '+' : '−';
+        if (isOpen) {
+          body?.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+          if (sign) sign.textContent = '+';
+        } else {
+          body?.classList.remove('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          if (sign) sign.textContent = '—';
+        }
       });
     });
   </script>
