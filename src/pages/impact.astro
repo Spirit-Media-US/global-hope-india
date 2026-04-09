@@ -82,33 +82,35 @@ const stories = [
   </section>
 
   <!-- ── STORIES GRID ────────────────────────────────────── -->
-  <section class="section bg-[#f9f9f6]">
-    <div class="container mx-auto max-w-6xl">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <section class="section bg-white">
+    <div class="container mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {stories.map(story => (
-          <div class="group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white flex flex-col">
+          <div class="group flex flex-col">
             <!-- Card image -->
-            <div class="overflow-hidden">
+            <div class="overflow-hidden rounded-lg mb-4">
               <img
                 src={story.image}
                 alt={story.title}
-                class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
+                class="w-full h-[200px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <!-- Card content -->
-            <div class="p-4 flex flex-col flex-1">
-              <div class="flex flex-wrap gap-2 mt-1 mb-2">
-                {story.tags.map((tag: string) => (
-                  <span class="text-xs text-[#666] border border-[#ddd] rounded-full px-3 py-1">{tag}</span>
-                ))}
-              </div>
-              <h2 class="text-[#2EAB5A] font-bold text-lg leading-snug mb-2">{story.title}</h2>
-              <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">{story.excerpt}</p>
-              <p class="text-[#aaa] text-xs mb-3">GHI Staff · {story.date}</p>
-              <a href={story.url} target="_blank" rel="noopener noreferrer" class="mt-auto text-[#2EAB5A] text-sm font-medium hover:underline">Read →</a>
+            <h2 class="text-[#1D1C1C] font-bold text-base leading-snug mb-3">{story.title}</h2>
+            <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-4">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+              <span>{story.date}</span>
             </div>
+            <a href={story.url} target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold hover:underline">
+              Read Full Story Here
+              <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+            </a>
           </div>
         ))}
+      </div>
+      <!-- Load More button -->
+      <div class="text-center mt-12">
+        <button class="bg-[#1a2456] text-white font-semibold text-sm rounded-full px-8 py-3 hover:bg-[#111b40] transition-colors">Load More</button>
       </div>
     </div>
   </section>
