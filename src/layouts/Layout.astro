@@ -141,15 +141,21 @@ const currentPath = Astro.url.pathname;
     </main>
 
     <!-- ── Footer ─────────────────────────────────────────── -->
-    <footer class="bg-[#f0f0f0] text-[#1D1C1C]">
+    <footer class="relative text-[#1D1C1C]">
+      <!-- Cream background with faded crowd photo overlay -->
+      <div class="absolute inset-0 bg-[#F8F5EF]"></div>
+      <div class="absolute inset-0 opacity-[0.07]" style="background-image: url('https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp'); background-size: cover; background-position: center;"></div>
+
       <!-- Legal banner -->
-      <div class="bg-[#e8e8e8] py-3 px-6">
+      <div class="relative z-10 py-4 px-6 border-b border-[#d5cfc5]">
         <p class="text-[#555] text-xs text-center max-w-5xl mx-auto">Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Raleigh, North Carolina. All gifts are tax-deductible.</p>
       </div>
 
-      <div class="container mx-auto px-6 py-10">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
-          <!-- Left: Logo + Contact -->
+      <!-- Main footer content -->
+      <div class="relative z-10 container mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 items-start">
+
+          <!-- Column 1: Logo + Contact -->
           <div class="text-center md:text-left">
             <div class="mb-5 flex justify-center md:justify-start">
               <img
@@ -175,13 +181,13 @@ const currentPath = Astro.url.pathname;
             </ul>
           </div>
 
-          <!-- Center: Donate + Social -->
+          <!-- Column 2: Donate + Social -->
           <div class="flex flex-col items-center gap-5">
             <a
               href="https://givebutter.com/GlobalHopeIndia"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium text-[15px] px-8 py-3 rounded transition-colors shadow-sm"
+              class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md"
             >Donate Now</a>
             <!-- Social icons in green squares -->
             <div class="flex gap-2">
@@ -203,28 +209,33 @@ const currentPath = Astro.url.pathname;
             </div>
           </div>
 
-          <!-- Right: Trust badges + India map -->
-          <div class="flex flex-col items-center md:items-end gap-4">
-            <div class="flex flex-wrap items-center justify-center md:justify-end gap-3">
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/767b76c41ccc43b3c07f07c94435a4dcc3ad13b3-500x500.svg" alt="GuideStar" class="h-10 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/07b08d8f4d9321bb85fa7814ef0d65a742b3463e-500x500.png" alt="Charity Navigator" class="h-10 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/f256d3af6f9dbfbc282103b8fb3f7037a98d64db-500x500.png" alt="Better Business Bureau" class="h-10 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/7de612782e20fce24ac52474b16b6bf4e011c126-500x500.png" alt="Cary Chamber of Commerce" class="h-10 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/cd3ad9882d7c42491f7d98a8df1b71e6868b6e68-135x135.svg" alt="Chamber Affiliation" class="h-10 opacity-80 hover:opacity-100 transition-opacity" />
+          <!-- Column 3: Trust badges -->
+          <div class="flex flex-col items-center gap-3">
+            <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/767b76c41ccc43b3c07f07c94435a4dcc3ad13b3-500x500.svg" alt="GuideStar Platinum Seal" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/07b08d8f4d9321bb85fa7814ef0d65a742b3463e-500x500.png" alt="Charity Navigator 100" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/f256d3af6f9dbfbc282103b8fb3f7037a98d64db-500x500.png" alt="Better Business Bureau" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/7de612782e20fce24ac52474b16b6bf4e011c126-500x500.png" alt="Cary Chamber of Commerce" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/cd3ad9882d7c42491f7d98a8df1b71e6868b6e68-135x135.svg" alt="Candid Silver Transparency 2023" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp" alt="GHI Badge" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
             </div>
-            <!-- India map silhouette -->
+          </div>
+
+          <!-- Column 4: Building photo -->
+          <div class="flex items-center justify-center lg:justify-end">
             <img
-              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
-              alt="India"
-              class="w-28 h-28 object-contain opacity-60"
+              src="https://globalhopeindia.org/wp-content/uploads/2020/10/bic-office-1024x560.jpg"
+              alt="Global Hope India Office"
+              class="rounded-lg shadow-md w-full max-w-[280px] h-auto object-cover"
             />
           </div>
+
         </div>
       </div>
 
       <!-- Copyright bar -->
-      <div class="bg-[#F8F9F3] py-3 px-6">
-        <p class="text-[#1D1C1C] text-xs text-center">© {new Date().getFullYear()} Copyright by Spirit Media | <a href="/privacy-policy" class="hover:text-[#2EAB5A] transition-colors">Privacy Policy</a></p>
+      <div class="relative z-10 bg-[#1D1C1C] py-3 px-6">
+        <p class="text-white/80 text-xs text-center">&copy; {new Date().getFullYear()} Copyright by <a href="https://spiritmedia.us" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#2EAB5A] transition-colors underline">Spirit Media</a> | <a href="/privacy-policy" class="text-white hover:text-[#2EAB5A] transition-colors">Privacy Policy</a></p>
       </div>
     </footer>
 
