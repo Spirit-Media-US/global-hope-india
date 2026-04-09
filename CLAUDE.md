@@ -40,37 +40,30 @@ Then run: `git checkout dev && git pull origin dev`
 - Hero: assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4 (live)
 - Impacting: assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4 (live, uploaded 2026-04-08)
 
-## Status — as of 2026-04-08
+## Status — as of 2026-04-09
 ### Completed
-- Phase 1: Infrastructure — repo, Netlify, Sanity created
-- Phase 2: Content extraction — all pages extracted to content/ directory
-- Phase 3: Build all pages — 8 pages, build passes
-- Phase 4: Wire Sanity CMS — Studio + schemas deployed, dataset live
-- Phase 5: CAR Gate — GA4, OG image, JSON-LD, security headers, sitemap all verified
-- Phase 6: Design Refinement — active nav, hero poster, removed broken .mov, removed duplicate banner
-- Phase 7: QA — 22 images migrated WP CDN → Sanity, `<main>` landmark added, all audits pass
-- Phase 8: Launch Prep — WP→Astro 301 redirects, Netlify/Sanity webhook/security headers verified
-- Phase 9: Client Delivery — CLIENT-GUIDE.md, HANDOFF.md, LAUNCH-CHECKLIST.md
-- Hero video migrated from WP CDN to R2
-- Impacting section video uploaded to R2 (empowering-indias-church-global-hope-india.mp4)
-- First deploy to main — merged 2026-04-08, Netlify auto-build triggered
-- Phase 10: Design match to original site (2026-04-08) — full section-by-section comparison and update:
-  - Navbar: indigo donate button, removed Blog link, font-semibold 16px links, no underline active state
-  - Hero: soft pink/green text colors, text-stroke, text-shadow, rotateY flip, 100px text
-  - Tagline: #F8F5EF bg, #F8C8DC pink banner
-  - 25 Years: dark heading, white "25 Years" span, rounded corners, shadow, negative margin overlap
-  - Impact Stats: #F8F9F3 bg, 35px counters, 30s animation, mobile vertical layout with green blobs
-  - Impacting: 70vh height, 3% overlay, large badge overlapping top
-  - GHI Magazine: #F8F9F3 bg, 5px radius cards, stronger shadows, 300px images, 26px titles, circular thumbnails, tag chips
-  - Footer: light gray bg, indigo donate button, centered mobile, #F8F9F3 copyright bar, full horizontal logo
+- Phase 1–9: Infrastructure through Client Delivery (completed 2026-04-08)
+- Phase 10: Design match to original site (2026-04-08)
+- Phase 11: Full page rebuild + blog creation (2026-04-09):
+  - **About page**: Hero text white + parallax, Our Team two-column layout with green leaf SVG, Statement of Faith two-column text with overlapping photo collage + parallax, removed yellow CTA
+  - **Projects page**: Rebuilt from scratch — hero image (kids on swings), intro text, 3 project cards (Bibles/Orphan Care/Community Dev), Practical Resources checklist, 6 FAQ accordions, parallax on hero text
+  - **Get Involved page**: Rebuilt — hero with Indian flag image + parallax, 3-column layout (Pray/Give/Go) with orange numbered badges, GHL form iframes for Pray and Go, Donate button for Give
+  - **Impact page**: Rebuilt — hero image + parallax, 6 story cards (white bg, shadow, green titles 16px), Load More button with JS pagination, cream background
+  - **Blog index**: Rebuilt to match SMP blog style — cream bg hero with 3x3 image grid, sticky search/filter bar with green chips, card design (16px green titles forced via inline !important, tags, excerpt, author+date, Read →), green pagination
+  - **Blog post template**: Social share icons row, rectangular hero image, centered title + green date, body content, share bar, Leave a Reply comment form (green borders), 3 recent blog cards at bottom
+  - **6 static blog posts created**: Our Partners in India, Support Key Projects in Manipur, Medical Camp Miracles, Hope for India's Special Needs (Raja's Home), Empowering the Deaf Community (DBM Nagaland), Elim School (Pastor Mayon Manipur)
+  - **Homepage**: Replaced coin poster with Indian youth hero image, added preload=auto
+  - **Global CSS**: html background white, body background white
+  - **Hero images uploaded**: projects-hero.png, get-involved-hero.png, impact-hero.png
 
 ### Still Pending — Developer Tasks
 - Connect custom domain in Netlify + Cloudflare DNS (globalhopeindia.org)
-- Populate blog posts in Sanity Studio (migrate 6+ from WordPress)
-- GHL form integration (prayer signup, mission trip interest)
+- Migrate 6 static blog posts into Sanity Studio (currently hardcoded in [slug].astro)
+- GHL form integration (prayer signup, mission trip interest — iframes in place, need webhook URLs)
 - UptimeRobot monitoring (add after site is live)
 - Sanity → Netlify rebuild webhook
 - Add vinit's SSH key to GitHub repo (push currently blocked)
+- Comment form backend (currently frontend-only, needs API endpoint)
 
 ### Still Pending — Requires Kevin
 - Share Sanity Studio access with GHI staff (manage.sanity.io > project r33r2z1j > Members > Invite)

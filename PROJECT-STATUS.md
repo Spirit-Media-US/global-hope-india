@@ -1,5 +1,5 @@
 # Global Hope India — Project Status & Knowledge Base
-> Last updated: 2026-04-08 (evening — design match session)
+> Last updated: 2026-04-09 (full page rebuild + blog creation session)
 > **Claude: Read this file before making any statements about project state or touching any code.**
 
 ---
@@ -42,7 +42,7 @@
 - **Background:** #FFFFFF
 - **H1:** 100px desktop / 45px mobile (hero)
 - **H2:** 50px desktop / 30px tablet / 26px mobile
-- **Blog card title:** 26px
+- **Blog card title:** 16px (forced via inline !important to override global h3)
 - **Body:** 16px, line-height 1.875em
 - **Hero flip animation:** rotateY (horizontal flip, 3s interval)
 - **Counter animation:** 30s duration, easeOutQuart
@@ -63,7 +63,7 @@
 | Projects | `/projects/` | `/projects` | Built |
 | Get Involved | `/get-involved/` | `/get-involved` | Built |
 | Impact | `/impact/` | `/impact` | Built |
-| Blog/Magazine | WordPress posts | `/blog/[slug]` | Built, wired to Sanity |
+| Blog/Magazine | WordPress posts | `/blog/[slug]` | Built, 6 static posts + Sanity fallback |
 | Privacy Policy | `/privacy-policy/` | `/privacy-policy` | Built |
 
 ---
@@ -71,7 +71,7 @@
 ## Sanity Document Counts
 | Type | Count | Notes |
 |---|---|---|
-| blogPost | 0 | Not yet populated |
+| blogPost | 0 | 6 posts exist as static fallbacks in [slug].astro — need Sanity migration |
 | siteSettings | 0 | Not yet populated |
 
 ---
@@ -96,11 +96,12 @@
 ## Remaining Tasks — Developer
 | Task | Priority | Notes |
 |---|---|---|
-| Populate blog posts in Sanity Studio | HIGH | Migrate 6+ posts from WordPress |
+| Migrate 6 static blog posts to Sanity | HIGH | Currently hardcoded in [slug].astro — need to create in Sanity Studio |
 | Connect custom domain | HIGH | Netlify domain config + Cloudflare CNAME → globalhopeindia.org |
 | Cloudflare proxy | HIGH | Enable orange cloud after domain connected |
 | Sanity → Netlify webhook | HIGH | Trigger rebuilds on content change |
-| GHL form integration | MEDIUM | Prayer signup, mission trip interest — get webhook URL from GHL MCP |
+| GHL form integration | MEDIUM | Prayer/Go form iframes in place on Get Involved page, need webhook URLs |
+| Comment form backend | MEDIUM | Leave a Reply form on blog posts is frontend-only — needs API |
 | UptimeRobot monitoring | MEDIUM | Add after site is live |
 | Push latest commits to remote | HIGH | vinit SSH key not on GitHub — blocked |
 
@@ -134,6 +135,28 @@
   - Impacting: 70vh min-height, 3% overlay, large badge overlapping top (-top-5)
   - GHI Magazine: #F8F9F3 bg, rounded-[5px] cards, stronger shadows, min-h-[300px] images, 26px titles, circular thumbnails, green tag chips, excerpts on fallback posts
   - Footer: light gray bg, #06038D indigo donate button, green square social icons, centered mobile layout, full horizontal logo (250px), #F8F9F3 copyright bar with #1D1C1C text
+- [x] Phase 11: Full page rebuild + blog creation (2026-04-09):
+  - About: hero white text + parallax, Our Team two-column with leaf SVG, Statement of Faith two-column + photo collage with parallax, removed yellow CTA
+  - Projects: rebuilt — hero (kids on swings), 3 project cards, Practical Resources, 6 FAQ accordions, parallax
+  - Get Involved: rebuilt — hero + parallax, 3-column Pray/Give/Go with orange badges, GHL form iframes
+  - Impact: rebuilt — hero + parallax, 6 story cards with Load More JS pagination, cream bg
+  - Blog index: rebuilt SMP-style — hero with image grid, sticky search/filter, card design with 16px green titles
+  - Blog post template: social icons, rectangular hero, centered title, comment form, 3 recent cards
+  - 6 static blog posts created (Our Partners, Manipur, Medical Camp, Raja's Home, DBM Nagaland, Elim School)
+  - Homepage: replaced coin poster with hero image, preload=auto
+  - Global CSS: html+body white background
+
+---
+
+## Static Blog Posts (hardcoded in [slug].astro until Sanity migration)
+| Slug | Title | Date | Image |
+|---|---|---|---|
+| our-partners-in-india | Our Partners in India | 2025-03-18 | GHI-Blog-3-03.18.25.webp |
+| support-key-projects-in-manipur | Support Key Projects in Manipur | 2025-03-18 | GHI-Blog-2-03.18.25.webp |
+| medical-camp-miracles-healing-bodies-and-souls | Medical Camp Miracles | 2025-03-18 | GHI-Blog-1-03.18.25.webp |
+| hope-for-indias-special-needs | Hope for India's Special Needs: Raja's Home | 2025-03-04 | GHI-04.04.25-2.webp |
+| empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india | Empowering the Deaf Community: DBM Nagaland | 2025-03-04 | GHI-Blog-03.04.25.webp |
+| elim-school-supporting-pastor-mayons-mission-in-manipur | Elim School: Pastor Mayon's Mission | 2025-03-04 | GHI-Blog-03.04.25-3-1.webp |
 
 ---
 
