@@ -95,9 +95,9 @@ const ALL_POSTS_JSON = JSON.stringify(allPosts.map(p => ({
   </section>
 
   <!-- ── POSTS GRID ────────────────────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
+  <section class="section bg-[#f9f9f6]">
     <div class="container mx-auto">
-      <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       <div id="no-results" class="hidden text-center py-20">
         <p class="text-xl font-semibold text-[#1D1C1C] mb-2">No stories found</p>
         <p class="text-[#666] text-sm">Try a different keyword or <button onclick="clearSearch()" class="text-[#2EAB5A] font-semibold hover:underline">clear the search</button>.</p>
@@ -149,25 +149,23 @@ function render() {
       ? `${POSTS.length} stories`
       : `${filtered.length} of ${POSTS.length} stories`;
     grid.innerHTML = pagePosts.map(p => `
-      <a href="${'/blog/' + p.slug}" class="blog-card group bg-white rounded-2xl border border-[#e0e0e0] shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-        <div class="h-48 overflow-hidden bg-[#1D1C1C]">
+      <div class="group rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white flex flex-col">
+        <div class="overflow-hidden">
           ${p.imageUrl
-            ? `<img src="${p.imageUrl}?w=600&auto=format" alt="${p.title}" class="blog-card-img w-full h-full object-cover" />`
-            : `<div class="w-full h-full flex items-center justify-center"><span class="text-white/20 text-5xl">🌏</span></div>`
+            ? `<img src="${p.imageUrl}?w=600&auto=format" alt="${p.title}" class="w-full h-[180px] object-cover transition-transform duration-300 group-hover:scale-105" />`
+            : `<div class="w-full h-[180px] bg-[#1D1C1C] flex items-center justify-center"><span class="text-white/20 text-5xl">🌏</span></div>`
           }
         </div>
-        <div class="p-6">
-          <div class="flex flex-wrap gap-1.5 mb-3">
-            ${(p.tags || []).slice(0, 2).map((t: string) => `<span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5">${t}</span>`).join('')}
+        <div class="p-4 flex flex-col flex-1">
+          <div class="flex flex-wrap gap-2 mt-1 mb-2">
+            ${(p.tags || []).slice(0, 2).map((t: string) => `<span class="text-xs text-[#666] border border-[#ddd] rounded-full px-3 py-1">${t}</span>`).join('')}
           </div>
-          <h3 class="font-bold text-lg leading-snug text-[#1D1C1C] mb-2 group-hover:text-[#2EAB5A] transition-colors">${p.title}</h3>
-          <p class="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">${p.excerpt || ''}</p>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-[#999]">${p.author || 'Global Hope India'} · ${p.dateFormatted}</span>
-            <span class="text-[#2EAB5A] font-semibold group-hover:underline">Read →</span>
-          </div>
+          <h3 class="text-[#2EAB5A] font-bold text-base leading-snug mb-2 line-clamp-2">${p.title}</h3>
+          <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">${p.excerpt || ''}</p>
+          <p class="text-[#aaa] text-xs mb-3">${p.author || 'GHI Staff'} · ${p.dateFormatted}</p>
+          <a href="${'/blog/' + p.slug}" class="mt-auto text-[#2EAB5A] text-sm font-medium hover:underline">Read →</a>
         </div>
-      </a>
+      </div>
     `).join('');
   }
   renderPagination();
