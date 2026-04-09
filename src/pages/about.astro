@@ -43,6 +43,33 @@ import Layout from '../layouts/Layout.astro';
         }
       }, { passive: true });
     }
+
+    // Faith collage parallax — each photo at different speed
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      const photos = document.querySelectorAll('.faith-photo');
+      const collage = document.getElementById('faith-collage');
+      let faithTicking = false;
+      window.addEventListener('scroll', () => {
+        if (!faithTicking) {
+          requestAnimationFrame(() => {
+            if (collage) {
+              const rect = collage.getBoundingClientRect();
+              const inView = rect.top < window.innerHeight && rect.bottom > 0;
+              if (inView) {
+                const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                photos.forEach(img => {
+                  const speed = parseFloat(img.dataset.speed || '0');
+                  const offset = (progress - 0.5) * -60 * speed / 0.25;
+                  img.style.transform = `translateY(${offset}px)`;
+                });
+              }
+            }
+            faithTicking = false;
+          });
+          faithTicking = true;
+        }
+      }, { passive: true });
+    }
   </script>
 
   <!-- ── VISION / EMPOWERING / MISSION ROW ───────────────── -->
@@ -413,8 +440,8 @@ import Layout from '../layouts/Layout.astro';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-14 gap-y-10">
         <!-- Left column: heading + 6 paragraphs -->
         <div>
-          <h2 class="text-[#1D1C1C] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-tight mb-8">Statement of Faith</h2>
-          <div class="space-y-5 text-[#444] text-[15px] leading-relaxed">
+          <h2 class="text-[#1D1C1C] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-tight mb-6">Statement of Faith</h2>
+          <div class="space-y-2 text-[#444] text-[15px] leading-[1.7]">
             <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
             <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
             <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
@@ -425,7 +452,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <!-- Right column: 7 paragraphs + photo collage -->
         <div>
-          <div class="space-y-5 text-[#444] text-[15px] leading-relaxed lg:mt-[116px]">
+          <div class="space-y-2 text-[#444] text-[15px] leading-[1.7] lg:mt-[116px]">
             <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
             <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
             <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
@@ -434,22 +461,25 @@ import Layout from '../layouts/Layout.astro';
             <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
             <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
           </div>
-          <!-- Photo collage: 3 images -->
-          <div class="relative mt-10 grid grid-cols-3 gap-3 items-end h-[320px] lg:h-[380px]">
+          <!-- Photo collage: 3 overlapping images with parallax -->
+          <div id="faith-collage" class="relative mt-8 h-[300px] lg:h-[350px] overflow-hidden">
             <img
               src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-56-scaled.jpg"
               alt="Global Hope India church gathering"
-              class="w-full h-full object-cover"
+              class="faith-photo absolute left-0 top-0 w-[38%] h-[85%] object-cover rounded-lg shadow-md z-10 will-change-transform"
+              data-speed="0.15"
             />
             <img
               src="https://globalhopeindia.org/wp-content/uploads/2023/12/201811_GlobalHopeIndia_Church-20-scaled.jpg"
               alt="Indian woman in prayer"
-              class="w-full h-[110%] object-cover object-top -mt-[10%]"
+              class="faith-photo absolute left-[28%] top-[15%] w-[40%] h-[90%] object-cover object-top rounded-lg shadow-lg z-20 will-change-transform"
+              data-speed="0.25"
             />
             <img
               src="https://globalhopeindia.org/wp-content/uploads/2023/12/20200106-IMG_0052Cary-The-water-untitled-scaled.jpg"
               alt="Global Hope India community outreach"
-              class="w-full h-full object-cover"
+              class="faith-photo absolute right-0 top-0 w-[38%] h-[85%] object-cover rounded-lg shadow-md z-10 will-change-transform"
+              data-speed="0.35"
             />
           </div>
         </div>
@@ -457,15 +487,4 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- ── CTA ──────────────────────────────────────────────── -->
-  <section class="section bg-[#FEC415]">
-    <div class="container mx-auto text-center">
-      <h2 class="text-[#1D1C1C] mb-4">Ready to Join the Mission?</h2>
-      <p class="text-[#1D1C1C]/80 text-lg max-w-xl mx-auto mb-8">Pray, give, or go — there's a place for you in God's work in India.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/get-involved" class="btn btn-dark-gold">Get Involved</a>
-        <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn btn-green">Donate Now</a>
-      </div>
-    </div>
-  </section>
 </Layout>
