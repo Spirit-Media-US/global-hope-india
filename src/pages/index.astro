@@ -11,7 +11,7 @@ try {
       "slug": slug.current,
       excerpt,
       publishDate,
-      "imageUrl": heroImage.asset->url,
+      "imageUrl": coalesce(heroImage.asset->url, externalImageUrl),
       tags
     }
   `);

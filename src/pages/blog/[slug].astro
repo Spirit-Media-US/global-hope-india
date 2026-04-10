@@ -14,7 +14,7 @@ const { slug } = Astro.params;
 const post = await sanityClient.fetch(
   `*[_type == "blogPost" && slug.current == $slug][0] {
     title, excerpt, author, publishDate, tags, body, seoTitle, seoDescription,
-    heroImage, "heroImageUrl": heroImage.asset->url
+    heroImage, "heroImageUrl": coalesce(heroImage.asset->url, externalImageUrl)
   }`,
   { slug }
 );
@@ -25,7 +25,7 @@ let related: any[] = [];
 if (post.tags?.length) {
   related = await sanityClient.fetch(
     `*[_type == "blogPost" && slug.current != $slug && count((tags)[@ in $tags]) > 0] | order(publishDate desc) [0..2] {
-      title, "slug": slug.current, excerpt, publishDate, "imageUrl": heroImage.asset->url, tags
+      title, "slug": slug.current, excerpt, publishDate, "imageUrl": coalesce(heroImage.asset->url, externalImageUrl), tags
     }`,
     { slug, tags: post.tags }
   );

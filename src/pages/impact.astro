@@ -1,56 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sanityClient } from '../lib/sanity.ts';
 
-const stories = [
-  {
-    title: 'Our Partners in India',
-    tags: ['Partners', 'South India'],
-    excerpt: 'Global Hope India works with indigenous church-planting partners across India covering North, South, East, West and Northeast India.',
-    date: 'March 18, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-3-03.18.25.webp',
-    url: '/blog/our-partners-in-india',
-  },
-  {
-    title: 'Support Key Projects in Manipur',
-    tags: ['Leadership', 'Northeast'],
-    excerpt: 'The work in Manipur is critical to reaching Northeast India for Christ. See how your support is making a difference.',
-    date: 'March 18, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-2-03.18.25.webp',
-    url: '/blog/support-key-projects-in-manipur',
-  },
-  {
-    title: 'Medical Camp Miracles: Healing Bodies and Souls',
-    tags: ['Medical', 'Outreach'],
-    excerpt: 'Medical camps in India are opening doors for the gospel by meeting physical needs and demonstrating the love of Jesus.',
-    date: 'March 18, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-1-03.18.25.webp',
-    url: '/blog/medical-camp-miracles-healing-bodies-and-souls',
-  },
-  {
-    title: "Hope for India's Special Needs Community: The Mission of Raja's Home",
-    tags: ['Community', 'Hyderabad'],
-    excerpt: "Raja's Home is providing hope and care for India's special needs community through the love of Christ.",
-    date: 'March 4, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-04.04.25-2.webp',
-    url: '/blog/hope-for-indias-special-needs',
-  },
-  {
-    title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland, India',
-    tags: ['Community', 'Nagaland'],
-    excerpt: 'DBM in Nagaland is empowering the deaf community through education, vocational training, and the gospel.',
-    date: 'March 4, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-03.04.25.webp',
-    url: '/blog/empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india',
-  },
-  {
-    title: "Elim School: Supporting Pastor Mayon's Mission in Manipur",
-    tags: ['Education', 'Manipur'],
-    excerpt: "Pastor Mayon's Elim School in Manipur is providing education and hope to children in one of India's most challenging regions.",
-    date: 'March 4, 2025',
-    image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-03.04.25-3-1.webp',
-    url: '/blog/elim-school-supporting-pastor-mayons-mission-in-manipur',
-  },
-];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const formatDate = (d: string) => {
+  const dt = new Date(d);
+  return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+};
+
+let stories: any[] = [];
+try {
+  const raw = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "image": coalesce(heroImage.asset->url, externalImageUrl),
+      "url": "/blog/" + slug.current,
+      tags
+    }
+  `);
+  stories = raw.map((p: any) => ({
+    ...p,
+    date: p.publishDate ? formatDate(p.publishDate) : '',
+  }));
+} catch (e) {}
 ---
 
 <Layout
