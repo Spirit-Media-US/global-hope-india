@@ -38,12 +38,12 @@ const stats = [
 ];
 
 const fallbackBlogPosts = [
-  { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners', excerpt: 'Global Hope India partners with local churches and ministries across India to bring the gospel, resources, and sustainable development to communities in need.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp' },
-  { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects', excerpt: 'The state of Manipur faces unique challenges. Discover how GHI is supporting critical projects that bring hope and transformation to this region.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/b3f0daaff6ca7cddeeb3832687184e4f35abf8b0-1640x924.webp' },
-  { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare', excerpt: 'Our medical camps provide free healthcare to underserved communities while sharing the love of Christ through compassionate service.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp' },
-  { title: "Hope for India's Special Needs Community: The Mission of Raja's Home", date: 'March 4, 2025', tag: 'Community', excerpt: "Raja's Home provides a safe haven for India's special needs community, offering care, education, and the transformative love of Jesus Christ.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/8e7bcac0ab2840741a8ac4f53cb2ce6111c7f613-1640x924.webp' },
-  { title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland, India', date: 'March 4, 2025', tag: 'Community', excerpt: 'Deaf Bible Ministries in Nagaland is transforming lives by making Scripture accessible and empowering the deaf community through education and faith.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/06fe4afbcd6d31de5d4dc3ba0bb0cdd0a9e8cccb-1640x924.webp' },
-  { title: "Elim School: Supporting Pastor Mayon's Mission in Manipur", date: 'March 4, 2025', tag: 'Education', excerpt: "Pastor Mayon's Elim School provides quality education and spiritual growth to children in Manipur, shaping the next generation of leaders for India.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/313486fedbeda5e753f0216704b9454e389d893b-1640x924.webp' },
+  { title: 'Our Partners in India', slug: 'our-partners-in-india', date: 'March 18, 2025', tag: 'Partners', excerpt: 'Global Hope India partners with local churches and ministries across India to bring the gospel, resources, and sustainable development to communities in need.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp' },
+  { title: 'Support Key Projects in Manipur', slug: 'support-key-projects-in-manipur', date: 'March 18, 2025', tag: 'Projects', excerpt: 'The state of Manipur faces unique challenges. Discover how GHI is supporting critical projects that bring hope and transformation to this region.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/b3f0daaff6ca7cddeeb3832687184e4f35abf8b0-1640x924.webp' },
+  { title: 'Medical Camp Miracles: Healing Bodies and Souls', slug: 'medical-camp-miracles-healing-bodies-and-souls', date: 'March 18, 2025', tag: 'Healthcare', excerpt: 'Our medical camps provide free healthcare to underserved communities while sharing the love of Christ through compassionate service.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp' },
+  { title: "Hope for India's Special Needs Community: The Mission of Raja's Home", slug: 'hope-for-indias-special-needs', date: 'March 4, 2025', tag: 'Community', excerpt: "Raja's Home provides a safe haven for India's special needs community, offering care, education, and the transformative love of Jesus Christ.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/8e7bcac0ab2840741a8ac4f53cb2ce6111c7f613-1640x924.webp' },
+  { title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland, India', slug: 'empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india', date: 'March 4, 2025', tag: 'Community', excerpt: 'Deaf Bible Ministries in Nagaland is transforming lives by making Scripture accessible and empowering the deaf community through education and faith.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/06fe4afbcd6d31de5d4dc3ba0bb0cdd0a9e8cccb-1640x924.webp' },
+  { title: "Elim School: Supporting Pastor Mayon's Mission in Manipur", slug: 'elim-school-supporting-pastor-mayons-mission-in-manipur', date: 'March 4, 2025', tag: 'Education', excerpt: "Pastor Mayon's Elim School provides quality education and spiritual growth to children in Manipur, shaping the next generation of leaders for India.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/313486fedbeda5e753f0216704b9454e389d893b-1640x924.webp' },
 ];
 ---
 
@@ -417,7 +417,8 @@ const fallbackBlogPosts = [
                 )}
                 <h3 class="font-bold text-[26px] leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
                 {post.excerpt && <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>}
-                <div class="text-xs text-[#999]">{post.publishDate ? formatDate(post.publishDate) : ''}</div>
+                <div class="text-xs text-[#999] mb-3">{post.publishDate ? formatDate(post.publishDate) : ''}</div>
+                <span class="text-sm font-semibold text-[#2EAB5A] group-hover:underline">Read Full Story Here →</span>
               </div>
             </a>
           ))}
@@ -426,17 +427,21 @@ const fallbackBlogPosts = [
         <!-- Fallback: static blog posts before Sanity is populated -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {fallbackBlogPosts.map(post => (
-            <div class="blog-card bg-white rounded-[5px] overflow-hidden shadow-[0px_0px_10px_0px_rgba(0,0,0,0.22)] hover:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.3)] transition-shadow group">
+            <a
+              href={`/blog/${post.slug}`}
+              class="blog-card bg-white rounded-[5px] overflow-hidden shadow-[0px_0px_10px_0px_rgba(0,0,0,0.22)] hover:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.3)] transition-shadow group"
+            >
               <div class="min-h-[300px] overflow-hidden">
                 <img src={post.image} alt={post.title} class="blog-card-img w-full h-full object-cover" />
               </div>
               <div class="p-6">
                 <span class="inline-block text-xs font-semibold text-[#2EAB5A] bg-[#2EAB5A]/10 rounded-full px-3 py-0.5 mb-3">{post.tag}</span>
-                <h3 class="font-bold text-[26px] leading-snug mb-2">{post.title}</h3>
+                <h3 class="font-bold text-[26px] leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
                 <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
-                <div class="text-xs text-[#999]">{post.date}</div>
+                <div class="text-xs text-[#999] mb-3">{post.date}</div>
+                <span class="text-sm font-semibold text-[#2EAB5A] group-hover:underline">Read Full Story Here →</span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       )}
