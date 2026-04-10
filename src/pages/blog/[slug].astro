@@ -2,243 +2,34 @@
 import Layout from '../../layouts/Layout.astro';
 import { sanityClient, urlFor } from '../../lib/sanity.ts';
 
-// Static fallback posts (not in Sanity yet)
-const staticPosts: Record<string, any> = {
-  'our-partners-in-india': {
-    title: 'Our Partners in India',
-    excerpt: 'Global Hope India works with indigenous church-planting partners across India.',
-    author: 'Global Hope India',
-    publishDate: '2025-03-18',
-    tags: ['Partners', 'South India'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-3-03.18.25.webp',
-    bodyHtml: `
-      <p>In Chennai, a major city in India, a local church has found itself at a crossroads, facing significant challenges in continuing to meet for worship. The church, which has been gathering in a space located on the first floor of a home, is currently in a difficult situation due to stringent local regulations that do not allow churches to meet in residential spaces or adjacent properties. This regulation has been an ongoing issue, and recently, the church faces a new challenge.</p>
-      <h2>Challenges in Chennai Church</h2>
-      <p>For the church in Chennai, during the first service of the year, on January 1, 2025, a group of individuals entered the church service, disrupting worship. This incident, along with previous warnings from local authorities, has left the congregation in a state of uncertainty. They were given just two weeks to vacate their current location and find an alternative space for worship which now puts them in a very tight situation, needing prayers and help.</p>
-      <h2>The Urgent Need for a New House of Worship</h2>
-      <p>The church, which relies heavily on the support of its local community and believers, now faces an urgent need to secure a new space. The plan is to find land for rent or lease where they can establish a temporary shelter made of sheets until a more permanent solution can be found. However, with limited resources, they are in dire need of financial support to cover the costs of securing land and setting up a safe and suitable place for worship.</p>
-      <p>In the midst of these challenges, they are calling on the global Christian community to join them in prayer. They ask for prayer that God will provide them with a new place to gather, a place where they can worship freely without fear of interference or disruption.</p>
-      <h2>Your Prayer is Needed</h2>
-      <p>In times like these, the power of prayer and the support of the global church are vital. As the church in Chennai navigates this challenging season, Global Hope India asks for prayers that God will open doors for them to find a suitable and permanent place of worship. Additionally, the church is seeking financial support to cover the costs of securing land and establishing a temporary space.</p>
-      <p>The road ahead may be uncertain, but with the support of prayer and the generosity of believers around the world, we trust that God will provide. Please join us in praying for the church in Chennai, as well as for other congregations across India who are facing similar struggles. Pray that they will be able to worship freely and boldly, without fear or hindrance.</p>
-      <p>To support the church in Chennai, please donate here: <a href="https://givebutter.com/ChennaiMinistry" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/ChennaiMinistry</a></p>
-      <p>Let's stand together in prayer and support, trusting that God will provide for His followers in this challenging time.</p>
-      <h2>How You Can Help</h2>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>Together, we can support the vision of making education accessible to all children. Let's show them the love of Jesus by ensuring they have the opportunity to learn and grow.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-  'support-key-projects-in-manipur': {
-    title: 'Support Key Projects in Manipur',
-    excerpt: 'The work in Manipur is critical to reaching Northeast India for Christ. See how your support is making a difference.',
-    author: 'Global Hope India',
-    publishDate: '2025-03-18',
-    tags: ['Leadership', 'Northeast'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-2-03.18.25.webp',
-    bodyHtml: `
-      <p>In Chennai, a major city in India, a local church has found itself at a crossroads, facing significant challenges in continuing to meet for worship. The church, which has been gathering in a space located on the first floor of a home, is currently in a difficult situation due to stringent local regulations that do not allow churches to meet in residential spaces or adjacent properties. This regulation has been an ongoing issue, and recently, the church faces a new challenge.</p>
-      <h2>Challenges in Chennai Church</h2>
-      <p>For the church in Chennai, during the first service of the year, on January 1, 2025, a group of individuals entered the church service, disrupting worship. This incident, along with previous warnings from local authorities, has left the congregation in a state of uncertainty. They were given just two weeks to vacate their current location and find an alternative space for worship which now puts them in a very tight situation, needing prayers and help.</p>
-      <h2>The Urgent Need for a New House of Worship</h2>
-      <p>The church, which relies heavily on the support of its local community and believers, now faces an urgent need to secure a new space. The plan is to find land for rent or lease where they can establish a temporary shelter made of sheets until a more permanent solution can be found. However, with limited resources, they are in dire need of financial support to cover the costs of securing land and setting up a safe and suitable place for worship.</p>
-      <p>In the midst of these challenges, they are calling on the global Christian community to join them in prayer. They ask for prayer that God will provide them with a new place to gather, a place where they can worship freely without fear of interference or disruption.</p>
-      <h2>Your Prayer is Needed</h2>
-      <p>In times like these, the power of prayer and the support of the global church are vital. As the church in Chennai navigates this challenging season, <a href="/" class="text-[#2EAB5A] hover:underline">GlobalHopeIndia</a> ask for prayers that God will open doors for them to find a suitable and permanent place of worship. Additionally, the church is seeking financial support to cover the costs of securing land and establishing a temporary space.</p>
-      <p>The road ahead may be uncertain, but with the support of prayer and the generosity of believers around the world, we trust that God will provide. Please join us in praying for the church in Chennai, as well as for other congregations across India who are facing similar struggles. Pray that they will be able to worship freely and boldly, without fear or hindrance.</p>
-      <p>To support the church in Chennai, please donate here: <a href="https://givebutter.com/ChennaiMinistry" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/ChennaiMinistry</a></p>
-      <p>Let's stand together in prayer and support, trusting that God will provide for His followers in this challenging time.</p>
-      <h2>How You Can Help</h2>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>Together, we can support the vision of making education accessible to all children. Let's show them the love of Jesus by ensuring they have the opportunity to learn and grow.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-  'medical-camp-miracles-healing-bodies-and-souls': {
-    title: 'Medical Camp Miracles: Healing Bodies and Souls',
-    excerpt: 'Medical camps in India are opening doors for the gospel by meeting physical needs and demonstrating the love of Jesus.',
-    author: 'Global Hope India',
-    publishDate: '2025-03-18',
-    tags: ['Medical', 'Outreach'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-1-03.18.25.webp',
-    bodyHtml: `
-      <p>In Chennai, a major city in India, a local church has found itself at a crossroads, facing significant challenges in continuing to meet for worship. The church, which has been gathering in a space located on the first floor of a home, is currently in a difficult situation due to stringent local regulations that do not allow churches to meet in residential spaces or adjacent properties. This regulation has been an ongoing issue, and recently, the church faces a new challenge.</p>
-      <h2>Challenges in Chennai Church</h2>
-      <p>For the church in Chennai, during the first service of the year, on January 1, 2025, a group of individuals entered the church service, disrupting worship. This incident, along with previous warnings from local authorities, has left the congregation in a state of uncertainty. They were given just two weeks to vacate their current location and find an alternative space for worship which now puts them in a very tight situation, needing prayers and help.</p>
-      <h2>The Urgent Need for a New House of Worship</h2>
-      <p>The church, which relies heavily on the support of its local community and believers, now faces an urgent need to secure a new space. The plan is to find land for rent or lease where they can establish a temporary shelter made of sheets until a more permanent solution can be found. However, with limited resources, they are in dire need of financial support to cover the costs of securing land and setting up a safe and suitable place for worship.</p>
-      <p>In the midst of these challenges, they are calling on the global Christian community to join them in prayer. They ask for prayer that God will provide them with a new place to gather, a place where they can worship freely without fear of interference or disruption.</p>
-      <h2>Your Prayer is Needed</h2>
-      <p>In times like these, the power of prayer and the support of the global church are vital. As the church in Chennai navigates this challenging season, <a href="/" class="text-[#2EAB5A] hover:underline">GlobalHopeIndia</a> ask for prayers that God will open doors for them to find a suitable and permanent place of worship. Additionally, the church is seeking financial support to cover the costs of securing land and establishing a temporary space.</p>
-      <p>The road ahead may be uncertain, but with the support of prayer and the generosity of believers around the world, we trust that God will provide. Please join us in praying for the church in Chennai, as well as for other congregations across India who are facing similar struggles. Pray that they will be able to worship freely and boldly, without fear or hindrance.</p>
-      <p>To support the church in Chennai, please donate here: <a href="https://givebutter.com/ChennaiMinistry" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/ChennaiMinistry</a></p>
-      <p>Let's stand together in prayer and support, trusting that God will provide for His followers in this challenging time.</p>
-      <h2>How You Can Help</h2>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>Together, we can support the vision of making education accessible to all children. Let's show them the love of Jesus by ensuring they have the opportunity to learn and grow.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-  'hope-for-indias-special-needs': {
-    title: "Hope for India's Special Needs Community: The Mission of Raja's Home",
-    excerpt: "Raja's Home is providing hope and care for India's special needs community through the love of Christ.",
-    author: 'Global Hope India',
-    publishDate: '2025-03-04',
-    tags: ['Community', 'Hyderabad'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-04.04.25-2.webp',
-    bodyHtml: `
-      <p>In India, individuals with special needs often face mistreatment, neglect, and marginalization due to societal misconceptions about disabilities. This heartbreaking reality is exemplified in stories like that of a young boy, his body bound as though by a rope — his humanity disregarded simply because of his condition. Pastor Raja, a compassionate leader with a Master's degree in Social Work, is dedicated to changing this narrative by extending love, care, and practical support to those who are most vulnerable.</p>
-      <h2>Raja's Home: A Sanctuary for the Forgotten</h2>
-      <p>Through his partnership with Global Hope India, Pastor Raja has established Raja's Home, a safe haven for individuals who have been cast aside due to disabilities. His ministry provides crucial assistance to orphans, individuals with disabilities, and members of the leper community — offering them dignity, education, and medical care.</p>
-      <p>Among his many impactful initiatives, Pastor Raja has been actively involved in:</p>
-      <ul><li>Supporting a leper colony and providing medical missions for those with disabilities.</li><li>Offering education and shelter to orphans and impoverished children.</li><li>Establishing a special school for mentally challenged individuals.</li><li>Spreading the Gospel and sharing God's love with the marginalized.</li></ul>
-      <p>Despite the progress made, there is still much to be done. The need for intervention and support is urgent, and your generosity can make a difference in transforming lives.</p>
-      <h2>Urgent Funding Needs</h2>
-      <p>Pastor Raja's mission continues to expand, but financial constraints limit the scope of his efforts. Current funding needs include:</p>
-      <ul><li>Church building construction in Hyderabad and tribal villages to support spiritual growth.</li><li>Bible distribution to spread the message of hope.</li><li>Borewells for villages affected by severe drought conditions.</li><li>Schools for orphans and underprivileged children to break the cycle of poverty.</li><li>Special education facilities for mentally challenged individuals who need a nurturing environment.</li><li>Sustainable agricultural development and livelihood programs to create long-term self-sufficiency for affected communities.</li></ul>
-      <h2>Join the Movement: Be a Voice for the Voiceless</h2>
-      <p>Pastor Raja is profoundly grateful for the prayers and support that have already fueled this mission. However, the journey is far from over. Every donation, prayer, and act of kindness brings hope to those who have been neglected and mistreated. Together, we can rewrite their stories, providing them with love, dignity, and a future filled with possibilities.</p>
-      <p>To learn more about Pastor Raja's work and contribute to this life-changing mission, please visit <a href="https://givebutter.com/RajaInHyderabad" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/RajaInHyderabad</a>. Your support can be the light that guides these individuals out of darkness and into a life of hope and opportunity.</p>
-      <h2>How You Can Help</h2>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>Together, we can support the vision of making education accessible to all children. Let's show them the love of Jesus by ensuring they have the opportunity to learn and grow.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-  'empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india': {
-    title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland, India',
-    excerpt: 'DBM in Nagaland is empowering the deaf community through education, vocational training, and the gospel.',
-    author: 'Global Hope India',
-    publishDate: '2025-03-04',
-    tags: ['Community', 'Nagaland'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-03.04.25.webp',
-    bodyHtml: `
-      <p>Since its establishment in 1987, the Deaf Biblical Ministry (DBM) in Nagaland, India, has been a beacon of hope for the Deaf Community, providing free education and accommodation to children in need. Under the leadership of Rev. Yanger Walling, Deaf Church Pastor, and his wife, Sister Amonglao Ao, who serves as the Administrator, DBM has been instrumental in transforming lives. Their unwavering commitment has earned them three President of India's National Awards and numerous other recognitions, underscoring the immense impact they have made on the Deaf community and beyond.</p>
-      <h2>A Home for the Deaf</h2>
-      <p>Currently, DBM houses 73 Deaf children in its school, while over 200 Deaf church members receive spiritual and community support. With the capacity to welcome more students, DBM faces financial challenges in meeting daily expenses. To sustain this mission, each child requires $25 per month, an amount that covers food, education, and healthcare.</p>
-      <h2>A Journey of Faith and Progress for the Deaf</h2>
-      <p>The past year, 2024, has been marked by tremendous progress and divine blessings for DBM. With a renewed commitment to its mission, fueled by the support of the community and divine guidance, the ministry has taken major steps forward, including:</p>
-      <ul><li><strong>Launching the First Translated Video Bible</strong> in Naga Sign Language, beginning with the book of Jonah, with ongoing work on Ephesians.</li><li><strong>Publishing a Naga Sign Language Textbook</strong>, officially approved by the government for training teachers, expanding educational opportunities for the Deaf community.</li><li><strong>Training Six New Missionaries</strong>, including three from the U.S., two from Sikkim, and one from Manipur, who will soon serve the Deaf community globally.</li><li><strong>Expanding Gospel Outreach</strong>, bringing people from Hindu, Muslim, Buddhist, and Christian backgrounds into a transformative relationship with Christ.</li></ul>
-      <p>Despite these achievements, DBM faces challenges due to new government restrictions on foreign visitors in Nagaland, Manipur, and Mizoram. These regulations create obstacles for those seeking training and mission work within India. DBM seeks prayers and support to overcome these barriers, ensuring the continuation of its life-changing ministry.</p>
-      <h2>Call to Action: How You Can Help</h2>
-      <p>To sustain and expand DBM's mission, we need your prayers and financial support. Current funding needs include:</p>
-      <ul><li><strong>$25 per month for 19 students</strong> to provide food, education, and healthcare.</li><li><strong>Support for ongoing Bible translation and teacher training</strong> to enhance accessibility for the Deaf community.</li><li><strong>Assistance in overcoming government restrictions</strong> that hinder missionary work in Nagaland and surrounding states.</li></ul>
-      <p>As DBM continues to serve as a "gateway to Heaven," we invite you to be a part of this transformative journey. Your support can help ensure that Deaf individuals receive the education, spiritual guidance, and care they deserve.</p>
-      <p>To learn more about DBM and contribute to this mission, please visit <a href="https://givebutter.com/DBMinDimapur" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/DBMinDimapur</a>. Together, we can break barriers and create opportunities for Deaf individuals to thrive in both education and faith.</p>
-      <h2>How You Can Help</h2>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-  'elim-school-supporting-pastor-mayons-mission-in-manipur': {
-    title: "Elim School: Supporting Pastor Mayon's Mission in Manipur",
-    excerpt: "Pastor Mayon's Elim School in Manipur is providing education and hope to children in one of India's most challenging regions.",
-    author: 'Global Hope India',
-    publishDate: '2025-03-04',
-    tags: ['Education', 'Manipur'],
-    heroImageUrl: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-03.04.25-3-1.webp',
-    bodyHtml: `
-      <h2>Providing Shelter and Education: Supporting Pastor Mayon's Mission in Manipur</h2>
-      <p>In the heart of Manipur, India, Pastor Mayonsing Moinao is transforming lives through his dedication to education and evangelism at Elim School. With a background as a teacher, school head, and missionary, Pastor Mayon has combined his passion for faith and learning to make a lasting impact on his community. Recognizing the lack of quality education in the village, he and his church established Elim School — a beacon of hope for children who otherwise would have limited opportunities for learning and growth.</p>
-      <h2>A Testament to Faith and Education at Elim School</h2>
-      <p>Elim School was built in response to the pressing need for quality education in the village. However, education is just one part of the mission; ensuring the well-being of the students is equally crucial. The school has provided more than just learning opportunities — it has also addressed basic needs such as clean water. Previously, villagers had to walk to a nearby spring to fetch water, but through the efforts of Pastor Mayon and his team, a temporary plastic water tank was installed, making clean water accessible to students and their families.</p>
-      <p>Yet, much more is needed to create a sustainable learning environment. While the school fees assistance has been a lifeline for many families, additional support is required to give students a safe and suitable place to study.</p>
-      <h2>The Call for Support: Urgent Needs of Elim School</h2>
-      <p>Pastor Mayon is reaching out to kind-hearted individuals who can help ensure that Elim School continues to be a place of learning and transformation. The mission's current funding needs include:</p>
-      <ul><li><strong>Bibles for Distribution:</strong> Sharing the Gospel remains a cornerstone of Pastor Mayon's work.</li><li><strong>30 Benches and Desks for Students:</strong> Proper furniture is essential for a conducive learning environment.</li><li><strong>Power Supply for 12 Classrooms:</strong> Electricity will enable students to study in a well-lit environment, enhancing their education experience.</li><li><strong>Sanitary Toilets for the School:</strong> Basic sanitation is a critical necessity for the health and well-being of students.</li><li><strong>Student Fee Sponsorships:</strong> Many students come from underprivileged backgrounds and need financial assistance to continue their education.</li><li><strong>Rain Harvesting Water Tanks or Bore Well Drilling:</strong> A sustainable water source is essential for the community's long-term well-being.</li></ul>
-      <h2>A Mission That Goes Beyond Borders</h2>
-      <p>Beyond his work in Manipur, Pastor Mayon continues to spread the Gospel through Bible preaching, evangelical youth camps, baptism, and church planting. His latest efforts in Myanmar resulted in 31 individuals receiving water baptism — a testament to his unwavering faith and commitment to sharing God's love.</p>
-      <h2>How You Can Help</h2>
-      <p>The mission of Elim School and Pastor Mayon's evangelization efforts rely on the generosity of people like you. Every contribution — whether through prayers, financial donations, or spreading the word — helps build a brighter future for these children and their community.</p>
-      <p>To learn more about Pastor Mayon's work and how you can support his mission, please visit <a href="https://givebutter.com/MayoninManipur" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">https://givebutter.com/MayoninManipur</a>. Together, we can provide not only education but also a place of shelter, faith, and hope for the students of Elim School.</p>
-      <p><strong>Pray for India:</strong> Join us in praying for the children and the mission.</p>
-      <p><strong>Give and Go:</strong> Consider supporting financially or volunteering to make a direct impact.</p>
-      <p><strong>Share the Vision:</strong> Spread the word among your friends, family, and church. Your advocacy can bring more support to this cause.</p>
-      <p>You too can create an impact in the lives of these children and elders by sending your donation <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] hover:underline font-semibold">here</a>. If you'd prefer to give by check, please make it payable to and mail it to:</p>
-      <p>Global Hope India<br/>8045 Arco Corporate Drive STE 130<br/>Raleigh, NC 27617</p>
-      <p>Thank you for your continued prayers and support. We couldn't do this without you.</p>
-    `,
-  },
-};
+// All blog posts now live in Sanity CMS — no static fallbacks needed
 
 export async function getStaticPaths() {
-  let sanityPaths: any[] = [];
-  try {
-    const posts = await sanityClient.fetch(`*[_type == "blogPost"] { "slug": slug.current }`);
-    sanityPaths = posts.map((p: any) => ({ params: { slug: p.slug } }));
-  } catch (e) {}
-  const staticSlugs = [
-    'our-partners-in-india',
-    'support-key-projects-in-manipur',
-    'medical-camp-miracles-healing-bodies-and-souls',
-    'hope-for-indias-special-needs',
-    'empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india',
-    'elim-school-supporting-pastor-mayons-mission-in-manipur',
-  ];
-  const staticPaths = staticSlugs.map(s => ({ params: { slug: s } }));
-  return [...sanityPaths, ...staticPaths];
+  const posts = await sanityClient.fetch(`*[_type == "blogPost"] { "slug": slug.current }`);
+  return posts.map((p: any) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
 
-let post: any = null;
+const post = await sanityClient.fetch(
+  `*[_type == "blogPost" && slug.current == $slug][0] {
+    title, excerpt, author, publishDate, tags, body, seoTitle, seoDescription,
+    heroImage, "heroImageUrl": heroImage.asset->url
+  }`,
+  { slug }
+);
+
+if (!post) return Astro.redirect('/impact');
+
 let related: any[] = [];
-let isStatic = false;
-try {
-  post = await sanityClient.fetch(
-    `*[_type == "blogPost" && slug.current == $slug][0]`,
-    { slug }
+if (post.tags?.length) {
+  related = await sanityClient.fetch(
+    `*[_type == "blogPost" && slug.current != $slug && count((tags)[@ in $tags]) > 0] | order(publishDate desc) [0..2] {
+      title, "slug": slug.current, excerpt, publishDate, "imageUrl": heroImage.asset->url, tags
+    }`,
+    { slug, tags: post.tags }
   );
-  if (post?.tags?.length) {
-    related = await sanityClient.fetch(
-      `*[_type == "blogPost" && slug.current != $slug && count((tags)[@ in $tags]) > 0] | order(publishDate desc) [0..2] {
-        title, "slug": slug.current, excerpt, publishDate, "imageUrl": heroImage.asset->url, tags
-      }`,
-      { slug, tags: post.tags }
-    );
-  }
-} catch (e) {}
-
-// Use static post if available (always wins over Sanity for known static slugs)
-if (staticPosts[slug]) {
-  isStatic = true;
-  const sp = staticPosts[slug];
-  post = {
-    title: sp.title,
-    excerpt: sp.excerpt,
-    author: sp.author,
-    publishDate: sp.publishDate,
-    tags: sp.tags,
-    heroImage: null,
-    body: null,
-    seoTitle: null,
-    seoDescription: null,
-  };
-} else if (!post) {
-  // No Sanity post and no static post
 }
-
-if (!post) return Astro.redirect('/blog');
 
 function renderPortableText(blocks: any[]): string {
   if (!Array.isArray(blocks)) return '';
@@ -268,14 +59,12 @@ const formatDate = (d: string) => {
   return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
 };
 
-const heroImage = isStatic
-  ? staticPosts[slug].heroImageUrl
-  : post.heroImage
-    ? urlFor(post.heroImage).width(1200).format('webp').url()
-    : null;
+const heroImage = post.heroImageUrl
+  ? `${post.heroImageUrl}?w=1200&auto=format`
+  : null;
 const author = post.author || 'Global Hope India';
 const tags = post.tags || [];
-const bodyHtml = isStatic ? staticPosts[slug].bodyHtml : renderPortableText(post.body);
+const bodyHtml = renderPortableText(post.body);
 const publishDate = post.publishDate ? formatDate(post.publishDate) : '';
 const postUrl = `https://globalhopeindia.org/blog/${slug}`;
 const encodedUrl = encodeURIComponent(postUrl);
@@ -412,24 +201,25 @@ const encodedTitle = encodeURIComponent(post.title);
     </div>
   </section>
 
-  <!-- ── RECENT POSTS ──────────────────────────────────────── -->
+  <!-- ── RELATED POSTS (from Sanity) ─────────────────────────── -->
+  {related.length > 0 && (
   <section class="bg-[#f5f5f0] py-12 lg:py-16 px-6 lg:px-8">
     <div class="mx-auto max-w-6xl">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-2-03.18.25.webp', url: '/blog/support-key-projects-in-manipur' },
-          { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-blog-1-03.18.25.webp', url: '/blog/medical-camp-miracles-healing-bodies-and-souls' },
-          { title: "Hope for India's Special Needs Community: The Mission of Raja's Home", date: 'March 4, 2025', image: 'https://assets.spiritmediapublishing.com/images/ghi-ghi-04.04.25-2.webp', url: '/blog/hope-for-indias-special-needs' },
-        ].map(card => (
-          <a href={card.url} class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+        {related.map(card => (
+          <a href={`/blog/${card.slug}`} class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
             <div class="overflow-hidden">
-              <img src={card.image} alt={card.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+              {card.imageUrl ? (
+                <img src={`${card.imageUrl}?w=600&auto=format`} alt={card.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+              ) : (
+                <div class="w-full h-[180px] bg-[#e5e5e0] flex items-center justify-center"><span class="text-[#999]">No image</span></div>
+              )}
             </div>
             <div class="p-4 flex flex-col flex-1">
-              <p class="blog-card-title" style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">{card.title}</p>
+              <p style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">{card.title}</p>
               <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
                 <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
-                <span>{card.date}</span>
+                <span>{card.publishDate ? formatDate(card.publishDate) : ''}</span>
               </div>
               <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
                 Read Full Story Here
@@ -441,6 +231,7 @@ const encodedTitle = encodeURIComponent(post.title);
       </div>
     </div>
   </section>
+  )}
 
 </Layout>
 
