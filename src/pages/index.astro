@@ -11,7 +11,7 @@ try {
       "slug": slug.current,
       excerpt,
       publishDate,
-      "imageUrl": heroImage.asset->url,
+      "imageUrl": coalesce(heroImage.asset->url, externalImageUrl),
       tags
     }
   `);
@@ -38,12 +38,12 @@ const stats = [
 ];
 
 const fallbackBlogPosts = [
-  { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners', image: 'https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp' },
-  { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects', image: 'https://cdn.sanity.io/images/r33r2z1j/production/b3f0daaff6ca7cddeeb3832687184e4f35abf8b0-1640x924.webp' },
-  { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp' },
-  { title: "Hope for India's Special Needs Community", date: 'March 4, 2025', tag: 'Community', image: 'https://cdn.sanity.io/images/r33r2z1j/production/8e7bcac0ab2840741a8ac4f53cb2ce6111c7f613-1640x924.webp' },
-  { title: 'Empowering the Deaf Community in Nagaland', date: 'March 4, 2025', tag: 'Community', image: 'https://cdn.sanity.io/images/r33r2z1j/production/06fe4afbcd6d31de5d4dc3ba0bb0cdd0a9e8cccb-1640x924.webp' },
-  { title: "Elim School: Supporting Pastor Mayon's Mission", date: 'March 4, 2025', tag: 'Education', image: 'https://cdn.sanity.io/images/r33r2z1j/production/313486fedbeda5e753f0216704b9454e389d893b-1640x924.webp' },
+  { title: 'Our Partners in India', slug: 'our-partners-in-india', date: 'March 18, 2025', tag: 'Partners', excerpt: 'Global Hope India partners with local churches and ministries across India to bring the gospel, resources, and sustainable development to communities in need.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp' },
+  { title: 'Support Key Projects in Manipur', slug: 'support-key-projects-in-manipur', date: 'March 18, 2025', tag: 'Projects', excerpt: 'The state of Manipur faces unique challenges. Discover how GHI is supporting critical projects that bring hope and transformation to this region.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/b3f0daaff6ca7cddeeb3832687184e4f35abf8b0-1640x924.webp' },
+  { title: 'Medical Camp Miracles: Healing Bodies and Souls', slug: 'medical-camp-miracles-healing-bodies-and-souls', date: 'March 18, 2025', tag: 'Healthcare', excerpt: 'Our medical camps provide free healthcare to underserved communities while sharing the love of Christ through compassionate service.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp' },
+  { title: "Hope for India's Special Needs Community: The Mission of Raja's Home", slug: 'hope-for-indias-special-needs', date: 'March 4, 2025', tag: 'Community', excerpt: "Raja's Home provides a safe haven for India's special needs community, offering care, education, and the transformative love of Jesus Christ.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/8e7bcac0ab2840741a8ac4f53cb2ce6111c7f613-1640x924.webp' },
+  { title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland, India', slug: 'empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india', date: 'March 4, 2025', tag: 'Community', excerpt: 'Deaf Bible Ministries in Nagaland is transforming lives by making Scripture accessible and empowering the deaf community through education and faith.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/06fe4afbcd6d31de5d4dc3ba0bb0cdd0a9e8cccb-1640x924.webp' },
+  { title: "Elim School: Supporting Pastor Mayon's Mission in Manipur", slug: 'elim-school-supporting-pastor-mayons-mission-in-manipur', date: 'March 4, 2025', tag: 'Education', excerpt: "Pastor Mayon's Elim School provides quality education and spiritual growth to children in Manipur, shaping the next generation of leaders for India.", image: 'https://cdn.sanity.io/images/r33r2z1j/production/313486fedbeda5e753f0216704b9454e389d893b-1640x924.webp' },
 ];
 ---
 
@@ -67,21 +67,22 @@ const fallbackBlogPosts = [
 
   <!-- ── HERO (Video Background + Flip Text) ────────────── -->
   <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 bg-[#1D1C1C]"></div>
+    <div class="absolute inset-0 bg-[#1D1C1C]" style="background-image:url('https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp');background-size:cover;background-position:center 30%;"></div>
     <video
       autoplay
       muted
       loop
       playsinline
-      poster="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
+      preload="auto"
+      poster="https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp"
       class="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="https://assets.spiritmediapublishing.com/video/GHI-Site-Video-v3.mp4" type="video/mp4" />
+      <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 container mx-auto px-6">
-      <div class="hero-flip-container" style="perspective: 600px;">
-        <h1 class="hero-flip-text" style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.1;">
+      <div class="hero-flip-container">
+        <h1 class="hero-flip-text">
           <!-- Phase A: "Jesus for India" -->
           <span class="flip-phrase flip-phrase-a active">
             <span class="txt-jesus">Jesus</span>
@@ -99,10 +100,92 @@ const fallbackBlogPosts = [
     </div>
   </section>
 
+  <!-- ── TAGLINE ─────────────────────────────────────────── -->
+  <section class="relative bg-[#F8F5EF] overflow-hidden -mt-28 md:-mt-20 lg:-mt-24 z-10">
+    <div class="relative z-10 text-center pt-10 lg:pt-14 pb-6 px-8 lg:px-16">
+      <h2 class="text-[#1D1C1C] font-bold mb-0 max-w-5xl mx-auto" style="font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1.3;">Sharing Jesus by Sending People, Funding, and Resources</h2>
+    </div>
+    <!-- Pink banner with mission text -->
+    <div class="relative z-10 bg-[#F8C8DC] py-5 px-6">
+      <p class="text-[#1D1C1C] text-sm md:text-base leading-relaxed text-center max-w-4xl mx-auto mb-0">
+        Global Hope India engages the church worldwide in order to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God in India
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CREAM GAP + GREEN BOX WRAPPER ───────────────────── -->
+  <section class="tagline-section relative bg-[#F8F5EF] overflow-hidden z-10">
+    <!-- Decorative dashed diagonal lines — both sides -->
+    <div class="tagline-dashed-line tagline-dashed-top-left"></div>
+    <div class="tagline-dashed-line tagline-dashed-bottom-left"></div>
+    <div class="tagline-dashed-line tagline-dashed-top-right"></div>
+    <div class="tagline-dashed-line tagline-dashed-bottom-right"></div>
+    <!-- Cream gap -->
+    <div class="h-10 lg:h-14"></div>
+    <!-- Green 25 Years box -->
+    <div class="relative z-10 mx-4 lg:mx-auto lg:max-w-6xl bg-[#2EAB5A] py-10 lg:py-12 px-6 rounded-[10px] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.5)]">
+      <div class="container mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div class="text-center md:text-left">
+            <h2 class="text-[#1D1C1C] font-bold">Celebrating Over <span class="text-[#FEC415]">25 Years</span> in India</h2>
+          </div>
+          <div class="shrink-0">
+            <img
+              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
+              alt="Celebrating 25 Years in India"
+              width="200"
+              height="200"
+              class="w-48 h-48 md:w-52 md:h-52"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom cream spacing -->
+    <div class="h-10 lg:h-14"></div>
+  </section>
+
   <style>
+    .tagline-dashed-line {
+      position: absolute;
+      width: 300px;
+      height: 0;
+      border-top: 3px dashed rgba(180, 160, 155, 0.5);
+      transform-origin: left center;
+      z-index: 5;
+    }
+    .tagline-dashed-top-right {
+      top: 15%;
+      right: -60px;
+      transform: rotate(-45deg);
+    }
+    .tagline-dashed-bottom-right {
+      bottom: 15%;
+      right: -60px;
+      transform: rotate(-45deg);
+    }
+    .tagline-dashed-top-left {
+      top: 15%;
+      left: -60px;
+      transform: rotate(45deg);
+    }
+    .tagline-dashed-bottom-left {
+      bottom: 15%;
+      left: -60px;
+      transform: rotate(45deg);
+    }
+  </style>
+
+  <style>
+    .hero-flip-container {
+      perspective: 600px;
+    }
     .hero-flip-text {
       position: relative;
       display: block;
+      font-size: clamp(2.8rem, 8vw, 100px);
+      font-weight: 700;
+      line-height: 1.1;
     }
     .flip-phrase {
       display: inline-flex;
@@ -110,18 +193,18 @@ const fallbackBlogPosts = [
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotateX(90deg);
+      transform: translate(-50%, -50%) rotateY(180deg);
       opacity: 0;
       transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
       backface-visibility: hidden;
       white-space: nowrap;
     }
     .flip-phrase.active {
-      transform: translate(-50%, -50%) rotateX(0deg);
+      transform: translate(-50%, -50%) rotateY(0deg);
       opacity: 1;
     }
     .flip-phrase.exit {
-      transform: translate(-50%, -50%) rotateX(-90deg);
+      transform: translate(-50%, -50%) rotateY(-180deg);
       opacity: 0;
     }
     /* Reserve vertical space for the text */
@@ -132,9 +215,12 @@ const fallbackBlogPosts = [
       font-size: inherit;
       line-height: 1.1;
     }
-    .txt-india { color: #2EAB5A; }
-    .txt-jesus { color: #FF4081; }
-    .txt-for   { color: #ffffff; }
+    .txt-india { color: #77dd77; -webkit-text-stroke: 1px black; text-shadow: -1px 3px 4px rgba(0,0,0,0.27); }
+    .txt-jesus { color: #f8c8Dc; -webkit-text-stroke: 1px black; text-shadow: -1px 3px 4px rgba(0,0,0,0.27); }
+    .txt-for   { color: #ffffff; -webkit-text-stroke: 1px black; font-size: 70px; margin: 0 20px; }
+    @media (max-width: 480px) {
+      .txt-for { font-size: 25px; margin: 0 8px; }
+    }
   </style>
 
   <script>
@@ -152,119 +238,222 @@ const fallbackBlogPosts = [
     setTimeout(flipHeroText, 3000);
   </script>
 
-  <!-- ── TAGLINE ─────────────────────────────────────────── -->
-  <section class="bg-white py-12 lg:py-16 px-6">
-    <div class="container mx-auto text-center">
-      <h2 class="text-[#1D1C1C] font-bold mb-4">Sharing Jesus by Sending People, Funding, and Resources</h2>
-      <p class="text-[#666] text-lg max-w-3xl mx-auto leading-relaxed">
-        Global Hope India engages the church worldwide in order to empower the church in India with needed resources — to make Christ known and extend the Kingdom of God in India.
-      </p>
-    </div>
-  </section>
-
-  <!-- ── 25 YEARS (green box) ────────────────────────────── -->
-  <section class="bg-[#2EAB5A] py-12 lg:py-16 px-6">
-    <div class="container mx-auto">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-        <div class="text-center md:text-left">
-          <h2 class="text-white font-bold">Celebrating Over <span class="text-[#FEC415]">25 Years</span> in India</h2>
-        </div>
-        <div class="shrink-0">
-          <img
-            src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
-            alt="Celebrating 25 Years in India"
-            width="200"
-            height="200"
-            class="w-48 h-48 md:w-52 md:h-52"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ── IMPACT STATS (3x3 grid) ─────────────────────────── -->
-  <section class="section bg-white">
+  <section id="impact-stats" class="section bg-[#F8F9F3]">
     <div class="container mx-auto">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-        {stats.map(stat => (
-          <div class="flex items-center gap-4">
-            <img src={stat.icon} alt={stat.label} class="w-16 h-16 shrink-0" />
-            <div>
-              <div class="text-2xl md:text-3xl font-bold text-[#1D1C1C] leading-tight">{stat.value}</div>
-              <div class="text-[#666] text-sm font-medium">{stat.label}</div>
+      <!-- Desktop: horizontal grid -->
+      <div class="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {stats.map(stat => {
+          const raw = stat.value.replace(/[$,]/g, '');
+          const num = parseInt(raw, 10);
+          const prefix = stat.value.startsWith('$') ? '$' : '';
+          return (
+            <div class="flex items-center gap-4">
+              <img src={stat.icon} alt={stat.label} class="w-16 h-16 shrink-0" />
+              <div>
+                <div
+                  class="count-up text-[22px] md:text-[35px] font-bold text-[#1D1C1C] leading-tight"
+                  data-target={num}
+                  data-prefix={prefix}
+                >0</div>
+                <div class="text-[#666] text-sm font-medium">{stat.label}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
+      </div>
+      <!-- Mobile: vertical centered cards with dashed path -->
+      <div class="sm:hidden relative">
+        <!-- Decorative dashed path -->
+        <div class="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 border-l-2 border-dashed border-stone-300 z-0"></div>
+        <div class="relative z-10 flex flex-col items-center gap-6">
+          {stats.map(stat => {
+            const raw = stat.value.replace(/[$,]/g, '');
+            const num = parseInt(raw, 10);
+            const prefix = stat.value.startsWith('$') ? '$' : '';
+            return (
+              <div class="flex flex-col items-center text-center">
+                <div class="relative w-28 h-28 flex items-center justify-center mb-3">
+                  <div class="absolute inset-0 bg-[#2EAB5A]/10 rounded-[40%_60%_50%_50%/60%_40%_60%_40%]"></div>
+                  <img src={stat.icon} alt={stat.label} class="relative w-20 h-20" />
+                </div>
+                <div
+                  class="count-up text-2xl font-bold text-[#1D1C1C] leading-tight"
+                  data-target={num}
+                  data-prefix={prefix}
+                >0</div>
+                <div class="text-[#666] text-sm font-medium">{stat.label}</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── INDIA MAP (full-width visual break) ────────────── -->
-  <section class="relative h-[40vh] lg:h-[50vh] flex items-center justify-center overflow-hidden bg-[#1D1C1C]">
-    <div class="absolute inset-0 flex items-center justify-center text-[12rem] md:text-[16rem] opacity-10 select-none">🇮🇳</div>
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1D1C1C]/60"></div>
-    <div class="relative z-10 text-center">
-      <span class="inline-block bg-[#2EAB5A] text-white font-bold text-2xl md:text-4xl px-8 py-3 rounded-sm">Impacting India</span>
-      <p class="text-white/70 mt-4 text-lg">1.4 billion people. One mission.</p>
+  <script>
+    function formatNumber(n: number): string {
+      return n.toLocaleString('en-US');
+    }
+
+    function animateCountUp(el: HTMLElement) {
+      const target = parseInt(el.dataset.target || '0', 10);
+      const prefix = el.dataset.prefix || '';
+      const duration = 30000;
+      const startTime = performance.now();
+
+      function easeOutQuart(t: number): number {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function tick(now: number) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(easeOutQuart(progress) * target);
+        el.textContent = prefix + formatNumber(current);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = prefix + formatNumber(target);
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.count-up');
+            counters.forEach((el) => animateCountUp(el as HTMLElement));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const statsSection = document.getElementById('impact-stats');
+    if (statsSection) observer.observe(statsSection);
+
+    document.addEventListener('astro:page-load', () => {
+      const s = document.getElementById('impact-stats');
+      if (s) observer.observe(s);
+    });
+  </script>
+
+  <!-- ── IMPACTING INDIA (video visual break) ──────────── -->
+  <section class="relative overflow-hidden" style="min-height: clamp(55vh, 70vh, 70vh);">
+    <div class="absolute inset-0 bg-[#F8F9F3]"></div>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="https://assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black/[0.03]"></div>
+    <div class="absolute -top-5 left-8 md:left-36 z-10">
+      <span class="inline-block bg-[#2EAB5A] text-white font-bold text-2xl md:text-[50px] p-5 rounded-sm shadow-lg">Impacting</span>
     </div>
   </section>
 
   <!-- ── GHI MAGAZINE / BLOG ──────────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
+  <section class="section bg-[#F8F9F3]">
     <div class="container mx-auto">
-      <div class="text-center mb-12">
+      <div class="text-center mb-8">
         <span class="eyebrow">Stories from the Field</span>
         <h2>GHI Magazine</h2>
       </div>
 
+      <!-- Featured circular thumbnails -->
+      <div class="flex justify-center gap-4 mb-6">
+        {(blogPosts.length > 0 ? blogPosts.slice(0, 3) : fallbackBlogPosts.slice(0, 3)).map((post: any) => (
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full border-3 border-[#2EAB5A] overflow-hidden shadow-sm">
+            <img
+              src={`${post.imageUrl || post.image}?w=200&auto=format`}
+              alt={post.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Tag filter chips -->
+      <div class="flex justify-center gap-2 flex-wrap mb-10">
+        {['Partners', 'Projects', 'Healthcare', 'Community', 'Education'].map(tag => (
+          <span class="inline-block bg-[#2EAB5A] text-white text-xs font-semibold rounded-full px-4 py-1.5">{tag}</span>
+        ))}
+      </div>
+
       {blogPosts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map(post => (
             <a
               href={`/blog/${post.slug}`}
-              class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
+              class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
             >
-              <div class="h-52 overflow-hidden bg-[#1D1C1C]">
+              <div class="overflow-hidden">
                 {post.imageUrl ? (
                   <img
                     src={`${post.imageUrl}?w=600&auto=format`}
                     alt={post.title}
-                    class="blog-card-img w-full h-full object-cover"
+                    class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <div class="w-full h-full flex items-center justify-center">
+                  <div class="w-full h-[180px] bg-[#1D1C1C] flex items-center justify-center">
                     <span class="text-white/30 text-4xl">🌏</span>
                   </div>
                 )}
               </div>
-              <div class="p-6">
-                <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
-                <div class="text-sm text-[#999] mb-3">{post.publishDate ? formatDate(post.publishDate) : ''}</div>
-                <span class="text-[#2EAB5A] font-semibold text-sm group-hover:underline">Read Full Story Here</span>
+              <div class="p-4 flex flex-col flex-1">
+                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                  <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                  <span>{post.publishDate ? formatDate(post.publishDate) : ''}</span>
+                </div>
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                  Read Full Story Here
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+                </div>
               </div>
             </a>
           ))}
         </div>
       ) : (
         <!-- Fallback: static blog posts before Sanity is populated -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {fallbackBlogPosts.map(post => (
-            <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm">
-              <div class="h-52 overflow-hidden">
-                <img src={post.image} alt={post.title} class="w-full h-full object-cover" />
+            <a
+              href={`/blog/${post.slug}`}
+              class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
+            >
+              <div class="overflow-hidden">
+                <img src={post.image} alt={post.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
               </div>
-              <div class="p-6">
-                <h3 class="font-bold text-lg leading-snug mb-2">{post.title}</h3>
-                <div class="text-sm text-[#999] mb-3">{post.date}</div>
-                <span class="text-[#2EAB5A] font-semibold text-sm">Read Full Story Here</span>
+              <div class="p-4 flex flex-col flex-1">
+                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                  <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                  <span>{post.date}</span>
+                </div>
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                  Read Full Story Here
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+                </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       )}
 
       <div class="text-center mt-12">
-        <a href="/blog" class="btn" style="background-color: #1D1C1C; color: #fff; border-color: #1D1C1C;">See more blogs</a>
+        <a href="/impact" class="btn btn-dark">See more blogs</a>
       </div>
     </div>
   </section>

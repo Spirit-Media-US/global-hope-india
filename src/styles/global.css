@@ -73,7 +73,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background-color: #FFFFFF; }
 
 body {
   font-family: var(--font-sans);
@@ -126,6 +126,42 @@ p { margin-bottom: var(--space-sm); }
   background-color: var(--color-white);
   color: var(--color-dark);
 }
+.btn-dark {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border-color: var(--color-dark);
+}
+.btn-dark:hover {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+}
+.btn-dark-gold {
+  background-color: var(--color-dark);
+  color: var(--color-accent);
+  border-color: var(--color-dark);
+}
+.btn-dark-gold:hover {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+.btn-green {
+  background-color: var(--color-green);
+  color: var(--color-white);
+  border-color: var(--color-green);
+}
+.btn-green:hover {
+  background-color: #1e8a45;
+  border-color: #1e8a45;
+}
+.btn-outline-dark {
+  background-color: transparent;
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
+.btn-outline-dark:hover {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
 
 /* ─── Layout utilities ────────────────────────────────────────── */
 .section { padding: var(--space-xl) var(--space-md); }
@@ -147,6 +183,9 @@ p { margin-bottom: var(--space-sm); }
   background-color: var(--color-dark);
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
+
+/* ─── Blog search ────────────────────────────────────────────── */
+#blog-search::placeholder { color: var(--color-text-muted); }
 
 /* ─── Blog cards ──────────────────────────────────────────────── */
 .blog-card-img { transition: transform 0.3s ease; }

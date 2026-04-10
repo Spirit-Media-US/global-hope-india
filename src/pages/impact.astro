@@ -2,164 +2,161 @@
 import Layout from '../layouts/Layout.astro';
 import { sanityClient } from '../lib/sanity.ts';
 
-let blogPosts: any[] = [];
-try {
-  blogPosts = await sanityClient.fetch(`
-    *[_type == "blogPost"] | order(publishDate desc) [0..11] {
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishDate,
-      "imageUrl": heroImage.asset->url,
-      tags
-    }
-  `);
-} catch (e) {
-  // Sanity not yet populated
-}
-
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const formatDate = (d: string) => {
   const dt = new Date(d);
   return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
 };
 
-const stats = [
-  { icon: '🤝', label: 'Donors', value: '1,000+' },
-  { icon: '📖', label: 'Bibles Distributed', value: '100,000+' },
-  { icon: '✈️', label: 'Mission Trips', value: '1,000+' },
-  { icon: '💧', label: 'Water Projects', value: '500+' },
-  { icon: '👶', label: 'Orphans Sponsored', value: '500+' },
-  { icon: '🧴', label: 'Hygiene Kits', value: '10,000+' },
-  { icon: '🌍', label: 'Lives Impacted', value: '100,000+' },
-  { icon: '🙏', label: 'Years of Ministry', value: '25+' },
-];
+let stories: any[] = [];
+try {
+  const raw = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "image": coalesce(heroImage.asset->url, externalImageUrl),
+      "url": "/blog/" + slug.current,
+      tags
+    }
+  `);
+  stories = raw.map((p: any) => ({
+    ...p,
+    date: p.publishDate ? formatDate(p.publishDate) : '',
+  }));
+} catch (e) {}
 ---
 
 <Layout
-  title="Our Impact — Global Hope India"
-  description="See the impact of Global Hope India's work: Bibles distributed, churches planted, lives transformed. Read stories from the field."
+  title="Impact GHI Magazine — Global Hope India"
+  description="Read Impact GHI Magazine to see how Global Hope India is making a difference. Your support helps extend God's kingdom."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Our Impact — Global Hope India",
+      "name": "Impact GHI Magazine — Global Hope India",
       "url": "https://globalhopeindia.org/impact",
-      "description": "See the impact of Global Hope India's work: Bibles distributed, churches planted, lives transformed.",
+      "description": "Read Impact GHI Magazine to see how Global Hope India is making a difference.",
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
     })}></script>
+    <style>
+      .blog-card-title, .blog-card-title * {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #3B9C5A !important;
+        line-height: 1.4 !important;
+      }
+    </style>
   </Fragment>
 
-  <!-- ── PAGE HERO ────────────────────────────────────────── -->
-  <section class="bg-[#1D1C1C] text-white pt-36 pb-20 px-6">
-    <div class="container mx-auto text-center">
-      <span class="eyebrow">God at Work</span>
-      <h1 class="text-white mb-5">Our Impact: Making Christ Known</h1>
-      <p class="text-white/70 text-lg max-w-2xl mx-auto">For over 25 years, God has used Global Hope India to transform lives, plant churches, and extend His kingdom across India.</p>
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="relative min-h-[55vh] lg:min-h-[65vh] overflow-hidden">
+    <img
+      src="/images/impact-hero.png"
+      alt="Global Hope India Impact"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+    <div id="hero-parallax" class="absolute bottom-8 left-0 right-0 z-10 container mx-auto px-6 lg:px-12 will-change-transform">
+      <h1 style="color: white !important;" class="max-w-3xl font-bold text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">Impact<br/>GHI Magazine</h1>
     </div>
   </section>
 
-  <!-- ── IMPACT STATS ─────────────────────────────────────── -->
-  <section class="section bg-[#FEC415]">
-    <div class="container mx-auto">
-      <div class="text-center mb-12">
-        <span class="eyebrow text-[#1D1C1C]">By the Numbers</span>
-        <h2 class="text-[#1D1C1C]">25+ Years of God's Faithfulness</h2>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {stats.map(stat => (
-          <div class="bg-white rounded-xl p-6 text-center shadow-sm">
-            <div class="text-3xl mb-2">{stat.icon}</div>
-            <div class="text-2xl md:text-3xl font-bold text-[#1D1C1C] mb-1">{stat.value}</div>
-            <div class="text-[#555] text-sm font-medium">{stat.label}</div>
-          </div>
-        ))}
+  <!-- ── STORIES GRID ────────────────────────────────────── -->
+  <section class="bg-[#f5f5f0] py-12 lg:py-20 px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="load-more-wrap" class="text-center mt-12">
+        <button id="load-more-btn" class="bg-[#2EAB5A] text-white font-semibold text-sm rounded-full px-8 py-3 hover:bg-[#248f4a] transition-colors inline-flex items-center gap-2">
+          <span id="load-more-text">Load More</span>
+          <svg id="load-more-spinner" class="hidden w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- ── STORIES FROM THE FIELD ───────────────────────────── -->
-  <section class="section bg-[#f5f5f5]">
-    <div class="container mx-auto">
-      <div class="text-center mb-12">
-        <span class="eyebrow">Stories from the Field</span>
-        <h2>GHI Magazine</h2>
-        <p class="text-[#555] text-lg max-w-xl mx-auto mt-4">Real stories of transformation from our partners and teams across India.</p>
-      </div>
+  <script id="stories-data" type="application/json" set:html={JSON.stringify(stories)}></script>
 
-      {blogPosts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map(post => (
-            <a
-              href={`/blog/${post.slug}`}
-              class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
-            >
-              <div class="h-52 overflow-hidden bg-[#1D1C1C]">
-                {post.imageUrl ? (
-                  <img
-                    src={`${post.imageUrl}?w=600&auto=format`}
-                    alt={post.title}
-                    class="blog-card-img w-full h-full object-cover"
-                  />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center">
-                    <span class="text-white/30 text-4xl">🌏</span>
-                  </div>
-                )}
-              </div>
-              <div class="p-6">
-                {post.tags?.length > 0 && (
-                  <div class="flex flex-wrap gap-1.5 mb-3">
-                    {post.tags.slice(0, 2).map((tag: string) => (
-                      <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5">{tag}</span>
-                    ))}
-                  </div>
-                )}
-                <h3 class="font-bold text-lg leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
-                {post.excerpt && <p class="text-[#666] text-sm leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>}
-                <div class="flex items-center justify-between text-sm">
-                  <span class="text-[#999]">{post.publishDate ? formatDate(post.publishDate) : ''}</span>
-                  <span class="text-[#2EAB5A] font-semibold group-hover:underline">Read Full Story →</span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <!-- Fallback static posts -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { title: 'Our Partners in India', date: 'March 18, 2025', tag: 'Partners' },
-            { title: 'Support Key Projects in Manipur', date: 'March 18, 2025', tag: 'Projects' },
-            { title: 'Medical Camp Miracles: Healing Bodies and Souls', date: 'March 18, 2025', tag: 'Healthcare' },
-            { title: 'Hope for India\'s Special Needs Community: The Mission of Raja\'s Home', date: 'March 4, 2025', tag: 'Community' },
-            { title: 'Empowering the Deaf Community: The Mission of DBM in Nagaland', date: 'March 4, 2025', tag: 'Community' },
-            { title: 'Elim School: Supporting Pastor Mayon\'s Mission in Manipur', date: 'March 4, 2025', tag: 'Education' },
-          ].map(post => (
-            <div class="blog-card bg-white rounded-2xl overflow-hidden shadow-sm">
-              <div class="h-52 bg-gradient-to-br from-[#1D1C1C] to-[#2EAB5A] flex items-center justify-center">
-                <span class="text-white/30 text-5xl">🌏</span>
-              </div>
-              <div class="p-6">
-                <span class="text-xs font-semibold bg-[#FEC415]/20 text-[#1D1C1C] rounded-full px-2.5 py-0.5 mb-3 inline-block">{post.tag}</span>
-                <h3 class="font-bold text-lg leading-snug mb-4">{post.title}</h3>
-                <div class="text-sm text-[#999]">{post.date}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- ── CTA ──────────────────────────────────────────────── -->
-  <section class="section bg-[#1D1C1C] text-white">
-    <div class="container mx-auto text-center">
-      <span class="eyebrow">Be Part of the Story</span>
-      <h2 class="text-white mb-4">Your Gift Writes the Next Chapter</h2>
-      <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">Every dollar you give funds real transformation — Bibles distributed, churches planted, and lives changed by the gospel.</p>
-      <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn">Donate Now</a>
-    </div>
-  </section>
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card-fade-in {
+      animation: fadeInUp 0.4s ease-out forwards;
+    }
+  </style>
 </Layout>
+
+<script>
+  // Hero parallax
+  const heroEl = document.getElementById('hero-parallax');
+  if (heroEl && window.matchMedia('(min-width: 768px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          heroEl.style.transform = `translateY(${window.scrollY * -0.3}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // Load More functionality
+  const ALL_STORIES = JSON.parse(document.getElementById('stories-data')?.textContent || '[]');
+  const PER_LOAD = 6;
+  let shown = 0;
+  const grid = document.getElementById('stories-grid');
+  const btn = document.getElementById('load-more-btn');
+  const wrap = document.getElementById('load-more-wrap');
+  const spinner = document.getElementById('load-more-spinner');
+  const btnText = document.getElementById('load-more-text');
+
+  function renderCard(s) {
+    return `<a href="${s.url}" class="card-fade-in group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+      <div class="overflow-hidden">
+        <img src="${s.image}" alt="${s.title}" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+      </div>
+      <div class="p-4 flex flex-col flex-1">
+        <p style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">${s.title}</p>
+        <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+          <span>${s.date}</span>
+        </div>
+        <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+          Read Full Story Here
+          <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </div>
+      </div>
+    </a>`;
+  }
+
+  function loadBatch() {
+    const batch = ALL_STORIES.slice(shown, shown + PER_LOAD);
+    batch.forEach(s => {
+      grid.insertAdjacentHTML('beforeend', renderCard(s));
+    });
+    shown += batch.length;
+    if (shown >= ALL_STORIES.length) {
+      wrap.classList.add('hidden');
+    }
+  }
+
+  // Initial load
+  loadBatch();
+
+  // Button click
+  btn?.addEventListener('click', () => {
+    spinner.classList.remove('hidden');
+    btnText.textContent = 'Loading...';
+    setTimeout(() => {
+      loadBatch();
+      spinner.classList.add('hidden');
+      btnText.textContent = 'Load More';
+    }, 400);
+  });
+</script>

@@ -1,11 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import MailtoLink from '../components/MailtoLink.astro';
 ---
 
 <Layout
   title="Get Involved — Global Hope India"
-  description="Pray, give, or go — there's a place for you in God's mission to India. Join thousands who have engaged with Global Hope India."
+  description="Join Global Hope India: Give, Pray, and Support for a Brighter Future. Pray for India, give to fund projects, or go on a mission trip."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -13,135 +12,151 @@ import MailtoLink from '../components/MailtoLink.astro';
       "@type": "WebPage",
       "name": "Get Involved — Global Hope India",
       "url": "https://globalhopeindia.org/get-involved",
-      "description": "Pray, give, or go — there's a place for you in God's mission to India.",
+      "description": "Join Global Hope India: Give, Pray, and Support for a Brighter Future.",
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
     })}></script>
+    <script src="https://mail.spiritmediaone.com/js/form_embed.js" defer></script>
   </Fragment>
 
-  <!-- ── PAGE HERO ────────────────────────────────────────── -->
-  <section class="bg-[#1D1C1C] text-white pt-36 pb-20 px-6">
-    <div class="container mx-auto text-center">
-      <span class="eyebrow">Join the Mission</span>
-      <h1 class="text-white mb-5">Get Involved with Global Hope India</h1>
-      <p class="text-white/70 text-lg max-w-2xl mx-auto">God is at work in India, and He's inviting you to join Him. Here's how you can make a difference today.</p>
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="relative min-h-[60vh] lg:min-h-[75vh] overflow-hidden">
+    <img
+      src="/images/get-involved-hero.png"
+      alt="Indian girl holding Indian flag"
+      class="absolute inset-0 w-full h-full object-cover object-[center_20%]"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent"></div>
+    <div id="hero-parallax" class="absolute bottom-10 lg:bottom-16 left-0 right-0 z-10 container mx-auto px-6 lg:px-12 will-change-transform">
+      <h1 class="max-w-lg font-bold text-[#1D1C1C] text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">Join Global Hope India:<br/>Give, Pray, and Support<br/>for a Brighter Future</h1>
     </div>
   </section>
 
-  <!-- ── THREE WAYS ──────────────────────────────────────── -->
+  <!-- ── THREE COLUMNS: PRAY / GIVE / GO ─────────────────── -->
   <section class="section bg-white">
-    <div class="container mx-auto">
+    <div class="container mx-auto max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
 
-      <!-- PRAY -->
-      <div id="pray" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 scroll-mt-24">
-        <div>
-          <div class="text-6xl mb-6">🙏</div>
-          <span class="eyebrow">Way #1</span>
-          <h2 class="mb-5">Pray</h2>
-          <p class="text-[#444] text-lg leading-relaxed mb-4">
-            "Pray for India. God loves India. Jesus died for India. Pray for God to open the eyes and hearts of all people of India to see, experience, and love Jesus as the one true God."
-          </p>
-          <p class="text-[#444] text-lg leading-relaxed mb-8">
-            Salvation and transformation are God's work. Our work is to pray — and your intercession is one of the most powerful things you can do for India.
-          </p>
-          <MailtoLink
-            email="info@globalhopeindia.org"
-            subject="Prayer Points Request"
-            body="I would like to receive prayer points for India. Please add me to your prayer list."
-            class="btn"
-          >
-            I Will Pray — Send Me Prayer Points
-          </MailtoLink>
-        </div>
-        <div class="bg-[#FEC415]/10 border-2 border-[#FEC415] rounded-2xl p-10 text-center">
-          <blockquote class="text-[#1D1C1C] text-xl font-semibold leading-relaxed italic">
-            "The prayer of a righteous person is powerful and effective."
-          </blockquote>
-          <cite class="block mt-4 text-[#666] text-sm">— James 5:16</cite>
-        </div>
-      </div>
-
-      <!-- GIVE -->
-      <div id="give" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 scroll-mt-24">
-        <div class="order-2 lg:order-1 bg-[#1D1C1C] rounded-2xl p-10 text-center">
-          <div class="text-5xl font-bold text-[#FEC415] mb-2">85%+</div>
-          <p class="text-white text-lg font-semibold mb-2">of every donation</p>
-          <p class="text-white/70">directly benefits programs in the USA and India</p>
-          <div class="mt-6 pt-6 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div class="text-2xl font-bold text-[#FEC415]">$0</div>
-              <div class="text-white/50 text-xs mt-1">Salaries from<br/>donations</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-[#FEC415]">100%</div>
-              <div class="text-white/50 text-xs mt-1">Accountability<br/>reporting</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-[#FEC415]">501c3</div>
-              <div class="text-white/50 text-xs mt-1">Tax-deductible<br/>giving</div>
+        <!-- ── COLUMN 1: PRAY ──────────────────────────────── -->
+        <div class="flex flex-col">
+          <!-- Photo with orange badge -->
+          <div class="relative mb-8">
+            <img
+              src="https://assets.spiritmediapublishing.com/images/ghi-img_4700-scaled.jpg"
+              alt="Indian children praying"
+              class="w-full aspect-[4/3] object-cover rounded-xl"
+            />
+            <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#FFA500] flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-xl">1</span>
             </div>
           </div>
-        </div>
-        <div class="order-1 lg:order-2">
-          <div class="text-6xl mb-6">💛</div>
-          <span class="eyebrow">Way #2</span>
-          <h2 class="mb-5">Give</h2>
-          <p class="text-[#444] text-lg leading-relaxed mb-4">
-            "God uses every gift through Global Hope India to make Christ known and extend God's kingdom in India."
-          </p>
-          <p class="text-[#444] text-lg leading-relaxed mb-8">
-            Over 85% of donations directly benefit programs. Your generosity funds Bibles, orphan care, clean water, leadership training, and church planting across India.
-          </p>
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="btn">Donate Now</a>
-          <p class="text-[#888] text-sm mt-3">
-            You can also mail a check to: PO Box 3251, Cary, NC 27519
-          </p>
-        </div>
-      </div>
-
-      <!-- GO -->
-      <div id="go" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center scroll-mt-24">
-        <div>
-          <div class="text-6xl mb-6">✈️</div>
-          <span class="eyebrow">Way #3</span>
-          <h2 class="mb-5">Go</h2>
-          <p class="text-[#444] text-lg leading-relaxed mb-4">
-            "God called every believer to go! Over 1,000 people have traveled to India through Global Hope India. Teams go and empower Indian partners to do what they couldn't otherwise do."
-          </p>
-          <p class="text-[#444] text-lg leading-relaxed mb-8">
-            A short-term mission trip to India is one of the most radical ways you can engage with God's mission. Come and see what God is doing — and be transformed in the process.
-          </p>
-          <MailtoLink
-            email="info@globalhopeindia.org"
-            subject="Mission Trip Interest"
-            body="I am interested in joining a mission team to India. Please send me more information."
-            class="btn"
-          >
-            I Want to Go — Tell Me More
-          </MailtoLink>
-        </div>
-        <div class="bg-[#2EAB5A]/10 border-2 border-[#2EAB5A] rounded-2xl p-10 text-center">
-          <div class="text-5xl font-bold text-[#2EAB5A] mb-2">1,000+</div>
-          <p class="text-[#1D1C1C] text-lg font-semibold mb-2">People Have Gone</p>
-          <p class="text-[#555]">on short-term mission trips to India through Global Hope India</p>
-          <div class="mt-6 pt-6 border-t border-[#2EAB5A]/20">
-            <blockquote class="italic text-[#444]">"One of the most radical ways to engage with God's mission."</blockquote>
+          <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Pray</h3>
+          <p class="text-[#444] text-sm leading-relaxed text-center mb-6">Pray for India. God loves India. Jesus died for India. Pray for God to open the eyes and hearts of all people of India to see, experience, and love Jesus as the one true God.</p>
+          <!-- Pray Form -->
+          <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
+            <p class="text-[#1D1C1C] font-bold text-sm text-center mb-4">I will pray. Send me prayer points.</p>
+            <form id="pray-form" class="space-y-3">
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
+                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Email *</label>
+                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
+                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
+            </form>
           </div>
         </div>
-      </div>
 
-    </div>
-  </section>
+        <!-- ── COLUMN 2: GIVE ──────────────────────────────── -->
+        <div class="flex flex-col">
+          <!-- Photo with orange badge -->
+          <div class="relative mb-8">
+            <img
+              src="https://assets.spiritmediapublishing.com/images/ghi-img_2295-scaled.jpg"
+              alt="Indian girl standing in field"
+              class="w-full aspect-[4/3] object-cover rounded-xl"
+            />
+            <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#FFA500] flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-xl">2</span>
+            </div>
+          </div>
+          <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Give</h3>
+          <p class="text-[#444] text-sm leading-relaxed text-center mb-6">God uses every gift through Global Hope India to make Christ known and extend God's kingdom in India.</p>
+          <div class="text-center">
+            <a href="https://givebutter.com/global-hope-india" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#1a2456] text-white font-semibold text-sm rounded-full px-8 py-3 hover:bg-[#111b40] transition-colors">Donate now</a>
+          </div>
+        </div>
 
-  <!-- ── CONTACT CTA ───────────────────────────────────────── -->
-  <section class="section bg-[#1D1C1C] text-white">
-    <div class="container mx-auto text-center">
-      <span class="eyebrow">Questions?</span>
-      <h2 class="text-white mb-4">We'd Love to Hear from You</h2>
-      <p class="text-white/70 text-lg max-w-xl mx-auto mb-8">Whether you want to pray, give, or go — reach out and we'll connect you with the right next step.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <MailtoLink email="info@globalhopeindia.org" class="btn">Email Us</MailtoLink>
-        <a href="tel:9194382444" class="btn btn-outline">Call 919-438-2444</a>
+        <!-- ── COLUMN 3: GO ────────────────────────────────── -->
+        <div class="flex flex-col">
+          <!-- Photo with orange badge -->
+          <div class="relative mb-8">
+            <img
+              src="https://assets.spiritmediapublishing.com/images/ghi-img_6300-scaled.jpg"
+              alt="Woman with children near brick wall"
+              class="w-full aspect-[4/3] object-cover rounded-xl"
+            />
+            <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#FFA500] flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-xl">3</span>
+            </div>
+          </div>
+          <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Go</h3>
+          <p class="text-[#444] text-sm leading-relaxed text-center mb-6">God called every believer to go! Over 1,000 people have traveled to India through Global Hope India. Teams go and empower Indian partners to do what they couldn't otherwise do.</p>
+          <!-- Go Form -->
+          <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
+            <form id="go-form" class="space-y-3">
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
+                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Email *</label>
+                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
+                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">When Can You Go? *</label>
+                <input type="text" name="when" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Who will go with you?</label>
+                <input type="text" name="who" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Share any specifics (location, focus, questions)</label>
+                <textarea name="specifics" rows="3" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent resize-none"></textarea>
+              </div>
+              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  // Hero parallax
+  const heroEl = document.getElementById('hero-parallax');
+  if (heroEl && window.matchMedia('(min-width: 768px)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          heroEl.style.transform = `translateY(${window.scrollY * -0.3}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>
