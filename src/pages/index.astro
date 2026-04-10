@@ -392,54 +392,60 @@ const fallbackBlogPosts = [
       </div>
 
       {blogPosts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map(post => (
             <a
               href={`/blog/${post.slug}`}
-              class="blog-card bg-white rounded-[5px] overflow-hidden shadow-[0px_0px_10px_0px_rgba(0,0,0,0.22)] hover:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.3)] transition-shadow group"
+              class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
             >
-              <div class="min-h-[300px] overflow-hidden bg-[#1D1C1C]">
+              <div class="overflow-hidden">
                 {post.imageUrl ? (
                   <img
                     src={`${post.imageUrl}?w=600&auto=format`}
                     alt={post.title}
-                    class="blog-card-img w-full h-full object-cover"
+                    class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <div class="w-full h-full flex items-center justify-center">
+                  <div class="w-full h-[180px] bg-[#1D1C1C] flex items-center justify-center">
                     <span class="text-white/30 text-4xl">🌏</span>
                   </div>
                 )}
               </div>
-              <div class="p-6">
-                {post.tags?.length > 0 && (
-                  <span class="inline-block text-xs font-semibold text-[#2EAB5A] bg-[#2EAB5A]/10 rounded-full px-3 py-0.5 mb-3">{post.tags[0]}</span>
-                )}
-                <h3 class="font-bold text-[26px] leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
-                {post.excerpt && <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>}
-                <div class="text-xs text-[#999] mb-3">{post.publishDate ? formatDate(post.publishDate) : ''}</div>
-                <span class="text-sm font-semibold text-[#2EAB5A] group-hover:underline">Read Full Story Here →</span>
+              <div class="p-4 flex flex-col flex-1">
+                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                  <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                  <span>{post.publishDate ? formatDate(post.publishDate) : ''}</span>
+                </div>
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                  Read Full Story Here
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+                </div>
               </div>
             </a>
           ))}
         </div>
       ) : (
         <!-- Fallback: static blog posts before Sanity is populated -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {fallbackBlogPosts.map(post => (
             <a
               href={`/blog/${post.slug}`}
-              class="blog-card bg-white rounded-[5px] overflow-hidden shadow-[0px_0px_10px_0px_rgba(0,0,0,0.22)] hover:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.3)] transition-shadow group"
+              class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
             >
-              <div class="min-h-[300px] overflow-hidden">
-                <img src={post.image} alt={post.title} class="blog-card-img w-full h-full object-cover" />
+              <div class="overflow-hidden">
+                <img src={post.image} alt={post.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
               </div>
-              <div class="p-6">
-                <span class="inline-block text-xs font-semibold text-[#2EAB5A] bg-[#2EAB5A]/10 rounded-full px-3 py-0.5 mb-3">{post.tag}</span>
-                <h3 class="font-bold text-[26px] leading-snug mb-2 group-hover:text-[#2EAB5A] transition-colors">{post.title}</h3>
-                <p class="text-[#666] text-sm leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
-                <div class="text-xs text-[#999] mb-3">{post.date}</div>
-                <span class="text-sm font-semibold text-[#2EAB5A] group-hover:underline">Read Full Story Here →</span>
+              <div class="p-4 flex flex-col flex-1">
+                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                  <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                  <span>{post.date}</span>
+                </div>
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                  Read Full Story Here
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+                </div>
               </div>
             </a>
           ))}
