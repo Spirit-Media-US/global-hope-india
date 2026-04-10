@@ -51,23 +51,24 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Pray</h3>
           <p class="text-[#444] text-sm leading-relaxed text-center mb-6">Pray for India. God loves India. Jesus died for India. Pray for God to open the eyes and hearts of all people of India to see, experience, and love Jesus as the one true God.</p>
-          <!-- Pray Form (GHL embed — Kevin: replace PRAY_FORM_ID with actual form ID from GHL) -->
+          <!-- Pray Form -->
           <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
             <p class="text-[#1D1C1C] font-bold text-sm text-center mb-4">I will pray. Send me prayer points.</p>
-            <iframe
-              src="https://mail.spiritmediaone.com/widget/form/PRAY_FORM_ID"
-              style="width:100%;min-height:350px;border:none;"
-              id="inline-pray-form"
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-activation-type="alwaysActivated"
-              data-deactivation-type="neverDeactivate"
-              data-form-name="GHI Prayer Request"
-              data-height="350"
-              data-layout-iframe-id="inline-pray-form"
-              data-form-id="PRAY_FORM_ID"
-              title="GHI Prayer Request"
-            ></iframe>
+            <form id="pray-form" class="space-y-3">
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
+                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Email *</label>
+                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
+                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
+            </form>
           </div>
         </div>
 
@@ -106,22 +107,35 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Go</h3>
           <p class="text-[#444] text-sm leading-relaxed text-center mb-6">God called every believer to go! Over 1,000 people have traveled to India through Global Hope India. Teams go and empower Indian partners to do what they couldn't otherwise do.</p>
-          <!-- Go Form (GHL embed — Kevin: replace GO_FORM_ID with actual form ID from GHL) -->
+          <!-- Go Form -->
           <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
-            <iframe
-              src="https://mail.spiritmediaone.com/widget/form/GO_FORM_ID"
-              style="width:100%;min-height:500px;border:none;"
-              id="inline-go-form"
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-activation-type="alwaysActivated"
-              data-deactivation-type="neverDeactivate"
-              data-form-name="GHI Mission Trip Interest"
-              data-height="500"
-              data-layout-iframe-id="inline-go-form"
-              data-form-id="GO_FORM_ID"
-              title="GHI Mission Trip Interest"
-            ></iframe>
+            <form id="go-form" class="space-y-3">
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
+                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Email *</label>
+                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
+                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">When Can You Go? *</label>
+                <input type="text" name="when" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Who will go with you?</label>
+                <input type="text" name="who" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
+              </div>
+              <div>
+                <label class="text-xs text-[#666] mb-1 block">Share any specifics (location, focus, questions)</label>
+                <textarea name="specifics" rows="3" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent resize-none"></textarea>
+              </div>
+              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
+            </form>
           </div>
         </div>
 
