@@ -20,7 +20,7 @@ Then run: `git checkout dev && git pull origin dev`
 - Astro 5 + Tailwind CSS v4
 - Sanity Studio at `/studio` (static build via `sanity build public/studio`)
 - Sanity project: r33r2z1j, dataset: production
-- Netlify: global-hope-india.netlify.app (site ID: b6e92b54-d7b8-4fa6-b7a9-2ec93ce3cefc)
+- Cloudflare Pages: dev.global-hope-india.pages.dev (preview)
 - GHL location: oPP9m0hKJpU6cFB7yD9w
 
 ## Design System (matched to original globalhopeindia.org)
@@ -47,7 +47,7 @@ Then run: `git checkout dev && git pull origin dev`
 
 ## Status — as of 2026-04-10
 ### LAUNCH READY
-- All 13 pages built and deployed to Netlify
+- All 13 pages built and deployed to Cloudflare Pages
 - All images on R2 CDN (zero WordPress dependencies)
 - 6 blog posts live in Sanity CMS with full content + hero images (externalImageUrl)
 - Sanity schema deployed (blogPost with externalImageUrl field)
@@ -56,10 +56,10 @@ Then run: `git checkout dev && git pull origin dev`
 - All QA passes: zero errors, all images 200 OK, all links verified
 
 ### Remaining — Requires Kevin
-- Connect custom domain globalhopeindia.org (Netlify + Cloudflare DNS)
+- Connect custom domain globalhopeindia.org in Cloudflare Pages
 - Create 2 GHL forms for Get Involved page (Prayer Request + Mission Trip Interest)
 - Share Sanity Studio access with GHI staff
-- Set up Sanity → Netlify rebuild webhook
+- Set up Sanity → Cloudflare Pages rebuild hook (if needed)
 - UptimeRobot monitoring
 
 ## Rules
@@ -68,4 +68,3 @@ Then run: `git checkout dev && git pull origin dev`
 - Read PROJECT-STATUS.md at the start of every session
 - All donation links → https://givebutter.com/GlobalHopeIndia (external, never internal form)
 - All images → R2 CDN or Sanity CDN (never in Git — blocked by .gitignore)
-- One push to main = one Netlify build credit (batch changes)
