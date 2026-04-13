@@ -1,0 +1,11 @@
+{
+  "enabledMcpjsonServers": [
+    "stitch",
+    "sanity",
+    "netlify",
+    "cloudflare",
+    "playwright",
+    "prod-ghl-mcp",
+    "google-docs"
+  ]
+}

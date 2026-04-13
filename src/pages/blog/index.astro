@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sanityClient } from '../../lib/sanity.ts';
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const formatDate = (d: string) => {
+  const dt = new Date(d);
+  return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
+};
+
+let posts: any[] = [];
+try {
+  const raw = await sanityClient.fetch(`
+    *[_type == "blogPost"] | order(publishDate desc) {
+      title,
+      "slug": slug.current,
+      excerpt,
+      publishDate,
+      "image": coalesce(heroImage.asset->url, externalImageUrl),
+      "url": "/blog/" + slug.current,
+      tags
+    }
+  `);
+  posts = raw.map((p: any) => ({
+    ...p,
+    date: p.publishDate ? formatDate(p.publishDate) : '',
+  }));
+} catch (e) {}
+---
+
+<Layout
+  title="Blog — Global Hope India"
+  description="Articles, insights, and updates from Global Hope India. Read stories of how God is working in India."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Global Hope India Blog",
+      "url": "https://globalhopeindia.org/blog",
+      "description": "Articles, insights, and updates from Global Hope India.",
+      "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+    <style>
+      .blog-card-title, .blog-card-title * {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #3B9C5A !important;
+        line-height: 1.4 !important;
+      }
+    </style>
+  </Fragment>
+
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="bg-[#1D1C1C] pt-32 pb-16 px-6 lg:px-8">
+    <div class="container mx-auto max-w-6xl">
+      <p class="text-[#2EAB5A] font-semibold text-sm uppercase tracking-widest mb-3">Blog</p>
+      <h1 style="color: white !important;" class="max-w-2xl font-bold text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">Stories of Hope<br/>from India</h1>
+      <p class="mt-4 text-white/60 text-lg max-w-xl">Articles, insights, and updates on how God is working through Global Hope India.</p>
+    </div>
+  </section>
+
+  <!-- ── POSTS GRID ──────────────────────────────────────── -->
+  <section class="bg-[#f5f5f0] py-12 lg:py-20 px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      {posts.length === 0 ? (
+        <div class="text-center py-20">
+          <p class="text-2xl font-bold text-[#1D1C1C] mb-2">No posts yet</p>
+          <p class="text-[#666]">Check back soon for new stories.</p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a href={post.url} class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+              <div class="overflow-hidden">
+                {post.image ? (
+                  <img src={post.image} alt={post.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+                ) : (
+                  <div class="w-full h-[180px] bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-400 text-sm">No image</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-4 flex flex-col flex-1">
+                <p class="blog-card-title mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                  <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
+                  <span>{post.date}</span>
+                </div>
+                {post.excerpt && <p class="text-sm text-[#666] mb-4 leading-relaxed">{post.excerpt}</p>}
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                  Read Full Story
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
