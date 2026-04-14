@@ -32,6 +32,12 @@ try {
   practicalResources = resItems.map((r: any) => r.label);
 } catch (e) { /* fallback below */ }
 
+// Fetch FAQs for projects page
+let projectFaqs: any[] = [];
+try {
+  projectFaqs = await sanityClient.fetch(`*[_type == "faqItem" && page == "projects"] | order(order asc) { question, answer }`);
+} catch (e) {}
+
 // Fallbacks
 if (partners.length === 0) partners = [
   { name: 'Achu in Nagaland', url: 'https://givebutter.com/AchuInNagaland' },
@@ -213,30 +219,19 @@ if (practicalResources.length === 0) practicalResources = [
           </div>
         </div>
 
-        <!-- Check Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Prefer to give by check?</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">If you'd prefer to give by check please make it payable to and mail it to:</p>
-            <p class="text-[#444] mt-3">Global Hope India<br/>PO Box 3251<br/>Cary, NC 27519</p>
+        {projectFaqs.map((faq: any) => (
+          <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
+            <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">{faq.question}</h3>
+              <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
+            </button>
+            <div class="accordion-body px-6 pb-6 hidden">
+              <p class="text-[#444] leading-relaxed">{faq.answer}</p>
+            </div>
           </div>
-        </div>
+        ))}
 
-        <!-- Tax Deductible Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Is my giving tax deductible?</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">Yes. Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Raleigh, North Carolina. All gifts are tax-deductible. Thank you!</p>
-          </div>
-        </div>
-
-        <!-- Privacy Toggle -->
+        <!-- Privacy Toggle (always shown) -->
         <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
           <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
             <h3 class="text-lg font-bold text-[#1D1C1C]">GHI's privacy policy</h3>
@@ -244,17 +239,6 @@ if (practicalResources.length === 0) practicalResources = [
           </button>
           <div class="accordion-body px-6 pb-6 hidden">
             <p class="text-[#444] leading-relaxed">GHI protects your privacy! Under no circumstance does GHI ever sell or give out our contact lists. <a href="/privacy-policy" class="font-bold text-[#1D1C1C] hover:text-[#2EAB5A] transition-colors underline">See our Privacy Policy.</a></p>
-          </div>
-        </div>
-
-        <!-- Cancel Recurring Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Cancel existing recurring donation</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">If you'd like to cancel an existing recurring donation, simply login to your Givebutter account and edit your giving.</p>
           </div>
         </div>
       </div>

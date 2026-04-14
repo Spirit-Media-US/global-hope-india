@@ -1,5 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sanityClient } from '../lib/sanity.ts';
+
+// Fetch all about page content from Sanity
+let settings: any = {};
+let culturePoints: any[] = [];
+let faithStatements: any[] = [];
+let teamMembers: any[] = [];
+let faqs: any[] = [];
+let empowerCards: any[] = [];
+let serviceAreas: any[] = [];
+let hero: any = {};
+
+try {
+  [settings, culturePoints, faithStatements, teamMembers, faqs, empowerCards, serviceAreas, hero] = await Promise.all([
+    sanityClient.fetch(`*[_type == "siteSettings"][0]`),
+    sanityClient.fetch(`*[_type == "culturePoint"] | order(order asc) { number, title, description }`),
+    sanityClient.fetch(`*[_type == "statementOfFaith"] | order(order asc) { text }`),
+    sanityClient.fetch(`*[_type == "teamMember"] | order(order asc) { text }`),
+    sanityClient.fetch(`*[_type == "faqItem" && page == "about"] | order(order asc) { question, answer }`),
+    sanityClient.fetch(`*[_type == "empowerCard"] | order(order asc) { title, description }`),
+    sanityClient.fetch(`*[_type == "serviceArea"] | order(order asc) { title, description }`),
+    sanityClient.fetch(`*[_type == "pageHero" && page == "about"][0] { heading, heroImageUrl }`),
+  ]);
+} catch (e) {}
+
+// Fallbacks
+settings = settings || {};
+hero = hero || {};
+const vision = settings.visionStatement || 'Everyone in India worshiping Jesus as Savior and Lord.';
+const mission = settings.missionStatement || 'Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel.';
+const empowering = settings.empoweringText || '';
+const heroHeading = hero.heading || 'Church Vision and Mission: Shaping Faith\'s Future with Global Hope India';
+const heroImage = hero.heroImageUrl || 'https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp';
+const radicalHeading = settings.radicalHeading || 'Did Someone Say, "Radical"?';
+const radicalP1 = settings.radicalParagraph1 || '';
+const radicalP2 = settings.radicalParagraph2 || '';
+const founderP1 = settings.founderStoryPart1 || '';
+const founderP2 = settings.founderStoryPart2 || '';
+const founderP3 = settings.founderStoryPart3 || '';
+const founderP4 = settings.founderStoryPart4 || '';
 ---
 
 <Layout
@@ -26,7 +66,7 @@ import Layout from '../layouts/Layout.astro';
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
     <div id="about-hero-parallax" class="relative z-10 container mx-auto px-6 lg:px-12 pb-10 pt-64 will-change-transform">
-      <h1 style="color: white !important;" class="max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2]">Church Vision and Mission:<br/>Shaping Faith's Future with<br/>Global Hope India</h1>
+      <h1 style="color: white !important;" class="max-w-3xl font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-[1.3] lg:leading-[1.2]" set:html={heroHeading.replace(/\n/g, '<br/>')} />
     </div>
   </section>
 
@@ -83,7 +123,7 @@ import Layout from '../layouts/Layout.astro';
             <svg class="w-7 h-7 text-[#FEC415]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Our Vision</h3>
-          <p class="text-[#555] leading-relaxed text-sm">"Everyone in India worshiping Jesus as Savior and Lord."</p>
+          <p class="text-[#555] leading-relaxed text-sm">"{vision}"</p>
         </div>
 
         <!-- Empowering Radical Transformation -->
@@ -92,7 +132,7 @@ import Layout from '../layouts/Layout.astro';
             <svg class="w-7 h-7 text-[#FEC415]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Empowering Radical Transformation</h3>
-          <p class="text-[#555] leading-relaxed text-sm">For over 25 years, we have been watching God radically transform thousands of Americans &amp; Indian Nationals through missions. We've taken over 1,000 Americans on short-term mission trips to India. We work with 12 long-term indigenous church-planting partners located in North, South, East, &amp; West Mainland India as well as Northeast India. We empower The Church in India to make Christ known through leadership, child, &amp; village development projects.</p>
+          <p class="text-[#555] leading-relaxed text-sm">{empowering}</p>
         </div>
 
         <!-- Our Mission -->
@@ -101,7 +141,7 @@ import Layout from '../layouts/Layout.astro';
             <svg class="w-7 h-7 text-[#FEC415]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Our Mission</h3>
-          <p class="text-[#555] leading-relaxed text-sm">"Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel."</p>
+          <p class="text-[#555] leading-relaxed text-sm">"{mission}"</p>
         </div>
       </div>
     </div>
@@ -118,47 +158,23 @@ import Layout from '../layouts/Layout.astro';
     <div class="relative z-10 container mx-auto max-w-5xl">
       <h2 class="text-[#1D1C1C] mb-10">Our Culture</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
-        <!-- Left column: items 1-4 -->
+        <!-- Left column -->
         <div class="space-y-6">
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">1.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We are missionaries.</strong> It's about being sent out by God; for the purposes of God, to the glory of God.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">2.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We love India.</strong> It's about Jesus' love for every nation, tribe, and tongue, absent to the gospel.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">3.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We facilitate short-term mission trips to India.</strong> It's about our radical response for the love &amp; grace we've received.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">4.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We empower The Church to fulfill the Great Commission.</strong> It's about Jesus' love for His bride — the Big C Church.</p>
-          </div>
+          {culturePoints.filter((_: any, i: number) => i < 4).map((c: any) => (
+            <div class="flex items-start gap-3">
+              <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">{c.number}.</span>
+              <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">{c.title}</strong> {c.description}</p>
+            </div>
+          ))}
         </div>
-        <!-- Right column: items 5-9 -->
+        <!-- Right column -->
         <div class="space-y-6">
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">5.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We minimize distractions.</strong> It's about freeing you to focus on the mission.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">6.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We stand on God's Word.</strong> It's about His Word being for all people and us hearing &amp; obeying the voice of God.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">7.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We make prayer — the work.</strong> It's about salvation belonging to God and Him doing the work in and through us.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">8.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We honor the Holy Spirit.</strong> It's about experiencing God and joining Him in His work.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">9.</span>
-            <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">We live generously.</strong> It's about worship and providing an attractive witness of the gospel.</p>
-          </div>
+          {culturePoints.filter((_: any, i: number) => i >= 4).map((c: any) => (
+            <div class="flex items-start gap-3">
+              <span class="text-[#2EAB5A] font-bold text-lg mt-0.5 shrink-0">{c.number}.</span>
+              <p class="text-[#1D1C1C] leading-relaxed"><strong class="text-[#2EAB5A]">{c.title}</strong> {c.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -178,13 +194,9 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <!-- Right: text content -->
         <div>
-          <h2 class="text-[#1D1C1C] text-3xl lg:text-4xl font-bold mb-6">Did Someone Say, "Radical"?</h2>
-          <p class="text-[#555] leading-[1.8] mb-5">
-            Today, India is 72% Hindu, 23% Muslim, 3% Christian and 2% other faiths. We believe God can take this country known for its persecution of Christians and radically transform India to be one of the largest church planters in our day.
-          </p>
-          <p class="text-[#555] leading-[1.8]">
-            We believe God can transform a Saul into a Paul! (Acts 9) Therefore, we are on a mission to see God transform India, from being unreached by the Gospel to being reached by the Gospel. But, not just reached! We believe God can transform India, from receiving missionaries to sending missionaries! Our vision is for God to transform India, from being a people known for their poverty, to a Church known for its generosity.
-          </p>
+          <h2 class="text-[#1D1C1C] text-3xl lg:text-4xl font-bold mb-6">{radicalHeading}</h2>
+          <p class="text-[#555] leading-[1.8] mb-5">{radicalP1}</p>
+          <p class="text-[#555] leading-[1.8]">{radicalP2}</p>
         </div>
       </div>
     </div>
@@ -194,52 +206,31 @@ import Layout from '../layouts/Layout.astro';
   <section class="section bg-white">
     <div class="container mx-auto max-w-5xl">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Left column -->
         <div class="space-y-6">
-          <!-- Why India? -->
-          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
-            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
-              <h3 class="text-lg font-bold text-[#1D1C1C]">Why India?</h3>
-              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
-            </button>
-            <div class="accordion-body mt-4">
-              <p class="text-[#555] leading-relaxed text-sm">With 1.4 billion people, India represents one of the largest, neediest, and most unreached countries in the world.</p>
+          {faqs.filter((_: any, i: number) => i % 2 === 0).map((faq: any) => (
+            <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+              <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+                <h3 class="text-lg font-bold text-[#1D1C1C]">{faq.question}</h3>
+                <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+              </button>
+              <div class="accordion-body mt-4">
+                <p class="text-[#555] leading-relaxed text-sm">{faq.answer}</p>
+              </div>
             </div>
-          </div>
-          <!-- Changing The World -->
-          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
-            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
-              <h3 class="text-lg font-bold text-[#1D1C1C]">Changing The World</h3>
-              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
-            </button>
-            <div class="accordion-body mt-4">
-              <p class="text-[#555] leading-relaxed text-sm">In 1972, in his only crusade ever in India, Dr. Billy Graham said, "As India goes, all of Asia will go with her." In essence, he was saying: that if we can make Christ known among the 1.4 billion people of India, they will help us to make Christ known among the 4.6 billion people in Asia. Not only does that cover the entire 10/40 window, but that is 2/3's of the earth's total population!</p>
-            </div>
-          </div>
+          ))}
         </div>
-        <!-- Right column -->
         <div class="space-y-6">
-          <!-- The Big "C" Church -->
-          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
-            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
-              <h3 class="text-lg font-bold text-[#1D1C1C]">The Big "C" Church</h3>
-              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
-            </button>
-            <div class="accordion-body mt-4">
-              <p class="text-[#555] leading-relaxed text-sm">EVERYTHING we do is through the local church! Jesus said, "I will build my Church, and the gates of hell will not prevail against it." (Matthew 16:18) We believe history proves the most effective means of evangelism and it is the starting of new churches. Therefore, we empower The Church in India to train more healthy church-planting pastors that will start more healthy churches.</p>
+          {faqs.filter((_: any, i: number) => i % 2 === 1).map((faq: any) => (
+            <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
+              <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
+                <h3 class="text-lg font-bold text-[#1D1C1C]">{faq.question}</h3>
+                <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
+              </button>
+              <div class="accordion-body mt-4">
+                <p class="text-[#555] leading-relaxed text-sm">{faq.answer}</p>
+              </div>
             </div>
-          </div>
-          <!-- Living The Dream -->
-          <div class="accordion-card bg-[#F5F5EE] rounded-xl p-6">
-            <button class="accordion-btn w-full flex items-center justify-between text-left" aria-expanded="true">
-              <h3 class="text-lg font-bold text-[#1D1C1C]">Living The Dream</h3>
-              <span class="accordion-sign text-[#1D1C1C] text-2xl leading-none shrink-0 ml-4">—</span>
-            </button>
-            <div class="accordion-body mt-4">
-              <p class="text-[#555] leading-relaxed text-sm">We help The Church be on earth as it is in heaven. In Revelation 7:9-12, we see the Church in heaven filled with people from every nation, tongue, and tribe gathered around the throne worshiping Jesus.</p>
-              <p class="text-[#555] leading-relaxed text-sm mt-3">Won't you join us in living the dream?</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
@@ -270,58 +261,25 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto max-w-4xl">
       <h2 class="text-[#1D1C1C] text-3xl lg:text-5xl font-bold mb-10">4 Ways we Empower Believers Globally</h2>
       <ol class="space-y-3 text-[#444]">
-        <li class="flex items-start gap-2">
-          <span class="font-bold text-[#1D1C1C]">1.</span>
-          <p>Pray for Believers (Americans &amp; Indians) to receive &amp; share Christ.</p>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="font-bold text-[#1D1C1C]">2.</span>
-          <p>Give to God's work through GHI.</p>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="font-bold text-[#1D1C1C]">3.</span>
-          <p>Go and serve the Church in India.</p>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="font-bold text-[#1D1C1C]">4.</span>
-          <p>Resources for radical transformation.</p>
-        </li>
+        {empowerCards.map((card: any, i: number) => (
+          <li class="flex items-start gap-2">
+            <span class="font-bold text-[#1D1C1C]">{i + 1}.</span>
+            <p>{card.title}{card.title === 'Pray' ? ' for Believers (Americans & Indians) to receive & share Christ.' : card.title === 'Give' ? " to God's work through GHI." : card.title === 'Go' ? ' and serve the Church in India.' : ' for radical transformation.'}</p>
+          </li>
+        ))}
       </ol>
 
       <!-- 2x2 Card Grid: Pray, Give, Go, Resources -->
       <div class="relative grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-        <!-- Pray -->
-        <div class="bg-white rounded-xl p-8">
-          <div class="w-10 h-10 rounded-full bg-[#FEC415] flex items-center justify-center mb-4">
-            <span class="text-white font-bold text-lg">1</span>
+        {empowerCards.map((card: any, i: number) => (
+          <div class="bg-white rounded-xl p-8">
+            <div class="w-10 h-10 rounded-full bg-[#FEC415] flex items-center justify-center mb-4">
+              <span class="text-white font-bold text-lg">{i + 1}</span>
+            </div>
+            <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">{card.title}</h3>
+            <p class="text-[#555] leading-relaxed text-sm">{card.description}</p>
           </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Pray</h3>
-          <p class="text-[#555] leading-relaxed text-sm">Salvation and transformation are God's work. Our work is to pray. We empower you to engage in God's work by praying very specifically for the people of India. Everyone wants to make a difference in the world. Changing the World is a daunting task, but when we pray and obey God, He can change our world forever.</p>
-        </div>
-        <!-- Give -->
-        <div class="bg-white rounded-xl p-8">
-          <div class="w-10 h-10 rounded-full bg-[#FEC415] flex items-center justify-center mb-4">
-            <span class="text-white font-bold text-lg">2</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Give</h3>
-          <p class="text-[#555] leading-relaxed text-sm">We empower you to engage by giving generously and sacrificially to God's work through GHI. God uses every gift to GHI so that Americans and Indian Nationals are radically transformed by &amp; for The Gospel. Over 85% of every dollar given directly benefits our programs here in the USA and India.</p>
-        </div>
-        <!-- Go -->
-        <div class="bg-white rounded-xl p-8">
-          <div class="w-10 h-10 rounded-full bg-[#FEC415] flex items-center justify-center mb-4">
-            <span class="text-white font-bold text-lg">3</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Go</h3>
-          <p class="text-[#555] leading-relaxed text-sm">We believe one of the most radical ways for us to engage in God's mission is to get on a plane and go to India. Few things are more endearing to any International living in the USA than the words, "I've been there." We empower you to go and share the love and grace you've been shown.</p>
-        </div>
-        <!-- Resources -->
-        <div class="bg-white rounded-xl p-8">
-          <div class="w-10 h-10 rounded-full bg-[#FEC415] flex items-center justify-center mb-4">
-            <span class="text-white font-bold text-lg">4</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#1D1C1C] mb-3">Resources</h3>
-          <p class="text-[#555] leading-relaxed text-sm">We empower church staffs and volunteers with an identifiable and measurable strategy for reaching the internationals in their community. When our churches reach foreign-born internationals, they will reach other foreign-born nationals. Now that is truly changing the world!</p>
-        </div>
+        ))}
         <!-- Green swoosh bottom-right -->
         <div class="absolute -bottom-8 -right-8 pointer-events-none opacity-40 hidden md:block">
           <svg width="180" height="100" viewBox="0 0 180 100" fill="none"><path d="M10 80c40-70 110-70 160-15" stroke="#2EAB5A" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M152 50l20 15-18 6" fill="#2EAB5A"/></svg>
@@ -340,24 +298,24 @@ import Layout from '../layouts/Layout.astro';
           <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
             <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Leadership Development</h3>
-          <p class="text-[#555] leading-relaxed">We equip church planters, pastors, worship leaders, church staff, and core leaders with biblical truth &amp; practical resources.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">{serviceAreas[0]?.title || 'Leadership Development'}</h3>
+          <p class="text-[#555] leading-relaxed">{serviceAreas[0]?.description || ''}</p>
         </div>
         <!-- Child Development -->
         <div class="text-center">
           <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
             <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Child Development</h3>
-          <p class="text-[#555] leading-relaxed">We empower the local church as they make Christ known among children in schools, orphan homes, and local communities.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">{serviceAreas[1]?.title || 'Child Development'}</h3>
+          <p class="text-[#555] leading-relaxed">{serviceAreas[1]?.description || ''}</p>
         </div>
         <!-- Community Development -->
         <div class="text-center">
           <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
             <svg class="w-10 h-10 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
           </div>
-          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">Community Development</h3>
-          <p class="text-[#555] leading-relaxed">We empower local churches in India with clean water projects, hygiene kits, business development projects, and other practical resources.</p>
+          <h3 class="text-lg font-bold text-[#1D1C1C] mb-3">{serviceAreas[2]?.title || 'Community Development'}</h3>
+          <p class="text-[#555] leading-relaxed">{serviceAreas[2]?.description || ''}</p>
         </div>
       </div>
     </div>
@@ -371,8 +329,8 @@ import Layout from '../layouts/Layout.astro';
         <div>
           <h2 class="text-[#1D1C1C] text-3xl lg:text-4xl font-bold mb-6">How GHI Began</h2>
           <div class="space-y-5 text-[#444] leading-relaxed">
-            <p>During our founder's first trip to India in 1998, God planted a part of his heart in India. He returned three years later, with his 11-year-old son, and again three years after that, with his 11-year-old daughter.</p>
-            <p>In 2003, GHI incorporated as a 501(c)(3) nonprofit organization for the sole purpose of having a bank account and the ability to offer donors a tax-deductible receipt.</p>
+            <p>{founderP1}</p>
+            <p>{founderP2}</p>
           </div>
         </div>
         <div>
@@ -397,8 +355,8 @@ import Layout from '../layouts/Layout.astro';
           />
         </div>
         <div class="space-y-5 text-[#444] leading-relaxed">
-          <p>This hobby of taking teams on mission trips to India grew from one team a year, to two teams per year and then three. In October 2010, while Pastor Kevin was speaking to a group of gospel workers in Hyderabad, India; God broke his heart for the pastors of India and called him to focus full-time on empowering The Church as they make Christ known among the people of India.</p>
-          <p class="font-semibold text-[#1D1C1C]">Today, thousands of Americans and Indians have been radically transformed through this mission, and millions of dollars have been collected for the Lord's work through Global Hope India.</p>
+          <p>{founderP3}</p>
+          <p class="font-semibold text-[#1D1C1C]">{founderP4}</p>
         </div>
       </div>
     </div>
@@ -423,11 +381,9 @@ import Layout from '../layouts/Layout.astro';
         <!-- Right: bullet list -->
         <div>
           <ul class="list-disc list-outside pl-5 space-y-3 text-[#1D1C1C] text-base leading-relaxed">
-            <li>US Founder/President</li>
-            <li>GHI Board of Directors (Consisting of male and female Christian leaders from the USA &amp; India)</li>
-            <li>Staff</li>
-            <li>Indian partners from across India covering North, South, East, and West India including mainland India and Northeast India.</li>
-            <li>100's of Volunteers annually</li>
+            {teamMembers.map((m: any) => (
+              <li>{m.text}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -443,24 +399,17 @@ import Layout from '../layouts/Layout.astro';
         <div>
           <h2 class="text-[#1D1C1C] font-bold text-[26px] md:text-[30px] lg:text-[50px] leading-tight mb-6">Statement of Faith</h2>
           <div class="space-y-2 text-[#444] text-[15px] leading-[1.7]">
-            <p>We believe in God the Father, Creator of everything, who loves the world he created and sent his only Son to be our Savior.</p>
-            <p>We believe that God the Son is Jesus of Nazareth, the Savior sent by God, Israel's Messiah, born of a virgin, fully man and fully God.</p>
-            <p>We believe that God the Holy Spirit quickens us from death to life, indwells all those who receive Jesus Christ by faith as Lord and Savior and continuously conforms believers to the image of Jesus Christ.</p>
-            <p>We believe that God created all men in his image, to be in perfect fellowship with him, but that this fellowship was broken by sin. Subsequently, all men are born sinners and are in need of salvation. Our relationship with God can only be restored through repentance of sin and belief in Jesus Christ for salvation.</p>
-            <p>We believe the death of Jesus Christ on the cross is sufficient in itself to make atonement for the sin of the world — an atonement available to all who repent of their sins and believe in him alone for forgiveness and salvation.</p>
-            <p>We believe Jesus Christ died on the cross, was buried, and the third day he bodily arose from the dead guaranteeing the bodily resurrection of all those who have received eternal life through faith in him.</p>
+            {faithStatements.slice(0, 6).map((s: any) => (
+              <p>{s.text}</p>
+            ))}
           </div>
         </div>
         <!-- Right column: 7 paragraphs + photo collage -->
         <div>
           <div class="space-y-2 text-[#444] text-[15px] leading-[1.7] lg:mt-[116px]">
-            <p>We believe salvation from judgment, forgiveness of sin and eternal life are free gifts of God's grace and cannot be earned, deserved, inherited or bought.</p>
-            <p>We believe only those who believe in Jesus Christ and receive him into their inner being will escape eternal judgment and be accepted into heaven.</p>
-            <p>We believe in the imminent, visible, bodily return of Jesus Christ to this earth to reign in righteousness and justice.</p>
-            <p>We believe the true Church is not an organization, but the body of Christ made up of those who have personally trusted Jesus Christ as Savior and publicly confessed him as Lord.</p>
-            <p>We believe that the Bible is the Word of God, inspired by the Spirit of God, without error and thus the supreme and final authority for faith and practice.</p>
-            <p>We believe that daily Bible reading and prayer are as necessary for the sustenance of spiritual life as food and water are necessary for physical life.</p>
-            <p>We believe that all believers are commanded to be witnesses for Christ, sharing the Gospel to the whole world.</p>
+            {faithStatements.slice(6).map((s: any) => (
+              <p>{s.text}</p>
+            ))}
           </div>
           <!-- Photo collage: 3 overlapping images with parallax -->
           <div id="faith-collage" class="relative mt-8 h-[300px] lg:h-[350px] overflow-hidden">
