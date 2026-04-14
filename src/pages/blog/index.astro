@@ -7,7 +7,7 @@ const rawSanityPosts = await sanityClient.fetch(`
     "slug": "/blog/" + slug.current,
     title,
     excerpt,
-    "image": coalesce(heroImage.asset->url + "?w=800&auto=format", "/blog-default.jpg"),
+    "image": coalesce(heroImage.asset->url + "?w=800&auto=format", externalImageUrl, "/blog-default.jpg"),
     "imagePosition": "center center",
     "author": coalesce(author, "Global Hope India"),
     "date": publishDate,
@@ -140,6 +140,12 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
     font-weight: 800;
     line-height: 1.08;
     letter-spacing: -0.02em;
+  }
+  /* Match SMP font size scale — all body-level text renders at 1rem */
+  #main-content .text-xs,
+  #main-content .text-sm,
+  #main-content .text-base {
+    font-size: 1rem;
   }
 </style>
 
