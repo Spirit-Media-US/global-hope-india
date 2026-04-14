@@ -24,7 +24,16 @@ const fallbackStats = [
   { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/db1bf9a4620f71ed820ed9c918e039d83c7a020f-500x500.svg', label: 'Hygiene kits', value: '100,000' },
   { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/9c4e4d08eec924a37808ac240f0ff1c22b4ce219-500x500.svg', label: 'Lives Impacted', value: '59,000,000' },
 ];
-if (stats.length === 0) stats = fallbackStats;
+if (stats.length === 0) {
+  stats = fallbackStats;
+} else {
+  // Fill in missing icons from fallback data
+  const fallbackByLabel = Object.fromEntries(fallbackStats.map(s => [s.label, s]));
+  stats = stats.map(s => ({
+    ...s,
+    icon: s.icon || fallbackByLabel[s.label]?.icon || '',
+  }));
+}
 
 // Fetch latest 6 blog posts
 let blogPosts: any[] = [];
