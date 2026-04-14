@@ -123,28 +123,19 @@ const fallbackBlogPosts = [
       <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative z-10 container mx-auto px-6 flex items-end justify-center" style="min-height:70vh;padding-bottom:12vh;">
+    <div class="relative z-10 container mx-auto px-6 flex items-center justify-center min-h-screen">
       <div class="hero-flip-container">
         <h1 class="hero-flip-text">
-          <!-- Phase A: "Jesus for India" -->
-          <span class="flip-phrase flip-phrase-a active">
-            <span class="txt-jesus">Jesus</span>
-            <span class="txt-for">for</span>
-            <span class="txt-india">India</span>
-          </span>
-          <!-- Phase B: "India for Jesus" -->
-          <span class="flip-phrase flip-phrase-b">
-            <span class="txt-india">India</span>
-            <span class="txt-for">for</span>
-            <span class="txt-jesus">Jesus</span>
-          </span>
+          <span class="flip-word flip-word-left active-word" id="word-left">Jesus</span>
+          <span class="txt-for">for</span>
+          <span class="flip-word flip-word-right active-word" id="word-right">India</span>
         </h1>
       </div>
     </div>
   </section>
 
   <!-- ── TAGLINE ─────────────────────────────────────────── -->
-  <section class="relative bg-[#F8F5EF] overflow-hidden -mt-28 md:-mt-20 lg:-mt-24 z-10">
+  <section class="relative bg-[#F8F5EF] overflow-hidden -mt-40 md:-mt-32 lg:-mt-36 z-10">
     <div class="relative z-10 text-center pt-10 lg:pt-14 pb-6 px-8 lg:px-16">
       <h2 class="text-[#1D1C1C] font-bold mb-0 max-w-5xl mx-auto" style="font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1.3;">Empowering God's Work in India — Sending People, Funding, and Bibles</h2>
     </div>
@@ -219,74 +210,89 @@ const fallbackBlogPosts = [
     }
   </style>
 
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <!-- Hero fonts loaded from system -->
   <style>
     .hero-flip-container {
-      perspective: 1000px;
+      perspective: 1200px;
     }
     .hero-flip-text {
-      position: relative;
-      display: block;
-      height: clamp(4rem, 10vw, 8rem);
-    }
-    .flip-phrase {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: center;
-      gap: clamp(0.4em, 2vw, 0.6em);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotateX(90deg);
-      opacity: 0;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-      transform-style: preserve-3d;
+      gap: clamp(0.15em, 1vw, 0.3em);
       white-space: nowrap;
     }
-    .flip-phrase.active {
-      transform: translate(-50%, -50%) rotateX(0deg);
-      opacity: 1;
+    .flip-word {
+      display: inline-block;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(3rem, 8vw, 100px);
+      font-weight: 400;
+      text-shadow: 3px 4px 10px rgba(0,0,0,0.6);
+      perspective: 800px;
+      min-width: 3em;
+      text-align: center;
     }
-    .flip-phrase.exit {
-      transform: translate(-50%, -50%) rotateX(-90deg);
-      opacity: 0;
+    .flip-word.flipping {
+      animation: word-flip 0.8s ease-in-out;
     }
-    .txt-india,
-    .txt-jesus {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(3rem, 9vw, 6.5rem);
-      font-weight: 700;
-      text-shadow: 2px 4px 8px rgba(0,0,0,0.5);
+    @keyframes word-flip {
+      0%   { transform: rotateY(0deg); }
+      50%  { transform: rotateY(90deg); }
+      100% { transform: rotateY(0deg); }
     }
-    .txt-india {
-      color: #2EAB5A;
+    .flip-word-left {
+      color: #FF8FAB;
     }
-    .txt-jesus {
-      color: #f8c8dc;
+    .flip-word-right {
+      color: #4CAF50;
+    }
+    .flip-word-left.swapped {
+      color: #4CAF50;
+    }
+    .flip-word-right.swapped {
+      color: #FF8FAB;
     }
     .txt-for {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.4rem, 4vw, 3rem);
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(2rem, 5.5vw, 70px);
       font-weight: 400;
       color: #ffffff;
-      text-shadow: 2px 4px 8px rgba(0,0,0,0.5);
-      padding: 0 0.1em;
+      text-shadow: 2px 3px 8px rgba(0,0,0,0.6);
     }
   </style>
 
   <script>
-    const phrases = document.querySelectorAll('.flip-phrase');
-    let current = 0;
-    function flipHeroText() {
-      const prev = current;
-      current = (current + 1) % phrases.length;
-      phrases[prev].classList.remove('active');
-      phrases[prev].classList.add('exit');
-      phrases[current].classList.add('active');
-      phrases[current].classList.remove('exit');
-      setTimeout(flipHeroText, 3000);
+    const left = document.getElementById('word-left');
+    const right = document.getElementById('word-right');
+    let phase = 0; // 0 = "Jesus for India", 1 = "India for Jesus"
+
+    function flipWords() {
+      left.classList.add('flipping');
+      right.classList.add('flipping');
+
+      setTimeout(() => {
+        if (phase === 0) {
+          left.textContent = 'India';
+          right.textContent = 'Jesus';
+          left.classList.add('swapped');
+          right.classList.add('swapped');
+        } else {
+          left.textContent = 'Jesus';
+          right.textContent = 'India';
+          left.classList.remove('swapped');
+          right.classList.remove('swapped');
+        }
+        phase = (phase + 1) % 2;
+      }, 400); // swap text at midpoint of flip
+
+      setTimeout(() => {
+        left.classList.remove('flipping');
+        right.classList.remove('flipping');
+      }, 800);
+
+      setTimeout(flipWords, 3000);
     }
-    setTimeout(flipHeroText, 3000);
+    setTimeout(flipWords, 3000);
   </script>
 
 
