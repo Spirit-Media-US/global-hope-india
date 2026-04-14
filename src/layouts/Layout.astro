@@ -6,12 +6,16 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  keywords?: string;
+  ogType?: string;
 }
 
 const {
   title,
-  description = 'Global Hope India empowers the church in India to make Christ known. Join us through prayer, giving, and going.',
+  description = 'Global Hope India is a 501(c)(3) nonprofit sending mission teams, Bibles, and resources to empower indigenous churches across India for over 25 years.',
   ogImage = 'https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp',
+  keywords,
+  ogType = 'website',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
@@ -23,6 +27,8 @@ const currentPath = Astro.url.pathname;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="robots" content="index, follow" />
     <title>{title}</title>
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -32,7 +38,7 @@ const currentPath = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Global Hope India" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -78,7 +84,6 @@ const currentPath = Astro.url.pathname;
             { href: '/projects', label: 'Projects' },
             { href: '/get-involved', label: 'Get Involved' },
             { href: '/impact', label: 'Impact' },
-            { href: '/blog', label: 'Blog' },
           ].map(link => (
             <a
               href={link.href}
@@ -91,7 +96,7 @@ const currentPath = Astro.url.pathname;
               {link.label}
             </a>
           ))}
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-[15px] font-medium py-3 px-8 rounded transition-colors">Donate</a>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-[15px] font-medium py-3 px-8 rounded transition-colors">Give to India</a>
         </nav>
 
         <!-- Mobile hamburger -->
@@ -112,7 +117,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Mobile donate bar (below logo row, matching original site) -->
       <div class="lg:hidden flex justify-center py-2 border-t border-gray-100">
-        <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-sm font-medium py-2.5 px-8 rounded-full transition-colors">Donate</a>
+        <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-sm font-medium py-2.5 px-8 rounded-full transition-colors">Give to India</a>
       </div>
 
       <!-- Mobile menu -->
@@ -124,7 +129,6 @@ const currentPath = Astro.url.pathname;
             { href: '/projects', label: 'Projects' },
             { href: '/get-involved', label: 'Get Involved' },
             { href: '/impact', label: 'Impact' },
-            { href: '/blog', label: 'Blog' },
           ].map(link => (
             <a
               href={link.href}
@@ -137,7 +141,7 @@ const currentPath = Astro.url.pathname;
               {link.label}
             </a>
           ))}
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium mt-3 text-center py-3 rounded transition-colors">Donate Now</a>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium mt-3 text-center py-3 rounded transition-colors">Give to India</a>
         </nav>
       </div>
     </header>
