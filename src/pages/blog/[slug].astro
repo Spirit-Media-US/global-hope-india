@@ -19,7 +19,7 @@ const post = await sanityClient.fetch(
   { slug }
 );
 
-if (!post) return Astro.redirect('/impact');
+if (!post) return Astro.redirect('/blog');
 
 let related: any[] = [];
 if (post.tags?.length) {
@@ -72,8 +72,8 @@ const encodedTitle = encodeURIComponent(post.title);
 ---
 
 <Layout
-  title={post.seoTitle || `${post.title} | GHI Magazine`}
-  description={post.seoDescription || post.excerpt || 'Read this story on the Global Hope India blog.'}
+  title={post.seoTitle || `${post.title} | Global Hope India Blog — Advancing the Gospel in India`}
+  description={post.seoDescription || post.excerpt || 'Read this story about how God is transforming lives and advancing the gospel among unreached people in India.'}
   ogImage={heroImage}
   ogType="article"
 >

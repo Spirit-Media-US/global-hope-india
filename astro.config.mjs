@@ -7,6 +7,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       serialize(item) {
+        // Giving landing pages — highest priority
+        if (item.url.includes('/give/')) {
+          return { ...item, changefreq: 'monthly', priority: 0.95, lastmod: new Date().toISOString() };
+        }
         if (item.url.includes('/blog/') && item.url !== 'https://globalhopeindia.org/blog/') {
           return { ...item, changefreq: 'weekly', priority: 0.9, lastmod: new Date().toISOString() };
         }

@@ -32,6 +32,12 @@ try {
   practicalResources = resItems.map((r: any) => r.label);
 } catch (e) { /* fallback below */ }
 
+// Fetch FAQs for projects page
+let projectFaqs: any[] = [];
+try {
+  projectFaqs = await sanityClient.fetch(`*[_type == "faqItem" && page == "projects"] | order(order asc) { question, answer }`);
+} catch (e) {}
+
 // Fallbacks
 if (partners.length === 0) partners = [
   { name: 'Achu in Nagaland', url: 'https://givebutter.com/AchuInNagaland' },
@@ -77,9 +83,9 @@ if (practicalResources.length === 0) practicalResources = [
 ---
 
 <Layout
-  title="Mission Projects in India — Bibles, Orphan Care & More"
-  description="Fund mission projects in India: Bible distribution, orphan sponsorship, clean water, church planting, and community development. 100% of gifts benefit programs."
-  keywords="donate bibles india, sponsor orphan india, church planting india, christian nonprofit india"
+  title="Give to Church Planting, Bibles & Orphan Care | GHI"
+  description="Donate to India missions: fund Bible distribution, church planting, support orphans, and sponsor missionaries transforming lives in India."
+  keywords="give to church planting India, Bibles for India, fund Bible distribution India, support orphans in India, donate to India missions, sponsor child India Christian, support Christian missionaries India, building orphanages in India, transforming lives in India"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -87,8 +93,29 @@ if (practicalResources.length === 0) practicalResources = [
       "@type": "WebPage",
       "name": "Projects — Global Hope India",
       "url": "https://globalhopeindia.org/projects",
-      "description": "We share Jesus by funding projects that make Christ known and extend God's kingdom in India.",
+      "description": "Donate to India missions: fund Bible distribution, give to church planting, support orphans, and sponsor Christian missionaries transforming lives across India.",
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where does my money go when I donate to Global Hope India?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Your donation funds Bible distribution, church planter support, orphan care, clean water projects, hygiene kits, and community development across India. Over 85% of every dollar given directly benefits programs in India and the USA." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I choose which project to fund?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can direct your gift to a specific partner or project such as Bibles for India, orphan care, church planting, or village development. Visit our Projects page to see all available giving options." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my donation to Global Hope India tax deductible?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Global Hope India is a federally recognized 501(c)(3) nonprofit organization located in Raleigh, North Carolina. All gifts are tax-deductible. You will receive a donation receipt for your records." }
+        }
+      ]
     })}></script>
   </Fragment>
 
@@ -213,30 +240,19 @@ if (practicalResources.length === 0) practicalResources = [
           </div>
         </div>
 
-        <!-- Check Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Prefer to give by check?</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">If you'd prefer to give by check please make it payable to and mail it to:</p>
-            <p class="text-[#444] mt-3">Global Hope India<br/>PO Box 3251<br/>Cary, NC 27519</p>
+        {projectFaqs.map((faq: any) => (
+          <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
+            <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
+              <h3 class="text-lg font-bold text-[#1D1C1C]">{faq.question}</h3>
+              <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
+            </button>
+            <div class="accordion-body px-6 pb-6 hidden">
+              <p class="text-[#444] leading-relaxed">{faq.answer}</p>
+            </div>
           </div>
-        </div>
+        ))}
 
-        <!-- Tax Deductible Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Is my giving tax deductible?</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">Yes. Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Raleigh, North Carolina. All gifts are tax-deductible. Thank you!</p>
-          </div>
-        </div>
-
-        <!-- Privacy Toggle -->
+        <!-- Privacy Toggle (always shown) -->
         <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
           <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
             <h3 class="text-lg font-bold text-[#1D1C1C]">GHI's privacy policy</h3>
@@ -244,17 +260,6 @@ if (practicalResources.length === 0) practicalResources = [
           </button>
           <div class="accordion-body px-6 pb-6 hidden">
             <p class="text-[#444] leading-relaxed">GHI protects your privacy! Under no circumstance does GHI ever sell or give out our contact lists. <a href="/privacy-policy" class="font-bold text-[#1D1C1C] hover:text-[#2EAB5A] transition-colors underline">See our Privacy Policy.</a></p>
-          </div>
-        </div>
-
-        <!-- Cancel Recurring Toggle -->
-        <div class="accordion-card bg-white rounded-xl border border-[#e0e0e0]">
-          <button class="accordion-btn w-full flex items-center justify-between text-left p-6" aria-expanded="false">
-            <h3 class="text-lg font-bold text-[#1D1C1C]">Cancel existing recurring donation</h3>
-            <span class="accordion-sign text-[#2EAB5A] text-2xl leading-none shrink-0 ml-4">+</span>
-          </button>
-          <div class="accordion-body px-6 pb-6 hidden">
-            <p class="text-[#444] leading-relaxed">If you'd like to cancel an existing recurring donation, simply login to your Givebutter account and edit your giving.</p>
           </div>
         </div>
       </div>
