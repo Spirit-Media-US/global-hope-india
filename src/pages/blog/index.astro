@@ -278,6 +278,8 @@ document.querySelectorAll('.tag-chip').forEach(btn => {
   });
 });
 
-// Initial render + re-render on Astro client-side navigation
+// Initial render
+renderPosts();
+// Re-render on Astro client-side navigation (back button etc.)
 document.addEventListener('astro:page-load', () => renderPosts());
 </script>
