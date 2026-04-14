@@ -19,7 +19,7 @@ const post = await sanityClient.fetch(
   { slug }
 );
 
-if (!post) return Astro.redirect('/impact');
+if (!post) return Astro.redirect('/blog');
 
 let related: any[] = [];
 if (post.tags?.length) {
