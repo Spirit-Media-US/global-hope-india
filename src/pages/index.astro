@@ -2,6 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 import { sanityClient } from '../lib/sanity.ts';
 
+// Fetch impact stats from Sanity
+let stats: any[] = [];
+try {
+  stats = await sanityClient.fetch(`
+    *[_type == "impactStat"] | order(order asc) {
+      label, value, "icon": icon
+    }
+  `);
+} catch (e) { /* fallback below */ }
+
+// Fallback stats (hardcoded)
+const fallbackStats = [
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/6dbc6e8cd900153cb00f62123e78bd52ba5b618c-500x500.svg', label: 'Donors', value: '1,029' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/94ffe68e3e0680b0c21f2ee1d46cde5298c0dc6f-500x500.svg', label: 'Collecting', value: '$10,000,000' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/95369fa252d43f495b649bc6582b4c5a8ce26ccf-500x500.svg', label: 'Bibles', value: '50,000' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/53c4d85a2901cef03143a8f1bf4c60181864f567-500x500.svg', label: 'Mission Teams', value: '139' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/da89ea6d23cb8d0a1bc30083985a7126209aa346-500x500.svg', label: 'Volunteers', value: '1,002' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/19173860c060a39b8d1dda6cdcded3b665f03ca1-500x500.svg', label: 'Water Projects', value: '143' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/be24a3c6f9211be8005b8e27c17a62c3004e5d93-500x500.svg', label: 'Orphans Sponsored', value: '599' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/db1bf9a4620f71ed820ed9c918e039d83c7a020f-500x500.svg', label: 'Hygiene kits', value: '100,000' },
+  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/9c4e4d08eec924a37808ac240f0ff1c22b4ce219-500x500.svg', label: 'Lives Impacted', value: '59,000,000' },
+];
+if (stats.length === 0) stats = fallbackStats;
+
 // Fetch latest 6 blog posts
 let blogPosts: any[] = [];
 try {
@@ -24,18 +48,6 @@ const formatDate = (d: string) => {
   const dt = new Date(d);
   return `${MONTHS[dt.getUTCMonth()]} ${dt.getUTCDate()}, ${dt.getUTCFullYear()}`;
 };
-
-const stats = [
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/6dbc6e8cd900153cb00f62123e78bd52ba5b618c-500x500.svg', label: 'Donors', value: '1,029' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/94ffe68e3e0680b0c21f2ee1d46cde5298c0dc6f-500x500.svg', label: 'Collecting', value: '$10,000,000' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/95369fa252d43f495b649bc6582b4c5a8ce26ccf-500x500.svg', label: 'Bibles', value: '50,000' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/53c4d85a2901cef03143a8f1bf4c60181864f567-500x500.svg', label: 'Mission Teams', value: '139' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/da89ea6d23cb8d0a1bc30083985a7126209aa346-500x500.svg', label: 'Volunteers', value: '1,002' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/19173860c060a39b8d1dda6cdcded3b665f03ca1-500x500.svg', label: 'Water Projects', value: '143' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/be24a3c6f9211be8005b8e27c17a62c3004e5d93-500x500.svg', label: 'Orphans Sponsored', value: '599' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/db1bf9a4620f71ed820ed9c918e039d83c7a020f-500x500.svg', label: 'Hygiene kits', value: '100,000' },
-  { icon: 'https://cdn.sanity.io/images/r33r2z1j/production/9c4e4d08eec924a37808ac240f0ff1c22b4ce219-500x500.svg', label: 'Lives Impacted', value: '59,000,000' },
-];
 
 const fallbackBlogPosts = [
   { title: 'Our Partners in India', slug: 'our-partners-in-india', date: 'March 18, 2025', tag: 'Partners', excerpt: 'Global Hope India partners with local churches and ministries across India to bring the gospel, resources, and sustainable development to communities in need.', image: 'https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp' },

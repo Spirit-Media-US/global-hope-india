@@ -1,7 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sanityClient } from '../lib/sanity.ts';
 
-const partners = [
+// Fetch from Sanity with hardcoded fallbacks
+let partners: any[] = [];
+let projectLinks: any[] = [];
+let accountability: string[] = [];
+let practicalResources: string[] = [];
+
+try {
+  const donationLinks = await sanityClient.fetch(`
+    *[_type == "donationLink"] | order(order asc) {
+      name, category, "url": donateUrl
+    }
+  `);
+  partners = donationLinks.filter((d: any) => d.category === 'partner');
+  projectLinks = donationLinks.filter((d: any) => d.category === 'project');
+} catch (e) { /* fallback below */ }
+
+try {
+  const accItems = await sanityClient.fetch(`
+    *[_type == "accountabilityItem"] | order(order asc) { text }
+  `);
+  accountability = accItems.map((a: any) => a.text);
+} catch (e) { /* fallback below */ }
+
+try {
+  const resItems = await sanityClient.fetch(`
+    *[_type == "practicalResource"] | order(order asc) { label }
+  `);
+  practicalResources = resItems.map((r: any) => r.label);
+} catch (e) { /* fallback below */ }
+
+// Fallbacks
+if (partners.length === 0) partners = [
   { name: 'Achu in Nagaland', url: 'https://givebutter.com/AchuInNagaland' },
   { name: 'Amit in Dehradun', url: 'https://givebutter.com/AmitInDehradun' },
   { name: 'Anil in Andhra Pradesh', url: 'https://givebutter.com/AnilinAndhraPradesh' },
@@ -16,8 +48,7 @@ const partners = [
   { name: 'Sekhar in Vizag', url: 'https://givebutter.com/SekharInVizag' },
   { name: "The Shepherd's House", url: 'https://givebutter.com/TheShepherdsHouse' },
 ];
-
-const projectLinks = [
+if (projectLinks.length === 0) projectLinks = [
   { name: 'Bibles', url: 'https://givebutter.com/BiblesForIndia' },
   { name: 'Business Development', url: 'https://givebutter.com/TheShepherdsHouse' },
   { name: 'Child Development', url: 'https://givebutter.com/GHIChildDevelopment' },
@@ -26,8 +57,7 @@ const projectLinks = [
   { name: 'Village Development', url: 'https://givebutter.com/GHIVillageDevelopment' },
   { name: 'North East Healthcare Fund', url: 'https://givebutter.com/NorthEastHealthcareFund' },
 ];
-
-const accountability = [
+if (accountability.length === 0) accountability = [
   'Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Morrisville, North Carolina. All gifts are tax-deductible to the full extent permitted by law.',
   'GHI is a member of multiple independent financial accountability programs.',
   'Our Board of Directors controls our annual budget including all staff salaries.',
@@ -36,8 +66,7 @@ const accountability = [
   'God uses every gift to GHI to radically transform Americans and Indian Nationals through missions.',
   '100% of every dollar given directly benefits our programs here in the USA and in India.',
 ];
-
-const practicalResources = [
+if (practicalResources.length === 0) practicalResources = [
   'Clean Water Projects',
   'Hygiene Kits',
   'Motor bikes for leaders',
