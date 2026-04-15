@@ -112,15 +112,15 @@ const fallbackBlogPosts = [
   <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
     <div class="absolute inset-0 bg-[#1D1C1C]" style="background-image:url('https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp');background-size:cover;background-position:center 30%;"></div>
     <video
-      autoplay
+      id="hero-video"
       muted
       loop
       playsinline
-      preload="auto"
+      preload="none"
       poster="https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp"
       class="absolute inset-0 w-full h-full object-cover"
+      data-src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4"
     >
-      <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 container mx-auto px-6 flex items-center justify-center min-h-screen">
@@ -260,6 +260,20 @@ const fallbackBlogPosts = [
       text-shadow: 2px 3px 8px rgba(0,0,0,0.6);
     }
   </style>
+
+  <script>
+    // Lazy-load hero video after page content is ready
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+      const src = heroVideo.dataset.src;
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = 'video/mp4';
+      heroVideo.appendChild(source);
+      heroVideo.load();
+      heroVideo.play();
+    }
+  </script>
 
   <script>
     const left = document.getElementById('word-left');
