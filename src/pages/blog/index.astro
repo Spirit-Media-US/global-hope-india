@@ -27,13 +27,14 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
 ---
 
 <Layout
-  title="Blog — Stories of Transforming Lives in India | Global Hope India"
+  title="Blog — Stories of Transforming Lives in India | GHI"
   description="Stories of God advancing the gospel in India — church planting, Bible distribution, orphan care, and empowering missionaries among unreached people."
 >
   <Fragment slot="head">
     <meta name="keywords" content="india missions blog, church planting india, christian nonprofit india, global hope india blog" />
     <meta name="robots" content="index, follow" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Blog",
