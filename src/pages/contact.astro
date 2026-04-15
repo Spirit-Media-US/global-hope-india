@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MailtoLink from '../components/MailtoLink.astro';
+---
+
+<Layout
+  title="Contact Us — Global Hope India"
+  description="Get in touch with Global Hope India. Call, email, or write to us about donations, mission trips, or partnerships."
+  keywords="contact Global Hope India, GHI phone number, Global Hope India email, donate to India missions contact"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact — Global Hope India",
+      "url": "https://globalhopeindia.org/contact",
+      "description": "Get in touch with Global Hope India about donations, mission trips, or partnerships.",
+      "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+  </Fragment>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="relative min-h-[40vh] lg:min-h-[50vh] overflow-hidden bg-[#06038D]">
+    <div class="absolute inset-0 opacity-10" style="background-image: url('https://cdn.sanity.io/images/r33r2z1j/production/c1a49b5d5cd211dcfec6e88222c0674f6d76463c-1640x924.webp'); background-size: cover; background-position: center;"></div>
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 flex flex-col justify-end h-full min-h-[40vh] lg:min-h-[50vh] pb-12 lg:pb-16">
+      <h1 class="max-w-lg font-bold text-white text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">Get in Touch</h1>
+      <p class="mt-4 text-white/80 text-lg max-w-xl">We'd love to hear from you — whether you have questions about donating, mission trips, or partnering with us.</p>
+    </div>
+  </section>
+
+  <!-- ── CONTACT INFO ─────────────────────────────────────── -->
+  <section class="bg-white py-16 lg:py-24 px-6 lg:px-12">
+    <div class="container mx-auto max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
+
+        <!-- Phone -->
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-[#2EAB5A]" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <h2 class="font-bold text-[#1D1C1C] text-xl mb-3">Call Us</h2>
+          <p class="text-[#555] text-sm leading-relaxed">
+            <a href="tel:9194382444" class="hover:text-[#2EAB5A] transition-colors">Office: 919-438-2444</a><br/>
+            <a href="tel:18555382444" class="hover:text-[#2EAB5A] transition-colors">Toll Free: 1-855-538-2444</a>
+          </p>
+        </div>
+
+        <!-- Email -->
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-[#2EAB5A]" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <h2 class="font-bold text-[#1D1C1C] text-xl mb-3">Email Us</h2>
+          <p class="text-[#555] text-sm">
+            <MailtoLink email="info@globalhopeindia.org" class="hover:text-[#2EAB5A] transition-colors">
+              info@globalhopeindia.org
+            </MailtoLink>
+          </p>
+        </div>
+
+        <!-- Mail -->
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-[#2EAB5A]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+          </div>
+          <h2 class="font-bold text-[#1D1C1C] text-xl mb-3">Write to Us</h2>
+          <p class="text-[#555] text-sm leading-relaxed">
+            PO Box 3251<br/>Cary, NC 27519
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────── -->
+  <section class="bg-[#F8F5EF] py-16 lg:py-20 px-6 lg:px-12">
+    <div class="container mx-auto max-w-3xl text-center">
+      <h2 class="font-bold text-[#1D1C1C] text-2xl lg:text-3xl mb-4">Ready to Make an Impact?</h2>
+      <p class="text-[#555] text-base mb-8 max-w-xl mx-auto">Your generosity funds Bible distribution, church planting, orphan care, and mission trips across India.</p>
+      <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md">Donate Now</a>
+    </div>
+  </section>
+</Layout>
