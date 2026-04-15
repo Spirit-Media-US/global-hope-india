@@ -45,10 +45,11 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Poppins font -->
+    <!-- Poppins font (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3R21TNHTX"></script>
@@ -62,6 +63,7 @@ const currentPath = Astro.url.pathname;
     <slot name="head" />
   </head>
   <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-[#1D1C1C] focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:font-semibold">Skip to main content</a>
     <!-- ── Navbar ─────────────────────────────────────────── -->
     <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white transition-colors duration-300">
       <div class="container mx-auto px-6 flex items-center justify-between h-[68px]">
@@ -73,6 +75,7 @@ const currentPath = Astro.url.pathname;
             width="220"
             height="47"
             class="h-12 w-auto object-contain"
+            fetchpriority="high"
           />
         </a>
 
@@ -174,6 +177,7 @@ const currentPath = Astro.url.pathname;
                 alt="Global Hope India"
                 width="250"
                 height="54"
+                loading="lazy"
                 class="w-[220px] lg:w-[250px] h-auto object-contain"
               />
             </div>
@@ -223,12 +227,12 @@ const currentPath = Astro.url.pathname;
           <!-- Column 3: Trust badges -->
           <div class="flex flex-col items-center gap-3">
             <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/767b76c41ccc43b3c07f07c94435a4dcc3ad13b3-500x500.svg" alt="GuideStar Platinum Seal" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/07b08d8f4d9321bb85fa7814ef0d65a742b3463e-500x500.png" alt="Charity Navigator 100" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/f256d3af6f9dbfbc282103b8fb3f7037a98d64db-500x500.png" alt="Better Business Bureau" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/7de612782e20fce24ac52474b16b6bf4e011c126-500x500.png" alt="Cary Chamber of Commerce" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/cd3ad9882d7c42491f7d98a8df1b71e6868b6e68-135x135.svg" alt="Candid Silver Transparency 2023" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
-              <img src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp" alt="GHI Badge" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/767b76c41ccc43b3c07f07c94435a4dcc3ad13b3-500x500.svg" alt="GuideStar Platinum Seal" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/07b08d8f4d9321bb85fa7814ef0d65a742b3463e-500x500.png" alt="Charity Navigator 100" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/f256d3af6f9dbfbc282103b8fb3f7037a98d64db-500x500.png" alt="Better Business Bureau" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/7de612782e20fce24ac52474b16b6bf4e011c126-500x500.png" alt="Cary Chamber of Commerce" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/cd3ad9882d7c42491f7d98a8df1b71e6868b6e68-135x135.svg" alt="Candid Silver Transparency 2023" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp" alt="GHI Badge" width="56" height="56" loading="lazy" class="h-14 opacity-80 hover:opacity-100 transition-opacity" />
             </div>
           </div>
 

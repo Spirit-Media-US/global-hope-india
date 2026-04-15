@@ -5,10 +5,19 @@ import MailtoLink from '../components/MailtoLink.astro';
 
 <Layout
   title="Privacy Policy — Global Hope India | India Missions"
-  description="Read Global Hope India's privacy policy. Your information is protected when you donate to India missions and give to church planting in India."
+  description="Read Global Hope India's privacy policy. Your personal information is protected when you donate to India missions, give to church planting, or sponsor orphans."
+  ogImage="https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp"
 >
   <Fragment slot="head">
     <meta name="robots" content="noindex, follow" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Privacy Policy — Global Hope India",
+      "url": "https://globalhopeindia.org/privacy-policy",
+      "description": "Read Global Hope India's privacy policy. Your information is protected when you donate to India missions.",
+      "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
   </Fragment>
 
   <section class="bg-[#1D1C1C] text-white pt-36 pb-16 px-6">

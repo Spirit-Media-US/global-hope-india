@@ -27,13 +27,15 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
 ---
 
 <Layout
-  title="Blog — Stories of Transforming Lives in India | Global Hope India"
-  description="Stories of God advancing the gospel in India — church planting, Bible distribution, orphan care, and empowering missionaries among unreached people."
+  title="Blog — Stories of Transforming Lives in India | GHI"
+  ogImage="https://assets.spiritmediapublishing.com/images/ghi-impact-hero.png"
+  description="Stories of God advancing the gospel in India — church planting, Bible distribution, orphan care, and empowering missionaries among unreached people groups."
 >
   <Fragment slot="head">
     <meta name="keywords" content="india missions blog, church planting india, christian nonprofit india, global hope india blog" />
     <meta name="robots" content="index, follow" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Blog",
@@ -63,7 +65,7 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
               ];
               return (
                 <div class="relative rounded-2xl overflow-hidden aspect-square">
-                  <img src={post.image} alt="" class="w-full h-full object-cover" style={`object-position: ${positions[i]};`} />
+                  <img src={post.image} alt="" width="200" height="200" loading="lazy" class="w-full h-full object-cover" style={`object-position: ${positions[i]};`} />
                 </div>
               );
             })}
@@ -194,7 +196,7 @@ function renderPosts() {
     grid.innerHTML = pagePosts.map(post => `
       <a href="${post.slug}" class="group bg-stone-50 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
         <div class="h-48 overflow-hidden">
-          <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" style="object-position: ${post.imagePosition};" />
+          <img src="${post.image}" alt="${post.title}" width="400" height="192" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" style="object-position: ${post.imagePosition};" />
         </div>
         <div class="p-6">
           <div class="flex flex-wrap gap-1.5 mb-3">
@@ -278,8 +280,23 @@ document.querySelectorAll('.tag-chip').forEach(btn => {
   });
 });
 
-// Initial render
-renderPosts();
+// Check URL for ?tag= parameter and activate that filter
+const urlParams = new URLSearchParams(window.location.search);
+const tagParam = urlParams.get('tag');
+if (tagParam) {
+  activeTag = tagParam;
+  document.querySelectorAll('.tag-chip').forEach(b => {
+    b.classList.remove('active', 'bg-[#2EAB5A]', 'text-white', 'border-[#2EAB5A]');
+    b.classList.add('border-stone-300', 'text-stone-600');
+    if (b.getAttribute('data-tag') === tagParam) {
+      b.classList.add('active', 'bg-[#2EAB5A]', 'text-white', 'border-[#2EAB5A]');
+      b.classList.remove('border-stone-300', 'text-stone-600');
+    }
+  });
+  applyFilters();
+} else {
+  renderPosts();
+}
 // Re-render on Astro client-side navigation (back button etc.)
 document.addEventListener('astro:page-load', () => renderPosts());
 </script>

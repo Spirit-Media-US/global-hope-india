@@ -29,8 +29,9 @@ try {
 ---
 
 <Layout
-  title="Impact Stories — Transforming Lives & Advancing the Gospel in India"
+  title="Impact Stories — Transforming Lives in India | GHI"
   description="See how giving to God's work in India transforms lives — stories of church planting, Bible distribution, orphan care, and missionaries reaching the unreached."
+  ogImage="https://assets.spiritmediapublishing.com/images/ghi-impact-hero.png"
   keywords="india missions, church planting india, christian nonprofit india, sponsor orphan india"
 >
   <Fragment slot="head">
@@ -57,6 +58,7 @@ try {
     <img
       src="https://assets.spiritmediapublishing.com/images/ghi-impact-hero.png"
       alt="Global Hope India Impact"
+      width="1600" height="900" fetchpriority="high"
       class="absolute inset-0 w-full h-full object-cover object-center"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
@@ -130,7 +132,7 @@ try {
   function renderCard(s) {
     return `<a href="${s.url}" class="card-fade-in group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
       <div class="overflow-hidden">
-        <img src="${s.image}" alt="${s.title}" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+        <img src="${s.image}" alt="${s.title}" width="600" height="180" loading="lazy" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
       </div>
       <div class="p-4 flex flex-col flex-1">
         <p style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">${s.title}</p>
