@@ -307,7 +307,7 @@ const fallbackBlogPosts = [
           const prefix = stat.value.startsWith('$') ? '$' : '';
           return (
             <div class="flex items-center gap-4">
-              <img src={stat.icon} alt={stat.label} class="w-16 h-16 shrink-0" />
+              <img src={stat.icon} alt={stat.label} width="64" height="64" loading="lazy" class="w-16 h-16 shrink-0" />
               <div>
                 <div
                   class="count-up text-[22px] md:text-[35px] font-bold text-[#1D1C1C] leading-tight"
@@ -333,7 +333,7 @@ const fallbackBlogPosts = [
               <div class="flex flex-col items-center text-center">
                 <div class="relative w-28 h-28 flex items-center justify-center mb-3">
                   <div class="absolute inset-0 bg-[#2EAB5A]/10 rounded-[40%_60%_50%_50%/60%_40%_60%_40%]"></div>
-                  <img src={stat.icon} alt={stat.label} class="relative w-20 h-20" />
+                  <img src={stat.icon} alt={stat.label} width="80" height="80" loading="lazy" class="relative w-20 h-20" />
                 </div>
                 <div
                   class="count-up text-2xl font-bold text-[#1D1C1C] leading-tight"
@@ -510,6 +510,7 @@ const fallbackBlogPosts = [
             <img
               src={`${post.imageUrl || post.image}?w=200&auto=format`}
               alt={post.title}
+              width="96" height="96" loading="lazy"
               class="w-full h-full object-cover"
             />
           </div>
@@ -535,6 +536,7 @@ const fallbackBlogPosts = [
                   <img
                     src={`${post.imageUrl}?w=600&auto=format`}
                     alt={post.title}
+                    width="600" height="180" loading="lazy"
                     class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
@@ -566,7 +568,7 @@ const fallbackBlogPosts = [
               class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col"
             >
               <div class="overflow-hidden">
-                <img src={post.image} alt={post.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+                <img src={post.image} alt={post.title} width="600" height="180" loading="lazy" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
               </div>
               <div class="p-4 flex flex-col flex-1">
                 <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>

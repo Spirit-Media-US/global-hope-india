@@ -124,7 +124,7 @@ const encodedTitle = encodeURIComponent(post.title);
   {heroImage && (
     <section class="bg-white px-6 py-6">
       <div class="container mx-auto max-w-3xl">
-        <img src={heroImage} alt={post.title} class="w-full rounded-xl object-cover max-h-[400px]" />
+        <img src={heroImage} alt={post.title} width="1200" height="400" fetchpriority="high" class="w-full rounded-xl object-cover max-h-[400px]" />
       </div>
     </section>
   )}
@@ -209,7 +209,7 @@ const encodedTitle = encodeURIComponent(post.title);
           <a href={`/blog/${card.slug}`} class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
             <div class="overflow-hidden">
               {card.imageUrl ? (
-                <img src={`${card.imageUrl}?w=600&auto=format`} alt={card.title} class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
+                <img src={`${card.imageUrl}?w=600&auto=format`} alt={card.title} width="600" height="180" loading="lazy" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
               ) : (
                 <div class="w-full h-[180px] bg-[#e5e5e0] flex items-center justify-center"><span class="text-[#999]">No image</span></div>
               )}
