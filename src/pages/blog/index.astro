@@ -278,8 +278,23 @@ document.querySelectorAll('.tag-chip').forEach(btn => {
   });
 });
 
-// Initial render
-renderPosts();
+// Check URL for ?tag= parameter and activate that filter
+const urlParams = new URLSearchParams(window.location.search);
+const tagParam = urlParams.get('tag');
+if (tagParam) {
+  activeTag = tagParam;
+  document.querySelectorAll('.tag-chip').forEach(b => {
+    b.classList.remove('active', 'bg-[#2EAB5A]', 'text-white', 'border-[#2EAB5A]');
+    b.classList.add('border-stone-300', 'text-stone-600');
+    if (b.getAttribute('data-tag') === tagParam) {
+      b.classList.add('active', 'bg-[#2EAB5A]', 'text-white', 'border-[#2EAB5A]');
+      b.classList.remove('border-stone-300', 'text-stone-600');
+    }
+  });
+  applyFilters();
+} else {
+  renderPosts();
+}
 // Re-render on Astro client-side navigation (back button etc.)
 document.addEventListener('astro:page-load', () => renderPosts());
 </script>
