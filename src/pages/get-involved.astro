@@ -17,7 +17,7 @@ import Layout from '../layouts/Layout.astro';
       "description": "Three ways to support God's work in India: pray for unreached people, donate to fund Bible distribution and church planting, or join a short term mission trip to India.",
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
     })}></script>
-    <script src="https://mail.spiritmediaone.com/js/form_embed.js" defer></script>
+    <script is:inline src="https://mail.spiritmediaone.com/js/form_embed.js"></script>
   </Fragment>
 
   <!-- ── HERO ────────────────────────────────────────────── -->
@@ -55,24 +55,26 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Pray</h3>
           <p class="text-[#444] text-sm leading-relaxed text-center mb-6">Pray for India. God loves India. Jesus died for India. Pray for God to open the eyes and hearts of all people of India to see, experience, and love Jesus as the one true God.</p>
-          <!-- Pray Form -->
+          <!-- Pray Form (GHL) -->
           <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
             <p class="text-[#1D1C1C] font-bold text-sm text-center mb-4">I will pray. Send me prayer points.</p>
-            <form id="pray-form" class="space-y-3">
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
-                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Email *</label>
-                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
-                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
-            </form>
+            <iframe
+              src="https://mail.spiritmediaone.com/widget/form/q8NkiVbKyHnak5sKGZAT"
+              style="width:100%;min-height:400px;border:none;border-radius:3px"
+              id="inline-q8NkiVbKyHnak5sKGZAT"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Pray Form"
+              data-height="400"
+              data-layout-iframe-id="inline-q8NkiVbKyHnak5sKGZAT"
+              data-form-id="q8NkiVbKyHnak5sKGZAT"
+              title="Pray Form"
+            ></iframe>
           </div>
         </div>
 
@@ -113,35 +115,25 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-[#1D1C1C] font-bold text-2xl text-center mb-3">Go</h3>
           <p class="text-[#444] text-sm leading-relaxed text-center mb-6">God called every believer to go! Over 1,000 people have traveled on short term mission trips to India through Global Hope India. Teams go and empower Indian partners to advance the gospel, distribute Bibles, and transform lives in communities that have never heard the name of Jesus.</p>
-          <!-- Go Form -->
+          <!-- Go Form (GHL) -->
           <div class="border border-[#e0e0e0] rounded-xl bg-[#fafafa] p-5 flex-1">
-            <form id="go-form" class="space-y-3">
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Full Name *</label>
-                <input type="text" name="name" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Email *</label>
-                <input type="email" name="email" required class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Mobile *</label>
-                <input type="tel" name="mobile" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">When Can You Go? *</label>
-                <input type="text" name="when" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Who will go with you?</label>
-                <input type="text" name="who" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent" />
-              </div>
-              <div>
-                <label class="text-xs text-[#666] mb-1 block">Share any specifics (location, focus, questions)</label>
-                <textarea name="specifics" rows="3" class="w-full border border-[#ccc] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2EAB5A] focus:border-transparent resize-none"></textarea>
-              </div>
-              <button type="submit" class="w-full bg-[#1D1C1C] text-white font-semibold text-sm rounded-lg py-2.5 hover:bg-[#333] transition-colors">Submit</button>
-            </form>
+            <iframe
+              src="https://mail.spiritmediaone.com/widget/form/g7xZZFrtIGXZUhed311U"
+              style="width:100%;min-height:603px;border:none;border-radius:3px"
+              id="inline-g7xZZFrtIGXZUhed311U"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Go Form"
+              data-height="603"
+              data-layout-iframe-id="inline-g7xZZFrtIGXZUhed311U"
+              data-form-id="g7xZZFrtIGXZUhed311U"
+              title="Go Form"
+            ></iframe>
           </div>
         </div>
 
