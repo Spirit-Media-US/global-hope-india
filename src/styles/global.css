@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
-/* Critical above-fold fonts ONLY — Poppins 400 (body) + 600 (nav/button weight).
-   Poppins 500, 700 and Playfair Display (blog headings) moved to public/deferred.css
-   so they don't compete with LCP resources. */
+/* Fonts — all weights. 400/600 preloaded; 500/700 + Playfair display lazy (font-display:swap). */
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-400.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-500.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-600.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-700.woff2') format('woff2');}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/playfair-display/playfair-display-700.woff2') format('woff2');}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:800;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/playfair-display/playfair-display-800.woff2') format('woff2');}
 
 /* ─── Design Tokens (Stitch Design System: Global Hope India Brand) ──── */
 /* Project: projects/3081457824766301683                                  */

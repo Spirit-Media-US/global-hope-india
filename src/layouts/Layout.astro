@@ -26,10 +26,121 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Preconnect to cross-origin asset hosts -->
+    <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+
+    <!-- Preload critical fonts (above-fold) -->
+    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/poppins/poppins-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/poppins/poppins-600.woff2" crossorigin />
+
+    <!-- Per-page head-early slot (hero preloads) -->
+    <slot name="head-early" />
+
+    <!-- ======== Critical CSS — hand-rolled, @layer base wrapped ========
+         @font-face and @keyframes stay at top level (CSS spec forbids them inside @layer).
+         Everything else inside @layer base so Tailwind's @layer utilities wins the cascade.
+         Docs: /home/deploy/.claude/projects/-home-deploy/memory/reference_100club_cascade_rules.md -->
+    <style is:inline>
+      @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-400.woff2') format('woff2')}
+      @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-600.woff2') format('woff2')}
+
+      @layer base {
+        /* Resets */
+        *,*::before,*::after{box-sizing:border-box;border:0 solid}
+        html{-webkit-text-size-adjust:100%;line-height:1.875;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;background-color:#FFFFFF}
+        body{margin:0;font-family:'Poppins',system-ui,sans-serif;color:#1D1C1C;background-color:#FFFFFF;line-height:1.875}
+        img,picture,svg,video,canvas{display:block;max-width:100%;height:auto}
+        h1,h2,h3,h4,h5,h6{margin:0;font-family:'Poppins',system-ui,sans-serif;font-weight:700;line-height:1.15;color:#1D1C1C;overflow-wrap:break-word}
+        h1{font-size:clamp(2.2rem,5vw,4.375rem)}
+        h2{font-size:clamp(1.75rem,3.5vw,3.125rem)}
+        h3{font-size:clamp(1.25rem,2.5vw,1.75rem)}
+        p{margin:0 0 1rem 0;overflow-wrap:break-word}
+        a{color:inherit;text-decoration:none}
+        button{font:inherit;color:inherit;background:transparent;cursor:pointer;padding:0;border:0}
+
+        /* Custom component classes — hex literals (Lighthouse contrast audit can't resolve var()) */
+        .container{max-width:1200px;margin-left:auto;margin-right:auto}
+        .section{padding:5rem 1.5rem}
+        .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#1D1C1C;display:block;margin-bottom:.5rem}
+
+        /* Tailwind utility copies used above the fold */
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+        .focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}
+        .focus\:fixed:focus{position:fixed}
+        .focus\:top-4:focus{top:1rem}
+        .focus\:left-4:focus{left:1rem}
+        .focus\:z-\[100\]:focus{z-index:100}
+        .focus\:bg-white:focus{background-color:#fff}
+        .focus\:text-\[\#1D1C1C\]:focus{color:#1D1C1C}
+        .focus\:px-4:focus{padding-inline:1rem}
+        .focus\:py-2:focus{padding-block:.5rem}
+        .focus\:rounded-lg:focus{border-radius:.5rem}
+        .focus\:shadow-lg:focus{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
+        .focus\:font-semibold:focus{font-weight:600}
+
+        .fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}
+        .top-0{top:0}.left-0{left:0}.right-0{right:0}.inset-0{inset:0}
+        .z-10{z-index:10}.z-50{z-index:50}
+        .flex{display:flex}.inline-flex{display:inline-flex}.inline-block{display:inline-block}.grid{display:grid}.block{display:block}.hidden{display:none}
+        .grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+        .flex-col{flex-direction:column}
+        .items-center{align-items:center}.items-start{align-items:flex-start}
+        .justify-center{justify-content:center}.justify-between{justify-content:space-between}
+        .gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-4{gap:1rem}.gap-8{gap:2rem}
+        .mx-auto{margin-inline:auto}.mt-3{margin-top:.75rem}
+        .px-6{padding-inline:1.5rem}.px-8{padding-inline:2rem}.py-2{padding-block:.5rem}.py-3{padding-block:.75rem}.py-2\.5{padding-block:.625rem}.p-2{padding:.5rem}
+        .w-7{width:1.75rem}.h-7{height:1.75rem}.w-auto{width:auto}.h-12{height:3rem}.h-\[68px\]{height:68px}
+        .w-full{width:100%}.h-full{height:100%}.min-h-screen{min-height:100vh}
+        .shrink-0{flex-shrink:0}
+        .overflow-hidden{overflow:hidden}
+        .object-cover{object-fit:cover}.object-contain{object-fit:contain}
+        .text-center{text-align:center}
+        .text-base{font-size:1rem}.text-sm{font-size:.875rem}.text-xl{font-size:1.25rem}.text-\[15px\]{font-size:15px}
+        .font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
+        .bg-white{background-color:#fff}
+        .bg-\[\#06038D\]{background-color:#06038D}
+        .bg-\[\#1D1C1C\]{background-color:#1D1C1C}
+        .bg-\[\#F8F5EF\]{background-color:#F8F5EF}
+        .bg-\[\#F8C8DC\]{background-color:#F8C8DC}
+        .bg-black\/40{background-color:rgba(0,0,0,.4)}
+        .text-white{color:#fff}
+        .text-\[\#1D1C1C\]{color:#1D1C1C}
+        .text-\[\#2EAB5A\]{color:#2EAB5A}
+        .border-t{border-top-width:1px}.border-gray-100{border-color:#f3f4f6}
+        .rounded{border-radius:.25rem}.rounded-full{border-radius:9999px}
+        .transition-colors{transition:color .15s, background-color .15s, border-color .15s}
+        .duration-300{transition-duration:.3s}
+        .max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}
+        .-mt-40{margin-top:-10rem}
+        .pt-10{padding-top:2.5rem}.pb-6{padding-bottom:1.5rem}
+        .px-8{padding-inline:2rem}
+        .leading-relaxed{line-height:1.625}
+        .mb-0{margin-bottom:0}
+        .py-5{padding-block:1.25rem}
+        .opacity-0{opacity:0}.opacity-100{opacity:1}
+        .duration-1000{transition-duration:1s}
+        .transition-opacity{transition-property:opacity}
+
+        @media(min-width:768px){
+          .md\:text-base{font-size:1rem}
+          .md\:-mt-32{margin-top:-8rem}
+        }
+        @media(min-width:1024px){
+          .lg\:hidden{display:none}
+          .lg\:flex{display:flex}
+          .lg\:-mt-36{margin-top:-9rem}
+          .lg\:pt-14{padding-top:3.5rem}
+          .lg\:px-16{padding-inline:4rem}
+        }
+      }
+    </style>
+
+    <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content="index, follow" />
-    <title>{title}</title>
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -45,11 +156,8 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Preconnect to R2 asset host (self-hosted fonts) -->
-    <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
-
-    <!-- Below-fold/alternate font weights (non-blocking) -->
-    <link rel="stylesheet" href="/deferred.css" />
+    <!-- Per-page head slot (JSON-LD, extra meta) -->
+    <slot name="head" />
 
     <!-- Google Analytics (GA4) — deferred until first user interaction or 8s fallback -->
     <script is:inline>
@@ -68,14 +176,12 @@ const currentPath = Astro.url.pathname;
           gtag('js', new Date());
           gtag('config', 'G-W3R21TNHTX');
         }
-        ['scroll','click','touchstart','keydown','mousemove'].forEach(function(e) {
-          window.addEventListener(e, loadGA, { once: true, passive: true });
-        });
-        setTimeout(loadGA, 8000);
+        var gaEvents=['scroll','mousemove','touchstart','keydown','click'];
+        function gaTrigger(){gaEvents.forEach(function(e){window.removeEventListener(e,gaTrigger);});loadGA();}
+        gaEvents.forEach(function(e){window.addEventListener(e,gaTrigger,{passive:true,once:true});});
+        setTimeout(function(){if(!gaLoaded)loadGA();},8000);
       })();
     </script>
-
-    <slot name="head" />
   </head>
   <body>
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:text-[#1D1C1C] focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:font-semibold">Skip to main content</a>
