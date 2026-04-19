@@ -74,6 +74,14 @@ const fallbackBlogPosts = [
   keywords="giving to God's work in India, empowering God's work in India, building God's kingdom in India, Bibles for India, advancing the gospel in India, building orphanages in India, transforming lives in India, donate to India missions, support Christian missionaries India, fund Bible distribution India, sponsor child India Christian, give to church planting India, support orphans in India, short term mission trip India, pray for India unreached people, 1 billion Indians without Bible, unreached people India, church planting movement India"
 >
   <Fragment slot="head">
+    <!-- Preload LCP hero poster (responsive) -->
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-mobile.webp 640w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp 1280w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "NGO",
@@ -112,18 +120,22 @@ const fallbackBlogPosts = [
   <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
     <img
       id="hero-poster"
-      src="https://assets.spiritmediapublishing.com/images/ghi-hero-poster.webp"
+      src="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp"
+      srcset="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-mobile.webp 640w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp 1280w"
+      sizes="100vw"
       alt="Aerial view of India"
+      width="1280"
+      height="720"
       fetchpriority="high"
+      decoding="async"
       class="absolute inset-0 w-full h-full object-cover"
     />
     <video
       id="hero-video"
-      autoplay
       muted
       loop
       playsinline
-      preload="auto"
+      preload="none"
       class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
     >
       <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
@@ -171,10 +183,13 @@ const fallbackBlogPosts = [
           </div>
           <div class="shrink-0">
             <img
-              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
+              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=208&fm=webp&q=85"
+              srcset="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=208&fm=webp&q=85 1x, https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=416&fm=webp&q=85 2x"
               alt="Celebrating over 25 years of advancing the gospel and transforming lives in India"
-              width="200"
-              height="200"
+              width="208"
+              height="208"
+              loading="lazy"
+              decoding="async"
               class="w-48 h-48 md:w-52 md:h-52"
             />
           </div>
@@ -268,13 +283,25 @@ const fallbackBlogPosts = [
   </style>
 
   <script>
-    // Fade video in over poster image once it starts playing
+    // Defer hero video until window.load (after LCP) to avoid competing with the hero image.
+    // Video fades in over the poster image once it starts playing.
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
       heroVideo.addEventListener('playing', () => {
         heroVideo.classList.remove('opacity-0');
         heroVideo.classList.add('opacity-100');
       }, { once: true });
+      const kickOffVideo = () => {
+        heroVideo.setAttribute('autoplay', '');
+        heroVideo.setAttribute('preload', 'auto');
+        // Force load + play (autoplay attr alone does not retrigger once DOM is past load)
+        try { heroVideo.load(); heroVideo.play().catch(() => {}); } catch (e) {}
+      };
+      if (document.readyState === 'complete') {
+        setTimeout(kickOffVideo, 200);
+      } else {
+        window.addEventListener('load', () => setTimeout(kickOffVideo, 200), { once: true });
+      }
     }
   </script>
 
