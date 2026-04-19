@@ -291,9 +291,6 @@ const currentPath = Astro.url.pathname;
         iconClose?.classList.toggle('hidden', isOpen);
         menuToggle.setAttribute('aria-expanded', String(!isOpen));
       });
-
-      // Re-run on Astro client-side nav
-      document.addEventListener('astro:page-load', () => { handleScroll(); });
     </script>
   </body>
 </html>

@@ -446,13 +446,15 @@ const fallbackBlogPosts = [
       { threshold: 0.3 }
     );
 
-    const statsSection = document.getElementById('impact-stats');
-    if (statsSection) observer.observe(statsSection);
-
-    document.addEventListener('astro:page-load', () => {
+    function initStatsObserver() {
       const s = document.getElementById('impact-stats');
       if (s) observer.observe(s);
-    });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStatsObserver);
+    } else {
+      initStatsObserver();
+    }
   </script>
 
   <!-- ── IMPACTING INDIA (video visual break) ──────────── -->
