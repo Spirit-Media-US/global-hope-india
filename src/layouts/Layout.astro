@@ -45,19 +45,34 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Poppins font (non-blocking) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Preconnect to R2 asset host (self-hosted fonts) -->
+    <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
 
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3R21TNHTX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-W3R21TNHTX');
+    <!-- Below-fold/alternate font weights (non-blocking) -->
+    <link rel="stylesheet" href="/deferred.css" />
+
+    <!-- Google Analytics (GA4) — deferred until first user interaction or 8s fallback -->
+    <script is:inline>
+      (function() {
+        let gaLoaded = false;
+        function loadGA() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W3R21TNHTX';
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ window.dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-W3R21TNHTX');
+        }
+        ['scroll','click','touchstart','keydown','mousemove'].forEach(function(e) {
+          window.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+        setTimeout(loadGA, 8000);
+      })();
     </script>
 
     <slot name="head" />
@@ -70,12 +85,13 @@ const currentPath = Astro.url.pathname;
         <!-- Logo -->
         <a href="/" class="shrink-0">
           <img
-            src="https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp"
+            src="https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp?w=220&fm=webp&q=85"
+            srcset="https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp?w=220&fm=webp&q=85 1x, https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp?w=440&fm=webp&q=85 2x"
             alt="Global Hope India"
             width="220"
             height="47"
+            decoding="async"
             class="h-12 w-auto object-contain"
-            fetchpriority="high"
           />
         </a>
 
