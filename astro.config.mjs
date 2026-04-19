@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import inline from '@playform/inline';
 
 export default defineConfig({
   site: 'https://globalhopeindia.org',
@@ -9,8 +8,6 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   integrations: [
-    // Beasties: extract above-fold critical CSS, inline it, async-load the rest.
-    inline(),
     sitemap({
       serialize(item) {
         // Giving landing pages — highest priority

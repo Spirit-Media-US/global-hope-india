@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
-    "@playform/inline": "^0.1.4",
     "@sanity/client": "^7.16.0",
     "@sanity/image-url": "^2.0.3",
     "@sanity/vision": "^3.72.0",
