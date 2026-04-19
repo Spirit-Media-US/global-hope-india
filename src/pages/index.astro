@@ -199,7 +199,7 @@ const fallbackBlogPosts = [
               height="208"
               fetchpriority="high"
               decoding="async"
-              class="w-48 h-48 md:w-52 md:h-52"
+              class="w-48 md:w-52"
             />
           </div>
         </div>
@@ -360,7 +360,7 @@ const fallbackBlogPosts = [
           const prefix = stat.value.startsWith('$') ? '$' : '';
           return (
             <div class="flex items-center gap-4">
-              <img src={stat.icon} alt={stat.label} width="64" height="64" loading="lazy" class="w-16 h-16 shrink-0" />
+              <img src={stat.icon} alt={stat.label} width="64" height="64" loading="lazy" class="w-16 h-[64px] shrink-0" />
               <div>
                 <div
                   class="count-up text-[22px] md:text-[35px] font-bold text-[#1D1C1C] leading-tight"
@@ -386,7 +386,7 @@ const fallbackBlogPosts = [
               <div class="flex flex-col items-center text-center">
                 <div class="relative w-28 h-28 flex items-center justify-center mb-3">
                   <div class="absolute inset-0 bg-[#2EAB5A]/10 rounded-[40%_60%_50%_50%/60%_40%_60%_40%]"></div>
-                  <img src={stat.icon} alt={stat.label} width="80" height="80" loading="lazy" class="relative w-20 h-20" />
+                  <img src={stat.icon} alt={stat.label} width="80" height="80" loading="lazy" class="relative w-20 h-[80px]" />
                 </div>
                 <div
                   class="count-up text-2xl font-bold text-[#1D1C1C] leading-tight"
