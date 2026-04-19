@@ -456,22 +456,49 @@ const fallbackBlogPosts = [
   </script>
 
   <!-- ── IMPACTING INDIA (video visual break) ──────────── -->
-  <section class="relative overflow-hidden" style="min-height: clamp(55vh, 70vh, 70vh);">
+  <section id="impact-video-section" class="relative overflow-hidden" style="min-height: clamp(55vh, 70vh, 70vh);">
     <div class="absolute inset-0 bg-[#F8F9F3]"></div>
     <video
-      autoplay
+      id="impact-video"
       muted
       loop
       playsinline
+      preload="none"
+      data-src="https://assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4"
       class="absolute inset-0 w-full h-full object-cover"
-    >
-      <source src="https://assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4" type="video/mp4" />
-    </video>
+    ></video>
     <div class="absolute inset-0 bg-black/[0.03]"></div>
     <div class="absolute inset-0 flex items-start justify-center md:justify-start z-10 px-4 pt-4 md:pt-0 md:-top-5 md:left-36">
       <span class="inline-block bg-[#2EAB5A] text-white font-bold text-xl md:text-[50px] px-5 py-3 md:p-5 rounded-sm shadow-lg text-center md:text-left">Transforming Lives in India</span>
     </div>
   </section>
+
+  <script>
+    // Lazy-load the impact video when it scrolls near the viewport
+    (() => {
+      const v = document.getElementById('impact-video');
+      const section = document.getElementById('impact-video-section');
+      if (!v || !section) return;
+      const boot = () => {
+        if (v.dataset.booted) return;
+        v.dataset.booted = '1';
+        const src = document.createElement('source');
+        src.src = v.getAttribute('data-src');
+        src.type = 'video/mp4';
+        v.appendChild(src);
+        v.setAttribute('preload', 'metadata');
+        try { v.load(); v.play().catch(() => {}); } catch (e) {}
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { boot(); io.disconnect(); } });
+        }, { rootMargin: '300px' });
+        io.observe(section);
+      } else {
+        window.addEventListener('load', () => setTimeout(boot, 1500), { once: true });
+      }
+    })();
+  </script>
 
   <!-- ── WHY GIVE TO INDIA? ─────────────────────────────── -->
   <section class="section bg-white">
