@@ -81,6 +81,22 @@
 
 * { box-sizing: border-box; }
 
+/* Skip link — focusable, off-screen until focused */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+  background: #ffffff;
+  color: #1D1C1C;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  z-index: 100;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; outline: 2px solid #1d803f; }
+
 html { scroll-behavior: smooth; background-color: #FFFFFF; }
 
 body {

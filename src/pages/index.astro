@@ -188,7 +188,7 @@ const fallbackBlogPosts = [
       <div class="container mx-auto">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="text-center md:text-left">
-            <h2 class="text-[#1D1C1C] font-bold">Celebrating Over <span class="text-[#FEC415]">25 Years</span> in India</h2>
+            <h2 class="text-white font-bold">Celebrating Over <span class="text-[#1D1C1C]">25 Years</span> in India</h2>
           </div>
           <div class="shrink-0">
             <img
@@ -259,7 +259,8 @@ const fallbackBlogPosts = [
       font-weight: 400;
       text-shadow: 3px 4px 10px rgba(0,0,0,0.6);
       perspective: 800px;
-      min-width: 3em;
+      /* Fixed wider min-width prevents CLS during text swap (Jesus ↔ India) */
+      min-width: 4.2em;
       text-align: center;
     }
     .flip-word.flipping {
@@ -542,35 +543,35 @@ const fallbackBlogPosts = [
       <p class="text-[#555] text-lg mb-10 max-w-2xl mx-auto">Every dollar you give to God's work in India is transforming lives. Here's what your gift can do:</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <a href="/give/bibles" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$25</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Bible</p>
-          <p class="text-[#888] text-xs mt-1">distributed in India</p>
+          <p class="text-[#595959] text-xs mt-1">distributed in India</p>
           <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Give Bibles →</span>
         </a>
         <a href="/give/orphan-care" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$50</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Month</p>
-          <p class="text-[#888] text-xs mt-1">of orphan care</p>
+          <p class="text-[#595959] text-xs mt-1">of orphan care</p>
           <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Sponsor a Child →</span>
         </a>
         <a href="/give/church-planting" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$150</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Church Planter</p>
-          <p class="text-[#888] text-xs mt-1">supported for a month</p>
+          <p class="text-[#595959] text-xs mt-1">supported for a month</p>
           <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Give to Planting →</span>
         </a>
         <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$500</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Water Project</p>
-          <p class="text-[#888] text-xs mt-1">clean water for a village</p>
+          <p class="text-[#595959] text-xs mt-1">clean water for a village</p>
           <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#1d803f] text-xs font-semibold mt-2 inline-block hover:underline">Donate Now →</a>
         </div>
       </div>
