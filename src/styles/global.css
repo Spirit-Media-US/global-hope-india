@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Fonts — all weights. 400/600 preloaded; 500/700 + Playfair display lazy (font-display:swap). */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-400.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-500.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-600.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/poppins/poppins-700.woff2') format('woff2');}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/playfair-display/playfair-display-700.woff2') format('woff2');}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:800;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/playfair-display/playfair-display-800.woff2') format('woff2');}
+
 /* ─── Design Tokens (Stitch Design System: Global Hope India Brand) ──── */
 /* Project: projects/3081457824766301683                                  */
 /* Design System: assets/8816472739238572553                              */
@@ -72,6 +80,22 @@
 }
 
 * { box-sizing: border-box; }
+
+/* Skip link — focusable, off-screen until focused */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+  background: #ffffff;
+  color: #1D1C1C;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  z-index: 100;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; outline: 2px solid #1d803f; }
 
 html { scroll-behavior: smooth; background-color: #FFFFFF; }
 
@@ -172,7 +196,8 @@ p { margin-bottom: var(--space-sm); }
   font-weight: var(--weight-semibold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  /* Darker ink for WCAG AA contrast — page-level spans can override */
+  color: #1D1C1C;
   display: block;
   margin-bottom: var(--space-xs);
 }

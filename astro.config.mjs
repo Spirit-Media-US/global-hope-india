@@ -4,6 +4,9 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://globalhopeindia.org',
+  build: {
+    inlineStylesheets: 'auto',
+  },
   integrations: [
     sitemap({
       serialize(item) {

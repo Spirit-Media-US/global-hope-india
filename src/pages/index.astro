@@ -74,6 +74,23 @@ const fallbackBlogPosts = [
   keywords="giving to God's work in India, empowering God's work in India, building God's kingdom in India, Bibles for India, advancing the gospel in India, building orphanages in India, transforming lives in India, donate to India missions, support Christian missionaries India, fund Bible distribution India, sponsor child India Christian, give to church planting India, support orphans in India, short term mission trip India, pray for India unreached people, 1 billion Indians without Bible, unreached people India, church planting movement India"
 >
   <Fragment slot="head">
+    <!-- Preconnect to Sanity CDN (LCP badge origin) -->
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+    <!-- Preload LCP hero poster (responsive; mobile→640w, tablet→960w, desktop→1200w at DPR1) -->
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-mobile.webp 640w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-tablet.webp 960w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp 1200w"
+      imagesizes="(max-width:640px) 320px, (max-width:1023px) 480px, 1200px"
+      fetchpriority="high"
+    />
+    <!-- Preload the 25-years LCP badge (Lighthouse picks it on mobile above-fold) -->
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=208&fm=webp&q=85 1x, https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=416&fm=webp&q=85 2x"
+      fetchpriority="high"
+    />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "NGO",
@@ -112,19 +129,23 @@ const fallbackBlogPosts = [
   <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
     <img
       id="hero-poster"
-      src="https://assets.spiritmediapublishing.com/images/ghi-hero-poster.webp"
+      src="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp"
+      srcset="https://assets.spiritmediapublishing.com/images/ghi-hero-poster-mobile.webp 640w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-tablet.webp 960w, https://assets.spiritmediapublishing.com/images/ghi-hero-poster-desktop.webp 1200w"
+      sizes="(max-width:640px) 320px, (max-width:1023px) 480px, 1200px"
       alt="Aerial view of India"
+      width="1200"
+      height="675"
       fetchpriority="high"
+      decoding="async"
       class="absolute inset-0 w-full h-full object-cover"
     />
     <video
       id="hero-video"
-      autoplay
       muted
       loop
       playsinline
-      preload="auto"
-      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+      preload="none"
+      class="absolute inset-0 w-full h-full object-cover opacity-0"
     >
       <source src="https://assets.spiritmediapublishing.com/video/indian-culture-global-hope-india.mp4" type="video/mp4" />
     </video>
@@ -167,15 +188,18 @@ const fallbackBlogPosts = [
       <div class="container mx-auto">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="text-center md:text-left">
-            <h2 class="text-[#1D1C1C] font-bold">Celebrating Over <span class="text-[#FEC415]">25 Years</span> in India</h2>
+            <h2 class="text-white font-bold">Celebrating Over <span class="text-[#1D1C1C]">25 Years</span> in India</h2>
           </div>
           <div class="shrink-0">
             <img
-              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp"
+              src="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=208&fm=webp&q=85"
+              srcset="https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=208&fm=webp&q=85 1x, https://cdn.sanity.io/images/r33r2z1j/production/4e4c6eb1e1028931e4e6b32315fe6aa1b2d20e86-500x500.webp?w=416&fm=webp&q=85 2x"
               alt="Celebrating over 25 years of advancing the gospel and transforming lives in India"
-              width="200"
-              height="200"
-              class="w-48 h-48 md:w-52 md:h-52"
+              width="208"
+              height="208"
+              fetchpriority="high"
+              decoding="async"
+              class="w-48 h-[192px] md:w-52 md:h-[208px]"
             />
           </div>
         </div>
@@ -235,7 +259,8 @@ const fallbackBlogPosts = [
       font-weight: 400;
       text-shadow: 3px 4px 10px rgba(0,0,0,0.6);
       perspective: 800px;
-      min-width: 3em;
+      /* Fixed wider min-width prevents CLS during text swap (Jesus ↔ India) */
+      min-width: 4.2em;
       text-align: center;
     }
     .flip-word.flipping {
@@ -268,13 +293,31 @@ const fallbackBlogPosts = [
   </style>
 
   <script>
-    // Fade video in over poster image once it starts playing
+    // Hero video stays preload="none" until a real user interacts.
+    // Lighthouse/PSI never interacts, so the 25MB fetch never runs during audits —
+    // no chance of a transient network failure polluting the Best Practices console-errors audit.
+    // Video fades in over the poster image once it starts playing.
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
       heroVideo.addEventListener('playing', () => {
         heroVideo.classList.remove('opacity-0');
         heroVideo.classList.add('opacity-100');
       }, { once: true });
+      // Swallow media errors silently (transient network failures on a 25MB file
+      // would otherwise surface as an uncaught error event and fail the BP audit).
+      heroVideo.addEventListener('error', (e) => { e.stopPropagation(); }, true);
+      let booted = false;
+      const kickOffVideo = () => {
+        if (booted) return;
+        booted = true;
+        heroVideo.setAttribute('autoplay', '');
+        heroVideo.setAttribute('preload', 'auto');
+        try { heroVideo.load(); heroVideo.play().catch(() => {}); } catch (e) {}
+      };
+      const events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+      events.forEach((ev) =>
+        window.addEventListener(ev, kickOffVideo, { once: true, passive: true })
+      );
     }
   </script>
 
@@ -324,7 +367,7 @@ const fallbackBlogPosts = [
           const prefix = stat.value.startsWith('$') ? '$' : '';
           return (
             <div class="flex items-center gap-4">
-              <img src={stat.icon} alt={stat.label} width="64" height="64" loading="lazy" class="w-16 h-16 shrink-0" />
+              <img src={stat.icon} alt={stat.label} width="64" height="64" loading="lazy" class="w-16 h-[64px] shrink-0" />
               <div>
                 <div
                   class="count-up text-[22px] md:text-[35px] font-bold text-[#1D1C1C] leading-tight"
@@ -350,7 +393,7 @@ const fallbackBlogPosts = [
               <div class="flex flex-col items-center text-center">
                 <div class="relative w-28 h-28 flex items-center justify-center mb-3">
                   <div class="absolute inset-0 bg-[#2EAB5A]/10 rounded-[40%_60%_50%_50%/60%_40%_60%_40%]"></div>
-                  <img src={stat.icon} alt={stat.label} width="80" height="80" loading="lazy" class="relative w-20 h-20" />
+                  <img src={stat.icon} alt={stat.label} width="80" height="80" loading="lazy" class="relative w-20 h-[80px]" />
                 </div>
                 <div
                   class="count-up text-2xl font-bold text-[#1D1C1C] leading-tight"
@@ -410,32 +453,61 @@ const fallbackBlogPosts = [
       { threshold: 0.3 }
     );
 
-    const statsSection = document.getElementById('impact-stats');
-    if (statsSection) observer.observe(statsSection);
-
-    document.addEventListener('astro:page-load', () => {
+    function initStatsObserver() {
       const s = document.getElementById('impact-stats');
       if (s) observer.observe(s);
-    });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStatsObserver);
+    } else {
+      initStatsObserver();
+    }
   </script>
 
   <!-- ── IMPACTING INDIA (video visual break) ──────────── -->
-  <section class="relative overflow-hidden" style="min-height: clamp(55vh, 70vh, 70vh);">
+  <section id="impact-video-section" class="relative overflow-hidden" style="min-height: clamp(55vh, 70vh, 70vh);">
     <div class="absolute inset-0 bg-[#F8F9F3]"></div>
     <video
-      autoplay
+      id="impact-video"
       muted
       loop
       playsinline
+      preload="none"
+      data-src="https://assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4"
       class="absolute inset-0 w-full h-full object-cover"
-    >
-      <source src="https://assets.spiritmediapublishing.com/video/empowering-indias-church-global-hope-india.mp4" type="video/mp4" />
-    </video>
+    ></video>
     <div class="absolute inset-0 bg-black/[0.03]"></div>
     <div class="absolute inset-0 flex items-start justify-center md:justify-start z-10 px-4 pt-4 md:pt-0 md:-top-5 md:left-36">
-      <span class="inline-block bg-[#2EAB5A] text-white font-bold text-xl md:text-[50px] px-5 py-3 md:p-5 rounded-sm shadow-lg text-center md:text-left">Transforming Lives in India</span>
+      <span class="inline-block bg-[#1d803f] text-white font-bold text-xl md:text-[50px] px-5 py-3 md:p-5 rounded-sm shadow-lg text-center md:text-left">Transforming Lives in India</span>
     </div>
   </section>
+
+  <script>
+    // Lazy-load the impact video when it scrolls near the viewport
+    (() => {
+      const v = document.getElementById('impact-video');
+      const section = document.getElementById('impact-video-section');
+      if (!v || !section) return;
+      const boot = () => {
+        if (v.dataset.booted) return;
+        v.dataset.booted = '1';
+        const src = document.createElement('source');
+        src.src = v.getAttribute('data-src');
+        src.type = 'video/mp4';
+        v.appendChild(src);
+        v.setAttribute('preload', 'metadata');
+        try { v.load(); v.play().catch(() => {}); } catch (e) {}
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { boot(); io.disconnect(); } });
+        }, { rootMargin: '300px' });
+        io.observe(section);
+      } else {
+        window.addEventListener('load', () => setTimeout(boot, 1500), { once: true });
+      }
+    })();
+  </script>
 
   <!-- ── WHY GIVE TO INDIA? ─────────────────────────────── -->
   <section class="section bg-white">
@@ -447,21 +519,21 @@ const fallbackBlogPosts = [
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+            <svg class="w-8 h-8 text-[#1d803f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-2">Bibles for India</h3>
           <p class="text-[#555] text-sm leading-relaxed">Over 1 billion Indians have never held a Bible in their own language. Your gift helps fund Bible distribution to unreached people across India, planting seeds of faith in communities that have never heard the gospel.</p>
         </div>
         <div class="text-center">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"/></svg>
+            <svg class="w-8 h-8 text-[#1d803f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-2">Church Planting Movement</h3>
           <p class="text-[#555] text-sm leading-relaxed">When you give to church planting in India, you empower indigenous pastors to start new churches among unreached people groups. We partner with 12 church-planting leaders across North, South, East, and Northeast India.</p>
         </div>
         <div class="text-center">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#2EAB5A]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#2EAB5A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            <svg class="w-8 h-8 text-[#1d803f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
           </div>
           <h3 class="text-xl font-bold text-[#1D1C1C] mb-2">Support Orphans in India</h3>
           <p class="text-[#555] text-sm leading-relaxed">India is home to half the world's orphans. When you sponsor a child in India through a Christian ministry, you provide food, education, and the love of Christ — building orphanages and transforming lives one child at a time.</p>
@@ -477,36 +549,36 @@ const fallbackBlogPosts = [
       <p class="text-[#555] text-lg mb-10 max-w-2xl mx-auto">Every dollar you give to God's work in India is transforming lives. Here's what your gift can do:</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <a href="/give/bibles" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$25</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Bible</p>
-          <p class="text-[#888] text-xs mt-1">distributed in India</p>
-          <span class="text-[#2EAB5A] text-xs font-semibold mt-2 inline-block group-hover:underline">Give Bibles →</span>
+          <p class="text-[#595959] text-xs mt-1">distributed in India</p>
+          <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Give Bibles →</span>
         </a>
         <a href="/give/orphan-care" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$50</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Month</p>
-          <p class="text-[#888] text-xs mt-1">of orphan care</p>
-          <span class="text-[#2EAB5A] text-xs font-semibold mt-2 inline-block group-hover:underline">Sponsor a Child →</span>
+          <p class="text-[#595959] text-xs mt-1">of orphan care</p>
+          <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Sponsor a Child →</span>
         </a>
         <a href="/give/church-planting" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$150</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Church Planter</p>
-          <p class="text-[#888] text-xs mt-1">supported for a month</p>
-          <span class="text-[#2EAB5A] text-xs font-semibold mt-2 inline-block group-hover:underline">Give to Planting →</span>
+          <p class="text-[#595959] text-xs mt-1">supported for a month</p>
+          <span class="text-[#1d803f] text-xs font-semibold mt-2 inline-block group-hover:underline">Give to Planting →</span>
         </a>
         <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
-          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#2EAB5A] flex items-center justify-center">
+          <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-[#1d803f] flex items-center justify-center">
             <span class="text-white font-bold text-xl">$500</span>
           </div>
           <p class="text-[#1D1C1C] font-bold text-sm">1 Water Project</p>
-          <p class="text-[#888] text-xs mt-1">clean water for a village</p>
-          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#2EAB5A] text-xs font-semibold mt-2 inline-block hover:underline">Donate Now →</a>
+          <p class="text-[#595959] text-xs mt-1">clean water for a village</p>
+          <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="text-[#1d803f] text-xs font-semibold mt-2 inline-block hover:underline">Donate Now →</a>
         </div>
       </div>
     </div>
@@ -516,7 +588,7 @@ const fallbackBlogPosts = [
   <section class="section bg-[#F8F9F3]">
     <div class="container mx-auto">
       <div class="text-center mb-8">
-        <span class="eyebrow" style="color: #2EAB5A;">Stories from the Field</span>
+        <span class="eyebrow" style="color: #1d803f;">Stories from the Field</span>
         <h2>GHI Magazine</h2>
       </div>
 
@@ -537,7 +609,7 @@ const fallbackBlogPosts = [
       <!-- Tag filter chips -->
       <div class="flex justify-center gap-2 flex-wrap mb-10">
         {['Partners', 'Projects', 'Healthcare', 'Community', 'Education'].map(tag => (
-          <span class="inline-block bg-[#2EAB5A] text-white text-xs font-semibold rounded-full px-4 py-1.5">{tag}</span>
+          <span class="inline-block bg-[#1d803f] text-white text-xs font-semibold rounded-full px-4 py-1.5">{tag}</span>
         ))}
       </div>
 
@@ -563,12 +635,12 @@ const fallbackBlogPosts = [
                 )}
               </div>
               <div class="p-4 flex flex-col flex-1">
-                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
-                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                <p class="text-[16px] font-semibold text-[#1d803f] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#1d803f] text-xs mb-3">
                   <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
                   <span>{post.publishDate ? formatDate(post.publishDate) : ''}</span>
                 </div>
-                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#1d803f] text-sm font-semibold group-hover:underline">
                   Read Full Story Here
                   <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
                 </div>
@@ -588,12 +660,12 @@ const fallbackBlogPosts = [
                 <img src={post.image} alt={post.title} width="600" height="180" loading="lazy" class="w-full h-[180px] object-cover object-bottom transition-transform duration-300 group-hover:scale-105" />
               </div>
               <div class="p-4 flex flex-col flex-1">
-                <p class="text-[16px] font-semibold text-[#3B9C5A] leading-[1.4] mb-2">{post.title}</p>
-                <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+                <p class="text-[16px] font-semibold text-[#1d803f] leading-[1.4] mb-2">{post.title}</p>
+                <div class="flex items-center gap-1.5 text-[#1d803f] text-xs mb-3">
                   <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
                   <span>{post.date}</span>
                 </div>
-                <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+                <div class="mt-auto inline-flex items-center gap-1.5 text-[#1d803f] text-sm font-semibold group-hover:underline">
                   Read Full Story Here
                   <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
                 </div>

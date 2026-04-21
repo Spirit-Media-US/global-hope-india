@@ -43,7 +43,7 @@ function renderPortableText(blocks: any[]): string {
       if (marks.includes('strong')) t = `<strong>${t}</strong>`;
       if (marks.includes('em')) t = `<em>${t}</em>`;
       const linkMark = marks.find((m: any) => m && typeof m === 'object' && m._type === 'link');
-      if (linkMark?.href) t = `<a href="${linkMark.href}" class="text-[#2EAB5A] hover:underline" target="_blank" rel="noopener noreferrer">${t}</a>`;
+      if (linkMark?.href) t = `<a href="${linkMark.href}" class="text-[#1d803f] hover:underline" target="_blank" rel="noopener noreferrer">${t}</a>`;
       return t;
     }).join('');
     const style = block.style || 'normal';
@@ -133,7 +133,7 @@ const encodedTitle = encodeURIComponent(post.title);
   <section class="bg-white px-6 pb-8">
     <div class="container mx-auto max-w-3xl text-center">
       <h1 class="mb-3">{post.title}</h1>
-      <p class="text-[#2EAB5A] text-sm font-medium">{publishDate}</p>
+      <p class="text-[#1d803f] text-sm font-medium">{publishDate}</p>
       {tags.length > 0 && (
         <div class="flex flex-wrap justify-center gap-2 mt-4">
           {tags.map((tag: string) => (
@@ -226,11 +226,11 @@ const encodedTitle = encodeURIComponent(post.title);
             </div>
             <div class="p-4 flex flex-col flex-1">
               <p style="font-size:16px!important;font-weight:600!important;color:#3B9C5A!important;line-height:1.4!important;margin:0 0 8px 0!important;">{card.title}</p>
-              <div class="flex items-center gap-1.5 text-[#2EAB5A] text-xs mb-3">
+              <div class="flex items-center gap-1.5 text-[#1d803f] text-xs mb-3">
                 <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 448 512" fill="currentColor"><path d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"/></svg>
                 <span>{card.publishDate ? formatDate(card.publishDate) : ''}</span>
               </div>
-              <div class="mt-auto inline-flex items-center gap-1.5 text-[#2EAB5A] text-sm font-semibold group-hover:underline">
+              <div class="mt-auto inline-flex items-center gap-1.5 text-[#1d803f] text-sm font-semibold group-hover:underline">
                 Read Full Story Here
                 <svg class="w-3.5 h-3.5" viewBox="0 0 448 512" fill="currentColor"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
               </div>

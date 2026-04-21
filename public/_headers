@@ -2,6 +2,14 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
+  X-Robots-Tag: index, follow
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://mail.spiritmediaone.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://cdn.sanity.io https://assets.spiritmediapublishing.com https://globalhopeindia.org https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://r33r2z1j.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; frame-src https://www.youtube.com https://givebutter.com https://mail.spiritmediaone.com; media-src 'self' https://assets.spiritmediapublishing.com https://globalhopeindia.org; object-src 'none'; base-uri 'self'; form-action 'self' https://givebutter.com
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://static.cloudflareinsights.com https://mail.spiritmediaone.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.sanity.io https://assets.spiritmediapublishing.com https://globalhopeindia.org https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self' https://assets.spiritmediapublishing.com; connect-src 'self' https://r33r2z1j.api.sanity.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://cloudflareinsights.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://givebutter.com https://mail.spiritmediaone.com; media-src 'self' https://cdn.sanity.io https://assets.spiritmediapublishing.com https://globalhopeindia.org; object-src 'none'; base-uri 'self'; form-action 'self' https://givebutter.com
+  Link: <https://assets.spiritmediapublishing.com/fonts/poppins/poppins-400.woff2>; rel=preload; as=font; type="font/woff2"; crossorigin
+  Link: <https://assets.spiritmediapublishing.com/fonts/poppins/poppins-600.woff2>; rel=preload; as=font; type="font/woff2"; crossorigin
+
+# Homepage — additional Early Hint for the LCP hero poster (R2-hosted, stable URL)
+/
+  Link: <https://assets.spiritmediapublishing.com/images/ghi-hero-poster-mobile.webp>; rel=preload; as=image; fetchpriority=high
+# Link: headers above CF Pages promotes to 103 Early Hints on cached edge hits.
