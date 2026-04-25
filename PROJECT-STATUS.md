@@ -1,5 +1,5 @@
 # Global Hope India — Project Status & Knowledge Base
-> Last updated: 2026-04-10 (full launch prep — blog migration, image migration, QA complete)
+> Last updated: 2026-04-24
 > **Claude: Read this file before making any statements about project state or touching any code.**
 
 ---
