@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import HundredClubBadge from '../components/HundredClubBadge.astro';
 import MailtoLink from '../components/MailtoLink.astro';
 
 interface Props {
@@ -370,7 +371,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Copyright bar -->
       <div class="relative z-10 bg-[#1D1C1C] py-3 px-6">
-        <p class="text-white/80 text-xs text-center">&copy; {new Date().getFullYear()} Global Hope India. All rights reserved. &bull; Powered by <a href="https://spiritmediapublishing.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#1d803f] transition-colors underline">Spirit Media</a></p>
+        <p class="text-white/80 text-xs text-center">&copy; {new Date().getFullYear()} Global Hope India. All rights reserved. &bull; Powered by <a href="https://spiritmediapublishing.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#1d803f] transition-colors underline">Spirit Media</a> <HundredClubBadge /></p>
       </div>
     </footer>
 
