@@ -62,6 +62,33 @@ Then run: `git checkout dev && git pull origin dev`
 - Set up Sanity → Cloudflare Pages rebuild hook (if needed)
 - UptimeRobot monitoring
 
+### Completed — SEO Implementation, Wave 1 — 2026-04-28
+Six source-only commits shipped to dev. Branch is now 6 ahead of main (plus this docs commit).
+
+| SHA | Phase | Description |
+|-----|-------|-------------|
+| 908c792 | 1A | seo(projects): correct fallback wording for accountability list — defensive fallback at `projects.astro:73` now says "Over 85%" instead of "100%". Visible bug on live site is in Sanity, not source (see findings) |
+| 24b9a5e | 1B | seo(meta): add twitter:site and twitter:creator tags sitewide — both `@GlobalHopeIndia` in Layout.astro |
+| 2e30cbb | 1C | seo(privacy-policy): fix double-suffixed title, sync JSON-LD name — title is now `Privacy Policy \| Global Hope India` |
+| ef747a1 | 1D | seo(get-involved): disambiguate title from homepage to fix cannibalization — homepage now owns `Donate to India Missions` exclusively |
+| 1df4c15 | 1E | seo(give): add brand suffix to bibles and church-planting titles — both end with `\| GHI`, redundant tails dropped |
+| 62c0ebe | 1F-i | seo(blog): enrich BlogPosting schema with dateModified and mainEntityOfPage — GROQ now projects `_updatedAt`, JSON-LD has new fields, OG `article:modified_time` meta added |
+
+#### Heads-up for Vinit / future blog work
+- `src/pages/blog/[slug].astro` GROQ now projects `_updatedAt` from Sanity. Preserve it in any future query changes — the BlogPosting `dateModified` field depends on it.
+
+#### Findings surfaced during this wave (separate tickets)
+- **Sanity has 11 blog posts, not 6.** PROJECT-STATUS.md is stale on the count.
+- **`studio/schemaTypes/blogPost.ts` is missing the `externalImageUrl` field** that's live on the deployed Sanity schema (the GROQ at `src/pages/blog/[slug].astro:17` uses it via `coalesce(heroImage.asset->url, externalImageUrl)`). Running `sanity deploy` from this repo would drop the field from the live schema. Needs a separate sync commit before any future schema deploy.
+- **Three different cities for GHI in source:** Cary (homepage NGO schema, footer address), Raleigh (`Layout.astro:294` legal banner), Morrisville (`projects.astro:67` accountability item). Pick one before any NonprofitOrganization schema enrichment. Needs Kevin's call.
+- **`/projects/` Financial Accountability accordion still renders "100% of every dollar"** on the live page despite Phase 1A. The bug lives in a Sanity `accountabilityItem` document, not source. Source fallback was fixed defensively in 908c792; the live fix needs a Sanity Studio edit (separate task).
+
+#### Phase 1 status
+Source-only Phase 1 SEO work is complete. Remaining Phase 1 items are blocked on Kevin's input:
+- NonprofitOrganization schema enrichment (needs city decision + EIN + founding date + logo URL)
+- OG image expansion to per-page custom images (needs design direction)
+- Sanity content edits (the `accountabilityItem` 100%/85% live fix; potentially others)
+
 ## Rules
 - All work goes to the dev branch — never push directly to main
 - Only merge dev to main when Kevin says "push to main"
