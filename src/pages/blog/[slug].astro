@@ -13,7 +13,7 @@ const { slug } = Astro.params;
 
 const post = await sanityClient.fetch(
   `*[_type == "blogPost" && slug.current == $slug][0] {
-    title, excerpt, author, publishDate, tags, body, seoTitle, seoDescription,
+    title, excerpt, author, publishDate, _updatedAt, tags, body, seoTitle, seoDescription,
     heroImage, "heroImageUrl": coalesce(heroImage.asset->url, externalImageUrl)
   }`,
   { slug }
@@ -80,6 +80,7 @@ const encodedTitle = encodeURIComponent(post.title);
   <Fragment slot="head">
     <meta property="article:author" content={author} />
     <meta property="article:published_time" content={post.publishDate} />
+    <meta property="article:modified_time" content={post._updatedAt || post.publishDate} />
     {tags.length > 0 && <meta property="article:section" content={tags[0]} />}
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -90,7 +91,9 @@ const encodedTitle = encodeURIComponent(post.title);
       "author": { "@type": "Organization", "name": "Global Hope India" },
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" },
       "url": postUrl,
-      "datePublished": post.publishDate
+      "mainEntityOfPage": { "@type": "WebPage", "@id": postUrl },
+      "datePublished": post.publishDate,
+      "dateModified": post._updatedAt || post.publishDate
     })}></script>
   </Fragment>
 
