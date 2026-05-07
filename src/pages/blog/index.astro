@@ -32,7 +32,6 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
   description="Stories of God advancing the gospel in India — church planting, Bible distribution, orphan care, and empowering missionaries among unreached people groups."
 >
   <Fragment slot="head">
-    <meta name="keywords" content="india missions blog, church planting india, christian nonprofit india, global hope india blog" />
     <meta name="robots" content="index, follow" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -41,6 +40,24 @@ const SANITY_POSTS_JSON = JSON.stringify(sanityPostsFormatted);
       "url": "https://globalhopeindia.org/blog",
       "description": "Read stories of how God is advancing the gospel in India — church planting, Bible distribution, orphan care, and empowering Christian missionaries among unreached people.",
       "publisher": { "@type": "Organization", "name": "Global Hope India", "url": "https://globalhopeindia.org" }
+    })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": rawSanityPosts.map((p: any, i: number) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "url": "https://globalhopeindia.org" + p.slug,
+        "item": {
+          "@type": "BlogPosting",
+          "headline": p.title,
+          "url": "https://globalhopeindia.org" + p.slug,
+          "datePublished": p.date,
+          "image": p.image,
+          "description": p.excerpt,
+          "author": { "@type": "Person", "name": p.author }
+        }
+      }))
     })}></script>
   </Fragment>
   <main id="main-content">
