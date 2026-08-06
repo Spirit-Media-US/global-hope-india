@@ -1,0 +1,9 @@
+# Blog slugs changed 2026-08-06 when partner locations were removed from published
+# posts for partner safety. These URLs are indexed, so they 301 to the new ones.
+/blog/empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india  /blog/empowering-the-deaf-community-the-mission-of-dbm-in-india  301
+/blog/support-key-projects-in-manipur                                     /blog/support-key-projects-in-india                              301
+/blog/elim-school-supporting-pastor-mayons-mission-in-manipur             /blog/a-school-in-india-supporting-pastor-m-mission              301
+
+# Givebutter partner pages -> our own designated giving pages (Givebutter is being closed).
+/give/mission-trips   /give/   301
+/give/orphan-care     /give/   301
