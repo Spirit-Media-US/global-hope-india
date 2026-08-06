@@ -1,0 +1,92 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DonationForm from '../../../components/DonationForm.astro';
+import { PARTNERS, type Partner } from '../../../data/partners';
+
+export function getStaticPaths() {
+  return PARTNERS.map((p) => ({ params: { slug: p.slug }, props: { partner: p } }));
+}
+
+interface Props { partner: Partner }
+const { partner } = Astro.props;
+
+const others = PARTNERS.filter((p) => p.slug !== partner.slug).slice(0, 3);
+---
+
+<Layout
+  title={`Support ${partner.name} | Global Hope India`}
+  description={`${partner.tagline}. Give directly to ${partner.name} through Global Hope India — monthly or one-time, secure and tax-deductible.`}
+  ogImage={partner.image}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "DonateAction",
+      "name": `Support ${partner.name}`,
+      "description": partner.tagline,
+      "recipient": {
+        "@type": "NGO",
+        "name": "Global Hope India",
+        "url": "https://globalhopeindia.org",
+        "taxID": "22-3894982"
+      },
+      "url": `https://globalhopeindia.org/give/partners/${partner.slug}/`
+    })}></script>
+  </Fragment>
+
+  <!-- HERO -->
+  <section class="relative min-h-[42vh] lg:min-h-[52vh] flex items-end overflow-hidden">
+    <div class="absolute inset-0 bg-[#1D1C1C]" style={`background-image:url('${partner.image}');background-size:cover;background-position:center;`}></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-12 pt-40">
+      <p class="text-[#1d803f] font-semibold text-sm uppercase tracking-widest mb-3">
+        {partner.kind === 'partner' ? 'Indian Partner' : 'Project'}
+      </p>
+      <h1 style="color:white!important;" class="max-w-3xl font-bold text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">{partner.name}</h1>
+      <p class="mt-4 text-white/80 text-lg max-w-2xl">{partner.tagline}</p>
+    </div>
+  </section>
+
+  <!-- WHY DESIGNATED GIVING -->
+  <section class="bg-[#2EAB5A] py-8 px-6">
+    <div class="container mx-auto max-w-3xl text-center text-white">
+      <p class="text-lg leading-relaxed">
+        Your gift here goes directly to {partner.name} — designated, receipted, and reported as such.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="give-now" class="section bg-[#F8F9F3] py-14">
+    <div class="container mx-auto px-6">
+      <DonationForm
+        campaign={partner.campaign}
+        fund={partner.campaign}
+        lockFund={true}
+        heading={`Give to ${partner.name}`}
+      />
+    </div>
+  </section>
+
+  <!-- OTHER PARTNERS -->
+  <section class="section bg-white py-14">
+    <div class="container mx-auto max-w-5xl px-6">
+      <h2 class="text-[#1D1C1C] font-bold text-2xl mb-6 text-center">Other partners you can support</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {others.map((p) => (
+          <a href={`/give/partners/${p.slug}/`} class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-stone-200">
+            <img src={p.image} alt={p.name} width="400" height="225" loading="lazy" class="w-full h-40 object-cover" />
+            <div class="p-5">
+              <p class="text-[#1D1C1C] font-bold">{p.name}</p>
+              <p class="text-[#595959] text-sm mt-1">{p.tagline}</p>
+              <span class="text-[#1d803f] text-xs font-semibold mt-3 inline-block group-hover:underline">Support &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="text-center mt-8">
+        <a href="/give/partners/" class="text-[#06038D] font-semibold hover:underline">See all partners &amp; projects &rarr;</a>
+      </p>
+    </div>
+  </section>
+</Layout>
