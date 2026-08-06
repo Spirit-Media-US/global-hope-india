@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DonationForm from '../../components/DonationForm.astro';
+---
+
+<Layout
+  title="Give to Global Hope India | Support God's Work in India"
+  description="Your gift supports leadership development, village development, and the greatest current needs across India. Give once or monthly — secure, tax-deductible, and cancel anytime."
+  ogImage="https://assets.spiritmediapublishing.com/images/ghi-201811_globalhopeindia_church-20-scaled.jpg"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "DonateAction",
+      "name": "Give to Global Hope India",
+      "description": "Support leadership development, village development, and the greatest current needs across India.",
+      "recipient": {
+        "@type": "NGO",
+        "name": "Global Hope India",
+        "url": "https://globalhopeindia.org",
+        "taxID": "22-3894982",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "205 S Academy Street #3251",
+          "addressLocality": "Cary",
+          "addressRegion": "NC",
+          "postalCode": "27519",
+          "addressCountry": "US"
+        }
+      },
+      "url": "https://globalhopeindia.org/give/"
+    })}></script>
+  </Fragment>
+
+  <!-- HERO -->
+  <section class="relative min-h-[42vh] lg:min-h-[50vh] flex items-end overflow-hidden">
+    <div class="absolute inset-0 bg-[#1D1C1C]" style="background-image:url('https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp');background-size:cover;background-position:center;"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+    <div class="relative z-10 container mx-auto px-6 lg:px-12 pb-12 pt-40">
+      <p class="text-[#1d803f] font-semibold text-sm uppercase tracking-widest mb-3">Give to India</p>
+      <h1 style="color:white!important;" class="max-w-3xl font-bold text-[28px] md:text-[36px] lg:text-[50px] leading-[1.2]">Your gift goes<br/>straight to India</h1>
+      <p class="mt-4 text-white/70 text-lg max-w-xl">For over 25 years, Global Hope India has walked alongside Indian leaders serving their own communities. Your giving keeps that work moving.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section bg-[#F8F9F3] py-14">
+    <div class="container mx-auto px-6">
+      <DonationForm campaign="ghi" fund="ghi" heading="Give to India" />
+    </div>
+  </section>
+
+  <!-- WHERE IT GOES -->
+  <section class="section bg-white py-14">
+    <div class="container mx-auto max-w-4xl px-6 text-center">
+      <h2 class="text-[#1D1C1C] font-bold text-3xl mb-3">Where your giving goes</h2>
+      <p class="text-[#555] text-lg mb-10 max-w-2xl mx-auto">Choose the work closest to your heart, or let us direct it to the greatest current need.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+          <p class="text-[#1D1C1C] font-bold mb-1">Where Most Needed</p>
+          <p class="text-[#595959] text-sm">Directed where it will do the most good right now — the fastest way to respond when needs shift on the ground.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+          <p class="text-[#1D1C1C] font-bold mb-1">Leadership Development</p>
+          <p class="text-[#595959] text-sm">Equipping and supporting Indian leaders — training, Bibles, and ongoing partnership with the people already serving their own communities.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-200">
+          <p class="text-[#1D1C1C] font-bold mb-1">Village Development</p>
+          <p class="text-[#595959] text-sm">Clean water, healthcare and community projects that change daily life for an entire village.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSURANCE -->
+  <section class="section bg-[#F8F5EF] py-12">
+    <div class="container mx-auto max-w-3xl px-6 text-center">
+      <h2 class="text-[#1D1C1C] font-bold text-2xl mb-4">Giving you can count on</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-[#555]">
+        <p><strong class="block text-[#1D1C1C] mb-1">Tax-deductible</strong>Global Hope India is a 501(c)(3) public charity, EIN 22-3894982. Every gift is receipted by email.</p>
+        <p><strong class="block text-[#1D1C1C] mb-1">Change it anytime</strong>Monthly donors can update a card, change or cancel from a secure link in every receipt.</p>
+        <p><strong class="block text-[#1D1C1C] mb-1">Secure</strong>Payments are processed by Stripe. Card details never touch our servers.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
