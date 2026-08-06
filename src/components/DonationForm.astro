@@ -142,8 +142,11 @@ const AMOUNTS = [25, 50, 100, 250, 500];
   import { loadStripe } from '@stripe/stripe-js/pure';
 
   const TOOLS_API = 'https://tools-api.spiritmediapublishing.com';
-  // Publishable key is public by design and safe in client source.
-  const STRIPE_PK = import.meta.env.PUBLIC_GHI_STRIPE_PK || '';
+  // Publishable key is public by design and safe in client source — it only
+  // identifies the account and can't move money. This is Global Hope India's
+  // LIVE key (acct_1U1RYLBpCAjFm8eo); it must stay paired with the live secret
+  // key the donations pipeline uses, or Checkout will reject the client secret.
+  const STRIPE_PK = 'pk_live_51U1RYLBpCAjFm8eoPFz8PwzL5DCaa1cQsUkVlQqhkiAmqeJSwDua8g3hZvBQamLGxCDpKpdJ2bf6efYe6M72dkX400FE9T2sx4';
 
   // Stripe nonprofit rate: 2.2% + $0.30. Amex is higher, but the brand isn't known
   // until inside Checkout, so the pre-payment estimate uses the standard NPO rate.
