@@ -39,7 +39,7 @@ const AMOUNTS = [25, 50, 100, 250, 500];
 
 <div id="ghi-donate" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 max-w-xl mx-auto">
   <h2 class="text-[#1D1C1C] font-bold text-2xl md:text-3xl mb-1">{heading}</h2>
-  <p class="text-[#595959] text-sm mb-6">Secure giving. Cancel or change a monthly gift anytime.</p>
+  <p class="text-[#595959] text-sm mb-6">Secure giving. You can cancel a monthly gift anytime.</p>
 
   <!-- STEP 1 -->
   <div id="ghi-step-form">
@@ -101,7 +101,31 @@ const AMOUNTS = [25, 50, 100, 250, 500];
         class="border border-stone-200 rounded-xl py-3 px-3 outline-none" />
     </div>
     <input id="ghi-email" type="email" autocomplete="email" placeholder="Email address"
-      class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none mb-5" />
+      class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none mb-3" />
+
+    <!-- Mailing address is OPTIONAL. Givebutter captured it on 98% of gifts and it is
+         where a year-end giving statement gets posted, so it is offered up front rather
+         than buried — but never blocks a gift. Mobile number is required and is collected
+         by Stripe on the next step, where it is validated. -->
+    <details class="mb-5 border border-stone-200 rounded-xl px-4 py-3">
+      <summary class="cursor-pointer text-sm font-semibold text-[#1D1C1C]">
+        Add your mailing address <span class="font-normal text-[#595959]">(optional — for your year-end giving statement)</span>
+      </summary>
+      <div class="mt-3 space-y-3">
+        <input id="ghi-addr1" type="text" autocomplete="address-line1" placeholder="Street address"
+          class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        <input id="ghi-addr2" type="text" autocomplete="address-line2" placeholder="Apt, suite (optional)"
+          class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        <div class="grid grid-cols-3 gap-3">
+          <input id="ghi-city" type="text" autocomplete="address-level2" placeholder="City"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+          <input id="ghi-state" type="text" autocomplete="address-level1" placeholder="State"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+          <input id="ghi-zip" type="text" autocomplete="postal-code" placeholder="ZIP"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        </div>
+      </div>
+    </details>
 
     <button id="ghi-continue" type="button"
       class="w-full bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg py-4 rounded-full transition-colors">
@@ -111,6 +135,24 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     <p class="text-center text-xs text-[#595959] mt-4">
       Global Hope India is a 501(c)(3) public charity (EIN 22-3894982). Your gift is tax-deductible.
     </p>
+
+    <!-- Give by cheque: INFORMATION ONLY. Cheques were 37% of 2025+ dollars, so the
+         option has to be visible — but this deliberately does not register a gift or
+         collect anything; it simply tells the donor where to post it. -->
+    <div class="mt-6 pt-6 border-t border-stone-200 text-center">
+      <p class="text-sm font-semibold text-[#1D1C1C] mb-1">Prefer to give by check?</p>
+      <p class="text-sm text-[#595959] leading-relaxed">
+        Make checks payable to <strong class="text-[#1D1C1C]">Global Hope India</strong> and mail to:
+      </p>
+      <p class="text-sm text-[#1D1C1C] leading-relaxed mt-2">
+        Global Hope India<br />
+        205 S Academy Street #3251<br />
+        Cary, NC 27519
+      </p>
+      <p class="text-xs text-[#595959] mt-2">
+        Please include your email address so we can send your receipt.
+      </p>
+    </div>
   </div>
 
   <!-- STEP 2 -->
@@ -288,6 +330,13 @@ const AMOUNTS = [25, 50, 100, 250, 500];
           is_public: false,
           cover_fees: coverFeesChecked(),
           fee_covered_cents: feeCovered,
+          // optional mailing address — blank strings are dropped server-side
+          address1: (($('ghi-addr1') as HTMLInputElement)?.value || '').trim(),
+          address2: (($('ghi-addr2') as HTMLInputElement)?.value || '').trim(),
+          city: (($('ghi-city') as HTMLInputElement)?.value || '').trim(),
+          state: (($('ghi-state') as HTMLInputElement)?.value || '').trim(),
+          postal_code: (($('ghi-zip') as HTMLInputElement)?.value || '').trim(),
+          country: 'US',
         }),
       });
       const data = await res.json();
