@@ -112,8 +112,8 @@ export const PARTNERS: Partner[] = [
       'To get updates on the ministry, please visit globalhopeindia.org',
     ] },
   { slug: 'kel', name: 'KEL in India', tagline: 'Overcoming persecution in pursuit of the mission', campaign: 'ghi-kel', image: `${IMG}/ghi-partner-kel.webp`, kind: 'partner', intro: [
-      'Pastor K. Zakkariah has been doing missionary work since 1985. He has faced many troubles and persecution in doing his ministry in India. Prayers and courage are his weapons to overcome all these.',
-      'Pastor K. Zakkariah has been pastoring thousands of people by proclaiming the Gospel and with the help of Global Hope India, SHM (KEL Home), his ministry, various projects have been created for the benefit of the communities in need. Aside from distributing the Holy bible, they also distribute food, blankets, and other necessities for children and widows.',
+      'Pastor Z has been doing missionary work since 1985. He has faced many troubles and persecution in doing his ministry in India. Prayers and courage are his weapons to overcome all these.',
+      'Pastor Z has been pastoring thousands of people by proclaiming the Gospel and with the help of Global Hope India, SHM (KEL Home), his ministry, various projects have been created for the benefit of the communities in need. Aside from distributing the Holy bible, they also distribute food, blankets, and other necessities for children and widows.',
       'The primary mission is expanding the preaching of the Gospel through church planting where a translation of the Holy Bible in Telegu is highly needed. This will help more people understand deeply the Good News.',
       'As they continuously ask for prayers for their protection and strength against persecution in doing God’s mission, they are also seeking financial support for the furtherance of the mission of proclaiming God’s Kingdom to every soul.',
       'Current funding needs:',
@@ -130,7 +130,7 @@ export const PARTNERS: Partner[] = [
       'To learn more about this project, please read here.',
     ] },
   { slug: 'mayon', name: 'Mayon in India', tagline: 'Impacting lives through evangelization and education', campaign: 'ghi-mayon', image: `${IMG}/ghi-partner-mayon.webp`, kind: 'partner', intro: [
-      'A school teacher for five years, a school head teacher for four years, and a missionary in Delhi for three years, Pastor Mayon combined his passion for education and evangelization to share the Good News in words and action among the people in India.',
+      'A school teacher for five years, a school head teacher for four years, and a missionary for three years, Pastor Mayon combined his passion for education and evangelization to share the Good News in words and action among the people in India.',
       'Pastor Mayon and his church built a mission school called his school. It was built due to the inadequacy of quality education in the village. In addition to school fees assistance, they were able to provide water supply through a temporary plastic water tank to address the basic and daily needs for cleaning water. Before its installation, people will need to walk to a nearby spring to fetch water.',
       'Photos of before and after the temporary plastic water tank installation',
       'In his commitment to the mission of preaching the Gospel, Pastor Mayon continues to nourish the spiritual needs of the people. Bible preaching, evangelical youth camps, baptism, and Bible distribution are being held regularly. Most recently, Pastor Mayon is planting a church in a tribe in a neighbouring country. In his latest evangelization, 31 individuals received water baptism.',
@@ -160,7 +160,7 @@ export const PARTNERS: Partner[] = [
     ] },
   { slug: 'sekhar', name: 'Sekhar in India', tagline: 'A compassionate crusader for the poor, orphans, widows and lepers', campaign: 'ghi-sekhar', image: `${IMG}/ghi-partner-sekhar.webp`, kind: 'partner', intro: [
       'Pastor Sekhar is a long-term partner in India. His missionary work stands on three principles: Soap, Soup, and Salvation – taking care of the body and soul.',
-      'Together with his wife Sharon (photo above), they regularly conduct personal house visits to share the Gospel, pray over sessions, and even host Gospel meetings in tribal communities. The ministry also conducts regular medical camps and feeding programs.',
+      'Together with his wife (photo above), they regularly conduct personal house visits to share the Gospel, pray over sessions, and even host Gospel meetings in tribal communities. The ministry also conducts regular medical camps and feeding programs.',
       'In November 2023 alone, with your generous donation, these have been accomplished:',
       'Feeding Progam',
       'Preaching the Gospel to villages',
@@ -175,9 +175,9 @@ export const PARTNERS: Partner[] = [
       'To learn more about Pastor Sekhar\'s missions, please visit https://globalhopeindia.org',
     ] },
   { slug: 'shepherds-house', name: "The Shepherd's House", tagline: 'A home of prayer, peace and hope', campaign: 'ghi-shepherds-house', image: `${IMG}/ghi-partner-shepherds-house.webp`, kind: 'project', intro: [
-      'The Shepherd’s House Ministry is being built as a church facility and home for Pastor Canary and his family (photo above) to further serve the neighboring communities in North East India.',
-      'Before the building of this facility, Pastor Canary has been spreading God’s word to his family, friends, and neighbors by distributing Bibles and preaching the Gospel. As a missionary, his words and actions have transformed lives and people started accepting the love of Jesus.',
-      'Raising funds for the construction is challenging enough, how much more if it is in the midst of ethnic wars, burning villages, and intense gunfire? Due to the threat to the lives of the workers, construction has been delayed. Adding to this, there is also a threat of loss of construction supplies and damage to the construction itself. Despite all these, Pastor Canary and the people of the community continue to rise with strong faith that God is with them building the Sheperd’s House piece by piece.',
+      'The Shepherd’s House Ministry is being built as a church facility and home for Pastor C and his family (photo above) to further serve the neighboring communities in India.',
+      'Before the building of this facility, Pastor C has been spreading God’s word to his family, friends, and neighbors by distributing Bibles and preaching the Gospel. As a missionary, his words and actions have transformed lives and people started accepting the love of Jesus.',
+      'Raising funds for the construction is challenging enough, how much more if it is in the midst of ethnic wars, burning villages, and intense gunfire? Due to the threat to the lives of the workers, construction has been delayed. Adding to this, there is also a threat of loss of construction supplies and damage to the construction itself. Despite all these, Pastor C and the people of the community continue to rise with strong faith that God is with them building the Sheperd’s House piece by piece.',
       'Aside from the construction funds needed to build the Shepherd’s House, basic needs for missionary work such as transportation, food, blanket distribution, and utilities are also needed.',
       'Current funding needs:',
       '$850 per month - travel expenses and rentals for the mission, food, blankets, and emergency lights for distribution.',
