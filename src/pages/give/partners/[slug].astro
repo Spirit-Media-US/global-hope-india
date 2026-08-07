@@ -34,31 +34,38 @@ const others = PARTNERS.filter((p) => p.slug !== partner.slug).slice(0, 3);
     })}></script>
   </Fragment>
 
-  <!-- HERO — two columns so the photo is shown whole rather than cropped.
-       These images come from the partners themselves and vary from tall portrait
-       to short landscape, so a full-bleed background crop cut faces off. -->
-  <section class="bg-[#1D1C1C] pt-28 pb-10 lg:pt-32 lg:pb-14">
+  <!-- HERO — the photograph is the subject, so it leads on a light ground with no
+       dark panel competing for attention. These images come from the partners
+       themselves and range from tall portrait to short landscape, which is why the
+       photo is given its own generous frame rather than being cropped full-bleed. -->
+  <section class="bg-white pt-28 pb-10 lg:pt-32 lg:pb-14">
     <div class="container mx-auto px-6 lg:px-12">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <div class="lg:col-span-7 order-1">
+          <!-- object-contain, not cover: these photos run from tall portrait to
+               short landscape, and cover crops heads off the portraits. Contain
+               shows every photo whole; the soft frame keeps the letterboxing
+               looking deliberate. -->
+          <div class="rounded-2xl bg-[#F1EFE9] overflow-hidden">
+            <img
+              src={partner.image}
+              alt={partner.name}
+              width="900"
+              height="640"
+              fetchpriority="high"
+              class="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-contain"
+            />
+          </div>
+        </div>
+        <div class="lg:col-span-5 order-2">
           <p class="text-[#1d803f] font-semibold text-sm uppercase tracking-widest mb-3">
             {partner.kind === 'partner' ? 'Indian Partner' : 'Project'}
           </p>
-          <h1 style="color:white!important;" class="font-bold text-[30px] md:text-[38px] lg:text-[46px] leading-[1.15]">{partner.name}</h1>
-          <p class="mt-4 text-white/80 text-lg">{partner.tagline}</p>
+          <h1 class="text-[#1D1C1C] font-bold text-[30px] md:text-[38px] lg:text-[44px] leading-[1.15]">{partner.name}</h1>
+          <p class="mt-4 text-[#555] text-lg leading-relaxed">{partner.tagline}</p>
           <a href="#give-now" class="inline-block mt-7 bg-[#06038D] hover:bg-[#1d803f] text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
             Give to {partner.name.replace(' in India', '')}
           </a>
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-black/30">
-          <img
-            src={partner.image}
-            alt={partner.name}
-            width="800"
-            height="600"
-            fetchpriority="high"
-            class="w-full h-[260px] sm:h-[340px] lg:h-[420px] object-cover object-center"
-          />
         </div>
       </div>
     </div>
@@ -131,7 +138,7 @@ const others = PARTNERS.filter((p) => p.slug !== partner.slug).slice(0, 3);
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {others.map((p) => (
           <a href={`/give/partners/${p.slug}/`} class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-stone-200">
-            <img src={p.image} alt={p.name} width="400" height="225" loading="lazy" class="w-full h-40 object-cover" />
+            <img src={p.image} alt={p.name} width="400" height="225" loading="lazy" class="w-full h-40 object-contain bg-[#F1EFE9]" />
             <div class="p-5">
               <p class="text-[#1D1C1C] font-bold">{p.name}</p>
               <p class="text-[#595959] text-sm mt-1">{p.tagline}</p>
