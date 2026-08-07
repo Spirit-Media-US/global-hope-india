@@ -287,6 +287,15 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     // Preselect $100/monthly so the form is never in an empty state.
     (document.querySelector('.ghi-amount-btn[data-amount="100"]') as HTMLElement)?.click();
 
+    // ?fund=<campaign-slug> preselects a fund. Used by the Givebutter migration
+    // emails so a donor returning to re-create a designated gift lands on their
+    // own designation rather than having to find it again.
+    const wanted = new URLSearchParams(window.location.search).get('fund');
+    if (wanted) {
+      const radio = document.querySelector(`input[name="ghi-fund"][value="${wanted}"]`) as HTMLInputElement | null;
+      if (radio) { radio.checked = true; updateImpact(); }
+    }
+
     // Returning from Stripe
     const params = new URLSearchParams(window.location.search);
     if (params.get('session_id')) {
