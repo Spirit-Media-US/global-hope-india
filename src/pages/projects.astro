@@ -2,21 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import { sanityClient } from '../lib/sanity.ts';
 
+import { PARTNERS } from '../data/partners';
+
+// Partner + project giving links come from src/data/partners.ts, NOT Sanity.
+// Sanity's donationLink documents still hold the old Givebutter URLs and name the
+// state/city each partner serves in — publishing that is a security risk for them.
+// Keep this list as the single source of truth for anything donor-facing.
+const partners = PARTNERS.filter(p => p.kind === 'partner').map(p => ({ name: p.name, url: `/give/partners/${p.slug}/` }));
+const projectLinks = PARTNERS.filter(p => p.kind === 'project').map(p => ({ name: p.name, url: `/give/partners/${p.slug}/` }));
+
 // Fetch from Sanity with hardcoded fallbacks
-let partners: any[] = [];
-let projectLinks: any[] = [];
 let accountability: string[] = [];
 let practicalResources: string[] = [];
 
-try {
-  const donationLinks = await sanityClient.fetch(`
-    *[_type == "donationLink"] | order(order asc) {
-      name, category, "url": donateUrl
-    }
-  `);
-  partners = donationLinks.filter((d: any) => d.category === 'partner');
-  projectLinks = donationLinks.filter((d: any) => d.category === 'project');
-} catch (e) { /* fallback below */ }
 
 try {
   const accItems = await sanityClient.fetch(`
@@ -39,30 +37,6 @@ try {
 } catch (e) {}
 
 // Fallbacks
-if (partners.length === 0) partners = [
-  { name: 'Achu in Nagaland', url: 'https://givebutter.com/AchuInNagaland' },
-  { name: 'Amit in Dehradun', url: 'https://givebutter.com/AmitInDehradun' },
-  { name: 'Anil in Andhra Pradesh', url: 'https://givebutter.com/AnilinAndhraPradesh' },
-  { name: 'Bernardshaw in Chennai', url: 'https://givebutter.com/ChennaiMinistry' },
-  { name: 'DBM in Dimapur', url: 'https://givebutter.com/DBMinDimapur' },
-  { name: 'Dr S in Hyderabad', url: 'https://givebutter.com/DrSHyderabad' },
-  { name: 'Kasbe in Pune', url: 'https://givebutter.com/KasbeinPune' },
-  { name: 'KEL in Palakollu', url: 'https://givebutter.com/KELinPalakollu' },
-  { name: 'Manoj in Mumbai', url: 'https://givebutter.com/ManojinMumbai' },
-  { name: 'Mayon in Manipur', url: 'https://givebutter.com/MayoninManipur' },
-  { name: 'Raja in Hyderabad', url: 'https://givebutter.com/RajaInHyderabad' },
-  { name: 'Sekhar in Vizag', url: 'https://givebutter.com/SekharInVizag' },
-  { name: "The Shepherd's House", url: 'https://givebutter.com/TheShepherdsHouse' },
-];
-if (projectLinks.length === 0) projectLinks = [
-  { name: 'Bibles', url: 'https://givebutter.com/BiblesForIndia' },
-  { name: 'Business Development', url: 'https://givebutter.com/TheShepherdsHouse' },
-  { name: 'Child Development', url: 'https://givebutter.com/GHIChildDevelopment' },
-  { name: 'Church Planting', url: 'https://givebutter.com/GHIChurchPlanting' },
-  { name: 'Leadership Development', url: 'https://givebutter.com/GHILeadershipDevelopment' },
-  { name: 'Village Development', url: 'https://givebutter.com/GHIVillageDevelopment' },
-  { name: 'North East Healthcare Fund', url: 'https://givebutter.com/NorthEastHealthcareFund' },
-];
 if (accountability.length === 0) accountability = [
   'Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Morrisville, North Carolina. All gifts are tax-deductible to the full extent permitted by law.',
   'GHI is a member of multiple independent financial accountability programs.',
@@ -113,7 +87,7 @@ if (practicalResources.length === 0) practicalResources = [
         {
           "@type": "Question",
           "name": "Is my donation to Global Hope India tax deductible?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Global Hope India is a federally recognized 501(c)(3) nonprofit organization located in Raleigh, North Carolina. All gifts are tax-deductible. You will receive a donation receipt for your records." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Global Hope India is a federally recognized 501(c)(3) nonprofit organization located in Cary, North Carolina. All gifts are tax-deductible. You will receive a donation receipt for your records." }
         }
       ]
     })}></script>
@@ -154,7 +128,7 @@ if (practicalResources.length === 0) practicalResources = [
             <svg class="w-12 h-12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M448 358.4V25.6c0-16-9.6-25.6-25.6-25.6H96C41.6 0 0 41.6 0 96v320c0 54.4 41.6 96 96 96h326.4c12.8 0 25.6-9.6 25.6-25.6v-16c0-6.4-3.2-12.8-9.6-19.2-3.2-16-3.2-60.8 0-73.6 6.4-3.2 9.6-9.6 9.6-19.2zM144 144c0-8.84 7.16-16 16-16h48V80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v48h48c8.84 0 16 7.16 16 16v32c0 8.84-7.16 16-16 16h-48v112c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16V192h-48c-8.84 0-16-7.16-16-16v-32zm236.8 304H96c-19.2 0-32-12.8-32-32s16-32 32-32h284.8v64z"/></svg>
           </div>
           <h2 class="text-[#1D1C1C] font-bold text-[22px] md:text-[24px] mb-3">Bibles for India</h2>
-          <p class="text-[#444] leading-relaxed">1.4B people call India home. 1B people in India have never held a Bible. Contribute now to share Bibles in India: <a href="https://givebutter.com/BiblesForIndia" target="_blank" rel="noopener noreferrer" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Bibles</a></p>
+          <p class="text-[#444] leading-relaxed">1.4B people call India home. 1B people in India have never held a Bible. Contribute now to share Bibles in India: <a href="/give/bibles" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Bibles</a></p>
         </div>
 
         <!-- Orphan Care -->
@@ -163,7 +137,7 @@ if (practicalResources.length === 0) practicalResources = [
             <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/></svg>
           </div>
           <h2 class="text-[#1D1C1C] font-bold text-[22px] md:text-[24px] mb-3">Orphan Care</h2>
-          <p class="text-[#444] leading-relaxed">India is home to half of the world's orphans. Contribute now to sponsor orphan care in India: <a href="https://givebutter.com/GHIChildDevelopment" target="_blank" rel="noopener noreferrer" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Child Development</a></p>
+          <p class="text-[#444] leading-relaxed">India is home to half of the world's orphans. Contribute now to sponsor orphan care in India: <a href="/give/" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Child Development</a></p>
         </div>
 
         <!-- Community Development -->
@@ -172,7 +146,7 @@ if (practicalResources.length === 0) practicalResources = [
             <svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
           </div>
           <h2 class="text-[#1D1C1C] font-bold text-[22px] md:text-[24px] mb-3">Community Development</h2>
-          <p class="text-[#444] leading-relaxed">We're transforming whole communities through building strong churches and business leaders for Christ: <a href="https://givebutter.com/GHIVillageDevelopment" target="_blank" rel="noopener noreferrer" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Community Development</a></p>
+          <p class="text-[#444] leading-relaxed">We're transforming whole communities through building strong churches and business leaders for Christ: <a href="/give/" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors underline">Community Development</a></p>
         </div>
       </div>
     </div>
@@ -191,7 +165,7 @@ if (practicalResources.length === 0) practicalResources = [
         ))}
       </div>
       <p class="text-[#444] text-lg leading-relaxed mb-8">Everything to proclaim and demonstrate Jesus' love.</p>
-      <a href="https://givebutter.com/global-hope-india" target="_blank" rel="noopener noreferrer" class="btn btn-green">Fund This Project</a>
+      <a href="/give/" class="btn btn-green">Fund This Project</a>
     </div>
   </section>
 
@@ -210,7 +184,7 @@ if (practicalResources.length === 0) practicalResources = [
             <ul class="space-y-2 mb-6">
               {partners.map(p => (
                 <li>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors">{p.name}</a>
+                  <a href={p.url} class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors">{p.name}</a>
                 </li>
               ))}
             </ul>
@@ -218,7 +192,7 @@ if (practicalResources.length === 0) practicalResources = [
             <ul class="space-y-2">
               {projectLinks.map(p => (
                 <li>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors">{p.name}</a>
+                  <a href={p.url} class="font-bold text-[#1D1C1C] hover:text-[#1d803f] transition-colors">{p.name}</a>
                 </li>
               ))}
             </ul>

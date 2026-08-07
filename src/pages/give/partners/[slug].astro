@@ -1,0 +1,155 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DonationForm from '../../../components/DonationForm.astro';
+import { PARTNERS, type Partner } from '../../../data/partners';
+
+export function getStaticPaths() {
+  return PARTNERS.map((p) => ({ params: { slug: p.slug }, props: { partner: p } }));
+}
+
+interface Props { partner: Partner }
+const { partner } = Astro.props;
+
+const others = PARTNERS.filter((p) => p.slug !== partner.slug).slice(0, 3);
+---
+
+<Layout
+  title={`Support ${partner.name} | Global Hope India`}
+  description={`${partner.tagline}. Give directly to ${partner.name} through Global Hope India — monthly or one-time, secure and tax-deductible.`}
+  ogImage={partner.image}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "DonateAction",
+      "name": `Support ${partner.name}`,
+      "description": partner.tagline,
+      "recipient": {
+        "@type": "NGO",
+        "name": "Global Hope India",
+        "url": "https://globalhopeindia.org",
+        "taxID": "22-3894982"
+      },
+      "url": `https://globalhopeindia.org/give/partners/${partner.slug}/`
+    })}></script>
+  </Fragment>
+
+  <!-- HERO — the photograph is the subject, so it leads on a light ground with no
+       dark panel competing for attention. These images come from the partners
+       themselves and range from tall portrait to short landscape, which is why the
+       photo is given its own generous frame rather than being cropped full-bleed. -->
+  <section class="bg-white pt-28 pb-10 lg:pt-32 lg:pb-14">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <div class="lg:col-span-7 order-1">
+          <!-- object-contain, not cover: these photos run from tall portrait to
+               short landscape, and cover crops heads off the portraits. Contain
+               shows every photo whole; the soft frame keeps the letterboxing
+               looking deliberate. -->
+          <div class="rounded-2xl bg-[#F1EFE9] overflow-hidden">
+            <img
+              src={partner.image}
+              alt={partner.name}
+              width="900"
+              height="640"
+              fetchpriority="high"
+              class="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-contain"
+            />
+          </div>
+        </div>
+        <div class="lg:col-span-5 order-2">
+          <p class="text-[#1d803f] font-semibold text-sm uppercase tracking-widest mb-3">
+            {partner.kind === 'partner' ? 'Indian Partner' : 'Project'}
+          </p>
+          <h1 class="text-[#1D1C1C] font-bold text-[30px] md:text-[38px] lg:text-[44px] leading-[1.15]">{partner.name}</h1>
+          <p class="mt-4 text-[#555] text-lg leading-relaxed">{partner.tagline}</p>
+          <a href="#give-now" class="inline-block mt-7 bg-[#06038D] hover:bg-[#1d803f] text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
+            Give to {partner.name.replace(' in India', '')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY DESIGNATED GIVING -->
+  <section class="bg-[#2EAB5A] py-8 px-6">
+    <div class="container mx-auto max-w-3xl text-center text-white">
+      <p class="text-lg leading-relaxed">
+        Your gift here goes directly to {partner.name} — designated, receipted, and reported as such.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE STORY — carried over from the partner's original giving page.
+       Short lines that follow a "Current funding needs:" heading are the needs
+       list, so they render as bullets rather than one-line paragraphs. -->
+  <section class="section bg-white py-14">
+    <div class="container mx-auto max-w-3xl px-6">
+      {(() => {
+        const out: any[] = [];
+        let inNeeds = false;
+        let needs: string[] = [];
+        for (const p of partner.intro) {
+          const isHeading = /^current funding needs:?$/i.test(p.trim());
+          if (isHeading) { inNeeds = true; continue; }
+          const looksLikeLink = /^(To get updates|For updates|Learn more|To support)/i.test(p);
+          if (inNeeds && !looksLikeLink && p.length < 220) { needs.push(p); continue; }
+          inNeeds = false;
+          if (needs.length) { out.push({ type: 'needs', items: [...needs] }); needs = []; }
+          out.push({ type: 'p', text: p });
+        }
+        if (needs.length) out.push({ type: 'needs', items: needs });
+        return out.map((b) =>
+          b.type === 'needs' ? (
+            <div class="bg-[#F8F5EF] rounded-2xl p-6 my-7">
+              <p class="font-bold text-[#1D1C1C] mb-3">Current funding needs</p>
+              <ul class="space-y-2">
+                {b.items.map((i: string) => (
+                  <li class="flex gap-3 text-[#444] leading-relaxed">
+                    <span class="text-[#1d803f] font-bold shrink-0">&bull;</span><span>{i}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p class="text-[#444] text-[17px] leading-relaxed mb-5">{b.text}</p>
+          )
+        );
+      })()}
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="give-now" class="section bg-[#F8F9F3] py-14">
+    <div class="container mx-auto px-6">
+      <DonationForm
+        campaign={partner.campaign}
+        fund={partner.campaign}
+        lockFund={true}
+        heading={`Give to ${partner.name}`}
+      />
+    </div>
+  </section>
+
+  <!-- OTHER PARTNERS -->
+  <section class="section bg-white py-14">
+    <div class="container mx-auto max-w-5xl px-6">
+      <h2 class="text-[#1D1C1C] font-bold text-2xl mb-6 text-center">Other partners you can support</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {others.map((p) => (
+          <a href={`/give/partners/${p.slug}/`} class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-stone-200">
+            <img src={p.image} alt={p.name} width="400" height="225" loading="lazy" class="w-full h-40 object-contain bg-[#F1EFE9]" />
+            <div class="p-5">
+              <p class="text-[#1D1C1C] font-bold">{p.name}</p>
+              <p class="text-[#595959] text-sm mt-1">{p.tagline}</p>
+              <span class="text-[#1d803f] text-xs font-semibold mt-3 inline-block group-hover:underline">Support &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="text-center mt-8">
+        <a href="/give/partners/" class="text-[#06038D] font-semibold hover:underline">See all partners &amp; projects &rarr;</a>
+      </p>
+    </div>
+  </section>
+</Layout>

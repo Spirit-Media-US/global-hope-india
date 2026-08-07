@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import DonationForm from '../../components/DonationForm.astro';
 ---
 
 <Layout
@@ -70,7 +71,7 @@ import Layout from '../../layouts/Layout.astro';
           <div class="bg-[#F8F5EF] rounded-2xl p-8 text-center">
             <h3 class="text-[#1D1C1C] text-xl font-bold mb-4">Support a Church Planter</h3>
             <p class="text-[#555] text-sm mb-6">Your gift goes directly to empowering indigenous pastors who are advancing the gospel among unreached people in India.</p>
-            <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md w-full">Donate Now</a>
+            <a href="#give-now" class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md w-full">Donate Now</a>
             <p class="text-[#666] text-xs mt-4 font-medium">Over 85% of every dollar goes directly to programs in India.</p>
             <p class="text-[#999] text-xs mt-1">Global Hope India is a 501(c)(3). All gifts are tax-deductible.</p>
             <div class="flex items-center justify-center gap-3 mt-4">
@@ -98,7 +99,17 @@ import Layout from '../../layouts/Layout.astro';
     <div class="mx-auto max-w-3xl">
       <h2 class="text-white font-bold text-[26px] md:text-[36px] mb-4">Build God's Kingdom in India</h2>
       <p class="text-white/90 text-lg leading-relaxed mb-8">Every new church is a beacon of hope in a community that has never heard the gospel. Give to the church planting movement in India today.</p>
-      <a href="https://givebutter.com/GlobalHopeIndia" target="_blank" rel="noopener noreferrer" class="inline-block bg-white hover:bg-stone-100 text-[#1d803f] font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md">Give to Church Planting</a>
+      <a href="#give-now" class="inline-block bg-white hover:bg-stone-100 text-[#1d803f] font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md">Give to Church Planting</a>
+    </div>
+  </section>
+
+  <!-- GIVE FORM -->
+  <section id="give-now" class="section bg-[#F8F9F3] py-14">
+    <div class="container mx-auto px-6">
+      <DonationForm campaign="ghi-leadership" fund="ghi-leadership" lockFund={true} heading="Give to Church Planting" />
+      <p class="text-center text-xs text-[#595959] mt-4 max-w-xl mx-auto">
+        Gifts here support Leadership Development — equipping Indian leaders who serve their own communities.
+      </p>
     </div>
   </section>
 </Layout>

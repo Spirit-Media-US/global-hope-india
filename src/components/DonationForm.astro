@@ -1,0 +1,360 @@
+---
+// Global Hope India donation form + embedded Stripe Checkout.
+//
+// The donor never leaves the page: Stripe's payment form mounts inline in
+// #ghi-stripe-mount. Step 1 collects who/how much/which fund; step 2 mounts
+// Stripe; on completion Stripe returns to this page with ?session_id= and we
+// show the thank-you state.
+//
+// Fee coverage is CHECKED BY DEFAULT and the donor may opt out. 83% of GHI's
+// 2026 Givebutter donors covered the fee, absorbing $757 of $771 in processing
+// costs — defaulting this off would move nearly all of that onto GHI.
+
+interface Props {
+  /** Campaign slug in the donations pipeline. */
+  campaign?: string;
+  /** Preselected fund; donor can change it unless lockFund is true. */
+  fund?: string;
+  /** Hide the fund picker (used on a single-fund landing page). */
+  lockFund?: boolean;
+  heading?: string;
+}
+
+const {
+  campaign = 'ghi',
+  fund = 'ghi',
+  lockFund = false,
+  heading = 'Give to India',
+} = Astro.props;
+
+// One entry per campaign slug configured for Global Hope India.
+const FUNDS = [
+  { slug: 'ghi', label: 'Where Most Needed', blurb: 'Directed to the greatest current need' },
+  { slug: 'ghi-leadership', label: 'Leadership Development', blurb: 'Equipping and supporting Indian leaders' },
+  { slug: 'ghi-village', label: 'Village Development', blurb: 'Clean water, health and community projects' },
+];
+
+const AMOUNTS = [25, 50, 100, 250, 500];
+---
+
+<div id="ghi-donate" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 max-w-xl mx-auto">
+  <h2 class="text-[#1D1C1C] font-bold text-2xl md:text-3xl mb-1">{heading}</h2>
+  <p class="text-[#595959] text-sm mb-6">Secure giving. You can cancel a monthly gift anytime.</p>
+
+  <!-- STEP 1 -->
+  <div id="ghi-step-form">
+    <!-- frequency -->
+    <div class="grid grid-cols-2 gap-2 p-1 bg-stone-100 rounded-full mb-6">
+      <button type="button" data-freq="recurring" data-active="true"
+        class="ghi-freq-btn rounded-full py-2.5 text-sm font-semibold transition-colors">Monthly</button>
+      <button type="button" data-freq="one_time"
+        class="ghi-freq-btn rounded-full py-2.5 text-sm font-semibold transition-colors">One-time</button>
+    </div>
+
+    {!lockFund && (
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-[#1D1C1C] mb-2">Where should your gift go?</label>
+        <div class="space-y-2">
+          {FUNDS.map((f) => (
+            <label class="flex items-start gap-3 p-3 border border-stone-200 rounded-xl cursor-pointer hover:border-[#1d803f] transition-colors">
+              <input type="radio" name="ghi-fund" value={f.slug} checked={f.slug === fund} class="mt-1 accent-[#1d803f]" />
+              <span>
+                <span class="block text-sm font-semibold text-[#1D1C1C]">{f.label}</span>
+                <span class="block text-xs text-[#595959]">{f.blurb}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+    )}
+    {lockFund && <input type="hidden" name="ghi-fund" value={fund} />}
+
+    <!-- amount -->
+    <label class="block text-sm font-semibold text-[#1D1C1C] mb-2">Amount</label>
+    <div class="grid grid-cols-3 gap-2 mb-3">
+      {AMOUNTS.map((a) => (
+        <button type="button" class="ghi-amount-btn border border-stone-200 rounded-xl py-3 font-semibold text-[#1D1C1C] transition-colors" data-amount={a}>${a}</button>
+      ))}
+      <button type="button" class="ghi-amount-btn border border-stone-200 rounded-xl py-3 font-semibold text-[#1D1C1C] transition-colors" data-amount="custom">Other</button>
+    </div>
+    <div id="ghi-custom-wrap" style="display:none" class="mb-3">
+      <div class="flex items-center border border-stone-200 rounded-xl px-3">
+        <span class="text-[#595959]">$</span>
+        <input id="ghi-custom-amount" type="number" min="1" step="1" inputmode="numeric"
+          class="w-full py-3 px-2 outline-none" placeholder="Enter an amount" />
+      </div>
+    </div>
+
+    <!-- cover fees: ON by default, donor may opt out -->
+    <label class="flex items-start gap-3 mb-5 cursor-pointer">
+      <input type="checkbox" id="ghi-cover-fees" checked class="mt-1 accent-[#1d803f]" />
+      <span class="text-sm text-[#595959]">Cover the processing fee so 100% of my gift reaches Global Hope India</span>
+    </label>
+
+    <div id="ghi-impact" class="bg-[#F8F5EF] rounded-xl px-4 py-3 mb-5 text-sm text-[#1D1C1C]"></div>
+
+    <!-- donor -->
+    <div class="grid grid-cols-2 gap-3 mb-3">
+      <input id="ghi-first" type="text" autocomplete="given-name" placeholder="First name"
+        class="border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+      <input id="ghi-last" type="text" autocomplete="family-name" placeholder="Last name"
+        class="border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+    </div>
+    <input id="ghi-email" type="email" autocomplete="email" placeholder="Email address"
+      class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none mb-3" />
+
+    <!-- Mailing address is OPTIONAL. Givebutter captured it on 98% of gifts and it is
+         where a year-end giving statement gets posted, so it is offered up front rather
+         than buried — but never blocks a gift. Mobile number is required and is collected
+         by Stripe on the next step, where it is validated. -->
+    <details class="mb-5 border border-stone-200 rounded-xl px-4 py-3">
+      <summary class="cursor-pointer text-sm font-semibold text-[#1D1C1C]">
+        Add your mailing address <span class="font-normal text-[#595959]">(optional — for your year-end giving statement)</span>
+      </summary>
+      <div class="mt-3 space-y-3">
+        <input id="ghi-addr1" type="text" autocomplete="address-line1" placeholder="Street address"
+          class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        <input id="ghi-addr2" type="text" autocomplete="address-line2" placeholder="Apt, suite (optional)"
+          class="w-full border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        <div class="grid grid-cols-3 gap-3">
+          <input id="ghi-city" type="text" autocomplete="address-level2" placeholder="City"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+          <input id="ghi-state" type="text" autocomplete="address-level1" placeholder="State"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+          <input id="ghi-zip" type="text" autocomplete="postal-code" placeholder="ZIP"
+            class="col-span-1 border border-stone-200 rounded-xl py-3 px-3 outline-none" />
+        </div>
+      </div>
+    </details>
+
+    <button id="ghi-continue" type="button"
+      class="w-full bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg py-4 rounded-full transition-colors">
+      Continue to payment
+    </button>
+    <p id="ghi-error" style="display:none" class="mt-3 text-sm text-red-700 bg-red-50 rounded-lg px-3 py-2"></p>
+    <p class="text-center text-xs text-[#595959] mt-4">
+      Global Hope India is a 501(c)(3) public charity (EIN 22-3894982). Your gift is tax-deductible.
+    </p>
+
+    <!-- Give by cheque: INFORMATION ONLY. Cheques were 37% of 2025+ dollars, so the
+         option has to be visible — but this deliberately does not register a gift or
+         collect anything; it simply tells the donor where to post it. -->
+    <div class="mt-6 pt-6 border-t border-stone-200 text-center">
+      <p class="text-sm font-semibold text-[#1D1C1C] mb-1">Prefer to give by check?</p>
+      <p class="text-sm text-[#595959] leading-relaxed">
+        Make checks payable to <strong class="text-[#1D1C1C]">Global Hope India</strong> and mail to:
+      </p>
+      <p class="text-sm text-[#1D1C1C] leading-relaxed mt-2">
+        Global Hope India<br />
+        205 S Academy Street #3251<br />
+        Cary, NC 27519
+      </p>
+      <p class="text-xs text-[#595959] mt-2">
+        Please include your email address so we can send your receipt.
+      </p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="ghi-step-stripe" style="display:none">
+    <button id="ghi-back" type="button" class="text-sm text-[#595959] hover:text-[#1D1C1C] mb-3">&larr; Back</button>
+    <p id="ghi-summary" class="font-semibold text-[#1D1C1C] mb-4"></p>
+    <div id="ghi-stripe-mount"></div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="ghi-step-done" style="display:none" class="text-center py-6">
+    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-[#1d803f] flex items-center justify-center">
+      <span class="text-white text-2xl">&#10003;</span>
+    </div>
+    <h3 class="font-bold text-xl text-[#1D1C1C] mb-2">Thank you.</h3>
+    <p class="text-[#595959] text-sm">Your receipt is on its way to your inbox. It serves as your record for tax purposes.</p>
+  </div>
+</div>
+
+<style>
+  .ghi-freq-btn[data-active='true'] { background: #ffffff; color: #1d803f; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .ghi-freq-btn:not([data-active='true']) { color: #595959; }
+  .ghi-amount-btn[data-active='true'] { border-color: #1d803f; background: #1d803f; color: #ffffff; }
+</style>
+
+<script>
+  // `/pure` so importing this does not eagerly warm js.stripe.com on page load;
+  // Stripe.js is fetched only when the donor reaches the payment step.
+  import { loadStripe } from '@stripe/stripe-js/pure';
+
+  const TOOLS_API = 'https://tools-api.spiritmediapublishing.com';
+  // Publishable key is public by design and safe in client source — it only
+  // identifies the account and can't move money. This is Global Hope India's
+  // LIVE key (acct_1U1RYLBpCAjFm8eo); it must stay paired with the live secret
+  // key the donations pipeline uses, or Checkout will reject the client secret.
+  const STRIPE_PK = 'pk_live_51U1RYLBpCAjFm8eoPFz8PwzL5DCaa1cQsUkVlQqhkiAmqeJSwDua8g3hZvBQamLGxCDpKpdJ2bf6efYe6M72dkX400FE9T2sx4';
+
+  // Stripe nonprofit rate: 2.2% + $0.30. Amex is higher, but the brand isn't known
+  // until inside Checkout, so the pre-payment estimate uses the standard NPO rate.
+  const FEE_RATE = 0.022;
+  const FEE_FIXED_CENTS = 30;
+
+  let stripePromise: Promise<any> | null = null;
+  let checkoutInstance: any = null;
+  let frequency: 'one_time' | 'recurring' = 'recurring';
+
+  const $ = (id: string) => document.getElementById(id);
+  const fmt = (c: number) =>
+    `$${(c / 100).toLocaleString('en-US', { minimumFractionDigits: c % 100 === 0 ? 0 : 2, maximumFractionDigits: 2 })}`;
+
+  function selectedAmountCents(): number {
+    const active = document.querySelector('.ghi-amount-btn[data-active="true"]') as HTMLElement | null;
+    if (!active) return 0;
+    if (active.dataset.amount === 'custom') {
+      const dollars = parseInt((($('ghi-custom-amount') as HTMLInputElement)?.value) || '0', 10);
+      return Number.isFinite(dollars) && dollars > 0 ? dollars * 100 : 0;
+    }
+    return parseInt(active.dataset.amount || '0', 10) * 100;
+  }
+
+  function coverFeesChecked(): boolean {
+    return ($('ghi-cover-fees') as HTMLInputElement | null)?.checked ?? true;
+  }
+
+  /** Gross up so the fund receives the full chosen amount when fees are covered. */
+  function grossUp(amountCents: number) {
+    if (!coverFeesChecked()) return { charged: amountCents, feeCovered: 0 };
+    const gross = Math.round((amountCents + FEE_FIXED_CENTS) / (1 - FEE_RATE));
+    return { charged: gross, feeCovered: gross - amountCents };
+  }
+
+  function selectedFund(): string {
+    const picked = document.querySelector('input[name="ghi-fund"]:checked') as HTMLInputElement | null;
+    const hidden = document.querySelector('input[name="ghi-fund"][type="hidden"]') as HTMLInputElement | null;
+    return picked?.value || hidden?.value || 'ghi';
+  }
+
+  function updateImpact() {
+    const el = $('ghi-impact');
+    if (!el) return;
+    const base = selectedAmountCents();
+    if (!base) { el.textContent = 'Choose an amount to continue.'; return; }
+    const { charged, feeCovered } = grossUp(base);
+    const period = frequency === 'recurring' ? ' each month' : '';
+    el.innerHTML = feeCovered
+      ? `You'll be charged <strong>${fmt(charged)}</strong>${period} — <strong>${fmt(base)}</strong> reaches India and ${fmt(feeCovered)} covers the processing fee.`
+      : `You'll be charged <strong>${fmt(charged)}</strong>${period}. About ${fmt(Math.round(base * FEE_RATE) + FEE_FIXED_CENTS)} goes to processing fees.`;
+  }
+
+  function showError(msg: string) {
+    const el = $('ghi-error');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = '';
+  }
+
+  function init() {
+    if (!$('ghi-donate')) return;
+
+    document.querySelectorAll('.ghi-freq-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ghi-freq-btn').forEach((b) => b.removeAttribute('data-active'));
+        btn.setAttribute('data-active', 'true');
+        frequency = (btn as HTMLElement).dataset.freq as 'one_time' | 'recurring';
+        updateImpact();
+      });
+    });
+
+    document.querySelectorAll('.ghi-amount-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ghi-amount-btn').forEach((b) => b.removeAttribute('data-active'));
+        btn.setAttribute('data-active', 'true');
+        const custom = (btn as HTMLElement).dataset.amount === 'custom';
+        ($('ghi-custom-wrap') as HTMLElement).style.display = custom ? '' : 'none';
+        if (custom) ($('ghi-custom-amount') as HTMLInputElement)?.focus();
+        updateImpact();
+      });
+    });
+
+    $('ghi-custom-amount')?.addEventListener('input', updateImpact);
+    $('ghi-cover-fees')?.addEventListener('change', updateImpact);
+    document.querySelectorAll('input[name="ghi-fund"]').forEach((r) => r.addEventListener('change', updateImpact));
+
+    $('ghi-back')?.addEventListener('click', () => {
+      ($('ghi-step-stripe') as HTMLElement).style.display = 'none';
+      ($('ghi-step-form') as HTMLElement).style.display = '';
+      if (checkoutInstance) { try { checkoutInstance.destroy(); } catch {} checkoutInstance = null; }
+    });
+
+    $('ghi-continue')?.addEventListener('click', startCheckout);
+
+    // Preselect $100/monthly so the form is never in an empty state.
+    (document.querySelector('.ghi-amount-btn[data-amount="100"]') as HTMLElement)?.click();
+
+    // Returning from Stripe
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('session_id')) {
+      ($('ghi-step-form') as HTMLElement).style.display = 'none';
+      ($('ghi-step-stripe') as HTMLElement).style.display = 'none';
+      ($('ghi-step-done') as HTMLElement).style.display = '';
+    }
+  }
+
+  async function startCheckout() {
+    ($('ghi-error') as HTMLElement).style.display = 'none';
+
+    const base = selectedAmountCents();
+    const first = (($('ghi-first') as HTMLInputElement).value || '').trim();
+    const last = (($('ghi-last') as HTMLInputElement).value || '').trim();
+    const email = (($('ghi-email') as HTMLInputElement).value || '').trim();
+
+    if (!base) return showError('Please choose an amount.');
+    if (!first || !last) return showError('Please enter your first and last name.');
+    if (!email || !email.includes('@')) return showError('Please enter a valid email address.');
+    if (!STRIPE_PK) return showError('Payments are not configured on this preview.');
+
+    const { charged, feeCovered } = grossUp(base);
+    const fund = selectedFund();
+
+    ($('ghi-step-form') as HTMLElement).style.display = 'none';
+    ($('ghi-step-stripe') as HTMLElement).style.display = '';
+    ($('ghi-summary') as HTMLElement).textContent =
+      `${frequency === 'recurring' ? 'Monthly' : 'One-time'}: ${fmt(charged)}`;
+
+    try {
+      const res = await fetch(`${TOOLS_API}/api/donations/checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaign: fund,
+          amount_cents: charged,
+          is_recurring: frequency === 'recurring',
+          donor_name: `${first} ${last}`,
+          donor_email: email,
+          is_public: false,
+          cover_fees: coverFeesChecked(),
+          fee_covered_cents: feeCovered,
+          // optional mailing address — blank strings are dropped server-side
+          address1: (($('ghi-addr1') as HTMLInputElement)?.value || '').trim(),
+          address2: (($('ghi-addr2') as HTMLInputElement)?.value || '').trim(),
+          city: (($('ghi-city') as HTMLInputElement)?.value || '').trim(),
+          state: (($('ghi-state') as HTMLInputElement)?.value || '').trim(),
+          postal_code: (($('ghi-zip') as HTMLInputElement)?.value || '').trim(),
+          country: 'US',
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.client_secret) throw new Error(data.error || 'Could not start checkout');
+
+      if (!stripePromise) stripePromise = loadStripe(STRIPE_PK);
+      const stripe = await stripePromise;
+      if (!stripe) throw new Error('Stripe failed to load');
+
+      checkoutInstance = await stripe.createEmbeddedCheckoutPage({ clientSecret: data.client_secret });
+      checkoutInstance.mount('#ghi-stripe-mount');
+    } catch (err: any) {
+      ($('ghi-step-stripe') as HTMLElement).style.display = 'none';
+      ($('ghi-step-form') as HTMLElement).style.display = '';
+      showError(err?.message || 'Something went wrong. Please try again.');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState !== 'loading') init();
+</script>
