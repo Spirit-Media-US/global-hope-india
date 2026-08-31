@@ -145,6 +145,17 @@ export const PARTNERS: Partner[] = [
       'Rain harvesting water tanks or bore well drilling',
       'To learn more about Pastor Mayon and his ministry please visit globalhopeindia.org',
     ] },
+  // NOTE (2026-08-31): restored as its own designation after being folded into
+  // Village Development at the Givebutter cutover. The only surviving source copy
+  // was the one-line description in content/pages/projects.md, so the intro below
+  // is deliberately short and carries NO funding-needs figures — none were on
+  // record, and inventing them for a live donation page is not acceptable.
+  // Kevin/GHI to supply real copy and a project photograph; the image here is
+  // GHI's existing medical-camp photograph, reused as a placeholder.
+  { slug: 'ne-healthcare', name: 'North East Healthcare', tagline: 'Medical care where the clinics are furthest away', campaign: 'ghi-ne-healthcare', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp', kind: 'project', intro: [
+      'The North East Healthcare Fund supports regional healthcare access in Northeast India — a part of the country where the nearest clinic can be a day\'s travel away, and where medical care and the love of Christ arrive together.',
+      'Global Hope India works through local partners to bring care to communities that sit outside the reach of ordinary health services. Gifts to this fund are designated to that work.',
+    ] },
   { slug: 'raja', name: 'Raja in India', tagline: 'A heart for orphans, the disabled, and people suffering from leprosy', campaign: 'ghi-raja', image: `${IMG}/ghi-partner-raja.webp`, kind: 'partner', intro: [
       'Pastor Raja has been extending love and care to people in need for years now. With a Master’s degree in Social Work plus a passion for proclaiming the Gospel, Pastor Raja was able to help and support orphans, persons with disability, and the leper community.',
       'With the help of Global Hope India, he has been supporting a leper colony, medical missions for people with disabilities, providing education and care for orphans, and a special school for the mentally challenged.',
