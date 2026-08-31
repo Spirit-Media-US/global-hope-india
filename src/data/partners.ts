@@ -145,6 +145,20 @@ export const PARTNERS: Partner[] = [
       'Rain harvesting water tanks or bore well drilling',
       'To learn more about Pastor Mayon and his ministry please visit globalhopeindia.org',
     ] },
+  // NOTE (2026-08-31): restored as its own designation after being folded into
+  // Village Development at the Givebutter cutover. Copy below is grounded in the
+  // original Givebutter campaign (givebutter.com/NorthEastHealthcareFund), whose
+  // ONLY text was the tagline: "An ethnic violence left a tribe fleeing for their
+  // lives and seek refuge in relief camps." That campaign carried no body copy,
+  // no funding-needs breakdown and no project photos — so none are invented here.
+  // It ran to $76,360 of a $100,000 goal across 45 supporters and is now CLOSED
+  // on Givebutter. Kevin/GHI to confirm the work is ongoing and supply real copy
+  // and a photograph; the image here is GHI's existing medical-camp photograph,
+  // reused as a placeholder.
+  { slug: 'ne-healthcare', name: 'North East Healthcare', tagline: 'Care for families driven from home by ethnic violence', campaign: 'ghi-ne-healthcare', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp', kind: 'project', intro: [
+      'Ethnic violence in North East India left a tribe fleeing for their lives, taking refuge in relief camps. The North East Healthcare Fund exists to meet the medical needs of those families — people who left home with nothing and now depend entirely on what relief reaches the camps.',
+      'Global Hope India works through local partners already living and serving in the region, so that care arrives from people the community knows and trusts. Gifts to this fund are designated to that work, receipted and reported as such.',
+    ] },
   { slug: 'raja', name: 'Raja in India', tagline: 'A heart for orphans, the disabled, and people suffering from leprosy', campaign: 'ghi-raja', image: `${IMG}/ghi-partner-raja.webp`, kind: 'partner', intro: [
       'Pastor Raja has been extending love and care to people in need for years now. With a Master’s degree in Social Work plus a passion for proclaiming the Gospel, Pastor Raja was able to help and support orphans, persons with disability, and the leper community.',
       'With the help of Global Hope India, he has been supporting a leper colony, medical missions for people with disabilities, providing education and care for orphans, and a special school for the mentally challenged.',
