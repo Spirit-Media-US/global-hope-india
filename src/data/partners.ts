@@ -89,13 +89,13 @@ export const PARTNERS: Partner[] = [
   // and a photograph; the image here is GHI's existing medical-camp photograph,
   // reused as a placeholder.
   //
-  // ⚠ NAMING — needs Kevin's ruling. This page names Manipur, which the site
-  // deliberately scrubbed from public blog slugs on 2026-08-06 for partner
-  // safety (see the 301s in public/_redirects, e.g.
-  // /blog/support-key-projects-in-manipur -> /blog/support-key-projects-in-india/).
-  // The name here follows the Givebutter campaign it was taken from
-  // ("Manipur Crisis Relief Fund"). If the safety rule covers projects too, this
-  // should be renamed to the "in India" form and given a 301 like the blog posts.
+  // NAMING — SETTLED, do not re-flag. Kevin ruled 2026-08-31: keep the Manipur
+  // name. The "never name a location" rule at the top of this file protects
+  // NAMED PARTNERS (a person identifiable with a place); it does not extend to a
+  // crisis-relief PROJECT, whose name is the crisis. This is why the blog slugs
+  // were scrubbed on 2026-08-06 (301s in public/_redirects) while this page keeps
+  // its name. Follows the Givebutter campaign it came from, "Manipur Crisis
+  // Relief Fund".
   // Body copy is verbatim from that campaign; goal $5,000, raised $0, 0 supporters,
   // closed on Givebutter. Image is GHI's own campaign cover from that page.
   { slug: 'manipur-relief', name: 'Manipur Crisis Relief', tagline: 'Emergency aid for displaced families in India', campaign: 'ghi-manipur-relief', image: `${IMG}/ghi-project-manipur-relief.webp`, kind: 'project', intro: [
