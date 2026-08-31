@@ -38,29 +38,6 @@ export const PARTNERS: Partner[] = [
       '$193 per month for 1 orphan - educational sponsorship, 12 orphan students need sponsorship for one academic year.',
       'To get updates on Pastor Achu and his ministry, please visit https://globalhopeindia.org',
     ] },
-  { slug: 'amit', name: 'Amit in India', tagline: 'Sharing the good news in villages and mountains', campaign: 'ghi-amit', image: `${IMG}/ghi-partner-amit.webp`, kind: 'partner', intro: [
-      'Pastor Amit built the ministry in 2013 with the mission of sharing the Gospel to far-flung and dangerous places. He started his mission of planting churches in mountains, villages, and slums.',
-      'In his effort and passion to spread the Good News, he was able to plant a church in a small village. More so, the foundation was able to provide walking sticks for the elders in that village.',
-      'For a decade, the mission of the ministry did not change yet it continues to expand. To support the mission, transportation and communication is an urgent need. Also, livelihood programs for the pastor and their families would be beneficial to help them in their missionary work and daily living. Thank you for being our partner in this great work for the Lord.',
-      'Current funding needs:',
-      '2 Motorcycles for transportation in villages',
-      'Literature and reading materials',
-      'Mobile phones for communication',
-      'Livelihood for pastors and their families for daily sustenance',
-      'To get updates on Pastor Amit and the ministry, please visit globalhopeindia.org.',
-    ] },
-  { slug: 'anil', name: 'Anil in India', tagline: 'A physician for the body and soul', campaign: 'ghi-anil', image: `${IMG}/ghi-partner-anil.webp`, kind: 'partner', intro: [
-      'In 1990, Dr Anil started the ministry in India with the mission of providing a holistic transformation to children, women, and elders.',
-      'The ministry in India strives to enhance life by stopping the cycle of poverty, illiteracy, unemployment, and untreated diseases through the provision of education, job-oriented skill training, and access to quality health care.',
-      'Among their projects include education for children, sports ministry for children and youth, vocational skills training for young women, a hospital with specialty health care services, and care for Leprosy patients.',
-      'For 30 years, the ministry in India has worked for the healing of body and soul on the most vulnerable – the children, women, and the elderly. With your generosity, more people will be healed and saved.',
-      'Current funding needs:',
-      'Sports Ministry - sports items and equipment',
-      'Hospital Equipment - Hematology analyzer, pulse oximeters, oxygen concentrators',
-      'Furnishing for the hospital\'s second floor - 20 patient beds, 20 couches, 20 chairs and 2 trolleys',
-      'Van for patient transportation',
-      'For updates on the projects of the ministry in India please visit globalhopeindia.org.',
-    ] },
   { slug: 'bernardshaw', name: 'Bernardshaw in India', tagline: 'A call for discipleship — in Scripture and action', campaign: 'ghi-bernardshaw', image: `${IMG}/ghi-partner-bernardshaw.webp`, kind: 'partner', intro: [
       'Join us in supporting God\'s work in India.',
       'The church\'s dedication and passion for proclaiming God\'s word includes church planting, pastoral and leadership training, discipleship training, and a Bible college. They actively create ways to share the Gospel through film, sports, and youth ministry.',
@@ -83,34 +60,6 @@ export const PARTNERS: Partner[] = [
       '$25 per month for 19 students - covering food, education, and healthcare needs',
       'Learn more about DBM here and their journey in creating a place to be a gateway to Heaven, where God’s presence is felt by every Deaf individual.',
     ] },
-  { slug: 'drs', name: 'Dr S in India', tagline: 'Proclaiming the gospel is a mission with action', campaign: 'ghi-drs', image: `${IMG}/ghi-partner-drs.webp`, kind: 'partner', intro: [
-      'In 2007, Dr S started his ministry in India. His missionary work evolves in church planting, child care, education, and employment-readiness programs.',
-      'Yearly his ministry was able to support:',
-      '292 children were given a home',
-      '685 students were assisted with tuition fees',
-      '1,300 young adults have been trained in a skills program',
-      '50 young people completed church planting training',
-      'These numbers have continuously grown over the years which means the mission is expanding. Dr S is looking forward to bringing the message of the Gospel and his missionary works to districts and villages. It will only be made possible with your generous donations and continued support.',
-      'Current funding needs:',
-      'For the new campus - 100 Bunk beds, 400 mattresses, 50 dining tables, 20 cots for house moms, and school furniture',
-      'For children\'s homes - 20 homes cost $35,000 each',
-      'Church Planter seminar - 2 conference cost is $5000',
-      '2 School buses - for the third campus cost is $35000 each',
-      '750 chairs for the auditorium - total cost is $43,500',
-      '4000 Bible for church planters = $15,000',
-      'To get updates on Dr S and his ministry please visit globalhopeindia.org',
-    ] },
-  { slug: 'kasbe', name: 'Kasbe in India', tagline: "Strengthening the family and home with God's Word", campaign: 'ghi-kasbe', image: `${IMG}/ghi-partner-kasbe.webp`, kind: 'partner', intro: [
-      'Pastor Kasbe is the current pastor of a ministry in India, established in 2013. The ministry is working on sharing the Gospel with non-believers.',
-      'With the hope of reaching more people to share the Good News, Pastor Kasbe regularly conducts family worship services, Sunday school for children, Bible study, and night vigils.',
-      'Families are welcoming them into their homes to praise, worship, and listen to God\'s word',
-      'Sunday school - children participate in worship services',
-      'With the ministry\'s hard work and passion for sharing the Gospel, more and more people are now coming forward. This growth of believers requires a bigger place to gather, worship, and receive God\'s word. With that, a ministry in India is knocking on your doors to make this possible.',
-      'Current funding needs:',
-      '$260 per month - ministry service hall rental',
-      '$600 per month - ministry fund for administration and personnel support',
-      'To get updates on the ministry, please visit globalhopeindia.org',
-    ] },
   { slug: 'kel', name: 'KEL in India', tagline: 'Overcoming persecution in pursuit of the mission', campaign: 'ghi-kel', image: `${IMG}/ghi-partner-kel.webp`, kind: 'partner', intro: [
       'Pastor Z has been doing missionary work since 1985. He has faced many troubles and persecution in doing his ministry in India. Prayers and courage are his weapons to overcome all these.',
       'Pastor Z has been pastoring thousands of people by proclaiming the Gospel and with the help of Global Hope India, SHM (the home), his ministry, various projects have been created for the benefit of the communities in need. Aside from distributing the Holy bible, they also distribute food, blankets, and other necessities for children and widows.',
@@ -129,22 +78,6 @@ export const PARTNERS: Partner[] = [
       'Pastor Manoj is asking for your continuous prayers and support for their ongoing programs to ensure the lifelong holistic transformation of each individual they are helping. Apart from this, a huge project is on its way - the development of the the ministry in India.',
       'To learn more about this project, please read here.',
     ] },
-  { slug: 'mayon', name: 'Mayon in India', tagline: 'Impacting lives through evangelization and education', campaign: 'ghi-mayon', image: `${IMG}/ghi-partner-mayon.webp`, kind: 'partner', intro: [
-      'A school teacher for five years, a school head teacher for four years, and a missionary for three years, Pastor Mayon combined his passion for education and evangelization to share the Good News in words and action among the people in India.',
-      'Pastor Mayon and his church built a mission school called his school. It was built due to the inadequacy of quality education in the village. In addition to school fees assistance, they were able to provide water supply through a temporary plastic water tank to address the basic and daily needs for cleaning water. Before its installation, people will need to walk to a nearby spring to fetch water.',
-      'Photos of before and after the temporary plastic water tank installation',
-      'In his commitment to the mission of preaching the Gospel, Pastor Mayon continues to nourish the spiritual needs of the people. Bible preaching, evangelical youth camps, baptism, and Bible distribution are being held regularly. Most recently, Pastor Mayon is planting a church in a tribe in a neighbouring country. In his latest evangelization, 31 individuals received water baptism.',
-      'Some of the newly baptized youth',
-      'Pastor Mayon is knocking on your generous heart as they continue the mission of evangelization and education. Their current projects that need funding are Bibles, school furniture & facilities, and bore well drilling for the use of the whole community. All prayers and support are highly appreciated.',
-      'Current funding need:',
-      'Bibles for distribution',
-      '30 benches and desks for his school',
-      'Power supply for 12 classrooms',
-      'Sanitary toilet for the school',
-      'Student fee sponsorships',
-      'Rain harvesting water tanks or bore well drilling',
-      'To learn more about Pastor Mayon and his ministry please visit globalhopeindia.org',
-    ] },
   // NOTE (2026-08-31): restored as its own designation after being folded into
   // Village Development at the Givebutter cutover. Copy below is grounded in the
   // original Givebutter campaign (givebutter.com/NorthEastHealthcareFund), whose
@@ -155,6 +88,20 @@ export const PARTNERS: Partner[] = [
   // on Givebutter. Kevin/GHI to confirm the work is ongoing and supply real copy
   // and a photograph; the image here is GHI's existing medical-camp photograph,
   // reused as a placeholder.
+  //
+  // NAMING — SETTLED, do not re-flag. Kevin ruled 2026-08-31: keep the Manipur
+  // name. The "never name a location" rule at the top of this file protects
+  // NAMED PARTNERS (a person identifiable with a place); it does not extend to a
+  // crisis-relief PROJECT, whose name is the crisis. This is why the blog slugs
+  // were scrubbed on 2026-08-06 (301s in public/_redirects) while this page keeps
+  // its name. Follows the Givebutter campaign it came from, "Manipur Crisis
+  // Relief Fund".
+  // Body copy is verbatim from that campaign; goal $5,000, raised $0, 0 supporters,
+  // closed on Givebutter. Image is GHI's own campaign cover from that page.
+  { slug: 'manipur-relief', name: 'Manipur Crisis Relief', tagline: 'Emergency aid for displaced families in India', campaign: 'ghi-manipur-relief', image: `${IMG}/ghi-project-manipur-relief.webp`, kind: 'project', intro: [
+      'Homes burned. Families displaced. People trapped, hungry, and sick. The crisis in Manipur, India is happening right now — and thousands of families need food, medicine, and shelter today.',
+      'Global Hope India works through local partners already living and serving in the region, so that relief reaches families through people the community knows and trusts. Gifts to this fund are designated to that work, receipted and reported as such.',
+    ] },
   { slug: 'ne-healthcare', name: 'North East Healthcare', tagline: 'Care for families driven from home by ethnic violence', campaign: 'ghi-ne-healthcare', image: 'https://cdn.sanity.io/images/r33r2z1j/production/a7047e93eb1370b0e8d473b2057cbd817a8f0755-1640x924.webp', kind: 'project', intro: [
       'Ethnic violence in North East India left a tribe fleeing for their lives, taking refuge in relief camps. The North East Healthcare Fund exists to meet the medical needs of those families — people who left home with nothing and now depend entirely on what relief reaches the camps.',
       'Global Hope India works through local partners already living and serving in the region, so that care arrives from people the community knows and trusts. Gifts to this fund are designated to that work, receipted and reported as such.',

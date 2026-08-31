@@ -8,6 +8,20 @@
 /give/mission-trips   /give/   301
 /give/orphan-care     /give/   301
 
+# Partner pages retired 2026-08-31 (Kevin). Their campaigns stay configured in the
+# donations pipeline so existing receipts and giving history still resolve — only the
+# public pages are gone. Indexed URLs 301 to the partners index.
+/give/partners/kasbe   /give/partners/   301
+/give/partners/mayon   /give/partners/   301
+/give/partners/drs     /give/partners/   301
+/give/partners/amit    /give/partners/   301
+/give/partners/anil    /give/partners/   301
+/give/partners/kasbe/  /give/partners/   301
+/give/partners/mayon/  /give/partners/   301
+/give/partners/drs/    /give/partners/   301
+/give/partners/amit/   /give/partners/   301
+/give/partners/anil/   /give/partners/   301
+
 # trailing-slash variants (Cloudflare Pages 308s to the slashed form first)
 /blog/empowering-the-deaf-community-the-mission-of-dbm-in-nagaland-india/  /blog/empowering-the-deaf-community-the-mission-of-dbm-in-india/  301
 /blog/support-key-projects-in-manipur/                                     /blog/support-key-projects-in-india/                              301
