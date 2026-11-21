@@ -19,12 +19,19 @@ interface Props {
 	subject?: string;
 	body?: string;
 	class?: string;
-	'aria-label'?: string;
+	"aria-label"?: string;
 	[key: string]: any;
 }
 
-const { email, subject, body, class: className, 'aria-label': ariaLabel, ...rest } = Astro.props;
-const [user, domain] = email.split('@');
+const {
+	email,
+	subject,
+	body,
+	class: className,
+	"aria-label": ariaLabel,
+	...rest
+} = Astro.props;
+const [user, domain] = email.split("@");
 ---
 
 <a
@@ -34,7 +41,7 @@ const [user, domain] = email.split('@');
   data-d={domain}
   data-subject={subject}
   data-body={body}
-  aria-label={ariaLabel || `Email ${user} at ${domain}`}
+  aria-label={ariaLabel}
   role="link"
   {...rest}
 ><slot /></a>

@@ -1,6 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { sanityClient } from '../lib/sanity.ts';
+import MailtoLink from "../components/MailtoLink.astro";
+import Layout from "../layouts/Layout.astro";
+import { sanityClient } from "../lib/sanity.ts";
 
 // Fetch all about page content from Sanity
 let settings: any = {};
@@ -13,33 +14,62 @@ let serviceAreas: any[] = [];
 let hero: any = {};
 
 try {
-  [settings, culturePoints, faithStatements, teamMembers, faqs, empowerCards, serviceAreas, hero] = await Promise.all([
-    sanityClient.fetch(`*[_type == "siteSettings"][0]`),
-    sanityClient.fetch(`*[_type == "culturePoint"] | order(order asc) { number, title, description }`),
-    sanityClient.fetch(`*[_type == "statementOfFaith"] | order(order asc) { text }`),
-    sanityClient.fetch(`*[_type == "teamMember"] | order(order asc) { text }`),
-    sanityClient.fetch(`*[_type == "faqItem" && page == "about"] | order(order asc) { question, answer }`),
-    sanityClient.fetch(`*[_type == "empowerCard"] | order(order asc) { title, description }`),
-    sanityClient.fetch(`*[_type == "serviceArea"] | order(order asc) { title, description }`),
-    sanityClient.fetch(`*[_type == "pageHero" && page == "about"][0] { heading, heroImageUrl }`),
-  ]);
+	[
+		settings,
+		culturePoints,
+		faithStatements,
+		teamMembers,
+		faqs,
+		empowerCards,
+		serviceAreas,
+		hero,
+	] = await Promise.all([
+		sanityClient.fetch(`*[_type == "siteSettings"][0]`),
+		sanityClient.fetch(
+			`*[_type == "culturePoint"] | order(order asc) { number, title, description }`,
+		),
+		sanityClient.fetch(
+			`*[_type == "statementOfFaith"] | order(order asc) { text }`,
+		),
+		sanityClient.fetch(`*[_type == "teamMember"] | order(order asc) { text }`),
+		sanityClient.fetch(
+			`*[_type == "faqItem" && page == "about"] | order(order asc) { question, answer }`,
+		),
+		sanityClient.fetch(
+			`*[_type == "empowerCard"] | order(order asc) { title, description }`,
+		),
+		sanityClient.fetch(
+			`*[_type == "serviceArea"] | order(order asc) { title, description }`,
+		),
+		sanityClient.fetch(
+			`*[_type == "pageHero" && page == "about"][0] { heading, heroImageUrl }`,
+		),
+	]);
 } catch (e) {}
 
 // Fallbacks
 settings = settings || {};
 hero = hero || {};
-const vision = settings.visionStatement || 'Everyone in India worshiping Jesus as Savior and Lord.';
-const mission = settings.missionStatement || 'Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel.';
-const empowering = settings.empoweringText || '';
-const heroHeading = hero.heading || 'Church Vision and Mission: Shaping Faith\'s Future with Global Hope India';
-const heroImage = hero.heroImageUrl || 'https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp';
+const vision =
+	settings.visionStatement ||
+	"Everyone in India worshiping Jesus as Savior and Lord.";
+const mission =
+	settings.missionStatement ||
+	"Global Hope India exists to see Indian Nationals, absent to the gospel, transformed into ambassadors for the gospel.";
+const empowering = settings.empoweringText || "";
+const heroHeading =
+	hero.heading ||
+	"Church Vision and Mission: Shaping Faith's Future with Global Hope India";
+const heroImage =
+	hero.heroImageUrl ||
+	"https://assets.spiritmediapublishing.com/images/ghi-about-hero.webp";
 const radicalHeading = settings.radicalHeading || 'Did Someone Say, "Radical"?';
-const radicalP1 = settings.radicalParagraph1 || '';
-const radicalP2 = settings.radicalParagraph2 || '';
-const founderP1 = settings.founderStoryPart1 || '';
-const founderP2 = settings.founderStoryPart2 || '';
-const founderP3 = settings.founderStoryPart3 || '';
-const founderP4 = settings.founderStoryPart4 || '';
+const radicalP1 = settings.radicalParagraph1 || "";
+const radicalP2 = settings.radicalParagraph2 || "";
+const founderP1 = settings.founderStoryPart1 || "";
+const founderP2 = settings.founderStoryPart2 || "";
+const founderP3 = settings.founderStoryPart3 || "";
+const founderP4 = settings.founderStoryPart4 || "";
 ---
 
 <Layout
@@ -391,7 +421,7 @@ const founderP4 = settings.founderStoryPart4 || '';
           </ul>
         </div>
       </div>
-      <p class="text-[#666] text-sm mt-10 italic text-center">(please <a href="mailto:info@globalhopeindia.org" class="underline hover:text-[#1d803f] transition-colors">contact us</a> directly to request specific details about Our Team.)</p>
+      <p class="text-[#666] text-sm mt-10 italic text-center">(please <MailtoLink email="info@globalhopeindia.org" class="underline hover:text-[#1d803f] transition-colors">contact us</MailtoLink> directly to request specific details about Our Team.)</p>
     </div>
   </section>
 
