@@ -1,59 +1,75 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { sanityClient } from '../lib/sanity.ts';
-
-import { PARTNERS } from '../data/partners';
+import MailtoLink from "../components/MailtoLink.astro";
+import { PARTNERS } from "../data/partners";
+import Layout from "../layouts/Layout.astro";
+import { sanityClient } from "../lib/sanity.ts";
 
 // Partner + project giving links come from src/data/partners.ts, NOT Sanity.
 // Sanity's donationLink documents still hold the old Givebutter URLs and name the
 // state/city each partner serves in — publishing that is a security risk for them.
 // Keep this list as the single source of truth for anything donor-facing.
-const partners = PARTNERS.filter(p => p.kind === 'partner').map(p => ({ name: p.name, url: `/give/partners/${p.slug}/` }));
-const projectLinks = PARTNERS.filter(p => p.kind === 'project').map(p => ({ name: p.name, url: `/give/partners/${p.slug}/` }));
+const partners = PARTNERS.filter((p) => p.kind === "partner").map((p) => ({
+	name: p.name,
+	url: `/give/partners/${p.slug}/`,
+}));
+const projectLinks = PARTNERS.filter((p) => p.kind === "project").map((p) => ({
+	name: p.name,
+	url: `/give/partners/${p.slug}/`,
+}));
 
 // Fetch from Sanity with hardcoded fallbacks
 let accountability: string[] = [];
 let practicalResources: string[] = [];
 
-
 try {
-  const accItems = await sanityClient.fetch(`
+	const accItems = await sanityClient.fetch(`
     *[_type == "accountabilityItem"] | order(order asc) { text }
   `);
-  accountability = accItems.map((a: any) => a.text);
-} catch (e) { /* fallback below */ }
+	accountability = accItems.map((a: any) => a.text);
+} catch (e) {
+	/* fallback below */
+}
 
 try {
-  const resItems = await sanityClient.fetch(`
+	const resItems = await sanityClient.fetch(`
     *[_type == "practicalResource"] | order(order asc) { label }
   `);
-  practicalResources = resItems.map((r: any) => r.label);
-} catch (e) { /* fallback below */ }
+	practicalResources = resItems.map((r: any) => r.label);
+} catch (e) {
+	/* fallback below */
+}
 
 // Fetch FAQs for projects page
+// Kevin 2026-11-20 RULE: an address in CMS FAQ text renders as a MailtoLink, never as text.
+const EMAIL_SPLIT =
+	/([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})/;
 let projectFaqs: any[] = [];
 try {
-  projectFaqs = await sanityClient.fetch(`*[_type == "faqItem" && page == "projects"] | order(order asc) { question, answer }`);
+	projectFaqs = await sanityClient.fetch(
+		`*[_type == "faqItem" && page == "projects"] | order(order asc) { question, answer }`,
+	);
 } catch (e) {}
 
 // Fallbacks
-if (accountability.length === 0) accountability = [
-  'Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Morrisville, North Carolina. All gifts are tax-deductible to the full extent permitted by law.',
-  'GHI is a member of multiple independent financial accountability programs.',
-  'Our Board of Directors controls our annual budget including all staff salaries.',
-  'No one compensated by GHI, including our founder/executive director, has a vote or family member on our Board of Directors.',
-  'Our Board of Directors reviews all bank accounts and financial transactions monthly, performs an annual audit, and secures an annual independent financial statement from a Certified Public Accountant.',
-  'God uses every gift to GHI to radically transform Americans and Indian Nationals through missions.',
-  'Over 85% of every dollar given directly benefits our programs here in the USA and in India.',
-];
-if (practicalResources.length === 0) practicalResources = [
-  'Clean Water Projects',
-  'Hygiene Kits',
-  'Motor bikes for leaders',
-  'Church buildings',
-  'Baptisteries',
-  'Disaster Relief',
-];
+if (accountability.length === 0)
+	accountability = [
+		"Global Hope India is a federally recognized 501(c)3 nonprofit organization located in Morrisville, North Carolina. All gifts are tax-deductible to the full extent permitted by law.",
+		"GHI is a member of multiple independent financial accountability programs.",
+		"Our Board of Directors controls our annual budget including all staff salaries.",
+		"No one compensated by GHI, including our founder/executive director, has a vote or family member on our Board of Directors.",
+		"Our Board of Directors reviews all bank accounts and financial transactions monthly, performs an annual audit, and secures an annual independent financial statement from a Certified Public Accountant.",
+		"God uses every gift to GHI to radically transform Americans and Indian Nationals through missions.",
+		"Over 85% of every dollar given directly benefits our programs here in the USA and in India.",
+	];
+if (practicalResources.length === 0)
+	practicalResources = [
+		"Clean Water Projects",
+		"Hygiene Kits",
+		"Motor bikes for leaders",
+		"Church buildings",
+		"Baptisteries",
+		"Disaster Relief",
+	];
 ---
 
 <Layout
@@ -222,7 +238,7 @@ if (practicalResources.length === 0) practicalResources = [
               <span class="accordion-sign text-[#1d803f] text-2xl leading-none shrink-0 ml-4">+</span>
             </button>
             <div class="accordion-body px-6 pb-6 hidden">
-              <p class="text-[#444] leading-relaxed">{faq.answer}</p>
+              <p class="text-[#444] leading-relaxed">{String(faq.answer ?? '').split(EMAIL_SPLIT).map((part: string, i: number) => (i % 2 ? <MailtoLink email={part}>our office</MailtoLink> : part))}</p>
             </div>
           </div>
         ))}
