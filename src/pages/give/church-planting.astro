@@ -1,12 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import DonationForm from '../../components/DonationForm.astro';
+import DonationForm from "../../components/DonationForm.astro";
+import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout
   title="Give to Church Planting in India | GHI"
   description="Support the church planting movement in India. Your gift empowers indigenous pastors to plant new churches among unreached people groups across India. Give today."
   ogImage="https://assets.spiritmediapublishing.com/images/ghi-201811_globalhopeindia_church-56-scaled.jpg"
+  giveHref="#give-now"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({

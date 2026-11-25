@@ -1,12 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import DonationForm from '../../components/DonationForm.astro';
+import DonationForm from "../../components/DonationForm.astro";
+import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout
   title="Fund Bible Distribution in India | GHI"
   description="Over 1 billion Indians have never held a Bible. Your $25 gift puts God's Word into the hands of someone who has never heard the gospel. Give to India today."
   ogImage="https://assets.spiritmediapublishing.com/images/ghi-201811_globalhopeindia_church-20-scaled.jpg"
+  giveHref="#give-now"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify({

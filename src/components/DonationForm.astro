@@ -11,35 +11,50 @@
 // costs — defaulting this off would move nearly all of that onto GHI.
 
 interface Props {
-  /** Campaign slug in the donations pipeline. */
-  campaign?: string;
-  /** Preselected fund; donor can change it unless lockFund is true. */
-  fund?: string;
-  /** Hide the fund picker (used on a single-fund landing page). */
-  lockFund?: boolean;
-  heading?: string;
+	/** Campaign slug in the donations pipeline. */
+	campaign?: string;
+	/** Preselected fund; donor can change it unless lockFund is true. */
+	fund?: string;
+	/** Hide the fund picker (used on a single-fund landing page). */
+	lockFund?: boolean;
+	heading?: string;
+	/** Donor-facing name of a LOCKED fund ("Sekhar in India"); defaults to the registry label of `fund`. */
+	fundLabel?: string;
 }
 
+import { FUNDS, fundLabel as labelOf } from "../data/partners";
+
 const {
-  campaign = 'ghi',
-  fund = 'ghi',
-  lockFund = false,
-  heading = 'Give to India',
+	campaign = "ghi",
+	fund = "ghi",
+	lockFund = false,
+	heading = "Give to India",
+	fundLabel,
 } = Astro.props;
 
-// One entry per campaign slug configured for Global Hope India.
-const FUNDS = [
-  { slug: 'ghi', label: 'Where Most Needed', blurb: 'Directed to the greatest current need' },
-  { slug: 'ghi-leadership', label: 'Leadership Development', blurb: 'Equipping and supporting Indian leaders' },
-  { slug: 'ghi-village', label: 'Village Development', blurb: 'Clean water, health and community projects' },
-];
+// FUNDS is DERIVED from the donations pipeline's campaign registry (src/data/partners.ts), never hand-typed (Kevin
+// 2026-11-25). The general form shows the general + top-level funds as cards and every partner/project in one select;
+// a locked (non-general) form shows no picker, only which fund the gift is designated to.
+const CARDS = FUNDS.filter((f) => f.group !== "partner");
+const PICKS = FUNDS.filter((f) => f.group === "partner");
+const lockedLabel = fundLabel || labelOf(fund);
+// slug -> donor-facing name, for the fee line, the impact line and the summary as the donor changes fund.
+const LABELS = Object.fromEntries(
+	FUNDS.map((f) => [f.slug, f.slug === "ghi" ? "" : f.label]),
+);
+if (lockFund) LABELS[fund] = lockedLabel;
 
 const AMOUNTS = [25, 50, 100, 250, 500];
 ---
 
-<div id="ghi-donate" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 max-w-xl mx-auto">
+<div id="ghi-donate" data-labels={JSON.stringify(LABELS)} class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 max-w-xl mx-auto">
   <h2 class="text-[#1D1C1C] font-bold text-2xl md:text-3xl mb-1">{heading}</h2>
   <p class="text-[#595959] text-sm mb-6">Secure giving. You can cancel a monthly gift anytime.</p>
+  {lockFund && (
+    <p id="ghi-designation" class="bg-[#F8F5EF] rounded-xl px-4 py-3 mb-6 text-sm text-[#1D1C1C]">
+      Your gift is designated to: <strong>{lockedLabel}</strong>
+    </p>
+  )}
 
   <!-- STEP 1 -->
   <div id="ghi-step-form">
@@ -55,7 +70,7 @@ const AMOUNTS = [25, 50, 100, 250, 500];
       <div class="mb-6">
         <label class="block text-sm font-semibold text-[#1D1C1C] mb-2">Where should your gift go?</label>
         <div class="space-y-2">
-          {FUNDS.map((f) => (
+          {CARDS.map((f) => (
             <label class="flex items-start gap-3 p-3 border border-stone-200 rounded-xl cursor-pointer hover:border-[#1d803f] transition-colors">
               <input type="radio" name="ghi-fund" value={f.slug} checked={f.slug === fund} class="mt-1 accent-[#1d803f]" />
               <span>
@@ -64,6 +79,19 @@ const AMOUNTS = [25, 50, 100, 250, 500];
               </span>
             </label>
           ))}
+          {PICKS.length > 0 && (
+            <label class="flex items-start gap-3 p-3 border border-stone-200 rounded-xl cursor-pointer hover:border-[#1d803f] transition-colors">
+              <input type="radio" name="ghi-fund" id="ghi-fund-pick" value={PICKS.some((f) => f.slug === fund) ? fund : PICKS[0].slug}
+                checked={PICKS.some((f) => f.slug === fund)} class="mt-1 accent-[#1d803f]" />
+              <span class="block w-full min-w-0">
+                <span class="block text-sm font-semibold text-[#1D1C1C]">A partner or project</span>
+                <select id="ghi-fund-select" aria-label="Choose a partner or project"
+                  class="mt-2 w-full border border-stone-200 rounded-lg py-2 px-2 text-sm text-[#1D1C1C] bg-white">
+                  {PICKS.map((f) => <option value={f.slug} selected={f.slug === fund}>{f.label}</option>)}
+                </select>
+              </span>
+            </label>
+          )}
         </div>
       </div>
     )}
@@ -88,7 +116,7 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     <!-- cover fees: ON by default, donor may opt out -->
     <label class="flex items-start gap-3 mb-5 cursor-pointer">
       <input type="checkbox" id="ghi-cover-fees" checked class="mt-1 accent-[#1d803f]" />
-      <span class="text-sm text-[#595959]">Cover the processing fee so 100% of my gift reaches Global Hope India</span>
+      <span class="text-sm text-[#595959]">Cover the processing fee so 100% of my gift reaches <span id="ghi-fee-dest">{lockFund ? lockedLabel : 'Global Hope India'}</span></span>
     </label>
 
     <div id="ghi-impact" class="bg-[#F8F5EF] rounded-xl px-4 py-3 mb-5 text-sm text-[#1D1C1C]"></div>
@@ -230,7 +258,18 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     return picked?.value || hidden?.value || 'ghi';
   }
 
+  /** Donor-facing name of a fund ('' for the general fund), from the registry-derived map the page carries. */
+  function labelFor(slug: string): string {
+    try {
+      const m = JSON.parse(($('ghi-donate') as HTMLElement)?.dataset.labels || '{}');
+      return m[slug] || '';
+    } catch { return ''; }
+  }
+
   function updateImpact() {
+    const dest = labelFor(selectedFund());
+    const feeDest = $('ghi-fee-dest');
+    if (feeDest) feeDest.textContent = dest || 'Global Hope India';
     const el = $('ghi-impact');
     if (!el) return;
     const base = selectedAmountCents();
@@ -238,7 +277,7 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     const { charged, feeCovered } = grossUp(base);
     const period = frequency === 'recurring' ? ' each month' : '';
     el.innerHTML = feeCovered
-      ? `You'll be charged <strong>${fmt(charged)}</strong>${period} — <strong>${fmt(base)}</strong> reaches India and ${fmt(feeCovered)} covers the processing fee.`
+      ? `You'll be charged <strong>${fmt(charged)}</strong>${period} — <strong>${fmt(base)}</strong> reaches ${dest || 'India'} and ${fmt(feeCovered)} covers the processing fee.`
       : `You'll be charged <strong>${fmt(charged)}</strong>${period}. About ${fmt(Math.round(base * FEE_RATE) + FEE_FIXED_CENTS)} goes to processing fees.`;
   }
 
@@ -275,6 +314,11 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     $('ghi-custom-amount')?.addEventListener('input', updateImpact);
     $('ghi-cover-fees')?.addEventListener('change', updateImpact);
     document.querySelectorAll('input[name="ghi-fund"]').forEach((r) => r.addEventListener('change', updateImpact));
+    // The partner/project select drives the "A partner or project" radio: its value IS the chosen campaign.
+    const pick = $('ghi-fund-pick') as HTMLInputElement | null;
+    const sel = $('ghi-fund-select') as HTMLSelectElement | null;
+    sel?.addEventListener('change', () => { if (pick) { pick.value = sel.value; pick.checked = true; } updateImpact(); });
+    sel?.addEventListener('focus', () => { if (pick) { pick.value = sel.value; pick.checked = true; updateImpact(); } });
 
     $('ghi-back')?.addEventListener('click', () => {
       ($('ghi-step-stripe') as HTMLElement).style.display = 'none';
@@ -291,9 +335,12 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     // emails so a donor returning to re-create a designated gift lands on their
     // own designation rather than having to find it again.
     const wanted = new URLSearchParams(window.location.search).get('fund');
+    // Any registry fund works, partners included (?fund=ghi-sekhar used to be ignored silently).
     if (wanted) {
-      const radio = document.querySelector(`input[name="ghi-fund"][value="${wanted}"]`) as HTMLInputElement | null;
+      const radio = document.querySelector(`input[name="ghi-fund"][value="${wanted}"]:not(#ghi-fund-pick)`) as HTMLInputElement | null;
+      const opt = sel ? Array.from(sel.options).find((o) => o.value === wanted) : undefined;
       if (radio) { radio.checked = true; updateImpact(); }
+      else if (opt && sel && pick) { sel.value = wanted; pick.value = wanted; pick.checked = true; updateImpact(); }
     }
 
     // Returning from Stripe
@@ -324,7 +371,7 @@ const AMOUNTS = [25, 50, 100, 250, 500];
     ($('ghi-step-form') as HTMLElement).style.display = 'none';
     ($('ghi-step-stripe') as HTMLElement).style.display = '';
     ($('ghi-summary') as HTMLElement).textContent =
-      `${frequency === 'recurring' ? 'Monthly' : 'One-time'}: ${fmt(charged)}`;
+      `${frequency === 'recurring' ? 'Monthly' : 'One-time'}: ${fmt(charged)}${labelFor(fund) ? ` to ${labelFor(fund)}` : ''}`;
 
     try {
       const res = await fetch(`${TOOLS_API}/api/donations/checkout`, {

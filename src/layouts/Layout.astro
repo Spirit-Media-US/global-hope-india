@@ -1,23 +1,28 @@
 ---
-import '../styles/global.css';
-import HundredClubBadge from '../components/HundredClubBadge.astro';
-import MailtoLink from '../components/MailtoLink.astro';
+import "../styles/global.css";
+import HundredClubBadge from "../components/HundredClubBadge.astro";
+import MailtoLink from "../components/MailtoLink.astro";
 
 interface Props {
-  title: string;
-  description?: string;
-  ogImage?: string;
-  ogType?: string;
+	title: string;
+	description?: string;
+	ogImage?: string;
+	ogType?: string;
+	/** Where the header/footer give buttons go. Partner pages pass '#give-now' (their own locked form) so a donor on
+	 *  /give/partners/sekhar/ is never sent to the general form (Kevin 2026-11-25). */
+	giveHref?: string;
 }
 
 const {
-  title,
-  description = 'Global Hope India is a 501(c)(3) nonprofit sending mission teams, Bibles, and resources to empower indigenous churches across India for over 25 years.',
-  ogImage = 'https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp',
-  ogType = 'website',
+	title,
+	description = "Global Hope India is a 501(c)(3) nonprofit sending mission teams, Bibles, and resources to empower indigenous churches across India for over 25 years.",
+	ogImage = "https://cdn.sanity.io/images/r33r2z1j/production/1c1bb5eb015260dd490f6b0cd7af0c34f30928c2-2560x552.webp",
+	ogType = "website",
+	giveHref = "/give/",
 } = Astro.props;
+const giveIsAnchor = giveHref.startsWith("#");
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://globalhopeindia.org');
+const canonicalURL = new URL(Astro.url.pathname, "https://globalhopeindia.org");
 const currentPath = Astro.url.pathname;
 ---
 <!doctype html>
@@ -227,7 +232,7 @@ const currentPath = Astro.url.pathname;
               {link.label}
             </a>
           ))}
-          <a href="/give/" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-[15px] font-medium py-3 px-8 rounded transition-colors">Give to India</a>
+          <a href={giveHref} class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-[15px] font-medium py-3 px-8 rounded transition-colors">Give to India</a>
         </nav>
 
         <!-- Mobile hamburger -->
@@ -248,7 +253,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Mobile donate bar (below logo row, matching original site) -->
       <div class="lg:hidden flex justify-center py-2 border-t border-gray-100">
-        <a href="/give/" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-sm font-medium py-2.5 px-8 rounded-full transition-colors">Give to India</a>
+        <a href={giveHref} class="bg-[#06038D] hover:bg-[#1D1C1C] text-white text-sm font-medium py-2.5 px-8 rounded-full transition-colors">Give to India</a>
       </div>
 
       <!-- Mobile menu -->
@@ -272,7 +277,7 @@ const currentPath = Astro.url.pathname;
               {link.label}
             </a>
           ))}
-          <a href="/give/" class="bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium mt-3 text-center py-3 rounded transition-colors">Give to India</a>
+          <a href={giveHref} class="bg-[#06038D] hover:bg-[#1D1C1C] text-white font-medium mt-3 text-center py-3 rounded transition-colors">Give to India</a>
         </nav>
       </div>
     </header>
@@ -327,9 +332,9 @@ const currentPath = Astro.url.pathname;
           <!-- Column 2: Donate + Social -->
           <div class="flex flex-col items-center gap-5">
             <a
-              href="/give/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={giveHref}
+              target={giveIsAnchor ? undefined : '_blank'}
+              rel={giveIsAnchor ? undefined : 'noopener noreferrer'}
               class="inline-block bg-[#06038D] hover:bg-[#1D1C1C] text-white font-semibold text-lg px-10 py-4 rounded-full transition-colors shadow-md"
             >Donate Now</a>
             <!-- Social icons in green squares -->
